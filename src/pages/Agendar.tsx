@@ -1,10 +1,10 @@
-
 import React, { useState } from 'react';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { CheckCircle, Send, Mail, Phone, Calendar } from "lucide-react";
 import { toast } from "sonner";
+import { useCalendly } from '@/components/CalendlyProvider';
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -53,6 +53,7 @@ const formSchema = z.object({
 const Agendar = () => {
   const [stage, setStage] = useState<FormStage>(FormStage.PERSONAL);
   const [showCalendly, setShowCalendly] = useState(false);
+  const { openCalendly } = useCalendly();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -600,7 +601,7 @@ ${values.preferCalendly ? "• Agendamento online" : ""}
                     <p className="font-medium">Agendamento online</p>
                     <Button 
                       variant="link" 
-                      onClick={() => setShowCalendly(true)}
+                      onClick={() => openCalendly()}
                       className="p-0 h-auto text-sm text-gray-200 hover:text-orange"
                     >
                       Agendar pelo Calendly

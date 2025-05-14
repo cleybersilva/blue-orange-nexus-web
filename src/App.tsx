@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import SobreNos from "./pages/SobreNos";
 import Agendar from "./pages/Agendar";
+import { CalendlyProvider } from "./components/CalendlyProvider";
 
 const queryClient = new QueryClient();
 
@@ -17,13 +18,15 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/sobre-nos" element={<SobreNos />} />
-          <Route path="/agendar" element={<Agendar />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <CalendlyProvider>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/sobre-nos" element={<SobreNos />} />
+            <Route path="/agendar" element={<Agendar />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </CalendlyProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

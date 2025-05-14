@@ -1,9 +1,13 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Calendar } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { useCalendlyDialog } from '@/hooks/useCalendlyDialog';
 
 const Hero: React.FC = () => {
+  const { openCalendly } = useCalendlyDialog();
+  
   return (
     <section id="hero" className="relative bg-navy pt-32 pb-20 md:pt-40 md:pb-32">
       {/* Abstract shapes for background */}
@@ -22,10 +26,13 @@ const Hero: React.FC = () => {
               Somos especialistas em criar experiências digitais que conectam marcas com seus públicos através de websites, lojas virtuais, aplicativos e estratégias de marketing eficientes.
             </p>
             <div className="flex flex-wrap gap-4 pt-4">
-              <Button className="btn-primary flex items-center gap-2">
-                Agendar Reunião <ArrowRight size={16} />
+              <Button 
+                className="btn-primary flex items-center gap-2"
+                onClick={() => openCalendly()}
+              >
+                Agendar Reunião <Calendar size={16} />
               </Button>
-              <Button variant="outline" className="btn-secondary">
+              <Button variant="outline" className="btn-secondary" as={Link} to="/servicos">
                 Conheça Nossos Serviços
               </Button>
             </div>
@@ -34,11 +41,12 @@ const Hero: React.FC = () => {
             <div className="relative">
               <div className="absolute -top-6 -right-6 w-full h-full bg-orange rounded-lg"></div>
               <div className="relative bg-navy-light p-8 rounded-lg">
-                <div className="aspect-video rounded-lg bg-navy-dark flex items-center justify-center">
-                  <div className="text-center text-white">
-                    <p className="text-orange font-semibold">Sua visão, nossa expertise</p>
-                    <p className="text-sm mt-2">Imagem ilustrativa do website</p>
-                  </div>
+                <div className="aspect-video rounded-lg overflow-hidden">
+                  <img 
+                    src="/website-illustration.jpg" 
+                    alt="Desenvolvimento de website responsivo" 
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </div>
             </div>
