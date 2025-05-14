@@ -32,7 +32,7 @@ const Hero: React.FC = () => {
               >
                 Agendar Reunião <Calendar size={16} />
               </Button>
-              <Button variant="outline" className="btn-secondary" as={Link} to="/servicos">
+              <Button variant="outline" className="btn-secondary" onClick={() => window.location.href = '/servicos'}>
                 Conheça Nossos Serviços
               </Button>
             </div>
