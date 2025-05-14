@@ -6,10 +6,12 @@ import {
   Linkedin, 
   Twitter, 
   Youtube, 
-  ChevronRight 
+  ChevronRight,
+  MapPin
 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
   return (
@@ -82,49 +84,70 @@ const Footer: React.FC = () => {
             <h3 className="text-lg font-semibold mb-6">Links Úteis</h3>
             <ul className="space-y-3">
               <li>
-                <a href="#about" className="text-gray-300 hover:text-orange transition-colors flex items-center">
+                <Link to="/sobre-nos" className="text-gray-300 hover:text-orange transition-colors flex items-center">
                   <ChevronRight size={16} className="mr-2" /> 
                   Sobre Nós
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#portfolio" className="text-gray-300 hover:text-orange transition-colors flex items-center">
+                <Link to="/#portfolio" className="text-gray-300 hover:text-orange transition-colors flex items-center">
                   <ChevronRight size={16} className="mr-2" /> 
                   Portfólio
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#testimonials" className="text-gray-300 hover:text-orange transition-colors flex items-center">
+                <Link to="/#testimonials" className="text-gray-300 hover:text-orange transition-colors flex items-center">
                   <ChevronRight size={16} className="mr-2" /> 
                   Depoimentos
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#faq" className="text-gray-300 hover:text-orange transition-colors flex items-center">
+                <Link to="/#faq" className="text-gray-300 hover:text-orange transition-colors flex items-center">
                   <ChevronRight size={16} className="mr-2" /> 
                   Perguntas Frequentes
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#contact" className="text-gray-300 hover:text-orange transition-colors flex items-center">
+                <Link to="/agendar" className="text-gray-300 hover:text-orange transition-colors flex items-center">
                   <ChevronRight size={16} className="mr-2" /> 
-                  Contato
-                </a>
+                  Agendar
+                </Link>
               </li>
             </ul>
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-6">Newsletter</h3>
-            <p className="text-gray-300 mb-4">
-              Inscreva-se para receber dicas, novidades e ofertas especiais.
-            </p>
-            <div className="space-y-3">
-              <Input
-                placeholder="Seu e-mail"
-                className="bg-navy-light border-navy-light focus:border-orange"
-              />
-              <Button className="bg-orange hover:bg-orange-dark w-full">Inscrever-se</Button>
+            <h3 className="text-lg font-semibold mb-6">Contato</h3>
+            <ul className="space-y-4">
+              <li className="flex items-start">
+                <MapPin size={18} className="mr-2 mt-1 text-orange" />
+                <span className="text-gray-300">Rua Goiás, 562 - João Pessoa/PB</span>
+              </li>
+              <li className="flex items-center">
+                <Facebook size={18} className="mr-2 text-orange" />
+                <a href="tel:+5583988329018" className="text-gray-300 hover:text-orange">
+                  (83) 98832-9018
+                </a>
+              </li>
+              <li className="flex items-center">
+                <Instagram size={18} className="mr-2 text-orange" />
+                <a href="mailto:contact@agenciadigital.com" className="text-gray-300 hover:text-orange">
+                  contact@agenciadigital.com
+                </a>
+              </li>
+            </ul>
+            
+            <div className="mt-6">
+              <p className="text-gray-300 mb-4">
+                Inscreva-se para receber dicas, novidades e ofertas especiais.
+              </p>
+              <div className="space-y-3">
+                <Input
+                  placeholder="Seu e-mail"
+                  className="bg-navy-light border-navy-light focus:border-orange"
+                />
+                <Button className="bg-orange hover:bg-orange-dark w-full">Inscrever-se</Button>
+              </div>
             </div>
           </div>
         </div>

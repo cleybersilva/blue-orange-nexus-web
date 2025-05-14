@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { CheckCircle, Send, Mail, Phone } from "lucide-react";
+import { CheckCircle, Send, Mail, Phone, Calendar } from "lucide-react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -12,6 +12,8 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 // Definindo os estágios do formulário
 enum FormStage {
@@ -45,10 +47,12 @@ const formSchema = z.object({
   preferWhatsApp: z.boolean().default(true),
   preferEmail: z.boolean().default(false),
   preferPhone: z.boolean().default(false),
+  preferCalendly: z.boolean().default(false),
 });
 
 const Agendar = () => {
   const [stage, setStage] = useState<FormStage>(FormStage.PERSONAL);
+  const [showCalendly, setShowCalendly] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -68,6 +72,7 @@ const Agendar = () => {
       preferWhatsApp: true,
       preferEmail: false,
       preferPhone: false,
+      preferCalendly: false,
     },
   });
 
@@ -103,36 +108,50 @@ Orçamento: ${values.budget || "Não informado"}
 ${values.preferWhatsApp ? "• WhatsApp" : ""}
 ${values.preferEmail ? "• Email" : ""}
 ${values.preferPhone ? "• Telefone" : ""}
+${values.preferCalendly ? "• Agendamento online" : ""}
     `;
 
-    // Simulando envio para WhatsApp
-    const whatsappUrl = `https://wa.me/5511999999999?text=${encodeURIComponent(formattedMessage)}`;
-    
-    // Simulando envio para email com link mailto
-    const emailSubject = "Novo Briefing - Site";
-    const emailBody = formattedMessage;
-    const mailtoUrl = `mailto:contato@empresa.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
-    
-    // Determinando método de envio com base na preferência do usuário
+    // Enviando para WhatsApp
     if (values.preferWhatsApp) {
+      const whatsappNumber = "5583988329018"; // Formato: DDI + DDD + número
+      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(formattedMessage)}`;
       window.open(whatsappUrl, "_blank");
-    } else if (values.preferEmail) {
+    }
+    
+    // Enviando para e-mail
+    if (values.preferEmail) {
+      const emailSubject = "Novo Briefing - Site";
+      const emailBody = formattedMessage;
+      const mailtoUrl = `mailto:contact@agenciadigital.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
       window.location.href = mailtoUrl;
+    }
+    
+    // Mostrando Calendly se preferir agendamento
+    if (values.preferCalendly) {
+      setShowCalendly(true);
     }
     
     toast.success("Briefing enviado com sucesso!", {
       description: "Entraremos em contato em breve.",
     });
     
-    // Resetando o formulário e voltando para o primeiro estágio
-    form.reset();
-    setStage(FormStage.PERSONAL);
+    // Se não escolher o Calendly, resetar o formulário
+    if (!values.preferCalendly) {
+      form.reset();
+      setStage(FormStage.PERSONAL);
+    }
   };
 
   const goBack = () => {
     if (stage > FormStage.PERSONAL) {
       setStage(stage - 1);
     }
+  };
+
+  const closeCalendly = () => {
+    setShowCalendly(false);
+    form.reset();
+    setStage(FormStage.PERSONAL);
   };
 
   // Renderização condicional com base no estágio atual
@@ -409,6 +428,26 @@ ${values.preferPhone ? "• Telefone" : ""}
                     </FormItem>
                   )}
                 />
+                <FormField
+                  control={form.control}
+                  name="preferCalendly"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <div className="space-y-1 leading-none">
+                        <FormLabel>Agendamento Online</FormLabel>
+                        <FormDescription>
+                          Agendar reunião pelo Calendly
+                        </FormDescription>
+                      </div>
+                    </FormItem>
+                  )}
+                />
               </div>
 
               <div className="rounded-md bg-navy-light/10 p-4">
@@ -471,67 +510,110 @@ ${values.preferPhone ? "• Telefone" : ""}
   };
 
   return (
-    <div className="container mx-auto py-16 md:py-24">
-      <h1 className="heading-lg text-center mb-2">Agendar Atendimento</h1>
-      <p className="text-center text-gray-600 mb-10 max-w-2xl mx-auto">
-        Preencha o briefing abaixo para que possamos entender melhor sua necessidade 
-        e preparar um atendimento personalizado para seu projeto.
-      </p>
+    <div className="min-h-screen flex flex-col">
+      <Header />
       
-      <div className="max-w-2xl mx-auto">
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
-            <Card className="shadow-md">
-              {renderProgress()}
-              {renderStageContent()}
-              <CardFooter className="flex justify-between mt-4">
-                <Button 
-                  type="button" 
-                  variant="outline"
-                  onClick={goBack}
-                  disabled={stage === FormStage.PERSONAL}
-                >
-                  Voltar
-                </Button>
-                <Button 
-                  type="submit" 
-                  className="bg-orange hover:bg-orange-dark"
-                >
-                  {stage === FormStage.CONFIRMATION ? (
-                    <>
-                      <span>Enviar</span>
-                      <Send className="ml-2 h-4 w-4" />
-                    </>
-                  ) : "Próximo"}
-                </Button>
-              </CardFooter>
-            </Card>
-          </form>
-        </Form>
-
-        <div className="mt-10 bg-navy rounded-lg p-6 text-white">
-          <h3 className="text-xl font-semibold mb-4">Precisa de ajuda imediata?</h3>
-          <p className="mb-6">
-            Você pode entrar em contato diretamente conosco por um dos canais abaixo:
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="flex items-center">
-              <Phone className="mr-3 text-orange" />
-              <div>
-                <p className="font-medium">Telefone</p>
-                <p className="text-sm text-gray-200">(11) 9999-9999</p>
+      <div className="container mx-auto py-16 md:py-24 flex-grow">
+        <h1 className="heading-lg text-center mb-2">Agendar Atendimento</h1>
+        <p className="text-center text-gray-600 mb-10 max-w-2xl mx-auto">
+          Preencha o briefing abaixo para que possamos entender melhor sua necessidade 
+          e preparar um atendimento personalizado para seu projeto.
+        </p>
+        
+        {showCalendly ? (
+          <div className="max-w-3xl mx-auto">
+            <div className="bg-white p-6 rounded-lg shadow-md">
+              <h2 className="text-xl font-bold mb-4">Agende sua Reunião</h2>
+              <div className="calendly-embed mb-6" style={{ minHeight: '650px' }}>
+                <iframe
+                  src="https://calendly.com/agenciadigital/30min"
+                  width="100%"
+                  height="650"
+                  frameBorder="0"
+                  title="Agendar reunião"
+                ></iframe>
               </div>
+              <Button 
+                onClick={closeCalendly} 
+                variant="outline"
+                className="mt-4"
+              >
+                Voltar ao Formulário
+              </Button>
             </div>
-            <div className="flex items-center">
-              <Mail className="mr-3 text-orange" />
-              <div>
-                <p className="font-medium">E-mail</p>
-                <p className="text-sm text-gray-200">contato@empresa.com.br</p>
+          </div>
+        ) : (
+          <div className="max-w-2xl mx-auto">
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)}>
+                <Card className="shadow-md">
+                  {renderProgress()}
+                  {renderStageContent()}
+                  <CardFooter className="flex justify-between mt-4">
+                    <Button 
+                      type="button" 
+                      variant="outline"
+                      onClick={goBack}
+                      disabled={stage === FormStage.PERSONAL}
+                    >
+                      Voltar
+                    </Button>
+                    <Button 
+                      type="submit" 
+                      className="bg-orange hover:bg-orange-dark"
+                    >
+                      {stage === FormStage.CONFIRMATION ? (
+                        <>
+                          <span>Enviar</span>
+                          <Send className="ml-2 h-4 w-4" />
+                        </>
+                      ) : "Próximo"}
+                    </Button>
+                  </CardFooter>
+                </Card>
+              </form>
+            </Form>
+
+            <div className="mt-10 bg-navy rounded-lg p-6 text-white">
+              <h3 className="text-xl font-semibold mb-4">Precisa de ajuda imediata?</h3>
+              <p className="mb-6">
+                Você pode entrar em contato diretamente conosco por um dos canais abaixo:
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="flex items-center">
+                  <Phone className="mr-3 text-orange" />
+                  <div>
+                    <p className="font-medium">Telefone/WhatsApp</p>
+                    <p className="text-sm text-gray-200">(83) 98832-9018</p>
+                  </div>
+                </div>
+                <div className="flex items-center">
+                  <Mail className="mr-3 text-orange" />
+                  <div>
+                    <p className="font-medium">E-mail</p>
+                    <p className="text-sm text-gray-200">contact@agenciadigital.com</p>
+                  </div>
+                </div>
+                <div className="flex items-center md:col-span-2">
+                  <Calendar className="mr-3 text-orange" />
+                  <div>
+                    <p className="font-medium">Agendamento online</p>
+                    <Button 
+                      variant="link" 
+                      onClick={() => setShowCalendly(true)}
+                      className="p-0 h-auto text-sm text-gray-200 hover:text-orange"
+                    >
+                      Agendar pelo Calendly
+                    </Button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
+      
+      <Footer />
     </div>
   );
 };
