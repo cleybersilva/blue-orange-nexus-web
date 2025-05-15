@@ -142,7 +142,8 @@ const SobreNos = () => {
                 </div>
                 <h3 className="text-xl font-bold mb-3 text-navy">{t('aboutPage.mvv.values')}</h3>
                 <ul className="text-gray-600 space-y-2">
-                  {(t('aboutPage.mvv.valuesList', []) as string[]).map((value, index) => (
+                  {/* Fix: Use proper type handling for the values list translation */}
+                  {(t('aboutPage.mvv.valuesList', { returnObjects: true }) as string[]).map((value, index) => (
                     <li key={index}>• {value}</li>
                   ))}
                 </ul>
