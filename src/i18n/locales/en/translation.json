@@ -36,13 +36,25 @@
       "title": "Mobile Applications",
       "description": "Native and cross-platform mobile applications for iOS and Android."
     },
+    "lms": {
+      "title": "Learning Management Systems",
+      "description": "Custom educational platforms to streamline your training process."
+    },
     "marketing": {
       "title": "Digital Marketing",
       "description": "Result-driven strategies to increase your online presence and reach."
     },
+    "social": {
+      "title": "Social Media Management",
+      "description": "Comprehensive social media strategies to grow your audience and engagement."
+    },
     "design": {
       "title": "UI/UX Design",
       "description": "User-centered design that focuses on creating memorable experiences."
+    },
+    "political": {
+      "title": "Political Campaign Solutions",
+      "description": "Digital tools and platforms for effective political campaigns."
     },
     "cta": "View All Services"
   },
@@ -51,18 +63,53 @@
     "subtitle": "Recent Projects",
     "description": "Check out some of our recent work that showcases our expertise and creativity.",
     "viewAll": "View All Projects",
+    "viewProject": "View Project",
+    "viewDetails": "View More Projects",
     "categories": {
       "all": "All",
       "websites": "Websites",
       "ecommerce": "E-commerce",
       "apps": "Mobile Apps",
-      "branding": "Branding"
+      "branding": "Branding",
+      "mobile": "Mobile",
+      "website": "Website",
+      "software": "Software",
+      "platform": "Platform",
+      "marketplace": "Marketplace"
+    },
+    "ecommerce": {
+      "title": "E-commerce Platform"
+    },
+    "delivery": {
+      "title": "Delivery App"
+    },
+    "institutional": {
+      "title": "Corporate Website"
+    },
+    "dashboard": {
+      "title": "Analytics Dashboard"
+    },
+    "social": {
+      "title": "Social Network"
+    },
+    "marketplace": {
+      "title": "Online Marketplace"
     }
   },
   "testimonials": {
     "title": "Testimonials",
     "subtitle": "What Our Clients Say",
-    "description": "Don't just take our word for it. See what our clients have to say about working with us."
+    "description": "Don't just take our word for it. See what our clients have to say about working with us.",
+    "quotes": {
+      "first": "Working with the Agency Digital team was an excellent experience. They delivered our e-commerce platform ahead of schedule and the results exceeded our expectations in terms of user engagement and sales conversion.",
+      "second": "The website redesign completely transformed our brand image. We've seen a 40% increase in inquiries and our bounce rate has significantly decreased. Highly recommend their services!",
+      "third": "Their mobile app development skills are unmatched. Our delivery app has received outstanding reviews on both App Store and Google Play. The user experience is intuitive and the performance is flawless."
+    },
+    "roles": {
+      "ceo": "CEO",
+      "commercial": "Commercial Director",
+      "product": "Product Manager"
+    }
   },
   "contact": {
     "title": "Contact Us",
