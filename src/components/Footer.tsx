@@ -13,11 +13,11 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { useCalendlyDialog } from '@/hooks/useCalendlyDialog';
-import { toast } from "sonner";
+import { useCalendly } from '@/components/CalendlyProvider';
+import { toast } from "@/components/ui/use-toast";
 
 const Footer: React.FC = () => {
-  const { openCalendly } = useCalendlyDialog();
+  const { openCalendly } = useCalendly();
   const [email, setEmail] = useState('');
   
   const scrollToSection = (sectionId: string) => {

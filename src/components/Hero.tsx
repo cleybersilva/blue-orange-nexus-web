@@ -3,10 +3,10 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Calendar } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useCalendlyDialog } from '@/hooks/useCalendlyDialog';
+import { useCalendly } from '@/components/CalendlyProvider';
 
 const Hero: React.FC = () => {
-  const { openCalendly } = useCalendlyDialog();
+  const { openCalendly } = useCalendly();
   
   return (
     <section id="hero" className="relative bg-navy pt-32 pb-20 md:pt-40 md:pb-32">
@@ -29,7 +29,7 @@ const Hero: React.FC = () => {
               <Button 
                 className="btn-primary flex items-center gap-2"
                 onClick={() => {
-                  openCalendly(); // Ensure this properly triggers the Calendly modal
+                  openCalendly();
                   console.log("Calendly opened from Hero section");
                 }}
               >

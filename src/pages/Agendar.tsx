@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { CheckCircle, Send, Mail, Phone, Calendar } from "lucide-react";
-import { toast } from "sonner";
+import { toast } from "@/components/ui/use-toast";
 import { useCalendly } from '@/components/CalendlyProvider';
 
 import { Button } from "@/components/ui/button";

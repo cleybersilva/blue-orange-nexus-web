@@ -3,13 +3,13 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X, Calendar } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useCalendlyDialog } from '@/hooks/useCalendlyDialog';
-import { toast } from "sonner";
+import { useCalendly } from '@/components/CalendlyProvider';
+import { toast } from "@/components/ui/use-toast";
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const { openCalendly } = useCalendlyDialog();
+  const { openCalendly } = useCalendly();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,9 +35,6 @@ const Header: React.FC = () => {
 
   const handleCalendlyOpen = () => {
     openCalendly();
-    toast.success("Abrindo agenda para marcar reunião", {
-      description: "Escolha um horário disponível",
-    });
     console.log("Calendly opened from header");
   };
 
