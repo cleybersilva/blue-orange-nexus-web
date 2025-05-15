@@ -31,30 +31,30 @@ const SobreNos = () => {
     window.open('https://wa.me/5583988329018', '_blank');
   };
 
-  // Dados dos membros da equipe atualizados
+  // Updated team members with translated roles and bios
   const teamMembers = [
     {
       name: "Cleyber Silva",
-      role: "SEO e AI Scientist",
-      bio: "Especialista em otimização para motores de busca e aplicações de inteligência artificial para negócios digitais.",
+      role: t('teamMembers.seo'),
+      bio: t('teamMembers.seoBio'),
       image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     {
       name: "Marcos Túlio",
-      role: "Sênior CyberSecurity",
-      bio: "Responsável pela segurança digital e proteção de dados dos clientes, com vasta experiência em prevenção de ameaças.",
+      role: t('teamMembers.security'),
+      bio: t('teamMembers.securityBio'),
       image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     {
       name: "Euthelys Arthur",
-      role: "Traffic Manager",
-      bio: "Especialista em geração de tráfego qualificado e estratégias de conversão para campanhas digitais.",
+      role: t('teamMembers.traffic'),
+      bio: t('teamMembers.trafficBio'),
       image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=2576&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     {
       name: "Vini",
-      role: "Graphic Design Manager",
-      bio: "Lidera o time de design gráfico, garantindo a excelência visual em todos os projetos e materiais da empresa.",
+      role: t('teamMembers.design'),
+      bio: t('teamMembers.designBio'),
       image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     }
   ];

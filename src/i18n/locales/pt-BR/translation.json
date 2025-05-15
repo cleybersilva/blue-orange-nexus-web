@@ -1,4 +1,3 @@
-
 {
   "nav": {
     "home": "Home",
@@ -140,6 +139,7 @@
     "title": "Nosso Portfólio",
     "backToHome": "Voltar para a Home",
     "viewDetails": "Ver Detalhes",
+    "viewProject": "Ver Projeto",
     "detailsTitle": "Detalhes do projeto",
     "detailsDescription": "Funcionalidade em desenvolvimento",
     "categories": {
@@ -234,5 +234,16 @@
       "commercial": "Diretor Comercial",
       "product": "Gerente de Produto"
     }
+  },
+  "siteTitle": "AGÊNCIA DIGITAL",
+  "teamMembers": {
+    "seo": "SEO e AI Scientist",
+    "seoBio": "Especialista em otimização para motores de busca e aplicações de inteligência artificial para negócios digitais.",
+    "security": "Sênior CyberSecurity",
+    "securityBio": "Responsável pela segurança digital e proteção de dados dos clientes, com vasta experiência em prevenção de ameaças.",
+    "traffic": "Traffic Manager",
+    "trafficBio": "Especialista em geração de tráfego qualificado e estratégias de conversão para campanhas digitais.",
+    "design": "Graphic Design Manager",
+    "designBio": "Lidera o time de design gráfico, garantindo a excelência visual em todos os projetos e materiais da empresa."
   }
 }

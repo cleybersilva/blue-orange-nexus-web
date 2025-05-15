@@ -11,37 +11,41 @@ interface ProjectProps {
   link: string;
 }
 
-const ProjectCard: React.FC<ProjectProps> = ({ title, category, image, link }) => (
-  <div className="group relative overflow-hidden rounded-lg card-shadow">
-    <div className="bg-gray-200 aspect-[4/3] w-full">
-      <img 
-        src={image} 
-        alt={title} 
-        className="w-full h-full object-cover" 
-        onError={(e) => {
-          // Fallback image if the original fails to load
-          e.currentTarget.src = "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80";
-        }}
-      />
-    </div>
-    <div className="absolute inset-0 bg-gradient-to-t from-navy to-transparent opacity-0 group-hover:opacity-90 transition-opacity duration-300 flex items-end">
-      <div className="p-6 w-full">
-        <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-          <p className="text-orange font-medium text-sm">{category}</p>
-          <h3 className="text-white font-bold text-xl mb-2">{title}</h3>
-          <a 
-            href={link} 
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-white hover:text-orange transition-colors"
-          >
-            <span>{link.includes('#') ? 'Ver projeto' : 'View project'}</span> <ExternalLink size={16} />
-          </a>
+const ProjectCard: React.FC<ProjectProps> = ({ title, category, image, link }) => {
+  const { t } = useTranslation();
+  
+  return (
+    <div className="group relative overflow-hidden rounded-lg card-shadow">
+      <div className="bg-gray-200 aspect-[4/3] w-full">
+        <img 
+          src={image} 
+          alt={title} 
+          className="w-full h-full object-cover" 
+          onError={(e) => {
+            // Fallback image if the original fails to load
+            e.currentTarget.src = "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80";
+          }}
+        />
+      </div>
+      <div className="absolute inset-0 bg-gradient-to-t from-navy to-transparent opacity-0 group-hover:opacity-90 transition-opacity duration-300 flex items-end">
+        <div className="p-6 w-full">
+          <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+            <p className="text-orange font-medium text-sm">{category}</p>
+            <h3 className="text-white font-bold text-xl mb-2">{title}</h3>
+            <a 
+              href={link} 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-white hover:text-orange transition-colors"
+            >
+              <span>{t('projects.viewProject')}</span> <ExternalLink size={16} />
+            </a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 const Portfolio: React.FC = () => {
   const { t } = useTranslation();

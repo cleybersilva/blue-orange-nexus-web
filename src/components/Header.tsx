@@ -1,130 +1,134 @@
 
 import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Menu, X, Calendar } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { useCalendly } from '@/components/CalendlyProvider';
-import { toast } from "@/components/ui/use-toast";
 import LanguageSelector from './LanguageSelector';
+import { useCalendly } from './CalendlyProvider';
 import { useTranslation } from 'react-i18next';
+import { useMobile } from '@/hooks/use-mobile';
 
-const Header: React.FC = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const { openCalendly } = useCalendly();
+const Header = () => {
   const { t, i18n } = useTranslation();
-
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const isMobile = useMobile();
+  const { openCalendly } = useCalendly();
+  const location = useLocation();
+  
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
-
+    
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
+  
+  // Close menu when route changes
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location]);
+  
+  // Re-render when language changes
+  useEffect(() => {
+    const handleLanguageChange = () => {
+      // Force re-render on language change
+      console.log('Language changed in header:', i18n.language);
+    };
 
-  // Update nav items when language changes
+    window.addEventListener('languageChanged', handleLanguageChange);
+    
+    return () => {
+      window.removeEventListener('languageChanged', handleLanguageChange);
+    };
+  }, [i18n]);
+
   const navItems = [
-    { name: t('nav.home'), href: '/' },
-    { name: t('nav.about'), href: '/sobre-nos' },
-    { name: t('nav.services'), href: '/#services' },
-    { name: t('nav.portfolio'), href: '/#portfolio' },
-    { name: t('nav.testimonials'), href: '/#testimonials' },
-    { name: t('nav.contact'), href: '/#contact' },
+    { label: t('nav.home'), path: '/' },
+    { label: t('nav.about'), path: '/sobre-nos' },
+    { label: t('nav.services'), path: '/#services' },
+    { label: t('nav.portfolio'), path: '/#portfolio' },
+    { label: t('nav.testimonials'), path: '/#testimonials' },
+    { label: t('nav.contact'), path: '/#contact' },
   ];
 
-  const handleCalendlyOpen = () => {
-    openCalendly();
-    console.log("Calendly opened from header");
-  };
-
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-navy shadow-lg py-2' : 'bg-navy py-4'
-    }`}>
-      <div className="container-custom flex items-center justify-between">
-        <div className="flex items-center">
-          <Link to="/" className="text-white font-bold text-2xl">
-            <span className="text-orange">Agência</span>Digital
-          </Link>
-        </div>
+    <header 
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        isScrolled ? 'bg-navy shadow-md py-2' : 'bg-transparent py-4'
+      }`}
+    >
+      <div className="container-custom flex justify-between items-center">
+        <Link to="/" className="flex items-center">
+          <span className="text-lg md:text-xl font-bold text-white">
+            {t('siteTitle')}
+          </span>
+        </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-8">
-          {navItems.map((item) => (
+        {/* Desktop Nav */}
+        <nav className="hidden lg:flex items-center space-x-1">
+          {navItems.map((item, i) => (
             <Link 
-              key={item.name}
-              to={item.href}
-              className="text-white hover:text-orange transition-colors duration-300"
-              onClick={(e) => {
-                if (item.href.startsWith('/#')) {
-                  e.preventDefault();
-                  const sectionId = item.href.substring(2);
-                  const section = document.getElementById(sectionId);
-                  if (section) {
-                    section.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }
-              }}
+              key={i}
+              to={item.path}
+              className={`px-3 py-2 text-sm text-white/90 hover:text-white transition-colors duration-300`}
             >
-              {item.name}
+              {item.label}
             </Link>
           ))}
-          <Button 
-            className="bg-orange hover:bg-orange-dark flex items-center gap-2"
-            onClick={handleCalendlyOpen}
-          >
-            {t('nav.schedule')} <Calendar size={16} />
-          </Button>
-          <LanguageSelector />
+          
+          <div className="ml-4 flex items-center space-x-2">
+            <LanguageSelector />
+            <Button 
+              className="btn-primary ml-2"
+              onClick={openCalendly}
+            >
+              {t('nav.schedule')}
+            </Button>
+          </div>
         </nav>
 
-        {/* Mobile menu button */}
-        <div className="md:hidden flex items-center gap-4">
-          <Button
-            variant="ghost"
-            className="text-white hover:text-orange"
+        {/* Mobile Nav */}
+        <div className="flex items-center lg:hidden">
+          <LanguageSelector />
+          <button 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="p-2 ml-2 text-white"
+            aria-label="Toggle menu"
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </Button>
-          <LanguageSelector />
+          </button>
         </div>
       </div>
 
-      {/* Mobile Navigation */}
-      {isMenuOpen && (
-        <div className="md:hidden bg-navy-dark">
-          <div className="container-custom py-4 flex flex-col space-y-4">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                to={item.href}
-                className="text-white hover:text-orange py-2 transition-colors duration-300"
-                onClick={(e) => {
+      {/* Mobile Menu */}
+      {isMenuOpen && isMobile && (
+        <div className="lg:hidden bg-navy shadow-lg">
+          <div className="container-custom py-4">
+            <nav className="flex flex-col space-y-3">
+              {navItems.map((item, i) => (
+                <Link 
+                  key={i}
+                  to={item.path}
+                  className="px-3 py-2 text-white/90 hover:text-white transition-colors duration-300"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              ))}
+              <Button 
+                className="btn-primary mt-2"
+                onClick={() => {
                   setIsMenuOpen(false);
-                  if (item.href.startsWith('/#')) {
-                    e.preventDefault();
-                    const sectionId = item.href.substring(2);
-                    const section = document.getElementById(sectionId);
-                    if (section) {
-                      section.scrollIntoView({ behavior: 'smooth' });
-                    }
-                  }
+                  openCalendly();
                 }}
               >
-                {item.name}
-              </Link>
-            ))}
-            <Button 
-              className="bg-orange hover:bg-orange-dark w-full flex items-center justify-center gap-2"
-              onClick={() => {
-                setIsMenuOpen(false);
-                handleCalendlyOpen();
-              }}
-            >
-              {t('nav.schedule')} <Calendar size={16} />
-            </Button>
+                {t('nav.schedule')}
+              </Button>
+            </nav>
           </div>
         </div>
       )}
