@@ -59,6 +59,26 @@ const SobreNos = () => {
     }
   ];
 
+  // Define default values list as fallback
+  const defaultValuesList = [
+    "Excelência",
+    "Inovação",
+    "Transparência",
+    "Compromisso",
+    "Resultados"
+  ];
+
+  // Get values list with fallback to default values
+  const valuesList = (() => {
+    try {
+      const translatedValues = t('aboutPage.mvv.valuesList', { returnObjects: true });
+      return Array.isArray(translatedValues) ? translatedValues : defaultValuesList;
+    } catch (error) {
+      console.error('Error getting valuesList:', error);
+      return defaultValuesList;
+    }
+  })();
+
   return (
     <div className="min-h-screen bg-white">
       <Header />
@@ -142,8 +162,8 @@ const SobreNos = () => {
                 </div>
                 <h3 className="text-xl font-bold mb-3 text-navy">{t('aboutPage.mvv.values')}</h3>
                 <ul className="text-gray-600 space-y-2">
-                  {/* Fix: Use proper type handling for the values list translation */}
-                  {(t('aboutPage.mvv.valuesList', { returnObjects: true }) as string[]).map((value, index) => (
+                  {/* Fixed: Use the safely obtained values list */}
+                  {valuesList.map((value, index) => (
                     <li key={index}>• {value}</li>
                   ))}
                 </ul>
