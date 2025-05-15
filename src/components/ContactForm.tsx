@@ -12,9 +12,14 @@ import {
 } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { Phone, Mail, MapPin, Clock } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { useCalendly } from '@/components/CalendlyProvider';
 
 const ContactForm: React.FC = () => {
+  const { t } = useTranslation();
   const { toast } = useToast();
+  const { openCalendly } = useCalendly();
+  
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -39,8 +44,8 @@ const ContactForm: React.FC = () => {
     // Here you would typically send the data to your backend
     
     toast({
-      title: "Mensagem enviada!",
-      description: "Entraremos em contato em breve.",
+      title: t('footer.success'),
+      description: t('footer.subscribed'),
       duration: 5000,
     });
 
@@ -55,36 +60,46 @@ const ContactForm: React.FC = () => {
   };
 
   const contactInfo = [
-    { icon: <Phone size={20} className="text-orange" />, label: 'Telefone', value: '(11) 9999-9999' },
-    { icon: <Mail size={20} className="text-orange" />, label: 'E-mail', value: 'contato@agenciadigital.com' },
-    { icon: <MapPin size={20} className="text-orange" />, label: 'Endereço', value: 'Av. Paulista, 1000, São Paulo - SP' },
-    { icon: <Clock size={20} className="text-orange" />, label: 'Horário', value: 'Seg-Sex: 9h às 18h' },
+    { icon: <Phone size={20} className="text-orange" />, label: t('aboutPage.location.phone'), value: '(11) 9999-9999' },
+    { icon: <Mail size={20} className="text-orange" />, label: t('aboutPage.location.email'), value: 'contato@agenciadigital.com' },
+    { icon: <MapPin size={20} className="text-orange" />, label: t('aboutPage.location.office'), value: t('footer.address') },
+    { icon: <Clock size={20} className="text-orange" />, label: t('timeline.title'), value: 'Seg-Sex: 9h às 18h' },
+  ];
+
+  const serviceOptions = [
+    { value: "websites", label: t('services.websites.title') },
+    { value: "ecommerce", label: t('services.ecommerce.title') },
+    { value: "apps", label: t('services.apps.title') },
+    { value: "ava", label: t('services.lms.title') },
+    { value: "marketing", label: t('services.marketing.title') },
+    { value: "social", label: t('services.social.title') },
+    { value: "design", label: t('services.design.title') },
+    { value: "political", label: t('services.political.title') },
   ];
 
   return (
     <section id="contact" className="section-padding bg-white">
       <div className="container-custom">
         <div className="text-center mb-16">
-          <h2 className="heading-lg text-navy mb-4">Entre em Contato</h2>
+          <h2 className="heading-lg text-navy mb-4">{t('nav.contact')}</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Estamos prontos para transformar suas ideias em realidade. Fale conosco
-            para iniciarmos seu próximo projeto digital.
+            {t('aboutPage.cta.subtitle')}
           </p>
         </div>
 
         <div className="grid md:grid-cols-5 gap-8">
           <div className="md:col-span-3 bg-white p-6 rounded-lg shadow-lg">
-            <h3 className="heading-sm mb-6 text-navy">Envie uma mensagem</h3>
+            <h3 className="heading-sm mb-6 text-navy">{t('aboutPage.contactUs')}</h3>
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div className="space-y-2">
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-                    Nome completo*
+                    {t('aboutPage.team.title')}*
                   </label>
                   <Input
                     id="name"
                     name="name"
-                    placeholder="Seu nome"
+                    placeholder={t('aboutPage.team.title')}
                     value={formData.name}
                     onChange={handleChange}
                     required
@@ -93,7 +108,7 @@ const ContactForm: React.FC = () => {
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                    E-mail*
+                    {t('aboutPage.location.email')}*
                   </label>
                   <Input
                     id="email"
@@ -110,7 +125,7 @@ const ContactForm: React.FC = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div className="space-y-2">
                   <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
-                    Telefone
+                    {t('aboutPage.location.phone')}
                   </label>
                   <Input
                     id="phone"
@@ -123,36 +138,33 @@ const ContactForm: React.FC = () => {
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="service" className="block text-sm font-medium text-gray-700">
-                    Serviço de interesse
+                    {t('services.title')}
                   </label>
                   <Select
                     value={formData.service}
                     onValueChange={handleSelectChange}
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder="Selecione um serviço" />
+                      <SelectValue placeholder={t('services.title')} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="websites">Criação de Sites</SelectItem>
-                      <SelectItem value="ecommerce">Lojas Virtuais</SelectItem>
-                      <SelectItem value="apps">Apps Móveis</SelectItem>
-                      <SelectItem value="ava">Ambientes Virtuais</SelectItem>
-                      <SelectItem value="marketing">Marketing Digital</SelectItem>
-                      <SelectItem value="social">Gestão de Mídias</SelectItem>
-                      <SelectItem value="design">Design Gráfico</SelectItem>
-                      <SelectItem value="political">Marketing Político</SelectItem>
+                      {serviceOptions.map((option) => (
+                        <SelectItem key={option.value} value={option.value}>
+                          {option.label}
+                        </SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                 </div>
               </div>
               <div className="space-y-2">
                 <label htmlFor="message" className="block text-sm font-medium text-gray-700">
-                  Mensagem*
+                  {t('nav.contact')}*
                 </label>
                 <Textarea
                   id="message"
                   name="message"
-                  placeholder="Conte-nos sobre seu projeto ou dúvida"
+                  placeholder={t('aboutPage.cta.subtitle')}
                   rows={5}
                   value={formData.message}
                   onChange={handleChange}
@@ -161,13 +173,13 @@ const ContactForm: React.FC = () => {
                 />
               </div>
               <Button type="submit" className="btn-primary w-full md:w-auto">
-                Enviar mensagem
+                {t('hero.scheduleButton')}
               </Button>
             </form>
           </div>
 
           <div className="md:col-span-2 bg-navy text-white p-6 rounded-lg">
-            <h3 className="heading-sm mb-6 text-white">Informações de contato</h3>
+            <h3 className="heading-sm mb-6 text-white">{t('footer.contact')}</h3>
             <div className="space-y-6">
               {contactInfo.map((item, index) => (
                 <div key={index} className="flex items-start gap-3">
@@ -181,12 +193,16 @@ const ContactForm: React.FC = () => {
             </div>
             
             <div className="mt-10">
-              <h4 className="text-lg font-semibold mb-4 text-orange">Agende uma reunião</h4>
+              <h4 className="text-lg font-semibold mb-4 text-orange">{t('hero.scheduleButton')}</h4>
               <p className="text-gray-300 mb-4">
-                Prefere conversar diretamente? Agende uma videoconferência ou reunião presencial.
+                {t('aboutPage.scheduleCall')}
               </p>
-              <Button variant="outline" className="bg-transparent border-white text-white hover:bg-white hover:text-navy w-full">
-                Agendar horário
+              <Button 
+                variant="outline" 
+                className="bg-transparent border-white text-white hover:bg-white hover:text-navy w-full"
+                onClick={() => openCalendly()}
+              >
+                {t('aboutPage.cta.schedule')}
               </Button>
             </div>
           </div>
