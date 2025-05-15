@@ -38,14 +38,4 @@ i18n
     }
   });
 
-// Add an observer for language changes to trigger the custom event
-i18n.on('languageChanged', (lng) => {
-  // Save the preferred language in localStorage
-  localStorage.setItem('preferredLanguage', lng);
-  
-  // Dispatch custom event
-  window.dispatchEvent(new Event('languageChanged'));
-  console.log(`Language changed to: ${lng}`);
-});
-
 export default i18n;
