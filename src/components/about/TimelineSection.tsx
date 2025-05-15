@@ -1,20 +1,27 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { useTranslation } from 'react-i18next';
 
 const TimelineSection = () => {
   const { t, i18n } = useTranslation();
+  // Add a state to force re-render on language change
+  const [, setForceUpdate] = useState(0);
 
-  // Reload component when language changes
+  // Enhanced language change handling
   useEffect(() => {
     const handleLanguageChange = () => {
       console.log('Timeline language updated:', i18n.language);
+      // Force re-render when language changes
+      setForceUpdate(prev => prev + 1);
     };
 
     i18n.on('languageChanged', handleLanguageChange);
+    window.addEventListener('languageChanged', handleLanguageChange);
+    
     return () => {
       i18n.off('languageChanged', handleLanguageChange);
+      window.removeEventListener('languageChanged', handleLanguageChange);
     };
   }, [i18n]);
 

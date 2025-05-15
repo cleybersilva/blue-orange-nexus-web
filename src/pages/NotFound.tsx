@@ -1,5 +1,5 @@
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Header from "@/components/Header";
@@ -8,6 +8,8 @@ import Footer from "@/components/Footer";
 const NotFound = () => {
   const location = useLocation();
   const { t, i18n } = useTranslation();
+  // State to force re-render on language change
+  const [, setForceUpdate] = useState(0);
 
   useEffect(() => {
     console.error(
@@ -16,16 +18,20 @@ const NotFound = () => {
     );
   }, [location.pathname]);
 
-  // Ensure translations update when language changes
+  // Enhanced language change handling
   useEffect(() => {
     const handleLanguageChange = () => {
       console.log("Language changed in NotFound page:", i18n.language);
+      // Force re-render
+      setForceUpdate(prev => prev + 1);
     };
 
     i18n.on('languageChanged', handleLanguageChange);
+    window.addEventListener('languageChanged', handleLanguageChange);
     
     return () => {
       i18n.off('languageChanged', handleLanguageChange);
+      window.removeEventListener('languageChanged', handleLanguageChange);
     };
   }, [i18n]);
 

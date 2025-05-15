@@ -45,6 +45,9 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       console.log('Language changed via i18n event:', lng);
       setCurrentLanguage(lng);
       document.documentElement.lang = lng;
+      
+      // Dispatch global event to force component updates
+      window.dispatchEvent(new Event('languageChanged'));
     };
 
     i18n.on('languageChanged', handleLanguageChanged);

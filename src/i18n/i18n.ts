@@ -33,8 +33,17 @@ const detectUserLanguage = () => {
   
   // Try to detect browser language
   const browserLang = navigator.language;
+  // Check if the exact language code exists in our resources
   if (browserLang && Object.keys(resources).includes(browserLang)) {
     return browserLang;
+  }
+  
+  // Try to match just the language part (e.g., 'en' from 'en-US')
+  const langPart = browserLang?.split('-')[0];
+  if (langPart && Object.keys(resources).some(code => code.startsWith(langPart))) {
+    // Find the first matching language code
+    const matchedCode = Object.keys(resources).find(code => code.startsWith(langPart));
+    return matchedCode || 'pt-BR';
   }
   
   // Default fallback
@@ -51,7 +60,9 @@ i18n
       escapeValue: false // react already safes from xss
     },
     react: {
-      useSuspense: false // Disable suspense for SSR compatibility
+      useSuspense: false, // Disable suspense for SSR compatibility
+      bindI18n: 'languageChanged loaded', // Events that trigger rerender
+      bindI18nStore: 'added removed' // Listen to store events
     },
     debug: process.env.NODE_ENV === 'development' // Enable debug in development
   });
