@@ -15,10 +15,18 @@ const Index = () => {
       <Header />
       <main>
         <Hero />
-        <Services />
-        <Portfolio />
-        <Testimonials />
-        <ContactForm />
+        <div id="services">
+          <Services />
+        </div>
+        <div id="portfolio">
+          <Portfolio />
+        </div>
+        <div id="testimonials">
+          <Testimonials />
+        </div>
+        <div id="contact">
+          <ContactForm />
+        </div>
       </main>
       <Footer />
       <FloatingSocialButtons />

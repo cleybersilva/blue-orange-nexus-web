@@ -32,7 +32,16 @@ const Hero: React.FC = () => {
               >
                 Agendar Reunião <Calendar size={16} />
               </Button>
-              <Button variant="outline" className="btn-secondary" onClick={() => window.location.href = '/servicos'}>
+              <Button 
+                variant="outline" 
+                className="btn-secondary" 
+                onClick={() => {
+                  const servicesSection = document.getElementById('services');
+                  if (servicesSection) {
+                    servicesSection.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+              >
                 Conheça Nossos Serviços
               </Button>
             </div>
@@ -43,7 +52,7 @@ const Hero: React.FC = () => {
               <div className="relative bg-navy-light p-8 rounded-lg">
                 <div className="aspect-video rounded-lg overflow-hidden">
                   <img 
-                    src="/website-illustration.jpg" 
+                    src="https://images.unsplash.com/photo-1487014679447-9f8336841d58?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
                     alt="Desenvolvimento de website responsivo" 
                     className="w-full h-full object-cover"
                   />

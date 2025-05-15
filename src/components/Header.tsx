@@ -3,10 +3,12 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useCalendlyDialog } from '@/hooks/useCalendlyDialog';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { openCalendly } = useCalendlyDialog();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,13 +48,26 @@ const Header: React.FC = () => {
               key={item.name}
               to={item.href}
               className="text-white hover:text-orange transition-colors duration-300"
+              onClick={(e) => {
+                if (item.href.startsWith('/#')) {
+                  e.preventDefault();
+                  const sectionId = item.href.substring(2);
+                  const section = document.getElementById(sectionId);
+                  if (section) {
+                    section.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }
+              }}
             >
               {item.name}
             </Link>
           ))}
-          <Link to="/agendar">
-            <Button className="bg-orange hover:bg-orange-dark">Agendar</Button>
-          </Link>
+          <Button 
+            className="bg-orange hover:bg-orange-dark"
+            onClick={() => openCalendly()}
+          >
+            Agendar
+          </Button>
         </nav>
 
         {/* Mobile menu button */}
@@ -73,14 +88,30 @@ const Header: React.FC = () => {
                 key={item.name}
                 to={item.href}
                 className="text-white hover:text-orange py-2 transition-colors duration-300"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={(e) => {
+                  setIsMenuOpen(false);
+                  if (item.href.startsWith('/#')) {
+                    e.preventDefault();
+                    const sectionId = item.href.substring(2);
+                    const section = document.getElementById(sectionId);
+                    if (section) {
+                      section.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }
+                }}
               >
                 {item.name}
               </Link>
             ))}
-            <Link to="/agendar" onClick={() => setIsMenuOpen(false)}>
-              <Button className="bg-orange hover:bg-orange-dark w-full">Agendar</Button>
-            </Link>
+            <Button 
+              className="bg-orange hover:bg-orange-dark w-full"
+              onClick={() => {
+                setIsMenuOpen(false);
+                openCalendly();
+              }}
+            >
+              Agendar
+            </Button>
           </div>
         </div>
       )}

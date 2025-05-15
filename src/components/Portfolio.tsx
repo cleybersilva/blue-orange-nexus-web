@@ -17,6 +17,10 @@ const ProjectCard: React.FC<ProjectProps> = ({ title, category, image, link }) =
         src={image} 
         alt={title} 
         className="w-full h-full object-cover" 
+        onError={(e) => {
+          // Fallback image if the original fails to load
+          e.currentTarget.src = "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80";
+        }}
       />
     </div>
     <div className="absolute inset-0 bg-gradient-to-t from-navy to-transparent opacity-0 group-hover:opacity-90 transition-opacity duration-300 flex items-end">
@@ -26,6 +30,8 @@ const ProjectCard: React.FC<ProjectProps> = ({ title, category, image, link }) =
           <h3 className="text-white font-bold text-xl mb-2">{title}</h3>
           <a 
             href={link} 
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-white hover:text-orange transition-colors"
           >
             Ver projeto <ExternalLink size={16} />
@@ -47,25 +53,25 @@ const Portfolio: React.FC = () => {
     {
       title: 'E-commerce de Moda',
       category: 'Loja Virtual',
-      image: 'https://images.unsplash.com/photo-1561069934-eee225952461?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+      image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
       link: '#',
     },
     {
       title: 'Aplicativo de Delivery',
       category: 'App Móvel',
-      image: 'https://images.unsplash.com/photo-1520333789090-1afc82db536a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+      image: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
       link: '#',
     },
     {
       title: 'Plataforma de Cursos',
       category: 'Ambiente Virtual',
-      image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+      image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
       link: '#',
     },
     {
       title: 'Campanha de Marketing',
       category: 'Marketing Digital',
-      image: 'https://images.unsplash.com/photo-1533750516457-a7f992034fec?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
       link: '#',
     },
     {
@@ -100,7 +106,15 @@ const Portfolio: React.FC = () => {
         </div>
         
         <div className="text-center">
-          <Button className="btn-secondary">Ver mais projetos</Button>
+          <Button 
+            className="btn-secondary"
+            onClick={() => {
+              // This could link to a more detailed portfolio page in the future
+              console.log("Ver mais projetos clicked");
+            }}
+          >
+            Ver mais projetos
+          </Button>
         </div>
       </div>
     </section>

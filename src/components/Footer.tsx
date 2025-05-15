@@ -12,8 +12,18 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import { useCalendlyDialog } from '@/hooks/useCalendlyDialog';
 
 const Footer: React.FC = () => {
+  const { openCalendly } = useCalendlyDialog();
+  
+  const scrollToSection = (sectionId: string) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <footer className="bg-navy text-white pt-16 pb-6">
       <div className="container-custom">
@@ -48,31 +58,51 @@ const Footer: React.FC = () => {
             <h3 className="text-lg font-semibold mb-6">Serviços</h3>
             <ul className="space-y-3">
               <li>
-                <a href="#" className="text-gray-300 hover:text-orange transition-colors flex items-center">
+                <a 
+                  href="#" 
+                  onClick={() => scrollToSection('services')}
+                  className="text-gray-300 hover:text-orange transition-colors flex items-center"
+                >
                   <ChevronRight size={16} className="mr-2" /> 
                   Criação de Sites
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-300 hover:text-orange transition-colors flex items-center">
+                <a 
+                  href="#" 
+                  onClick={() => scrollToSection('services')}
+                  className="text-gray-300 hover:text-orange transition-colors flex items-center"
+                >
                   <ChevronRight size={16} className="mr-2" /> 
                   Lojas Virtuais
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-300 hover:text-orange transition-colors flex items-center">
+                <a 
+                  href="#" 
+                  onClick={() => scrollToSection('services')}
+                  className="text-gray-300 hover:text-orange transition-colors flex items-center"
+                >
                   <ChevronRight size={16} className="mr-2" /> 
                   Apps Móveis
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-300 hover:text-orange transition-colors flex items-center">
+                <a 
+                  href="#" 
+                  onClick={() => scrollToSection('services')}
+                  className="text-gray-300 hover:text-orange transition-colors flex items-center"
+                >
                   <ChevronRight size={16} className="mr-2" /> 
                   Marketing Digital
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-300 hover:text-orange transition-colors flex items-center">
+                <a 
+                  href="#" 
+                  onClick={() => scrollToSection('services')}
+                  className="text-gray-300 hover:text-orange transition-colors flex items-center"
+                >
                   <ChevronRight size={16} className="mr-2" /> 
                   Design Gráfico
                 </a>
@@ -90,28 +120,44 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/#portfolio" className="text-gray-300 hover:text-orange transition-colors flex items-center">
+                <a 
+                  href="#" 
+                  onClick={() => scrollToSection('portfolio')}
+                  className="text-gray-300 hover:text-orange transition-colors flex items-center"
+                >
                   <ChevronRight size={16} className="mr-2" /> 
                   Portfólio
-                </Link>
+                </a>
               </li>
               <li>
-                <Link to="/#testimonials" className="text-gray-300 hover:text-orange transition-colors flex items-center">
+                <a 
+                  href="#" 
+                  onClick={() => scrollToSection('testimonials')}
+                  className="text-gray-300 hover:text-orange transition-colors flex items-center"
+                >
                   <ChevronRight size={16} className="mr-2" /> 
                   Depoimentos
-                </Link>
+                </a>
               </li>
               <li>
-                <Link to="/#faq" className="text-gray-300 hover:text-orange transition-colors flex items-center">
+                <a 
+                  href="#" 
+                  onClick={() => scrollToSection('contact')}
+                  className="text-gray-300 hover:text-orange transition-colors flex items-center"
+                >
                   <ChevronRight size={16} className="mr-2" /> 
                   Perguntas Frequentes
-                </Link>
+                </a>
               </li>
               <li>
-                <Link to="/agendar" className="text-gray-300 hover:text-orange transition-colors flex items-center">
+                <a 
+                  href="#" 
+                  onClick={() => openCalendly()}
+                  className="text-gray-300 hover:text-orange transition-colors flex items-center"
+                >
                   <ChevronRight size={16} className="mr-2" /> 
                   Agendar
-                </Link>
+                </a>
               </li>
             </ul>
           </div>
