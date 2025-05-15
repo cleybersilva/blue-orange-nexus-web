@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
@@ -62,8 +63,8 @@ const Header = () => {
     >
       <div className="container-custom flex justify-between items-center">
         <Link to="/" className="flex items-center">
-          <span className="text-lg md:text-xl font-bold text-white">
-            {t('siteTitle')}
+          <span className="text-lg md:text-xl font-bold">
+            <span className="text-orange">Agência</span><span className="text-white">Digital</span>
           </span>
         </Link>
 
