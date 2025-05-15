@@ -1,8 +1,7 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Calendar } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Calendar } from 'lucide-react';
 import { useCalendly } from '@/components/CalendlyProvider';
 import { useTranslation } from 'react-i18next';
 
@@ -29,7 +28,7 @@ const Hero: React.FC = () => {
             </p>
             <div className="flex flex-wrap gap-4 pt-4">
               <Button 
-                className="btn-primary flex items-center gap-2"
+                className="bg-orange hover:bg-orange-dark text-white flex items-center gap-2"
                 onClick={() => {
                   openCalendly();
                   console.log("Calendly opened from Hero section");
@@ -57,12 +56,12 @@ const Hero: React.FC = () => {
               <div className="relative bg-navy-light p-8 rounded-lg">
                 <div className="aspect-video rounded-lg overflow-hidden">
                   <img 
-                    src="https://images.unsplash.com/photo-1487014679447-9f8336841d58?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                    src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
                     alt={t('hero.imageAlt')} 
                     className="w-full h-full object-cover"
                     onError={(e) => {
                       // Fallback image if the primary one fails
-                      e.currentTarget.src = "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80";
+                      e.currentTarget.src = "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80";
                     }}
                   />
                 </div>

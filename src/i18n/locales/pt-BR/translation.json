@@ -248,5 +248,10 @@
     "trafficBio": "Especialista em geração de tráfego qualificado e estratégias de conversão para campanhas digitais.",
     "design": "Graphic Design Manager",
     "designBio": "Lidera o time de design gráfico, garantindo a excelência visual em todos os projetos e materiais da empresa."
+  },
+  "calendly": {
+    "openingSchedule": "Abrindo agenda para marcar reunião",
+    "chooseTime": "Escolha um horário disponível",
+    "scheduleTitle": "Agende sua Reunião"
   }
 }

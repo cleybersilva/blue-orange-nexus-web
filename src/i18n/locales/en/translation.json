@@ -248,5 +248,10 @@
     "trafficBio": "Specialist in generating qualified traffic and conversion strategies for digital campaigns.",
     "design": "Graphic Design Manager",
     "designBio": "Leads the graphic design team, ensuring visual excellence in all company projects and materials."
+  },
+  "calendly": {
+    "openingSchedule": "Opening scheduling calendar",
+    "chooseTime": "Choose an available time",
+    "scheduleTitle": "Schedule Your Meeting"
   }
 }
