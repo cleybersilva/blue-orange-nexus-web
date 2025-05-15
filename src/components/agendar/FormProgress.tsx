@@ -3,6 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { CheckCircle } from "lucide-react";
 
+// Define FormStage enum
 export enum FormStage {
   PERSONAL = 0,
   COMPANY = 1,
@@ -57,4 +58,5 @@ const FormProgress: React.FC<FormProgressProps> = ({ currentStage }) => {
   );
 };
 
-export { FormProgress, FormStage };
+// Only export FormProgress here, as FormStage is already exported above
+export { FormProgress };
