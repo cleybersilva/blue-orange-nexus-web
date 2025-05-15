@@ -63,8 +63,8 @@ const Header = () => {
     >
       <div className="container-custom flex justify-between items-center">
         <Link to="/" className="flex items-center">
-          <span className="text-lg md:text-xl font-bold">
-            <span className="text-orange">Agência</span><span className="text-white">Digital</span>
+          <span className="text-2xl font-bold">
+            <span className="text-orange">{t('siteTitle.agency')}</span><span className="text-white">{t('siteTitle.digital')}</span>
           </span>
         </Link>
 
@@ -83,7 +83,7 @@ const Header = () => {
           <div className="ml-4 flex items-center space-x-2">
             <LanguageSelector />
             <Button 
-              className="btn-primary ml-2"
+              className="bg-orange hover:bg-orange-dark text-white"
               onClick={openCalendly}
             >
               {t('nav.schedule')}
@@ -120,7 +120,7 @@ const Header = () => {
                 </Link>
               ))}
               <Button 
-                className="btn-primary mt-2"
+                className="bg-orange hover:bg-orange-dark text-white mt-2"
                 onClick={() => {
                   setIsMenuOpen(false);
                   openCalendly();

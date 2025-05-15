@@ -235,7 +235,10 @@
       "product": "Product Manager"
     }
   },
-  "siteTitle": "DIGITAL AGENCY",
+  "siteTitle": {
+    "agency": "Agency",
+    "digital": "Digital"
+  },
   "teamMembers": {
     "seo": "SEO and AI Scientist",
     "seoBio": "Specialist in search engine optimization and artificial intelligence applications for digital businesses.",
