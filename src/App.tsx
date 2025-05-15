@@ -23,19 +23,6 @@ const AppWithLanguage = () => {
     // Force all components to re-render when language changes
     const lang = localStorage.getItem('preferredLanguage') || 'pt-BR';
     document.documentElement.lang = lang;
-
-    // Register a global event listener for language changes
-    const handleLanguageChange = () => {
-      console.log('Language changed in App');
-      // Force re-render by updating lang attribute
-      document.documentElement.lang = localStorage.getItem('preferredLanguage') || 'pt-BR';
-    };
-
-    window.addEventListener('languageChanged', handleLanguageChange);
-    
-    return () => {
-      window.removeEventListener('languageChanged', handleLanguageChange);
-    };
   }, []);
 
   return (

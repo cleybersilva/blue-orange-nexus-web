@@ -1,12 +1,10 @@
-
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { CheckCircle, Send, Mail, Phone, Calendar } from "lucide-react";
 import { toast } from "@/components/ui/use-toast";
 import { useCalendly } from '@/components/CalendlyProvider';
-import { useTranslation } from 'react-i18next';
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -17,7 +15,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-// Defining form stages
+// Definindo os estágios do formulário
 enum FormStage {
   PERSONAL = 0,
   COMPANY = 1,
@@ -25,51 +23,37 @@ enum FormStage {
   CONFIRMATION = 3,
 }
 
+// Schema para validação dos dados
+const formSchema = z.object({
+  // Dados pessoais
+  name: z.string().min(3, { message: "Nome deve ter pelo menos 3 caracteres" }),
+  email: z.string().email({ message: "Email inválido" }),
+  phone: z.string().min(10, { message: "Telefone inválido" }),
+  role: z.string().min(2, { message: "Cargo é obrigatório" }),
+  
+  // Dados da empresa
+  companyName: z.string().min(2, { message: "Nome da empresa é obrigatório" }),
+  segment: z.string().min(2, { message: "Segmento é obrigatório" }),
+  companySize: z.string().min(1, { message: "Tamanho da empresa é obrigatório" }),
+  website: z.string().optional(),
+  
+  // Dados do projeto
+  serviceType: z.string().min(2, { message: "Tipo de serviço é obrigatório" }),
+  projectDescription: z.string().min(20, { message: "Descrição deve ter pelo menos 20 caracteres" }),
+  deadline: z.string().min(1, { message: "Prazo é obrigatório" }),
+  budget: z.string().optional(),
+
+  // Preferências de contato
+  preferWhatsApp: z.boolean().default(true),
+  preferEmail: z.boolean().default(false),
+  preferPhone: z.boolean().default(false),
+  preferCalendly: z.boolean().default(false),
+});
+
 const Agendar = () => {
   const [stage, setStage] = useState<FormStage>(FormStage.PERSONAL);
   const [showCalendly, setShowCalendly] = useState(false);
   const { openCalendly } = useCalendly();
-  const { t, i18n } = useTranslation();
-
-  // Force re-render when language changes
-  useEffect(() => {
-    const handleLanguageChange = () => {
-      console.log('Language changed in Agendar page:', i18n.language);
-    };
-
-    window.addEventListener('languageChanged', handleLanguageChange);
-    
-    return () => {
-      window.removeEventListener('languageChanged', handleLanguageChange);
-    };
-  }, [i18n]);
-
-  // Schema for form validation
-  const formSchema = z.object({
-    // Personal data
-    name: z.string().min(3, { message: t('form.errors.nameMin') }),
-    email: z.string().email({ message: t('form.errors.emailInvalid') }),
-    phone: z.string().min(10, { message: t('form.errors.phoneInvalid') }),
-    role: z.string().min(2, { message: t('form.errors.roleRequired') }),
-    
-    // Company data
-    companyName: z.string().min(2, { message: t('form.errors.companyNameRequired') }),
-    segment: z.string().min(2, { message: t('form.errors.segmentRequired') }),
-    companySize: z.string().min(1, { message: t('form.errors.companySizeRequired') }),
-    website: z.string().optional(),
-    
-    // Project data
-    serviceType: z.string().min(2, { message: t('form.errors.serviceTypeRequired') }),
-    projectDescription: z.string().min(20, { message: t('form.errors.descriptionMin') }),
-    deadline: z.string().min(1, { message: t('form.errors.deadlineRequired') }),
-    budget: z.string().optional(),
-
-    // Contact preferences
-    preferWhatsApp: z.boolean().default(true),
-    preferEmail: z.boolean().default(false),
-    preferPhone: z.boolean().default(false),
-    preferCalendly: z.boolean().default(false),
-  });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -99,62 +83,60 @@ const Agendar = () => {
       return;
     }
 
-    // Formatting data for submission
+    // Formatando os dados para envio
     const formattedMessage = `
-*${t('form.newBriefing')}*
+*Novo Briefing*
 -------------------
-*${t('form.personalData')}*
-${t('form.name')}: ${values.name}
-${t('form.email')}: ${values.email}
-${t('form.phone')}: ${values.phone}
-${t('form.role')}: ${values.role}
+*Dados Pessoais*
+Nome: ${values.name}
+Email: ${values.email}
+Telefone: ${values.phone}
+Cargo: ${values.role}
 
-*${t('form.companyData')}*
-${t('form.company')}: ${values.companyName}
-${t('form.segment')}: ${values.segment}
-${t('form.size')}: ${values.companySize}
-${t('form.website')}: ${values.website || t('form.notProvided')}
+*Dados da Empresa*
+Empresa: ${values.companyName}
+Segmento: ${values.segment}
+Tamanho: ${values.companySize}
+Site: ${values.website || "Não informado"}
 
-*${t('form.projectData')}*
-${t('form.service')}: ${values.serviceType}
-${t('form.description')}: ${values.projectDescription}
-${t('form.deadline')}: ${values.deadline}
-${t('form.budget')}: ${values.budget || t('form.notProvided')}
+*Dados do Projeto*
+Serviço: ${values.serviceType}
+Descrição: ${values.projectDescription}
+Prazo: ${values.deadline}
+Orçamento: ${values.budget || "Não informado"}
 
-*${t('form.contactPreference')}*
+*Preferência de Contato*
 ${values.preferWhatsApp ? "• WhatsApp" : ""}
-${values.preferEmail ? `• ${t('form.email')}` : ""}
-${values.preferPhone ? `• ${t('form.phone')}` : ""}
-${values.preferCalendly ? `• ${t('form.onlineScheduling')}` : ""}
+${values.preferEmail ? "• Email" : ""}
+${values.preferPhone ? "• Telefone" : ""}
+${values.preferCalendly ? "• Agendamento online" : ""}
     `;
 
-    // Sending to WhatsApp
+    // Enviando para WhatsApp
     if (values.preferWhatsApp) {
-      const whatsappNumber = "5583988329018"; // Format: country code + area code + number
+      const whatsappNumber = "5583988329018"; // Formato: DDI + DDD + número
       const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(formattedMessage)}`;
       window.open(whatsappUrl, "_blank");
     }
     
-    // Sending to email
+    // Enviando para e-mail
     if (values.preferEmail) {
-      const emailSubject = t('form.newBriefingSubject');
+      const emailSubject = "Novo Briefing - Site";
       const emailBody = formattedMessage;
       const mailtoUrl = `mailto:contact@agenciadigital.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
       window.location.href = mailtoUrl;
     }
     
-    // Showing Calendly if preferred
+    // Mostrando Calendly se preferir agendamento
     if (values.preferCalendly) {
       setShowCalendly(true);
     }
     
-    toast({
-      title: t('form.briefingSentSuccess'),
-      description: t('form.willContactSoon'),
-      duration: 3000,
+    toast.success("Briefing enviado com sucesso!", {
+      description: "Entraremos em contato em breve.",
     });
     
-    // Reset form if not using Calendly
+    // Se não escolher o Calendly, resetar o formulário
     if (!values.preferCalendly) {
       form.reset();
       setStage(FormStage.PERSONAL);
@@ -173,15 +155,15 @@ ${values.preferCalendly ? `• ${t('form.onlineScheduling')}` : ""}
     setStage(FormStage.PERSONAL);
   };
 
-  // Conditional rendering based on current stage
+  // Renderização condicional com base no estágio atual
   const renderStageContent = () => {
     switch (stage) {
       case FormStage.PERSONAL:
         return (
           <>
             <CardHeader>
-              <CardTitle>{t('form.personalData')}</CardTitle>
-              <CardDescription>{t('form.provideContactInfo')}</CardDescription>
+              <CardTitle>Dados Pessoais</CardTitle>
+              <CardDescription>Informe seus dados para contato</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <FormField
@@ -189,9 +171,9 @@ ${values.preferCalendly ? `• ${t('form.onlineScheduling')}` : ""}
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t('form.fullName')}</FormLabel>
+                    <FormLabel>Nome Completo</FormLabel>
                     <FormControl>
-                      <Input placeholder={t('form.yourName')} {...field} />
+                      <Input placeholder="Seu nome" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -202,9 +184,9 @@ ${values.preferCalendly ? `• ${t('form.onlineScheduling')}` : ""}
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t('form.email')}</FormLabel>
+                    <FormLabel>E-mail</FormLabel>
                     <FormControl>
-                      <Input type="email" placeholder={t('form.emailPlaceholder')} {...field} />
+                      <Input type="email" placeholder="seu@email.com" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -215,9 +197,9 @@ ${values.preferCalendly ? `• ${t('form.onlineScheduling')}` : ""}
                 name="phone"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t('form.phone')}</FormLabel>
+                    <FormLabel>Telefone</FormLabel>
                     <FormControl>
-                      <Input placeholder={t('form.phonePlaceholder')} {...field} />
+                      <Input placeholder="(11) 99999-9999" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -228,9 +210,9 @@ ${values.preferCalendly ? `• ${t('form.onlineScheduling')}` : ""}
                 name="role"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t('form.role')}</FormLabel>
+                    <FormLabel>Cargo</FormLabel>
                     <FormControl>
-                      <Input placeholder={t('form.rolePlaceholder')} {...field} />
+                      <Input placeholder="Seu cargo na empresa" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -244,8 +226,8 @@ ${values.preferCalendly ? `• ${t('form.onlineScheduling')}` : ""}
         return (
           <>
             <CardHeader>
-              <CardTitle>{t('form.aboutCompany')}</CardTitle>
-              <CardDescription>{t('form.companyInfo')}</CardDescription>
+              <CardTitle>Sobre a Empresa</CardTitle>
+              <CardDescription>Informações sobre a empresa contratante</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <FormField
@@ -253,9 +235,9 @@ ${values.preferCalendly ? `• ${t('form.onlineScheduling')}` : ""}
                 name="companyName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t('form.companyName')}</FormLabel>
+                    <FormLabel>Nome da Empresa</FormLabel>
                     <FormControl>
-                      <Input placeholder={t('form.companyNamePlaceholder')} {...field} />
+                      <Input placeholder="Nome da empresa" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -266,9 +248,9 @@ ${values.preferCalendly ? `• ${t('form.onlineScheduling')}` : ""}
                 name="segment"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t('form.segment')}</FormLabel>
+                    <FormLabel>Segmento</FormLabel>
                     <FormControl>
-                      <Input placeholder={t('form.segmentPlaceholder')} {...field} />
+                      <Input placeholder="Ex: Tecnologia, Saúde, Educação" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -279,9 +261,9 @@ ${values.preferCalendly ? `• ${t('form.onlineScheduling')}` : ""}
                 name="companySize"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t('form.companySize')}</FormLabel>
+                    <FormLabel>Tamanho da Empresa</FormLabel>
                     <FormControl>
-                      <Input placeholder={t('form.companySizePlaceholder')} {...field} />
+                      <Input placeholder="Ex: Startup, Pequena, Média, Grande" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -292,12 +274,12 @@ ${values.preferCalendly ? `• ${t('form.onlineScheduling')}` : ""}
                 name="website"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t('form.website')}</FormLabel>
+                    <FormLabel>Website (se existente)</FormLabel>
                     <FormControl>
-                      <Input placeholder={t('form.websitePlaceholder')} {...field} />
+                      <Input placeholder="www.seusite.com.br" {...field} />
                     </FormControl>
                     <FormDescription>
-                      {t('form.websiteDescription')}
+                      Deixe em branco se ainda não possui um site
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -311,8 +293,8 @@ ${values.preferCalendly ? `• ${t('form.onlineScheduling')}` : ""}
         return (
           <>
             <CardHeader>
-              <CardTitle>{t('form.aboutProject')}</CardTitle>
-              <CardDescription>{t('form.projectDetails')}</CardDescription>
+              <CardTitle>Sobre o Projeto</CardTitle>
+              <CardDescription>Detalhes do projeto que deseja desenvolver</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <FormField
@@ -320,9 +302,9 @@ ${values.preferCalendly ? `• ${t('form.onlineScheduling')}` : ""}
                 name="serviceType"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t('form.serviceType')}</FormLabel>
+                    <FormLabel>Tipo de Serviço</FormLabel>
                     <FormControl>
-                      <Input placeholder={t('form.serviceTypePlaceholder')} {...field} />
+                      <Input placeholder="Ex: Site, Loja Virtual, App, Design Gráfico" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -333,10 +315,10 @@ ${values.preferCalendly ? `• ${t('form.onlineScheduling')}` : ""}
                 name="projectDescription"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t('form.projectDescription')}</FormLabel>
+                    <FormLabel>Descrição do Projeto</FormLabel>
                     <FormControl>
                       <Textarea 
-                        placeholder={t('form.projectDescriptionPlaceholder')}
+                        placeholder="Descreva o que você precisa, objetivos, referências..."
                         className="min-h-[100px]"
                         {...field} 
                       />
@@ -350,9 +332,9 @@ ${values.preferCalendly ? `• ${t('form.onlineScheduling')}` : ""}
                 name="deadline"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t('form.desiredDeadline')}</FormLabel>
+                    <FormLabel>Prazo Desejado</FormLabel>
                     <FormControl>
-                      <Input placeholder={t('form.deadlinePlaceholder')} {...field} />
+                      <Input placeholder="Ex: 1 mês, 3 meses, Flexível" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -363,12 +345,12 @@ ${values.preferCalendly ? `• ${t('form.onlineScheduling')}` : ""}
                 name="budget"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t('form.estimatedBudget')}</FormLabel>
+                    <FormLabel>Orçamento Estimado</FormLabel>
                     <FormControl>
-                      <Input placeholder={t('form.budgetPlaceholder')} {...field} />
+                      <Input placeholder="Seu orçamento para o projeto" {...field} />
                     </FormControl>
                     <FormDescription>
-                      {t('form.budgetDescription')}
+                      Opcional, mas ajuda a alinharmos propostas adequadas
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -382,8 +364,8 @@ ${values.preferCalendly ? `• ${t('form.onlineScheduling')}` : ""}
         return (
           <>
             <CardHeader>
-              <CardTitle>{t('form.confirmation')}</CardTitle>
-              <CardDescription>{t('form.howPreferContact')}</CardDescription>
+              <CardTitle>Confirmação</CardTitle>
+              <CardDescription>Como prefere ser contatado?</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="space-y-4">
@@ -401,7 +383,7 @@ ${values.preferCalendly ? `• ${t('form.onlineScheduling')}` : ""}
                       <div className="space-y-1 leading-none">
                         <FormLabel>WhatsApp</FormLabel>
                         <FormDescription>
-                          {t('form.sendBriefingWhatsApp')}
+                          Enviar briefing pelo WhatsApp
                         </FormDescription>
                       </div>
                     </FormItem>
@@ -419,9 +401,9 @@ ${values.preferCalendly ? `• ${t('form.onlineScheduling')}` : ""}
                         />
                       </FormControl>
                       <div className="space-y-1 leading-none">
-                        <FormLabel>{t('form.email')}</FormLabel>
+                        <FormLabel>E-mail</FormLabel>
                         <FormDescription>
-                          {t('form.sendBriefingEmail')}
+                          Enviar briefing por e-mail
                         </FormDescription>
                       </div>
                     </FormItem>
@@ -439,9 +421,9 @@ ${values.preferCalendly ? `• ${t('form.onlineScheduling')}` : ""}
                         />
                       </FormControl>
                       <div className="space-y-1 leading-none">
-                        <FormLabel>{t('form.phone')}</FormLabel>
+                        <FormLabel>Telefone</FormLabel>
                         <FormDescription>
-                          {t('form.preferPhone')}
+                          Prefiro ser contatado por telefone
                         </FormDescription>
                       </div>
                     </FormItem>
@@ -459,9 +441,9 @@ ${values.preferCalendly ? `• ${t('form.onlineScheduling')}` : ""}
                         />
                       </FormControl>
                       <div className="space-y-1 leading-none">
-                        <FormLabel>{t('form.onlineScheduling')}</FormLabel>
+                        <FormLabel>Agendamento Online</FormLabel>
                         <FormDescription>
-                          {t('form.scheduleCalendly')}
+                          Agendar reunião pelo Calendly
                         </FormDescription>
                       </div>
                     </FormItem>
@@ -471,11 +453,11 @@ ${values.preferCalendly ? `• ${t('form.onlineScheduling')}` : ""}
 
               <div className="rounded-md bg-navy-light/10 p-4">
                 <div className="flex flex-col gap-2">
-                  <p className="font-medium">{t('form.informationSummary')}</p>
-                  <p><span className="font-semibold">{t('form.name')}:</span> {form.getValues("name")}</p>
-                  <p><span className="font-semibold">{t('form.company')}:</span> {form.getValues("companyName")}</p>
-                  <p><span className="font-semibold">{t('form.service')}:</span> {form.getValues("serviceType")}</p>
-                  <p><span className="font-semibold">{t('form.deadline')}:</span> {form.getValues("deadline")}</p>
+                  <p className="font-medium">Resumo das Informações</p>
+                  <p><span className="font-semibold">Nome:</span> {form.getValues("name")}</p>
+                  <p><span className="font-semibold">Empresa:</span> {form.getValues("companyName")}</p>
+                  <p><span className="font-semibold">Serviço:</span> {form.getValues("serviceType")}</p>
+                  <p><span className="font-semibold">Prazo:</span> {form.getValues("deadline")}</p>
                 </div>
               </div>
             </CardContent>
@@ -489,10 +471,10 @@ ${values.preferCalendly ? `• ${t('form.onlineScheduling')}` : ""}
 
   const renderProgress = () => {
     const stages = [
-      { name: t('form.stages.personal'), stage: FormStage.PERSONAL },
-      { name: t('form.stages.company'), stage: FormStage.COMPANY },
-      { name: t('form.stages.project'), stage: FormStage.PROJECT },
-      { name: t('form.stages.confirmation'), stage: FormStage.CONFIRMATION },
+      { name: "Pessoal", stage: FormStage.PERSONAL },
+      { name: "Empresa", stage: FormStage.COMPANY },
+      { name: "Projeto", stage: FormStage.PROJECT },
+      { name: "Confirmação", stage: FormStage.CONFIRMATION },
     ];
 
     return (
@@ -533,22 +515,23 @@ ${values.preferCalendly ? `• ${t('form.onlineScheduling')}` : ""}
       <Header />
       
       <div className="container mx-auto py-16 md:py-24 flex-grow">
-        <h1 className="heading-lg text-center mb-2">{t('form.scheduleTitle')}</h1>
+        <h1 className="heading-lg text-center mb-2">Agendar Atendimento</h1>
         <p className="text-center text-gray-600 mb-10 max-w-2xl mx-auto">
-          {t('form.briefingInstructions')}
+          Preencha o briefing abaixo para que possamos entender melhor sua necessidade 
+          e preparar um atendimento personalizado para seu projeto.
         </p>
         
         {showCalendly ? (
           <div className="max-w-3xl mx-auto">
             <div className="bg-white p-6 rounded-lg shadow-md">
-              <h2 className="text-xl font-bold mb-4">{t('form.scheduleYourMeeting')}</h2>
+              <h2 className="text-xl font-bold mb-4">Agende sua Reunião</h2>
               <div className="calendly-embed mb-6" style={{ minHeight: '650px' }}>
                 <iframe
-                  src={`https://calendly.com/agenciadigital/30min?lang=${i18n.language.split('-')[0]}`}
+                  src="https://calendly.com/agenciadigital/30min"
                   width="100%"
                   height="650"
                   frameBorder="0"
-                  title={t('form.scheduleTitle')}
+                  title="Agendar reunião"
                 ></iframe>
               </div>
               <Button 
@@ -556,7 +539,7 @@ ${values.preferCalendly ? `• ${t('form.onlineScheduling')}` : ""}
                 variant="outline"
                 className="mt-4"
               >
-                {t('form.backToForm')}
+                Voltar ao Formulário
               </Button>
             </div>
           </div>
@@ -574,7 +557,7 @@ ${values.preferCalendly ? `• ${t('form.onlineScheduling')}` : ""}
                       onClick={goBack}
                       disabled={stage === FormStage.PERSONAL}
                     >
-                      {t('form.back')}
+                      Voltar
                     </Button>
                     <Button 
                       type="submit" 
@@ -582,10 +565,10 @@ ${values.preferCalendly ? `• ${t('form.onlineScheduling')}` : ""}
                     >
                       {stage === FormStage.CONFIRMATION ? (
                         <>
-                          <span>{t('form.send')}</span>
+                          <span>Enviar</span>
                           <Send className="ml-2 h-4 w-4" />
                         </>
-                      ) : t('form.next')}
+                      ) : "Próximo"}
                     </Button>
                   </CardFooter>
                 </Card>
@@ -593,35 +576,35 @@ ${values.preferCalendly ? `• ${t('form.onlineScheduling')}` : ""}
             </Form>
 
             <div className="mt-10 bg-navy rounded-lg p-6 text-white">
-              <h3 className="text-xl font-semibold mb-4">{t('form.needImmediateHelp')}</h3>
+              <h3 className="text-xl font-semibold mb-4">Precisa de ajuda imediata?</h3>
               <p className="mb-6">
-                {t('form.contactDirectly')}
+                Você pode entrar em contato diretamente conosco por um dos canais abaixo:
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="flex items-center">
                   <Phone className="mr-3 text-orange" />
                   <div>
-                    <p className="font-medium">{t('form.phoneWhatsApp')}</p>
+                    <p className="font-medium">Telefone/WhatsApp</p>
                     <p className="text-sm text-gray-200">(83) 98832-9018</p>
                   </div>
                 </div>
                 <div className="flex items-center">
                   <Mail className="mr-3 text-orange" />
                   <div>
-                    <p className="font-medium">{t('form.email')}</p>
+                    <p className="font-medium">E-mail</p>
                     <p className="text-sm text-gray-200">contact@agenciadigital.com</p>
                   </div>
                 </div>
                 <div className="flex items-center md:col-span-2">
                   <Calendar className="mr-3 text-orange" />
                   <div>
-                    <p className="font-medium">{t('form.onlineScheduling')}</p>
+                    <p className="font-medium">Agendamento online</p>
                     <Button 
                       variant="link" 
                       onClick={() => openCalendly()}
                       className="p-0 h-auto text-sm text-gray-200 hover:text-orange"
                     >
-                      {t('form.scheduleCalendly')}
+                      Agendar pelo Calendly
                     </Button>
                   </div>
                 </div>
