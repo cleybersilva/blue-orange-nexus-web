@@ -1,72 +1,86 @@
 
 import React from 'react';
-import { Calendar, Users, Building, Phone } from 'lucide-react';
+import { Calendar, Users, Building, Phone, MapPin, Mail } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 const SobreNos = () => {
-  // Dados dos membros da equipe
+  // Dados dos membros da equipe atualizados
   const teamMembers = [
     {
-      name: "Ana Silva",
-      role: "CEO & Fundadora",
-      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      name: "Cleyber Silva",
+      role: "SEO e AI Scientist",
+      bio: "Especialista em otimização para motores de busca e aplicações de inteligência artificial para negócios digitais.",
+      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     {
-      name: "Carlos Mendes",
-      role: "Diretor de Tecnologia",
+      name: "Marcos Túlio",
+      role: "Sênior CyberSecurity",
+      bio: "Responsável pela segurança digital e proteção de dados dos clientes, com vasta experiência em prevenção de ameaças.",
       image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     {
-      name: "Juliana Costa",
-      role: "Diretora de Design",
+      name: "Euthelys Arthur",
+      role: "Traffic Manager",
+      bio: "Especialista em geração de tráfego qualificado e estratégias de conversão para campanhas digitais.",
       image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=2576&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     {
-      name: "Rafael Santos",
-      role: "Gerente de Marketing",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      name: "Vini",
+      role: "Graphic Design Manager",
+      bio: "Lidera o time de design gráfico, garantindo a excelência visual em todos os projetos e materiais da empresa.",
+      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     }
   ];
 
-  // Linha do tempo da empresa
+  // Linha do tempo da empresa corrigida
   const timelineEvents = [
     {
       year: "2018",
       title: "O início da jornada",
-      description: "Fundação da empresa com foco em desenvolvimento web"
+      description: "Fundação da empresa com foco em desenvolvimento web e soluções digitais personalizadas."
     },
     {
       year: "2019",
       title: "Expansão de serviços",
-      description: "Incluímos design gráfico e marketing digital em nosso portfólio"
+      description: "Ampliamos nosso portfólio para incluir design gráfico profissional e estratégias de marketing digital."
     },
     {
       year: "2020",
-      title: "Adaptação em tempos de crise",
-      description: "Desenvolvemos soluções digitais para empresas se manterem ativas durante a pandemia"
+      title: "Adaptação e inovação",
+      description: "Durante a pandemia, desenvolvemos soluções digitais que ajudaram empresas a se manterem ativas e conectadas com seus clientes."
     },
     {
       year: "2022",
-      title: "Novos horizontes",
-      description: "Expandimos para desenvolvimento de aplicativos móveis e AVAs"
+      title: "Diversificação tecnológica",
+      description: "Expandimos para o desenvolvimento de aplicativos móveis e Ambientes Virtuais de Aprendizagem (AVAs)."
     },
     {
       year: "2023",
-      title: "Especialização em marketing político",
-      description: "Iniciamos nossa divisão de estratégia digital para campanhas políticas"
+      title: "Estratégia política digital",
+      description: "Lançamos nossa divisão especializada em marketing político digital, oferecendo soluções completas para campanhas."
     },
     {
       year: "2024",
-      title: "Consolidação no mercado",
-      description: "Ampliamos nossa equipe e expandimos nosso escritório para atender a demanda crescente"
+      title: "Crescimento sustentável",
+      description: "Ampliamos nossa equipe e infraestrutura para atender à crescente demanda por nossas soluções digitais integradas."
     }
   ];
 
+  // Função para abrir o WhatsApp
+  const abrirWhatsApp = () => {
+    window.open('https://wa.me/5583988329018', '_blank');
+  };
+
   return (
     <div className="min-h-screen bg-white">
+      {/* Adicionando o Header que estava faltando */}
+      <Header />
+      
       {/* Hero Section */}
-      <section className="bg-navy text-white py-20">
+      <section className="bg-navy text-white py-20 mt-16">
         <div className="container-custom">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
@@ -152,7 +166,7 @@ const SobreNos = () => {
         </div>
       </section>
 
-      {/* Nossa Equipe */}
+      {/* Nossa Equipe - Atualizada com os novos membros */}
       <section className="py-16 md:py-24">
         <div className="container-custom">
           <h2 className="heading-lg text-center mb-4">Nossa Equipe</h2>
@@ -186,13 +200,14 @@ const SobreNos = () => {
                 </div>
                 <h3 className="text-lg font-semibold text-navy">{member.name}</h3>
                 <p className="text-gray-600">{member.role}</p>
+                <p className="text-gray-500 text-sm mt-2">{member.bio}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Timeline / Nossa História */}
+      {/* Timeline / Nossa Trajetória - Corrigida */}
       <section className="py-16 md:py-24 bg-gray-50">
         <div className="container-custom">
           <h2 className="heading-lg text-center mb-12">Nossa Trajetória</h2>
@@ -328,7 +343,7 @@ const SobreNos = () => {
         </div>
       </section>
 
-      {/* Call To Action */}
+      {/* Call To Action - Com botão de WhatsApp corrigido */}
       <section className="py-16 bg-gradient-to-r from-navy to-navy-light text-white">
         <div className="container-custom text-center">
           <h2 className="heading-lg mb-6">Pronto para Transformar suas Ideias em Realidade?</h2>
@@ -339,42 +354,56 @@ const SobreNos = () => {
             <a href="/agendar" className="btn-primary bg-orange hover:bg-orange-dark">
               Agendar Atendimento
             </a>
-            <a href="/contato" className="btn-secondary border-white text-white hover:bg-white hover:text-navy">
+            <button 
+              onClick={abrirWhatsApp} 
+              className="btn-secondary border-white text-white hover:bg-white hover:text-navy">
               Fale Conosco
-            </a>
+            </button>
           </div>
         </div>
       </section>
 
-      {/* Informações de Contato */}
+      {/* Informações de Contato - Atualizadas */}
       <section className="py-16 md:py-24">
         <div className="container-custom">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="heading-lg mb-6">Onde Estamos</h2>
               <p className="text-gray-600 mb-8">
-                Nosso escritório está localizado em São Paulo, mas atendemos clientes de todo o Brasil 
-                e estamos expandindo nossas operações para América Latina.
+                Estamos localizados em João Pessoa, mas atendemos clientes de todo o Brasil 
+                através de nossas soluções digitais integradas.
               </p>
               
               <div className="space-y-6">
                 <div className="flex">
-                  <Building className="h-6 w-6 text-orange mr-4 flex-shrink-0" />
+                  <MapPin className="h-6 w-6 text-orange mr-4 flex-shrink-0" />
                   <div>
                     <h3 className="font-medium text-navy">Escritório Principal</h3>
                     <address className="text-gray-600 not-italic">
-                      Av. Paulista, 1000, Bela Vista<br />
-                      São Paulo - SP, 01310-100
+                      R. Empresário Lourival Lopes Filho, 105<br />
+                      Jardim Oceania, João Pessoa - PB, 58037-735
                     </address>
                   </div>
                 </div>
                 <div className="flex">
                   <Phone className="h-6 w-6 text-orange mr-4 flex-shrink-0" />
                   <div>
-                    <h3 className="font-medium text-navy">Contato</h3>
+                    <h3 className="font-medium text-navy">Telefone</h3>
                     <p className="text-gray-600">
-                      contato@empresa.com.br<br />
-                      +55 (11) 9999-9999
+                      <a href="tel:+5583988329018" className="hover:text-orange transition-colors">
+                        +55 (83) 98832-9018
+                      </a>
+                    </p>
+                  </div>
+                </div>
+                <div className="flex">
+                  <Mail className="h-6 w-6 text-orange mr-4 flex-shrink-0" />
+                  <div>
+                    <h3 className="font-medium text-navy">E-mail</h3>
+                    <p className="text-gray-600">
+                      <a href="mailto:contato@agenciadigital.com" className="hover:text-orange transition-colors">
+                        contato@agenciadigital.com
+                      </a>
                     </p>
                   </div>
                 </div>
@@ -383,7 +412,7 @@ const SobreNos = () => {
             
             <div className="aspect-ratio overflow-hidden rounded-lg shadow-lg">
               <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.0976521576186!2d-46.6549364!3d-23.5657291!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59c8da0aa315%3A0xd59f9431f2c9776a!2sAv.%20Paulista%20-%20Bela%20Vista%2C%20S%C3%A3o%20Paulo%20-%20SP!5e0!3m2!1spt-BR!2sbr!4v1653397790866!5m2!1spt-BR!2sbr" 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.013136161069!2d-34.84086482477677!3d-7.128195292865566!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7ace9d31e7cf233%3A0xf632c57f6b5940ef!2sR.%20Empres%C3%A1rio%20Lourival%20Lopes%20Filho%2C%20105%20-%20Jardim%20Oceania%2C%20Jo%C3%A3o%20Pessoa%20-%20PB%2C%2058037-735!5e0!3m2!1spt-BR!2sbr!4v1713305804046!5m2!1spt-BR!2sbr" 
                 width="100%" 
                 height="450" 
                 style={{ border: 0 }} 
@@ -395,6 +424,9 @@ const SobreNos = () => {
           </div>
         </div>
       </section>
+
+      {/* Adicionando o Footer */}
+      <Footer />
     </div>
   );
 };
