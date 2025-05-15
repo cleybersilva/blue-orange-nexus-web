@@ -35,7 +35,12 @@ i18n
     },
     react: {
       useSuspense: false // Disable suspense for SSR compatibility
-    }
+    },
+    debug: process.env.NODE_ENV === 'development' // Enable debug in development
   });
+
+// Force initial language detection
+document.documentElement.lang = i18n.language;
+console.log('i18n initialized with language:', i18n.language);
 
 export default i18n;

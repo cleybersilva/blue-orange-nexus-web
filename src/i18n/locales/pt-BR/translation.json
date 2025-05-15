@@ -356,5 +356,108 @@
   "language": {
     "changed": "Idioma Alterado",
     "changedTo": "Idioma alterado para {{language}}"
+  },
+  "aboutPage": {
+    "ourHistory": "Nossa História",
+    "historyIntro": "Desde 2018, temos sido pioneiros em soluções digitais inovadoras que transformam negócios e elevam marcas. Nossa jornada é marcada por criatividade, excelência técnica e um compromisso inabalável com o sucesso de nossos clientes.",
+    "contactUs": "Fale Conosco",
+    "scheduleCall": "Agendar Reunião",
+    "mvv": {
+      "title": "Missão, Visão e Valores",
+      "mission": "Nossa Missão",
+      "missionText": "Potencializar o crescimento dos negócios de nossos clientes através de soluções digitais inovadoras e eficientes, oferecendo excelência técnica e criativa em cada projeto.",
+      "vision": "Nossa Visão",
+      "visionText": "Ser reconhecida como a principal referência em soluções digitais no Brasil, conhecida pela excelência, inovação e resultados extraordinários que entregamos aos nossos clientes.",
+      "values": "Nossos Valores",
+      "valuesList": [
+        "Excelência em tudo que fazemos",
+        "Inovação constante",
+        "Transparência e honestidade",
+        "Compromisso com resultados",
+        "Foco no cliente"
+      ]
+    },
+    "team": {
+      "title": "Nossa Equipe",
+      "subtitle": "Conheça os talentos que tornam nossos projetos realidade. Uma equipe multidisciplinar apaixonada por criar soluções digitais inovadoras."
+    },
+    "differentials": {
+      "title": "Nossos Diferenciais",
+      "subtitle": "O que nos torna diferentes e como isso beneficia seu negócio",
+      "agility": {
+        "title": "Agilidade",
+        "description": "Metodologias ágeis que garantem entregas rápidas e adaptáveis às necessidades do seu negócio."
+      },
+      "innovation": {
+        "title": "Inovação",
+        "description": "Sempre à frente com as mais recentes tecnologias e tendências do mercado digital."
+      },
+      "team": {
+        "title": "Equipe Especializada",
+        "description": "Profissionais altamente qualificados com experiência em projetos nacionais e internacionais."
+      },
+      "security": {
+        "title": "Segurança",
+        "description": "Protocolos avançados de segurança para proteger seus dados e de seus clientes."
+      },
+      "cloud": {
+        "title": "Infraestrutura em Nuvem",
+        "description": "Soluções escaláveis e de alta disponibilidade baseadas nas melhores plataformas cloud."
+      },
+      "support": {
+        "title": "Suporte Contínuo",
+        "description": "Acompanhamento constante e suporte técnico especializado mesmo após o lançamento."
+      }
+    },
+    "cta": {
+      "title": "Pronto para Transformar seu Negócio?",
+      "subtitle": "Vamos conversar sobre como podemos ajudar a alcançar seus objetivos digitais.",
+      "schedule": "Agendar Reunião",
+      "contact": "Fale Conosco"
+    },
+    "location": {
+      "title": "Onde Estamos",
+      "description": "Nossa sede está localizada em um hub tecnológico estratégico, facilitando a colaboração e inovação. Estamos sempre disponíveis para atender você presencialmente ou remotamente.",
+      "office": "Nosso Escritório",
+      "phone": "Telefone",
+      "email": "Email"
+    }
+  },
+  "teamMembers": {
+    "seo": "Especialista em SEO",
+    "seoBio": "Especialista em otimização para motores de busca com mais de 7 anos de experiência.",
+    "security": "Especialista em Segurança",
+    "securityBio": "Especialista em segurança cibernética com certificações internacionais.",
+    "traffic": "Gerente de Tráfego",
+    "trafficBio": "Especialista em estratégias de tráfego pago e orgânico com foco em ROI.",
+    "design": "UI/UX Designer",
+    "designBio": "Designer de experiência do usuário com forte background em design centrado no usuário."
+  },
+  "timeline": {
+    "title": "Nossa Trajetória",
+    "2018": {
+      "title": "Fundação da Empresa",
+      "description": "Iniciamos nossa jornada com a missão de transformar negócios através de soluções digitais inovadoras."
+    },
+    "2019": {
+      "title": "Primeiros Grandes Clientes",
+      "description": "Conquistamos a confiança de empresas renomadas e expandimos nossa carteira de clientes."
+    },
+    "2020": {
+      "title": "Adaptação à Pandemia",
+      "description": "Ajudamos empresas a se digitalizarem rapidamente durante os desafios da pandemia global."
+    },
+    "2022": {
+      "title": "Expansão Internacional",
+      "description": "Iniciamos operações em outros países, levando nossa expertise para novos mercados."
+    },
+    "2023": {
+      "title": "Inovação em IA",
+      "description": "Incorporamos soluções de inteligência artificial avançadas em nossos produtos e serviços."
+    },
+    "2024": {
+      "title": "Novos Horizontes",
+      "description": "Continuamos a expandir e inovar, sempre com foco na excelência e resultados para nossos clientes."
+    }
   }
 }
