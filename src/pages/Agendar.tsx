@@ -35,6 +35,8 @@ const Agendar = () => {
   useEffect(() => {
     const handleLanguageChange = () => {
       console.log('Language changed in Agendar page:', i18n.language);
+      // Re-initialize the form with new translations
+      resetForm();
     };
 
     window.addEventListener('languageChanged', handleLanguageChange);
@@ -43,6 +45,29 @@ const Agendar = () => {
       window.removeEventListener('languageChanged', handleLanguageChange);
     };
   }, [i18n]);
+  
+  // Function to reset the form with current translations
+  const resetForm = () => {
+    form.reset({
+      name: "",
+      email: "",
+      phone: "",
+      role: "",
+      companyName: "",
+      segment: "",
+      companySize: "",
+      website: "",
+      serviceType: "",
+      projectDescription: "",
+      deadline: "",
+      budget: "",
+      preferWhatsApp: true,
+      preferEmail: false,
+      preferPhone: false,
+      preferCalendly: false,
+    });
+    setStage(FormStage.PERSONAL);
+  };
 
   // Schema for form validation
   const formSchema = z.object({
@@ -93,13 +118,40 @@ const Agendar = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
+  // Validate only the current stage fields
+  const validateCurrentStage = async () => {
+    let fieldsToValidate: string[] = [];
+    
+    switch (stage) {
+      case FormStage.PERSONAL:
+        fieldsToValidate = ['name', 'email', 'phone', 'role'];
+        break;
+      case FormStage.COMPANY:
+        fieldsToValidate = ['companyName', 'segment', 'companySize'];
+        break;
+      case FormStage.PROJECT:
+        fieldsToValidate = ['serviceType', 'projectDescription', 'deadline'];
+        break;
+      case FormStage.CONFIRMATION:
+        // No specific validation for confirmation stage
+        return true;
+    }
+    
+    const result = await form.trigger(fieldsToValidate as any);
+    return result;
+  };
+
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    // For intermediate stages, validate and advance
     if (stage < FormStage.CONFIRMATION) {
-      setStage(stage + 1);
+      const isValid = await validateCurrentStage();
+      if (isValid) {
+        setStage(stage + 1);
+      }
       return;
     }
 
-    // Formatting data for submission
+    // Final submission - formatting data
     const formattedMessage = `
 *${t('form.newBriefing')}*
 -------------------
