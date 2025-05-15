@@ -71,4 +71,13 @@ i18n
 document.documentElement.lang = i18n.language;
 console.log('i18n initialized with language:', i18n.language);
 
+// Add custom event emitter for language changes
+const originalChangeLanguage = i18n.changeLanguage;
+i18n.changeLanguage = async function(lng, ...args) {
+  const result = await originalChangeLanguage.apply(this, [lng, ...args]);
+  // Emit a custom event that components can listen to
+  window.dispatchEvent(new CustomEvent('languageChanged', { detail: { language: lng } }));
+  return result;
+};
+
 export default i18n;

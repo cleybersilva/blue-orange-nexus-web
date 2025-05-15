@@ -95,7 +95,7 @@ const Portfolio: React.FC = () => {
         <div className="text-center mb-16">
           <h2 className="heading-lg text-navy mb-4">{t('projects.title')}</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            {t('testimonials.subtitle')}
+            {t('projects.subtitle')}
           </p>
         </div>
         

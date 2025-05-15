@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import Services from '@/components/Services';
@@ -12,17 +12,23 @@ import { useTranslation } from 'react-i18next';
 
 const Index = () => {
   const { t, i18n } = useTranslation();
+  // Add a state to force re-render on language change
+  const [, setForceUpdate] = useState(0);
   
-  // Force re-render when language changes
+  // Enhanced language change handling
   useEffect(() => {
     const handleLanguageChange = () => {
       console.log('Language changed in Index page:', i18n.language);
+      // Force re-render
+      setForceUpdate(prev => prev + 1);
     };
 
     i18n.on('languageChanged', handleLanguageChange);
+    window.addEventListener('languageChanged', handleLanguageChange);
     
     return () => {
       i18n.off('languageChanged', handleLanguageChange);
+      window.removeEventListener('languageChanged', handleLanguageChange);
     };
   }, [i18n]);
   

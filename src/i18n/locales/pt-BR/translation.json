@@ -36,13 +36,25 @@
       "title": "Aplicativos Móveis",
       "description": "Aplicativos nativos e multiplataforma para iOS e Android."
     },
+    "lms": {
+      "title": "Sistemas de Gestão de Aprendizagem",
+      "description": "Plataformas educacionais personalizadas para otimizar seu processo de treinamento."
+    },
     "marketing": {
       "title": "Marketing Digital",
       "description": "Estratégias orientadas a resultados para aumentar sua presença online e alcance."
     },
+    "social": {
+      "title": "Gestão de Mídias Sociais",
+      "description": "Estratégias abrangentes de mídia social para aumentar seu público e engajamento."
+    },
     "design": {
       "title": "Design UI/UX",
       "description": "Design centrado no usuário que foca em criar experiências memoráveis."
+    },
+    "political": {
+      "title": "Soluções para Campanhas Políticas",
+      "description": "Ferramentas digitais e plataformas para campanhas políticas eficazes."
     },
     "cta": "Ver Todos os Serviços"
   },
@@ -51,18 +63,53 @@
     "subtitle": "Projetos Recentes",
     "description": "Confira alguns de nossos trabalhos recentes que demonstram nossa experiência e criatividade.",
     "viewAll": "Ver Todos os Projetos",
+    "viewProject": "Ver Projeto",
+    "viewDetails": "Ver Mais Projetos",
     "categories": {
       "all": "Todos",
       "websites": "Websites",
       "ecommerce": "E-commerce",
       "apps": "Aplicativos",
-      "branding": "Marca"
+      "branding": "Marca",
+      "mobile": "Mobile",
+      "website": "Website",
+      "software": "Software",
+      "platform": "Plataforma",
+      "marketplace": "Marketplace"
+    },
+    "ecommerce": {
+      "title": "Plataforma de E-commerce"
+    },
+    "delivery": {
+      "title": "Aplicativo de Entregas"
+    },
+    "institutional": {
+      "title": "Site Institucional"
+    },
+    "dashboard": {
+      "title": "Dashboard Analítico"
+    },
+    "social": {
+      "title": "Rede Social"
+    },
+    "marketplace": {
+      "title": "Marketplace Online"
     }
   },
   "testimonials": {
     "title": "Depoimentos",
     "subtitle": "O Que Nossos Clientes Dizem",
-    "description": "Não acredite apenas em nossa palavra. Veja o que nossos clientes têm a dizer sobre trabalhar conosco."
+    "description": "Não acredite apenas em nossa palavra. Veja o que nossos clientes têm a dizer sobre trabalhar conosco.",
+    "quotes": {
+      "first": "Trabalhar com a equipe da Agência Digital foi uma experiência excelente. Eles entregaram nossa plataforma de e-commerce antes do prazo e os resultados superaram nossas expectativas em termos de engajamento do usuário e conversão de vendas.",
+      "second": "O redesign do site transformou completamente a imagem da nossa marca. Vimos um aumento de 40% nas consultas e nossa taxa de rejeição diminuiu significativamente. Recomendo fortemente os serviços deles!",
+      "third": "As habilidades de desenvolvimento de aplicativos móveis deles são incomparáveis. Nosso aplicativo de entrega recebeu avaliações excelentes tanto na App Store quanto no Google Play. A experiência do usuário é intuitiva e o desempenho é impecável."
+    },
+    "roles": {
+      "ceo": "CEO",
+      "commercial": "Diretor Comercial",
+      "product": "Gerente de Produto"
+    }
   },
   "contact": {
     "title": "Contato",
