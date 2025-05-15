@@ -1,9 +1,10 @@
 
+import { CheckCircle } from "lucide-react";
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { CheckCircle } from "lucide-react";
 
 // Define o enum para os estágios do formulário
+// eslint-disable-next-line react-refresh/only-export-components
 export enum FormStage {
   PERSONAL = 0,
   COMPANY = 1,
@@ -59,3 +60,4 @@ const FormProgress: React.FC<FormProgressProps> = ({ currentStage }) => {
 };
 
 export { FormProgress };
+
