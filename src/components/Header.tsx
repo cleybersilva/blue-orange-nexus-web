@@ -1,10 +1,11 @@
 
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Menu, X, Calendar } from 'lucide-react';
+import { Menu, X, Calendar, Whatsapp } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useCalendly } from '@/components/CalendlyProvider';
 import { toast } from "@/components/ui/use-toast";
+import LanguageSelector from './LanguageSelector';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,11 +14,7 @@ const Header: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 10);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -38,8 +35,14 @@ const Header: React.FC = () => {
     console.log("Calendly opened from header");
   };
 
+  const handleWhatsAppClick = () => {
+    window.open('https://wa.me/5583988329018', '_blank');
+  };
+
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-navy shadow-lg py-2' : 'bg-transparent py-4'}`}>
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      isScrolled ? 'bg-navy shadow-lg py-2' : 'bg-navy py-4'
+    }`}>
       <div className="container-custom flex items-center justify-between">
         <div className="flex items-center">
           <Link to="/" className="text-white font-bold text-2xl">
@@ -74,15 +77,26 @@ const Header: React.FC = () => {
           >
             Agendar <Calendar size={16} />
           </Button>
+          <Button
+            className="bg-[#25D366] hover:bg-[#20b958] flex items-center gap-2"
+            onClick={handleWhatsAppClick}
+          >
+            Fale Conosco <Whatsapp size={16} />
+          </Button>
+          <LanguageSelector />
         </nav>
 
         {/* Mobile menu button */}
-        <button
-          className="md:hidden text-white p-2"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        <div className="md:hidden flex items-center gap-4">
+          <Button
+            variant="ghost"
+            className="text-white hover:text-orange"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </Button>
+          <LanguageSelector />
+        </div>
       </div>
 
       {/* Mobile Navigation */}
@@ -117,6 +131,12 @@ const Header: React.FC = () => {
               }}
             >
               Agendar <Calendar size={16} />
+            </Button>
+            <Button
+              className="bg-[#25D366] hover:bg-[#20b958] w-full flex items-center justify-center gap-2"
+              onClick={handleWhatsAppClick}
+            >
+              Fale Conosco <Whatsapp size={16} />
             </Button>
           </div>
         </div>

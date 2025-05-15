@@ -1,12 +1,20 @@
-
 import React from 'react';
-import { Calendar, Users, Building, Phone, MapPin, Mail } from 'lucide-react';
+import { Calendar, Users, Building, Phone, MapPin, Mail, Whatsapp } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import TimelineSection from '@/components/about/TimelineSection';
+import { useCalendly } from '@/components/CalendlyProvider';
 
 const SobreNos = () => {
+  const { openCalendly } = useCalendly();
+
+  const handleWhatsAppClick = () => {
+    window.open('https://wa.me/5583988329018', '_blank');
+  };
+
   // Dados dos membros da equipe atualizados
   const teamMembers = [
     {
@@ -69,17 +77,12 @@ const SobreNos = () => {
     }
   ];
 
-  // Função para abrir o WhatsApp
-  const abrirWhatsApp = () => {
-    window.open('https://wa.me/5583988329018', '_blank');
-  };
-
   return (
     <div className="min-h-screen bg-white">
       {/* Adicionando o Header que estava faltando */}
       <Header />
       
-      {/* Hero Section */}
+      {/* Hero Section - Updated styling */}
       <section className="bg-navy text-white py-20 mt-16">
         <div className="container-custom">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -89,14 +92,18 @@ const SobreNos = () => {
                 Desde 2018, estamos transformando ideias em soluções digitais inovadoras que impulsionam o sucesso dos nossos clientes.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <div className="flex items-center">
-                  <Calendar className="text-orange mr-2" />
-                  <span>Desde 2018</span>
-                </div>
-                <div className="flex items-center">
-                  <Users className="text-orange mr-2" />
-                  <span>+100 clientes atendidos</span>
-                </div>
+                <Button
+                  className="bg-[#25D366] hover:bg-[#20b958] flex items-center gap-2"
+                  onClick={handleWhatsAppClick}
+                >
+                  Fale Conosco <Whatsapp className="h-5 w-5" />
+                </Button>
+                <Button
+                  className="bg-orange hover:bg-orange-dark flex items-center gap-2"
+                  onClick={openCalendly}
+                >
+                  Agendar Reunião <Calendar className="h-5 w-5" />
+                </Button>
               </div>
             </div>
             <div className="relative">
@@ -113,6 +120,9 @@ const SobreNos = () => {
           </div>
         </div>
       </section>
+
+      {/* Timeline Section */}
+      <TimelineSection />
 
       {/* Missão, Visão e Valores */}
       <section className="py-16 md:py-24 bg-gray-50">
@@ -207,40 +217,6 @@ const SobreNos = () => {
         </div>
       </section>
 
-      {/* Timeline / Nossa Trajetória - Corrigida */}
-      <section className="py-16 md:py-24 bg-gray-50">
-        <div className="container-custom">
-          <h2 className="heading-lg text-center mb-12">Nossa Trajetória</h2>
-          
-          <div className="relative border-l-2 border-orange ml-4 md:ml-0 md:mx-auto md:max-w-3xl pl-8 md:pl-0">
-            {timelineEvents.map((event, index) => (
-              <div 
-                key={index} 
-                className={`mb-12 relative ${
-                  index % 2 === 0 
-                    ? 'md:ml-auto md:pl-8 md:pr-0 md:text-left' 
-                    : 'md:mr-auto md:pr-8 md:pl-0 md:text-right md:-translate-x-full'
-                }`}
-                style={{ width: 'calc(50% - 1rem)' }}
-              >
-                <div className="absolute top-0 -left-10 md:left-auto md:right-full md:mr-6">
-                  <div className="w-6 h-6 rounded-full bg-orange"></div>
-                </div>
-                <div className={`bg-white p-6 rounded-lg shadow-md ${
-                  index % 2 === 1 && 'md:ml-auto'
-                }`}>
-                  <span className="inline-block px-4 py-1 mb-4 text-sm bg-navy text-white rounded-full">
-                    {event.year}
-                  </span>
-                  <h3 className="text-xl font-bold mb-2 text-navy">{event.title}</h3>
-                  <p className="text-gray-600">{event.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Diferenciais */}
       <section className="py-16 md:py-24">
         <div className="container-custom">
@@ -284,7 +260,7 @@ const SobreNos = () => {
               <CardContent className="p-6">
                 <div className="mb-4 w-12 h-12 bg-orange/10 rounded-lg flex items-center justify-center">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20h2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                   </svg>
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Equipe Multidisciplinar</h3>
@@ -355,7 +331,7 @@ const SobreNos = () => {
               Agendar Atendimento
             </a>
             <button 
-              onClick={abrirWhatsApp} 
+              onClick={handleWhatsAppClick} 
               className="btn-secondary border-white text-white hover:bg-white hover:text-navy">
               Fale Conosco
             </button>
