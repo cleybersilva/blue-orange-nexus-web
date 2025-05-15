@@ -1,5 +1,4 @@
-
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Calendar, Users, Building, Phone, MapPin, Mail, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -13,17 +12,23 @@ import { useTranslation } from 'react-i18next';
 const SobreNos = () => {
   const { t, i18n } = useTranslation();
   const { openCalendly } = useCalendly();
+  // Add a state to force re-render on language change
+  const [, setForceUpdate] = useState(0);
 
-  // Force re-render when language changes
+  // Enhanced language change handling
   useEffect(() => {
     const handleLanguageChange = () => {
       console.log('Language changed in About page:', i18n.language);
+      // Force re-render
+      setForceUpdate(prev => prev + 1);
     };
 
     i18n.on('languageChanged', handleLanguageChange);
+    window.addEventListener('languageChanged', handleLanguageChange);
     
     return () => {
       i18n.off('languageChanged', handleLanguageChange);
+      window.removeEventListener('languageChanged', handleLanguageChange);
     };
   }, [i18n]);
 
@@ -162,7 +167,6 @@ const SobreNos = () => {
                 </div>
                 <h3 className="text-xl font-bold mb-3 text-navy">{t('aboutPage.mvv.values')}</h3>
                 <ul className="text-gray-600 space-y-2">
-                  {/* Fixed: Use the safely obtained values list */}
                   {valuesList.map((value, index) => (
                     <li key={index}>• {value}</li>
                   ))}
