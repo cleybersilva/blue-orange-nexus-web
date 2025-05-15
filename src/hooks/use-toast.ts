@@ -1,3 +1,4 @@
+
 import * as React from "react"
 
 import type {
@@ -8,11 +9,14 @@ import type {
 const TOAST_LIMIT = 1
 const TOAST_REMOVE_DELAY = 1000000
 
+type ToastVariant = "default" | "destructive" | "success" | "info" | "warning"
+
 type ToasterToast = ToastProps & {
   id: string
   title?: React.ReactNode
   description?: React.ReactNode
   action?: ToastActionElement
+  variant?: ToastVariant
 }
 
 const actionTypes = {
@@ -139,7 +143,7 @@ function dispatch(action: Action) {
 
 type Toast = Omit<ToasterToast, "id">
 
-function toast({ ...props }: Toast) {
+function createToast(props: Toast) {
   const id = genId()
 
   const update = (props: ToasterToast) =>
@@ -167,6 +171,23 @@ function toast({ ...props }: Toast) {
     update,
   }
 }
+
+function toast(props: Toast) {
+  return createToast(props)
+}
+
+// Add variant methods to toast
+toast.info = (title: string, props?: Omit<Toast, "title" | "variant">) => 
+  createToast({ title, variant: "info", ...props })
+
+toast.success = (title: string, props?: Omit<Toast, "title" | "variant">) => 
+  createToast({ title, variant: "success", ...props })
+
+toast.warning = (title: string, props?: Omit<Toast, "title" | "variant">) => 
+  createToast({ title, variant: "warning", ...props })
+
+toast.error = (title: string, props?: Omit<Toast, "title" | "variant">) => 
+  createToast({ title, variant: "destructive", ...props })
 
 function useToast() {
   const [state, setState] = React.useState<State>(memoryState)
