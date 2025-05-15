@@ -25,5 +25,58 @@
   "language": {
     "changed": "Language changed",
     "changedTo": "The language has been changed to {{language}}"
+  },
+  "notFound": {
+    "message": "Oops! Page not found",
+    "returnHome": "Return to Home"
+  },
+  "projects": {
+    "title": "Our Portfolio",
+    "backToHome": "Back to Home",
+    "viewDetails": "View Details",
+    "detailsTitle": "Project details",
+    "detailsDescription": "Feature in development",
+    "categories": {
+      "ecommerce": "E-commerce",
+      "mobile": "Mobile App",
+      "website": "Website",
+      "software": "Software",
+      "platform": "Web Platform",
+      "marketplace": "Marketplace",
+      "fintech": "Fintech",
+      "edtech": "EdTech"
+    },
+    "ecommerce": {
+      "title": "Fashion E-commerce",
+      "description": "Complete online store with payment integration and inventory management."
+    },
+    "delivery": {
+      "title": "Delivery App",
+      "description": "Mobile application for orders and deliveries with real-time tracking."
+    },
+    "institutional": {
+      "title": "Corporate Website",
+      "description": "Responsive website with SEO optimization and CRM integration."
+    },
+    "dashboard": {
+      "title": "Analytics Dashboard",
+      "description": "Control panel with business metrics and custom reports."
+    },
+    "social": {
+      "title": "Corporate Social Network",
+      "description": "Private platform for communication and collaboration between employees."
+    },
+    "marketplace": {
+      "title": "B2B Marketplace",
+      "description": "Portal to connect suppliers and buyers in the industrial sector."
+    },
+    "finance": {
+      "title": "Financial Management App",
+      "description": "Application for personal finance control with expense analysis."
+    },
+    "education": {
+      "title": "Educational Portal",
+      "description": "Online course platform with student area and digital certification."
+    }
   }
 }

@@ -27,6 +27,8 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   useEffect(() => {
     // Set initial language
     i18n.changeLanguage(currentLanguage);
+    // Force re-render on language change
+    document.documentElement.lang = currentLanguage;
   }, [i18n, currentLanguage]);
 
   const changeLanguage = (lang: string) => {

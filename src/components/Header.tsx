@@ -12,7 +12,7 @@ const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { openCalendly } = useCalendly();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,6 +23,7 @@ const Header: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Update nav items when language changes
   const navItems = [
     { name: t('nav.home'), href: '/' },
     { name: t('nav.about'), href: '/sobre-nos' },

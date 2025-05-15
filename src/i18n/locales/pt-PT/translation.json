@@ -25,5 +25,58 @@
   "language": {
     "changed": "Idioma alterado",
     "changedTo": "O idioma foi alterado para {{language}}"
+  },
+  "notFound": {
+    "message": "Ops! Página não encontrada",
+    "returnHome": "Voltar para a Página Inicial"
+  },
+  "projects": {
+    "title": "O Nosso Portfólio",
+    "backToHome": "Voltar para a Página Inicial",
+    "viewDetails": "Ver Detalhes",
+    "detailsTitle": "Detalhes do projeto",
+    "detailsDescription": "Funcionalidade em desenvolvimento",
+    "categories": {
+      "ecommerce": "Loja Virtual",
+      "mobile": "Aplicação Móvel",
+      "website": "Website",
+      "software": "Software",
+      "platform": "Plataforma Web",
+      "marketplace": "Marketplace",
+      "fintech": "Fintech",
+      "edtech": "EdTech"
+    },
+    "ecommerce": {
+      "title": "E-commerce de Moda",
+      "description": "Loja virtual completa com integração de pagamentos e gestão de stock."
+    },
+    "delivery": {
+      "title": "Aplicação de Entregas",
+      "description": "Aplicação móvel para pedidos e entregas com rastreamento em tempo real."
+    },
+    "institutional": {
+      "title": "Site Institucional",
+      "description": "Website responsivo com otimização SEO e integração com CRM."
+    },
+    "dashboard": {
+      "title": "Dashboard Analítico",
+      "description": "Painel de controlo com métricas de negócio e relatórios personalizados."
+    },
+    "social": {
+      "title": "Rede Social Corporativa",
+      "description": "Plataforma privada para comunicação e colaboração entre funcionários."
+    },
+    "marketplace": {
+      "title": "Marketplace B2B",
+      "description": "Portal para conectar fornecedores e compradores do setor industrial."
+    },
+    "finance": {
+      "title": "Aplicação de Gestão Financeira",
+      "description": "Aplicação para controlo de finanças pessoais com análise de gastos."
+    },
+    "education": {
+      "title": "Portal Educacional",
+      "description": "Plataforma de cursos online com área do aluno e certificação digital."
+    }
   }
 }

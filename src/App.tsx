@@ -11,28 +11,42 @@ import Agendar from "./pages/Agendar";
 import ProjectsPage from "./pages/ProjectsPage";
 import { CalendlyProvider } from "./components/CalendlyProvider";
 import { LanguageProvider } from "./components/LanguageProvider";
+import { useEffect } from "react";
 
 const queryClient = new QueryClient();
+
+// Ensure language updates apply to the entire app
+const AppWithLanguage = () => {
+  useEffect(() => {
+    // Force all components to re-render when language changes
+    const lang = localStorage.getItem('preferredLanguage') || 'pt-BR';
+    document.documentElement.lang = lang;
+  }, []);
+
+  return (
+    <LanguageProvider>
+      <BrowserRouter>
+        <CalendlyProvider>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/sobre-nos" element={<SobreNos />} />
+            <Route path="/agendar" element={<Agendar />} />
+            <Route path="/projetos" element={<ProjectsPage />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          <Toaster />
+          <Sonner />
+        </CalendlyProvider>
+      </BrowserRouter>
+    </LanguageProvider>
+  );
+};
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <LanguageProvider>
-        <BrowserRouter>
-          <CalendlyProvider>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/sobre-nos" element={<SobreNos />} />
-              <Route path="/agendar" element={<Agendar />} />
-              <Route path="/projetos" element={<ProjectsPage />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-            <Toaster />
-            <Sonner />
-          </CalendlyProvider>
-        </BrowserRouter>
-      </LanguageProvider>
+      <AppWithLanguage />
     </TooltipProvider>
   </QueryClientProvider>
 );

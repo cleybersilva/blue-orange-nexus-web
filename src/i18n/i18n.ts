@@ -30,9 +30,11 @@ i18n
     resources,
     lng: localStorage.getItem('preferredLanguage') || 'pt-BR',
     fallbackLng: 'pt-BR',
-    
     interpolation: {
       escapeValue: false // react already safes from xss
+    },
+    react: {
+      useSuspense: false // Disable suspense for SSR compatibility
     }
   });
 

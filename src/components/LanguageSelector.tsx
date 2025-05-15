@@ -74,14 +74,14 @@ const LanguageSelector = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent 
         align="end" 
-        className="bg-orange border-orange animate-in fade-in-80 data-[side=bottom]:slide-in-from-top-2"
+        className="bg-navy border-navy animate-in fade-in-80 data-[side=bottom]:slide-in-from-top-2"
       >
         {languages.map((language) => (
           <DropdownMenuItem
             key={language.code}
             onClick={() => handleLanguageChange(language.code)}
-            className={`flex items-center gap-2 cursor-pointer text-navy hover:bg-orange-light transition-colors duration-200 ${
-              selectedLanguage === language.code ? 'bg-orange-light font-medium' : ''
+            className={`flex items-center gap-2 cursor-pointer text-orange hover:bg-navy-light transition-colors duration-200 ${
+              selectedLanguage === language.code ? 'bg-navy-light font-medium' : ''
             }`}
           >
             <span className="text-base">{language.flag}</span>

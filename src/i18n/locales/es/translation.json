@@ -25,5 +25,58 @@
   "language": {
     "changed": "Idioma cambiado",
     "changedTo": "El idioma se ha cambiado a {{language}}"
+  },
+  "notFound": {
+    "message": "¡Ups! Página no encontrada",
+    "returnHome": "Volver al Inicio"
+  },
+  "projects": {
+    "title": "Nuestro Portafolio",
+    "backToHome": "Volver al Inicio",
+    "viewDetails": "Ver Detalles",
+    "detailsTitle": "Detalles del proyecto",
+    "detailsDescription": "Funcionalidad en desarrollo",
+    "categories": {
+      "ecommerce": "Tienda Virtual",
+      "mobile": "Aplicación Móvil",
+      "website": "Sitio Web",
+      "software": "Software",
+      "platform": "Plataforma Web",
+      "marketplace": "Marketplace",
+      "fintech": "Fintech",
+      "edtech": "EdTech"
+    },
+    "ecommerce": {
+      "title": "E-commerce de Moda",
+      "description": "Tienda virtual completa con integración de pagos y gestión de inventario."
+    },
+    "delivery": {
+      "title": "App de Entrega",
+      "description": "Aplicación móvil para pedidos y entregas con seguimiento en tiempo real."
+    },
+    "institutional": {
+      "title": "Sitio Web Corporativo",
+      "description": "Sitio web responsivo con optimización SEO e integración con CRM."
+    },
+    "dashboard": {
+      "title": "Panel Analítico",
+      "description": "Panel de control con métricas de negocio e informes personalizados."
+    },
+    "social": {
+      "title": "Red Social Corporativa",
+      "description": "Plataforma privada para comunicación y colaboración entre empleados."
+    },
+    "marketplace": {
+      "title": "Marketplace B2B",
+      "description": "Portal para conectar proveedores y compradores del sector industrial."
+    },
+    "finance": {
+      "title": "App de Gestión Financiera",
+      "description": "Aplicación para control de finanzas personales con análisis de gastos."
+    },
+    "education": {
+      "title": "Portal Educativo",
+      "description": "Plataforma de cursos en línea con área de estudiante y certificación digital."
+    }
   }
 }
