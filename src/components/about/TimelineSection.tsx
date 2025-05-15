@@ -18,43 +18,44 @@ const TimelineSection = () => {
     };
   }, [i18n]);
 
+  // Define timeline events as an array to properly use map function
   const timelineEvents = [
     {
       year: "2018",
-      title: t('timeline.2018.title', "O início da jornada"),
-      description: t('timeline.2018.description', "Fundação da empresa com foco em desenvolvimento web e soluções digitais personalizadas.")
+      title: t('timeline.2018.title'),
+      description: t('timeline.2018.description')
     },
     {
       year: "2019",
-      title: t('timeline.2019.title', "Expansão de serviços"),
-      description: t('timeline.2019.description', "Ampliamos nosso portfólio para incluir design gráfico profissional e estratégias de marketing digital.")
+      title: t('timeline.2019.title'),
+      description: t('timeline.2019.description')
     },
     {
       year: "2020",
-      title: t('timeline.2020.title', "Adaptação e inovação"),
-      description: t('timeline.2020.description', "Durante a pandemia, desenvolvemos soluções digitais que ajudaram empresas a se manterem ativas e conectadas com seus clientes.")
+      title: t('timeline.2020.title'),
+      description: t('timeline.2020.description')
     },
     {
       year: "2022",
-      title: t('timeline.2022.title', "Diversificação tecnológica"),
-      description: t('timeline.2022.description', "Expandimos para o desenvolvimento de aplicativos móveis e Ambientes Virtuais de Aprendizagem (AVAs).")
+      title: t('timeline.2022.title'),
+      description: t('timeline.2022.description')
     },
     {
       year: "2023",
-      title: t('timeline.2023.title', "Estratégia política digital"),
-      description: t('timeline.2023.description', "Lançamos nossa divisão especializada em marketing político digital, oferecendo soluções completas para campanhas.")
+      title: t('timeline.2023.title'),
+      description: t('timeline.2023.description')
     },
     {
       year: "2024",
-      title: t('timeline.2024.title', "Crescimento sustentável"),
-      description: t('timeline.2024.description', "Ampliamos nossa equipe e infraestrutura para atender à crescente demanda por nossas soluções digitais integradas.")
+      title: t('timeline.2024.title'),
+      description: t('timeline.2024.description')
     }
   ];
 
   return (
     <section className="py-16 md:py-24 bg-gray-50">
       <div className="container-custom">
-        <h2 className="heading-lg text-center mb-12">{t('timeline.title', 'Nossa Trajetória')}</h2>
+        <h2 className="heading-lg text-center mb-12">{t('timeline.title')}</h2>
         
         <div className="relative max-w-4xl mx-auto">
           {/* Central vertical line */}
