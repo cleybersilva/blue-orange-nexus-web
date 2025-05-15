@@ -30,6 +30,99 @@
     "message": "Oops! Page not found",
     "returnHome": "Return to Home"
   },
+  "timeline": {
+    "title": "Our Journey",
+    "2018": {
+      "title": "The beginning of the journey",
+      "description": "Company foundation with a focus on web development and custom digital solutions."
+    },
+    "2019": {
+      "title": "Service expansion",
+      "description": "We expanded our portfolio to include professional graphic design and digital marketing strategies."
+    },
+    "2020": {
+      "title": "Adaptation and innovation",
+      "description": "During the pandemic, we developed digital solutions that helped businesses stay active and connected with their customers."
+    },
+    "2022": {
+      "title": "Technological diversification",
+      "description": "We expanded to mobile app development and Virtual Learning Environments (VLEs)."
+    },
+    "2023": {
+      "title": "Digital political strategy",
+      "description": "We launched our specialized division in digital political marketing, offering complete solutions for campaigns."
+    },
+    "2024": {
+      "title": "Sustainable growth",
+      "description": "We expanded our team and infrastructure to meet the growing demand for our integrated digital solutions."
+    }
+  },
+  "aboutPage": {
+    "ourHistory": "Our History",
+    "historyIntro": "Since 2018, we've been transforming ideas into innovative digital solutions that drive our clients' success.",
+    "contactUs": "Contact Us",
+    "scheduleCall": "Schedule a Meeting",
+    "mvv": {
+      "title": "Mission, Vision and Values",
+      "mission": "Mission",
+      "missionText": "To transform ideas into innovative digital solutions that drive our clients' growth, adding real value to their businesses through technology and creativity.",
+      "vision": "Vision",
+      "visionText": "To be recognized as a reference in integrated digital solutions, expanding our national presence and standing out for excellence, innovation and results delivered to our clients.",
+      "values": "Values",
+      "valuesList": [
+        "Excellence in every delivery",
+        "Constant innovation",
+        "Transparency in processes",
+        "Commitment to results",
+        "Relationship of trust"
+      ]
+    },
+    "team": {
+      "title": "Our Team",
+      "subtitle": "Meet the talented professionals who are part of our team and work daily to deliver the best digital solutions."
+    },
+    "differentials": {
+      "title": "Our Differentials",
+      "subtitle": "What makes us unique in the market and why our clients trust our services.",
+      "agility": {
+        "title": "Agility",
+        "description": "We deliver projects quickly without compromising quality, using agile methodologies to ensure efficiency and results."
+      },
+      "innovation": {
+        "title": "Innovation",
+        "description": "We are always ahead of technological trends, integrating the latest innovations into our projects."
+      },
+      "team": {
+        "title": "Multidisciplinary Team",
+        "description": "We have professionals specialized in various areas, ensuring a comprehensive approach for each project."
+      },
+      "security": {
+        "title": "Security",
+        "description": "We prioritize data protection and the security of the systems we develop, following market best practices."
+      },
+      "cloud": {
+        "title": "Cloud Solutions",
+        "description": "We develop and implement cloud-based solutions, ensuring scalability, availability and cost reduction."
+      },
+      "support": {
+        "title": "Continuous Support",
+        "description": "We offer post-delivery technical support and continuous maintenance, ensuring that your solution remains updated and functional."
+      }
+    },
+    "cta": {
+      "title": "Ready to Turn Your Ideas into Reality?",
+      "subtitle": "Contact us or schedule a personalized consultation to discuss your project.",
+      "schedule": "Schedule Consultation",
+      "contact": "Contact Us"
+    },
+    "location": {
+      "title": "Where We Are",
+      "description": "We are located in João Pessoa, but we serve clients from all over Brazil through our integrated digital solutions.",
+      "office": "Main Office",
+      "phone": "Phone",
+      "email": "Email"
+    }
+  },
   "projects": {
     "title": "Our Portfolio",
     "backToHome": "Back to Home",
@@ -78,5 +171,45 @@
       "title": "Educational Portal",
       "description": "Online course platform with student area and digital certification."
     }
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "We offer complete digital solutions to transform your online presence and drive your business growth.",
+    "websites": {
+      "title": "Website Creation",
+      "description": "Responsive websites, optimized for SEO and with modern design for your brand to stand out online."
+    },
+    "ecommerce": {
+      "title": "Online Stores",
+      "description": "Complete e-commerce platforms with product management, payments and integrated logistics."
+    },
+    "apps": {
+      "title": "Mobile Apps",
+      "description": "Native or hybrid applications for Android and iOS focusing on usability and performance."
+    },
+    "lms": {
+      "title": "Virtual Environments",
+      "description": "Customized educational platforms (LMS) for online courses and corporate training."
+    },
+    "marketing": {
+      "title": "Digital Marketing",
+      "description": "Complete digital marketing strategies for positioning and growth of your brand."
+    },
+    "social": {
+      "title": "Media Management",
+      "description": "Professional management of social networks to amplify your digital presence."
+    },
+    "design": {
+      "title": "Graphic Design",
+      "description": "Visual identity, graphic materials and visual elements to strengthen your brand."
+    },
+    "political": {
+      "title": "Political Marketing",
+      "description": "Digital strategies for election campaigns and political presence for the 2026 elections."
+    }
+  },
+  "testimonials": {
+    "title": "What our clients say",
+    "subtitle": "Our clients' satisfaction is our greatest success indicator. See what they have to say about our solutions."
   }
 }

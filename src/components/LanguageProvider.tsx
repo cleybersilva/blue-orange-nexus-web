@@ -24,17 +24,35 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
     localStorage.getItem('preferredLanguage') || 'pt-BR'
   );
 
+  // Initial setup
   useEffect(() => {
     // Set initial language
     i18n.changeLanguage(currentLanguage);
-    // Force re-render on language change
+    
+    // Set HTML language attribute for SEO and accessibility
     document.documentElement.lang = currentLanguage;
+    
+    // Force refresh all components that depend on translations
+    window.dispatchEvent(new Event('languageChanged'));
+    
+    console.log('Language provider initialized with:', currentLanguage);
   }, [i18n, currentLanguage]);
 
+  // Handle language change
   const changeLanguage = (lang: string) => {
+    if (lang === currentLanguage) return;
+    
     setCurrentLanguage(lang);
     i18n.changeLanguage(lang);
     localStorage.setItem('preferredLanguage', lang);
+    
+    // Update HTML language attribute
+    document.documentElement.lang = lang;
+    
+    // Force refresh all components that depend on translations
+    window.dispatchEvent(new Event('languageChanged'));
+    
+    console.log('Language changed to:', lang);
   };
 
   return (

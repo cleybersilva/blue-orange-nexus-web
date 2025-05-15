@@ -1,4 +1,5 @@
-import React from 'react';
+
+import React, { useEffect } from 'react';
 import { Calendar, Users, Building, Phone, MapPin, Mail, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -7,9 +8,24 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import TimelineSection from '@/components/about/TimelineSection';
 import { useCalendly } from '@/components/CalendlyProvider';
+import { useTranslation } from 'react-i18next';
 
 const SobreNos = () => {
+  const { t, i18n } = useTranslation();
   const { openCalendly } = useCalendly();
+
+  // Force re-render when language changes
+  useEffect(() => {
+    const handleLanguageChange = () => {
+      console.log('Language changed in About page:', i18n.language);
+    };
+
+    i18n.on('languageChanged', handleLanguageChange);
+    
+    return () => {
+      i18n.off('languageChanged', handleLanguageChange);
+    };
+  }, [i18n]);
 
   const handleWhatsAppClick = () => {
     window.open('https://wa.me/5583988329018', '_blank');
@@ -43,66 +59,31 @@ const SobreNos = () => {
     }
   ];
 
-  // Linha do tempo da empresa corrigida
-  const timelineEvents = [
-    {
-      year: "2018",
-      title: "O início da jornada",
-      description: "Fundação da empresa com foco em desenvolvimento web e soluções digitais personalizadas."
-    },
-    {
-      year: "2019",
-      title: "Expansão de serviços",
-      description: "Ampliamos nosso portfólio para incluir design gráfico profissional e estratégias de marketing digital."
-    },
-    {
-      year: "2020",
-      title: "Adaptação e inovação",
-      description: "Durante a pandemia, desenvolvemos soluções digitais que ajudaram empresas a se manterem ativas e conectadas com seus clientes."
-    },
-    {
-      year: "2022",
-      title: "Diversificação tecnológica",
-      description: "Expandimos para o desenvolvimento de aplicativos móveis e Ambientes Virtuais de Aprendizagem (AVAs)."
-    },
-    {
-      year: "2023",
-      title: "Estratégia política digital",
-      description: "Lançamos nossa divisão especializada em marketing político digital, oferecendo soluções completas para campanhas."
-    },
-    {
-      year: "2024",
-      title: "Crescimento sustentável",
-      description: "Ampliamos nossa equipe e infraestrutura para atender à crescente demanda por nossas soluções digitais integradas."
-    }
-  ];
-
   return (
     <div className="min-h-screen bg-white">
-      {/* Adicionando o Header que estava faltando */}
       <Header />
       
-      {/* Hero Section - Updated styling */}
+      {/* Hero Section */}
       <section className="bg-navy text-white py-20 mt-16">
         <div className="container-custom">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
-              <h1 className="heading-xl mb-6">Nossa História</h1>
+              <h1 className="heading-xl mb-6">{t('aboutPage.ourHistory')}</h1>
               <p className="text-lg mb-6">
-                Desde 2018, estamos transformando ideias em soluções digitais inovadoras que impulsionam o sucesso dos nossos clientes.
+                {t('aboutPage.historyIntro')}
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button
                   className="bg-[#25D366] hover:bg-[#20b958] flex items-center gap-2"
                   onClick={handleWhatsAppClick}
                 >
-                  Fale Conosco <MessageCircle className="h-5 w-5" />
+                  {t('aboutPage.contactUs')} <MessageCircle className="h-5 w-5" />
                 </Button>
                 <Button
                   className="bg-orange hover:bg-orange-dark flex items-center gap-2"
                   onClick={openCalendly}
                 >
-                  Agendar Reunião <Calendar className="h-5 w-5" />
+                  {t('aboutPage.scheduleCall')} <Calendar className="h-5 w-5" />
                 </Button>
               </div>
             </div>
@@ -112,7 +93,7 @@ const SobreNos = () => {
               <AspectRatio ratio={16/9} className="bg-navy-light rounded-lg overflow-hidden">
                 <img 
                   src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-                  alt="Equipe trabalhando" 
+                  alt={t('aboutPage.ourHistory')}
                   className="object-cover w-full h-full"
                 />
               </AspectRatio>
@@ -127,7 +108,7 @@ const SobreNos = () => {
       {/* Missão, Visão e Valores */}
       <section className="py-16 md:py-24 bg-gray-50">
         <div className="container-custom">
-          <h2 className="heading-lg text-center mb-12">Missão, Visão e Valores</h2>
+          <h2 className="heading-lg text-center mb-12">{t('aboutPage.mvv.title')}</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <Card className="bg-white shadow-md hover:shadow-lg transition-shadow">
@@ -135,10 +116,9 @@ const SobreNos = () => {
                 <div className="h-16 w-16 rounded-full bg-navy flex items-center justify-center mb-6">
                   <span className="text-2xl text-white font-bold">M</span>
                 </div>
-                <h3 className="text-xl font-bold mb-3 text-navy">Missão</h3>
+                <h3 className="text-xl font-bold mb-3 text-navy">{t('aboutPage.mvv.mission')}</h3>
                 <p className="text-gray-600">
-                  Transformar ideias em soluções digitais inovadoras que impulsionem o crescimento dos nossos clientes, 
-                  agregando valor real aos seus negócios através da tecnologia e criatividade.
+                  {t('aboutPage.mvv.missionText')}
                 </p>
               </CardContent>
             </Card>
@@ -148,11 +128,9 @@ const SobreNos = () => {
                 <div className="h-16 w-16 rounded-full bg-orange flex items-center justify-center mb-6">
                   <span className="text-2xl text-white font-bold">V</span>
                 </div>
-                <h3 className="text-xl font-bold mb-3 text-navy">Visão</h3>
+                <h3 className="text-xl font-bold mb-3 text-navy">{t('aboutPage.mvv.vision')}</h3>
                 <p className="text-gray-600">
-                  Ser reconhecida como referência em soluções digitais integradas, 
-                  expandindo nossa atuação nacional e destacando-nos pela excelência, 
-                  inovação e resultados entregues aos nossos clientes.
+                  {t('aboutPage.mvv.visionText')}
                 </p>
               </CardContent>
             </Card>
@@ -162,13 +140,11 @@ const SobreNos = () => {
                 <div className="h-16 w-16 rounded-full bg-navy-light flex items-center justify-center mb-6">
                   <span className="text-2xl text-white font-bold">V</span>
                 </div>
-                <h3 className="text-xl font-bold mb-3 text-navy">Valores</h3>
+                <h3 className="text-xl font-bold mb-3 text-navy">{t('aboutPage.mvv.values')}</h3>
                 <ul className="text-gray-600 space-y-2">
-                  <li>• Excelência em cada entrega</li>
-                  <li>• Inovação constante</li>
-                  <li>• Transparência nos processos</li>
-                  <li>• Compromisso com resultados</li>
-                  <li>• Relacionamento de confiança</li>
+                  {(t('aboutPage.mvv.valuesList', []) as string[]).map((value, index) => (
+                    <li key={index}>• {value}</li>
+                  ))}
                 </ul>
               </CardContent>
             </Card>
@@ -176,13 +152,12 @@ const SobreNos = () => {
         </div>
       </section>
 
-      {/* Nossa Equipe - Atualizada com os novos membros */}
+      {/* Nossa Equipe */}
       <section className="py-16 md:py-24">
         <div className="container-custom">
-          <h2 className="heading-lg text-center mb-4">Nossa Equipe</h2>
+          <h2 className="heading-lg text-center mb-4">{t('aboutPage.team.title')}</h2>
           <p className="text-center text-gray-600 max-w-2xl mx-auto mb-12">
-            Conheça os profissionais talentosos que fazem parte do nosso time e trabalham 
-            diariamente para entregar as melhores soluções digitais.
+            {t('aboutPage.team.subtitle')}
           </p>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
@@ -220,9 +195,9 @@ const SobreNos = () => {
       {/* Diferenciais */}
       <section className="py-16 md:py-24">
         <div className="container-custom">
-          <h2 className="heading-lg text-center mb-4">Nossos Diferenciais</h2>
+          <h2 className="heading-lg text-center mb-4">{t('aboutPage.differentials.title')}</h2>
           <p className="text-center text-gray-600 max-w-2xl mx-auto mb-12">
-            O que nos torna únicos no mercado e por que nossos clientes confiam em nossos serviços.
+            {t('aboutPage.differentials.subtitle')}
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -233,10 +208,9 @@ const SobreNos = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold mb-2">Agilidade</h3>
+                <h3 className="text-xl font-semibold mb-2">{t('aboutPage.differentials.agility.title')}</h3>
                 <p className="text-gray-600">
-                  Entregamos projetos com rapidez sem comprometer a qualidade, utilizando metodologias ágeis 
-                  para garantir eficiência e resultados.
+                  {t('aboutPage.differentials.agility.description')}
                 </p>
               </CardContent>
             </Card>
@@ -248,10 +222,9 @@ const SobreNos = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold mb-2">Inovação</h3>
+                <h3 className="text-xl font-semibold mb-2">{t('aboutPage.differentials.innovation.title')}</h3>
                 <p className="text-gray-600">
-                  Estamos sempre à frente das tendências tecnológicas, integrando as mais recentes 
-                  inovações em nossos projetos.
+                  {t('aboutPage.differentials.innovation.description')}
                 </p>
               </CardContent>
             </Card>
@@ -263,10 +236,9 @@ const SobreNos = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20h2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold mb-2">Equipe Multidisciplinar</h3>
+                <h3 className="text-xl font-semibold mb-2">{t('aboutPage.differentials.team.title')}</h3>
                 <p className="text-gray-600">
-                  Contamos com profissionais especializados em diversas áreas, garantindo uma abordagem 
-                  completa para cada projeto.
+                  {t('aboutPage.differentials.team.description')}
                 </p>
               </CardContent>
             </Card>
@@ -278,10 +250,9 @@ const SobreNos = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold mb-2">Segurança</h3>
+                <h3 className="text-xl font-semibold mb-2">{t('aboutPage.differentials.security.title')}</h3>
                 <p className="text-gray-600">
-                  Priorizamos a proteção dos dados e a segurança dos sistemas que desenvolvemos, 
-                  seguindo as melhores práticas do mercado.
+                  {t('aboutPage.differentials.security.description')}
                 </p>
               </CardContent>
             </Card>
@@ -293,10 +264,9 @@ const SobreNos = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold mb-2">Soluções na Nuvem</h3>
+                <h3 className="text-xl font-semibold mb-2">{t('aboutPage.differentials.cloud.title')}</h3>
                 <p className="text-gray-600">
-                  Desenvolvemos e implementamos soluções baseadas em nuvem, garantindo escalabilidade, 
-                  disponibilidade e redução de custos.
+                  {t('aboutPage.differentials.cloud.description')}
                 </p>
               </CardContent>
             </Card>
@@ -308,10 +278,9 @@ const SobreNos = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold mb-2">Suporte Contínuo</h3>
+                <h3 className="text-xl font-semibold mb-2">{t('aboutPage.differentials.support.title')}</h3>
                 <p className="text-gray-600">
-                  Oferecemos suporte técnico pós-entrega e manutenção contínua, garantindo que sua 
-                  solução permaneça atualizada e funcional.
+                  {t('aboutPage.differentials.support.description')}
                 </p>
               </CardContent>
             </Card>
@@ -319,52 +288,50 @@ const SobreNos = () => {
         </div>
       </section>
 
-      {/* Call To Action - Com botão de WhatsApp corrigido */}
+      {/* Call To Action */}
       <section className="py-16 bg-gradient-to-r from-navy to-navy-light text-white">
         <div className="container-custom text-center">
-          <h2 className="heading-lg mb-6">Pronto para Transformar suas Ideias em Realidade?</h2>
+          <h2 className="heading-lg mb-6">{t('aboutPage.cta.title')}</h2>
           <p className="text-lg mb-8 max-w-2xl mx-auto">
-            Entre em contato conosco ou agende um atendimento personalizado para discutirmos seu projeto.
+            {t('aboutPage.cta.subtitle')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="/agendar" className="btn-primary bg-orange hover:bg-orange-dark">
-              Agendar Atendimento
+              {t('aboutPage.cta.schedule')}
             </a>
             <button 
               onClick={handleWhatsAppClick} 
               className="btn-secondary border-white text-white hover:bg-white hover:text-navy">
-              Fale Conosco
+              {t('aboutPage.cta.contact')}
             </button>
           </div>
         </div>
       </section>
 
-      {/* Informações de Contato - Atualizadas */}
+      {/* Informações de Contato */}
       <section className="py-16 md:py-24">
         <div className="container-custom">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="heading-lg mb-6">Onde Estamos</h2>
+              <h2 className="heading-lg mb-6">{t('aboutPage.location.title')}</h2>
               <p className="text-gray-600 mb-8">
-                Estamos localizados em João Pessoa, mas atendemos clientes de todo o Brasil 
-                através de nossas soluções digitais integradas.
+                {t('aboutPage.location.description')}
               </p>
               
               <div className="space-y-6">
                 <div className="flex">
                   <MapPin className="h-6 w-6 text-orange mr-4 flex-shrink-0" />
                   <div>
-                    <h3 className="font-medium text-navy">Escritório Principal</h3>
+                    <h3 className="font-medium text-navy">{t('aboutPage.location.office')}</h3>
                     <address className="text-gray-600 not-italic">
-                      R. Empresário Lourival Lopes Filho, 105<br />
-                      Jardim Oceania, João Pessoa - PB, 58037-735
+                      {t('footer.address')}
                     </address>
                   </div>
                 </div>
                 <div className="flex">
                   <Phone className="h-6 w-6 text-orange mr-4 flex-shrink-0" />
                   <div>
-                    <h3 className="font-medium text-navy">Telefone</h3>
+                    <h3 className="font-medium text-navy">{t('aboutPage.location.phone')}</h3>
                     <p className="text-gray-600">
                       <a href="tel:+5583988329018" className="hover:text-orange transition-colors">
                         +55 (83) 98832-9018
@@ -375,7 +342,7 @@ const SobreNos = () => {
                 <div className="flex">
                   <Mail className="h-6 w-6 text-orange mr-4 flex-shrink-0" />
                   <div>
-                    <h3 className="font-medium text-navy">E-mail</h3>
+                    <h3 className="font-medium text-navy">{t('aboutPage.location.email')}</h3>
                     <p className="text-gray-600">
                       <a href="mailto:contato@agenciadigital.com" className="hover:text-orange transition-colors">
                         contato@agenciadigital.com
@@ -394,14 +361,12 @@ const SobreNos = () => {
                 style={{ border: 0 }} 
                 loading="lazy" 
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Mapa do escritório"
+                title={t('aboutPage.location.office')}
               ></iframe>
             </div>
           </div>
         </div>
       </section>
-
-      {/* Adicionando o Footer */}
       <Footer />
     </div>
   );

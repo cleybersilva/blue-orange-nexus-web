@@ -10,6 +10,7 @@ import {
   Palette,
   Vote 
 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface ServiceProps {
   icon: React.ReactNode;
@@ -28,46 +29,48 @@ const ServiceCard: React.FC<ServiceProps> = ({ icon, title, description }) => (
 );
 
 const Services: React.FC = () => {
+  const { t } = useTranslation();
+  
   const services = [
     {
       icon: <Globe size={28} />,
-      title: 'Criação de Sites',
-      description: 'Sites responsivos, otimizados para SEO e com design moderno para sua marca se destacar online.',
+      title: t('services.websites.title'),
+      description: t('services.websites.description'),
     },
     {
       icon: <ShoppingBag size={28} />,
-      title: 'Lojas Virtuais',
-      description: 'Plataformas de e-commerce completas com gestão de produtos, pagamentos e logística integrada.',
+      title: t('services.ecommerce.title'),
+      description: t('services.ecommerce.description'),
     },
     {
       icon: <Smartphone size={28} />,
-      title: 'Apps Móveis',
-      description: 'Aplicativos nativos ou híbridos para Android e iOS com foco em usabilidade e performance.',
+      title: t('services.apps.title'),
+      description: t('services.apps.description'),
     },
     {
       icon: <GraduationCap size={28} />,
-      title: 'Ambientes Virtuais',
-      description: 'Plataformas educacionais (AVA) personalizadas para cursos online e capacitação corporativa.',
+      title: t('services.lms.title'),
+      description: t('services.lms.description'),
     },
     {
       icon: <BarChartBig size={28} />,
-      title: 'Marketing Digital',
-      description: 'Estratégias completas de marketing digital para posicionamento e crescimento da sua marca.',
+      title: t('services.marketing.title'),
+      description: t('services.marketing.description'),
     },
     {
       icon: <Users size={28} />,
-      title: 'Gestão de Mídias',
-      description: 'Gerenciamento profissional de redes sociais para amplificar sua presença digital.',
+      title: t('services.social.title'),
+      description: t('services.social.description'),
     },
     {
       icon: <Palette size={28} />,
-      title: 'Design Gráfico',
-      description: 'Identidade visual, materiais gráficos e elementos visuais para fortalecer sua marca.',
+      title: t('services.design.title'),
+      description: t('services.design.description'),
     },
     {
       icon: <Vote size={28} />,
-      title: 'Marketing Político',
-      description: 'Estratégias digitais para campanhas eleitorais e presença política para as eleições de 2026.',
+      title: t('services.political.title'),
+      description: t('services.political.description'),
     },
   ];
 
@@ -75,10 +78,9 @@ const Services: React.FC = () => {
     <section id="services" className="bg-gray-50 section-padding">
       <div className="container-custom">
         <div className="text-center mb-16">
-          <h2 className="heading-lg text-navy mb-4">Nossos Serviços</h2>
+          <h2 className="heading-lg text-navy mb-4">{t('services.title')}</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Oferecemos soluções digitais completas para transformar sua presença online
-            e impulsionar o crescimento do seu negócio.
+            {t('services.subtitle')}
           </p>
         </div>
         

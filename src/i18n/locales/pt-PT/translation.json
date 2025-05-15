@@ -30,6 +30,99 @@
     "message": "Ops! Página não encontrada",
     "returnHome": "Voltar para a Página Inicial"
   },
+  "timeline": {
+    "title": "A Nossa Trajetória",
+    "2018": {
+      "title": "O início da jornada",
+      "description": "Fundação da empresa com foco em desenvolvimento web e soluções digitais personalizadas."
+    },
+    "2019": {
+      "title": "Expansão de serviços",
+      "description": "Ampliámos o nosso portfólio para incluir design gráfico profissional e estratégias de marketing digital."
+    },
+    "2020": {
+      "title": "Adaptação e inovação",
+      "description": "Durante a pandemia, desenvolvemos soluções digitais que ajudaram empresas a manterem-se ativas e conectadas com os seus clientes."
+    },
+    "2022": {
+      "title": "Diversificação tecnológica",
+      "description": "Expandimos para o desenvolvimento de aplicações móveis e Ambientes Virtuais de Aprendizagem (AVAs)."
+    },
+    "2023": {
+      "title": "Estratégia política digital",
+      "description": "Lançámos a nossa divisão especializada em marketing político digital, oferecendo soluções completas para campanhas."
+    },
+    "2024": {
+      "title": "Crescimento sustentável",
+      "description": "Ampliámos a nossa equipa e infraestrutura para atender à crescente procura pelas nossas soluções digitais integradas."
+    }
+  },
+  "aboutPage": {
+    "ourHistory": "A Nossa História",
+    "historyIntro": "Desde 2018, estamos a transformar ideias em soluções digitais inovadoras que impulsionam o sucesso dos nossos clientes.",
+    "contactUs": "Fale Connosco",
+    "scheduleCall": "Agendar Reunião",
+    "mvv": {
+      "title": "Missão, Visão e Valores",
+      "mission": "Missão",
+      "missionText": "Transformar ideias em soluções digitais inovadoras que impulsionem o crescimento dos nossos clientes, agregando valor real aos seus negócios através da tecnologia e criatividade.",
+      "vision": "Visão",
+      "visionText": "Ser reconhecida como referência em soluções digitais integradas, expandindo a nossa atuação nacional e destacando-nos pela excelência, inovação e resultados entregues aos nossos clientes.",
+      "values": "Valores",
+      "valuesList": [
+        "Excelência em cada entrega",
+        "Inovação constante",
+        "Transparência nos processos",
+        "Compromisso com resultados",
+        "Relacionamento de confiança"
+      ]
+    },
+    "team": {
+      "title": "A Nossa Equipa",
+      "subtitle": "Conheça os profissionais talentosos que fazem parte da nossa equipa e trabalham diariamente para entregar as melhores soluções digitais."
+    },
+    "differentials": {
+      "title": "Os Nossos Diferenciais",
+      "subtitle": "O que nos torna únicos no mercado e por que os nossos clientes confiam nos nossos serviços.",
+      "agility": {
+        "title": "Agilidade",
+        "description": "Entregamos projetos com rapidez sem comprometer a qualidade, utilizando metodologias ágeis para garantir eficiência e resultados."
+      },
+      "innovation": {
+        "title": "Inovação",
+        "description": "Estamos sempre à frente das tendências tecnológicas, integrando as mais recentes inovações nos nossos projetos."
+      },
+      "team": {
+        "title": "Equipa Multidisciplinar",
+        "description": "Contamos com profissionais especializados em diversas áreas, garantindo uma abordagem completa para cada projeto."
+      },
+      "security": {
+        "title": "Segurança",
+        "description": "Priorizamos a proteção dos dados e a segurança dos sistemas que desenvolvemos, seguindo as melhores práticas do mercado."
+      },
+      "cloud": {
+        "title": "Soluções na Nuvem",
+        "description": "Desenvolvemos e implementamos soluções baseadas na nuvem, garantindo escalabilidade, disponibilidade e redução de custos."
+      },
+      "support": {
+        "title": "Suporte Contínuo",
+        "description": "Oferecemos suporte técnico pós-entrega e manutenção contínua, garantindo que a sua solução permaneça atualizada e funcional."
+      }
+    },
+    "cta": {
+      "title": "Pronto para Transformar as suas Ideias em Realidade?",
+      "subtitle": "Entre em contacto connosco ou agende um atendimento personalizado para discutirmos o seu projeto.",
+      "schedule": "Agendar Atendimento",
+      "contact": "Fale Connosco"
+    },
+    "location": {
+      "title": "Onde Estamos",
+      "description": "Estamos localizados em João Pessoa, mas atendemos clientes de todo o Brasil através das nossas soluções digitais integradas.",
+      "office": "Escritório Principal",
+      "phone": "Telefone",
+      "email": "E-mail"
+    }
+  },
   "projects": {
     "title": "O Nosso Portfólio",
     "backToHome": "Voltar para a Página Inicial",
@@ -78,5 +171,45 @@
       "title": "Portal Educacional",
       "description": "Plataforma de cursos online com área do aluno e certificação digital."
     }
+  },
+  "services": {
+    "title": "Os Nossos Serviços",
+    "subtitle": "Oferecemos soluções digitais completas para transformar a sua presença online e impulsionar o crescimento do seu negócio.",
+    "websites": {
+      "title": "Criação de Sites",
+      "description": "Sites responsivos, otimizados para SEO e com design moderno para a sua marca se destacar online."
+    },
+    "ecommerce": {
+      "title": "Lojas Virtuais",
+      "description": "Plataformas de e-commerce completas com gestão de produtos, pagamentos e logística integrada."
+    },
+    "apps": {
+      "title": "Aplicações Móveis",
+      "description": "Aplicações nativas ou híbridas para Android e iOS com foco em usabilidade e performance."
+    },
+    "lms": {
+      "title": "Ambientes Virtuais",
+      "description": "Plataformas educacionais (AVA) personalizadas para cursos online e capacitação corporativa."
+    },
+    "marketing": {
+      "title": "Marketing Digital",
+      "description": "Estratégias completas de marketing digital para posicionamento e crescimento da sua marca."
+    },
+    "social": {
+      "title": "Gestão de Mídias",
+      "description": "Gestão profissional de redes sociais para amplificar a sua presença digital."
+    },
+    "design": {
+      "title": "Design Gráfico",
+      "description": "Identidade visual, materiais gráficos e elementos visuais para fortalecer a sua marca."
+    },
+    "political": {
+      "title": "Marketing Político",
+      "description": "Estratégias digitais para campanhas eleitorais e presença política para as eleições de 2026."
+    }
+  },
+  "testimonials": {
+    "title": "O que dizem os nossos clientes",
+    "subtitle": "A satisfação dos nossos clientes é o nosso maior indicador de sucesso. Veja o que eles têm a dizer sobre as nossas soluções."
   }
 }

@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Globe } from 'lucide-react';
 import { toast } from "@/components/ui/use-toast";
 import { useTranslation } from 'react-i18next';
+import { useLanguage } from './LanguageProvider';
 
 // Define languages with country codes
 const languages = [
@@ -20,27 +21,13 @@ const languages = [
 ];
 
 const LanguageSelector = () => {
-  const { i18n, t } = useTranslation();
-  const [selectedLanguage, setSelectedLanguage] = React.useState(() => {
-    // Get saved language from localStorage or default to pt-BR
-    return localStorage.getItem('preferredLanguage') || 'pt-BR';
-  });
-
-  // Set the language on component mount
-  useEffect(() => {
-    i18n.changeLanguage(selectedLanguage);
-  }, [i18n, selectedLanguage]);
-
-  // Update localStorage when language changes
-  useEffect(() => {
-    localStorage.setItem('preferredLanguage', selectedLanguage);
-  }, [selectedLanguage]);
+  const { t } = useTranslation();
+  const { currentLanguage, changeLanguage } = useLanguage();
 
   const handleLanguageChange = (langCode: string) => {
-    if (langCode === selectedLanguage) return;
+    if (langCode === currentLanguage) return;
     
-    setSelectedLanguage(langCode);
-    i18n.changeLanguage(langCode);
+    changeLanguage(langCode);
     
     // Show toast notification
     toast({
@@ -53,7 +40,7 @@ const LanguageSelector = () => {
   };
 
   const getCurrentLanguageFlag = () => {
-    const language = languages.find(lang => lang.code === selectedLanguage);
+    const language = languages.find(lang => lang.code === currentLanguage);
     return language?.flag || '🇧🇷';
   };
 
@@ -81,7 +68,7 @@ const LanguageSelector = () => {
             key={language.code}
             onClick={() => handleLanguageChange(language.code)}
             className={`flex items-center gap-2 cursor-pointer text-orange hover:bg-navy-light transition-colors duration-200 ${
-              selectedLanguage === language.code ? 'bg-navy-light font-medium' : ''
+              currentLanguage === language.code ? 'bg-navy-light font-medium' : ''
             }`}
           >
             <span className="text-base">{language.flag}</span>

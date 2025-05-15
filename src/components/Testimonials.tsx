@@ -3,6 +3,7 @@ import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Star } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface TestimonialProps {
   quote: string;
@@ -43,6 +44,8 @@ const TestimonialCard: React.FC<TestimonialProps> = ({
 );
 
 const Testimonials: React.FC = () => {
+  const { t } = useTranslation();
+  
   const testimonials = [
     {
       quote: "A equipe superou todas as nossas expectativas. Nosso site foi entregue dentro do prazo e com um design excepcional que reflete perfeitamente nossa marca.",
@@ -71,10 +74,9 @@ const Testimonials: React.FC = () => {
     <section id="testimonials" className="bg-gray-50 section-padding">
       <div className="container-custom">
         <div className="text-center mb-16">
-          <h2 className="heading-lg text-navy mb-4">O que dizem nossos clientes</h2>
+          <h2 className="heading-lg text-navy mb-4">{t('testimonials.title')}</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            A satisfação de nossos clientes é nosso maior indicador de sucesso.
-            Veja o que eles têm a dizer sobre nossas soluções.
+            {t('testimonials.subtitle')}
           </p>
         </div>
         
