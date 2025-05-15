@@ -28,7 +28,10 @@ const Hero: React.FC = () => {
             <div className="flex flex-wrap gap-4 pt-4">
               <Button 
                 className="btn-primary flex items-center gap-2"
-                onClick={() => openCalendly()}
+                onClick={() => {
+                  openCalendly(); // Ensure this properly triggers the Calendly modal
+                  console.log("Calendly opened from Hero section");
+                }}
               >
                 Agendar Reunião <Calendar size={16} />
               </Button>
@@ -55,6 +58,10 @@ const Hero: React.FC = () => {
                     src="https://images.unsplash.com/photo-1487014679447-9f8336841d58?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
                     alt="Desenvolvimento de website responsivo" 
                     className="w-full h-full object-cover"
+                    onError={(e) => {
+                      // Fallback image if the primary one fails
+                      e.currentTarget.src = "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80";
+                    }}
                   />
                 </div>
               </div>

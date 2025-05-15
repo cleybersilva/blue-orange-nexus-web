@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   Facebook, 
   Instagram, 
@@ -7,21 +7,42 @@ import {
   Twitter, 
   Youtube, 
   ChevronRight,
-  MapPin
+  MapPin,
+  Mail
 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { useCalendlyDialog } from '@/hooks/useCalendlyDialog';
+import { toast } from "sonner";
 
 const Footer: React.FC = () => {
   const { openCalendly } = useCalendlyDialog();
+  const [email, setEmail] = useState('');
   
   const scrollToSection = (sectionId: string) => {
     const section = document.getElementById(sectionId);
     if (section) {
       section.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!email || !email.includes('@') || !email.includes('.')) {
+      toast.error("Email inválido", {
+        description: "Por favor, insira um email válido",
+      });
+      return;
+    }
+    
+    // Simulate subscription success
+    toast.success("Inscrição realizada com sucesso!", {
+      description: "Você receberá nossas atualizações em breve",
+    });
+    setEmail('');
+    console.log("Newsletter subscription:", email);
   };
 
   return (
@@ -36,19 +57,19 @@ const Footer: React.FC = () => {
               Transformando ideias em experiências digitais memoráveis que conectam marcas aos seus públicos.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-300 hover:text-orange transition-colors">
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-orange transition-colors">
                 <Facebook size={20} />
               </a>
-              <a href="#" className="text-gray-300 hover:text-orange transition-colors">
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-orange transition-colors">
                 <Instagram size={20} />
               </a>
-              <a href="#" className="text-gray-300 hover:text-orange transition-colors">
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-orange transition-colors">
                 <Linkedin size={20} />
               </a>
-              <a href="#" className="text-gray-300 hover:text-orange transition-colors">
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-orange transition-colors">
                 <Twitter size={20} />
               </a>
-              <a href="#" className="text-gray-300 hover:text-orange transition-colors">
+              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-orange transition-colors">
                 <Youtube size={20} />
               </a>
             </div>
@@ -59,8 +80,11 @@ const Footer: React.FC = () => {
             <ul className="space-y-3">
               <li>
                 <a 
-                  href="#" 
-                  onClick={() => scrollToSection('services')}
+                  href="#services" 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection('services');
+                  }}
                   className="text-gray-300 hover:text-orange transition-colors flex items-center"
                 >
                   <ChevronRight size={16} className="mr-2" /> 
@@ -69,8 +93,11 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <a 
-                  href="#" 
-                  onClick={() => scrollToSection('services')}
+                  href="#services" 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection('services');
+                  }}
                   className="text-gray-300 hover:text-orange transition-colors flex items-center"
                 >
                   <ChevronRight size={16} className="mr-2" /> 
@@ -79,8 +106,11 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <a 
-                  href="#" 
-                  onClick={() => scrollToSection('services')}
+                  href="#services" 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection('services');
+                  }}
                   className="text-gray-300 hover:text-orange transition-colors flex items-center"
                 >
                   <ChevronRight size={16} className="mr-2" /> 
@@ -89,8 +119,11 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <a 
-                  href="#" 
-                  onClick={() => scrollToSection('services')}
+                  href="#services" 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection('services');
+                  }}
                   className="text-gray-300 hover:text-orange transition-colors flex items-center"
                 >
                   <ChevronRight size={16} className="mr-2" /> 
@@ -99,8 +132,11 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <a 
-                  href="#" 
-                  onClick={() => scrollToSection('services')}
+                  href="#services" 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection('services');
+                  }}
                   className="text-gray-300 hover:text-orange transition-colors flex items-center"
                 >
                   <ChevronRight size={16} className="mr-2" /> 
@@ -121,8 +157,11 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <a 
-                  href="#" 
-                  onClick={() => scrollToSection('portfolio')}
+                  href="#portfolio" 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection('portfolio');
+                  }}
                   className="text-gray-300 hover:text-orange transition-colors flex items-center"
                 >
                   <ChevronRight size={16} className="mr-2" /> 
@@ -131,8 +170,11 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <a 
-                  href="#" 
-                  onClick={() => scrollToSection('testimonials')}
+                  href="#testimonials" 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection('testimonials');
+                  }}
                   className="text-gray-300 hover:text-orange transition-colors flex items-center"
                 >
                   <ChevronRight size={16} className="mr-2" /> 
@@ -141,8 +183,11 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <a 
-                  href="#" 
-                  onClick={() => scrollToSection('contact')}
+                  href="#contact" 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection('contact');
+                  }}
                   className="text-gray-300 hover:text-orange transition-colors flex items-center"
                 >
                   <ChevronRight size={16} className="mr-2" /> 
@@ -152,7 +197,10 @@ const Footer: React.FC = () => {
               <li>
                 <a 
                   href="#" 
-                  onClick={() => openCalendly()}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    openCalendly();
+                  }}
                   className="text-gray-300 hover:text-orange transition-colors flex items-center"
                 >
                   <ChevronRight size={16} className="mr-2" /> 
@@ -187,13 +235,22 @@ const Footer: React.FC = () => {
               <p className="text-gray-300 mb-4">
                 Inscreva-se para receber dicas, novidades e ofertas especiais.
               </p>
-              <div className="space-y-3">
+              <form onSubmit={handleSubscribe} className="space-y-3">
                 <Input
                   placeholder="Seu e-mail"
                   className="bg-navy-light border-navy-light focus:border-orange"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
                 />
-                <Button className="bg-orange hover:bg-orange-dark w-full">Inscrever-se</Button>
-              </div>
+                <Button 
+                  type="submit" 
+                  className="bg-orange hover:bg-orange-dark w-full flex items-center justify-center gap-2"
+                >
+                  Inscrever-se <Mail size={16} />
+                </Button>
+              </form>
             </div>
           </div>
         </div>
@@ -205,8 +262,8 @@ const Footer: React.FC = () => {
             © {new Date().getFullYear()} Agência Digital. Todos os direitos reservados.
           </p>
           <div className="flex gap-4 mt-2 md:mt-0">
-            <a href="#" className="text-gray-400 hover:text-orange text-sm">Política de Privacidade</a>
-            <a href="#" className="text-gray-400 hover:text-orange text-sm">Termos de Uso</a>
+            <a href="/politica-privacidade" className="text-gray-400 hover:text-orange text-sm">Política de Privacidade</a>
+            <a href="/termos-uso" className="text-gray-400 hover:text-orange text-sm">Termos de Uso</a>
           </div>
         </div>
       </div>

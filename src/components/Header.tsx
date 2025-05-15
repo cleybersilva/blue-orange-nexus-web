@@ -1,9 +1,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Calendar } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useCalendlyDialog } from '@/hooks/useCalendlyDialog';
+import { toast } from "sonner";
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -31,6 +32,14 @@ const Header: React.FC = () => {
     { name: 'Depoimentos', href: '/#testimonials' },
     { name: 'Contato', href: '/#contact' },
   ];
+
+  const handleCalendlyOpen = () => {
+    openCalendly();
+    toast.success("Abrindo agenda para marcar reunião", {
+      description: "Escolha um horário disponível",
+    });
+    console.log("Calendly opened from header");
+  };
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-navy shadow-lg py-2' : 'bg-transparent py-4'}`}>
@@ -63,10 +72,10 @@ const Header: React.FC = () => {
             </Link>
           ))}
           <Button 
-            className="bg-orange hover:bg-orange-dark"
-            onClick={() => openCalendly()}
+            className="bg-orange hover:bg-orange-dark flex items-center gap-2"
+            onClick={handleCalendlyOpen}
           >
-            Agendar
+            Agendar <Calendar size={16} />
           </Button>
         </nav>
 
@@ -104,13 +113,13 @@ const Header: React.FC = () => {
               </Link>
             ))}
             <Button 
-              className="bg-orange hover:bg-orange-dark w-full"
+              className="bg-orange hover:bg-orange-dark w-full flex items-center justify-center gap-2"
               onClick={() => {
                 setIsMenuOpen(false);
-                openCalendly();
+                handleCalendlyOpen();
               }}
             >
-              Agendar
+              Agendar <Calendar size={16} />
             </Button>
           </div>
         </div>

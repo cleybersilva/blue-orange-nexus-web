@@ -8,6 +8,8 @@ import Testimonials from '@/components/Testimonials';
 import ContactForm from '@/components/ContactForm';
 import Footer from '@/components/Footer';
 import FloatingSocialButtons from '@/components/FloatingSocialButtons';
+import { Toaster } from "@/components/ui/toaster";
+import { Toaster as Sonner } from "@/components/ui/sonner";
 
 const Index = () => {
   return (
@@ -30,6 +32,9 @@ const Index = () => {
       </main>
       <Footer />
       <FloatingSocialButtons />
+      {/* Adding Toaster components for notifications */}
+      <Toaster />
+      <Sonner />
     </div>
   );
 };
