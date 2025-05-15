@@ -19,10 +19,10 @@ const Index = () => {
       console.log('Language changed in Index page:', i18n.language);
     };
 
-    window.addEventListener('languageChanged', handleLanguageChange);
+    i18n.on('languageChanged', handleLanguageChange);
     
     return () => {
-      window.removeEventListener('languageChanged', handleLanguageChange);
+      i18n.off('languageChanged', handleLanguageChange);
     };
   }, [i18n]);
   
