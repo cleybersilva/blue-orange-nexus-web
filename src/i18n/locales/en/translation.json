@@ -1,4 +1,9 @@
+
 {
+  "siteTitle": {
+    "agency": "Agency",
+    "digital": "Digital"
+  },
   "nav": {
     "home": "Home",
     "about": "About Us",
@@ -9,249 +14,260 @@
     "schedule": "Schedule"
   },
   "hero": {
-    "title": "Transform your",
-    "subtitle": "digital presence",
-    "description": "We are experts in creating digital experiences that connect brands with their audiences through websites, online stores, applications and efficient marketing strategies.",
-    "cta": "Discover our services",
+    "title": "Transform Your Business with",
+    "subtitle": "Digital Solutions",
+    "description": "We create digital experiences that connect brands with their customers through innovative design and cutting-edge technology.",
     "scheduleButton": "Schedule a Meeting",
-    "imageAlt": "Responsive website development"
-  },
-  "footer": {
-    "about": "About Digital Agency",
-    "aboutText": "We are a full-service digital agency, specialized in transforming ideas into results through innovative digital solutions.",
-    "links": "Quick links",
-    "contact": "Contact us",
-    "address": "R. Empresário Lourival Lopes Filho, 105, Jardim Oceania, João Pessoa - PB",
-    "rights": "All rights reserved",
-    "newsletter": "Subscribe to receive tips, news and special offers.",
-    "emailPlaceholder": "Your email",
-    "subscribe": "Subscribe",
-    "error": "Error",
-    "emailInvalid": "Please enter a valid email",
-    "success": "Subscription successful!",
-    "subscribed": "You will receive our updates soon",
-    "faq": "Frequently Asked Questions",
-    "privacy": "Privacy Policy",
-    "terms": "Terms of Use"
-  },
-  "language": {
-    "changed": "Language changed",
-    "changedTo": "The language has been changed to {{language}}"
-  },
-  "notFound": {
-    "message": "Oops! Page not found",
-    "returnHome": "Return to Home"
-  },
-  "timeline": {
-    "title": "Our Journey",
-    "2018": {
-      "title": "The beginning of the journey",
-      "description": "Company foundation with a focus on web development and custom digital solutions."
-    },
-    "2019": {
-      "title": "Service expansion",
-      "description": "We expanded our portfolio to include professional graphic design and digital marketing strategies."
-    },
-    "2020": {
-      "title": "Adaptation and innovation",
-      "description": "During the pandemic, we developed digital solutions that helped businesses stay active and connected with their customers."
-    },
-    "2022": {
-      "title": "Technological diversification",
-      "description": "We expanded to mobile app development and Virtual Learning Environments (VLEs)."
-    },
-    "2023": {
-      "title": "Digital political strategy",
-      "description": "We launched our specialized division in digital political marketing, offering complete solutions for campaigns."
-    },
-    "2024": {
-      "title": "Sustainable growth",
-      "description": "We expanded our team and infrastructure to meet the growing demand for our integrated digital solutions."
-    }
-  },
-  "aboutPage": {
-    "ourHistory": "Our History",
-    "historyIntro": "Since 2018, we've been transforming ideas into innovative digital solutions that drive our clients' success.",
-    "contactUs": "Contact Us",
-    "scheduleCall": "Schedule a Meeting",
-    "mvv": {
-      "title": "Mission, Vision and Values",
-      "mission": "Mission",
-      "missionText": "To transform ideas into innovative digital solutions that drive our clients' growth, adding real value to their businesses through technology and creativity.",
-      "vision": "Vision",
-      "visionText": "To be recognized as a reference in integrated digital solutions, expanding our national presence and standing out for excellence, innovation and results delivered to our clients.",
-      "values": "Values",
-      "valuesList": [
-        "Excellence in every delivery",
-        "Constant innovation",
-        "Transparency in processes",
-        "Commitment to results",
-        "Relationship of trust"
-      ]
-    },
-    "team": {
-      "title": "Our Team",
-      "subtitle": "Meet the talented professionals who are part of our team and work daily to deliver the best digital solutions."
-    },
-    "differentials": {
-      "title": "Our Differentials",
-      "subtitle": "What makes us unique in the market and why our clients trust our services.",
-      "agility": {
-        "title": "Agility",
-        "description": "We deliver projects quickly without compromising quality, using agile methodologies to ensure efficiency and results."
-      },
-      "innovation": {
-        "title": "Innovation",
-        "description": "We are always ahead of technological trends, integrating the latest innovations into our projects."
-      },
-      "team": {
-        "title": "Multidisciplinary Team",
-        "description": "We have professionals specialized in various areas, ensuring a comprehensive approach for each project."
-      },
-      "security": {
-        "title": "Security",
-        "description": "We prioritize data protection and the security of the systems we develop, following market best practices."
-      },
-      "cloud": {
-        "title": "Cloud Solutions",
-        "description": "We develop and implement cloud-based solutions, ensuring scalability, availability and cost reduction."
-      },
-      "support": {
-        "title": "Continuous Support",
-        "description": "We offer post-delivery technical support and continuous maintenance, ensuring that your solution remains updated and functional."
-      }
-    },
-    "cta": {
-      "title": "Ready to Turn Your Ideas into Reality?",
-      "subtitle": "Contact us or schedule a personalized consultation to discuss your project.",
-      "schedule": "Schedule Consultation",
-      "contact": "Contact Us"
-    },
-    "location": {
-      "title": "Where We Are",
-      "description": "We are located in João Pessoa, but we serve clients from all over Brazil through our integrated digital solutions.",
-      "office": "Main Office",
-      "phone": "Phone",
-      "email": "Email"
-    }
-  },
-  "projects": {
-    "title": "Our Portfolio",
-    "backToHome": "Back to Home",
-    "viewDetails": "View Details",
-    "viewProject": "View Project",
-    "detailsTitle": "Project details",
-    "detailsDescription": "Feature in development",
-    "categories": {
-      "ecommerce": "E-commerce",
-      "mobile": "Mobile App",
-      "website": "Website",
-      "software": "Software",
-      "platform": "Web Platform",
-      "marketplace": "Marketplace",
-      "fintech": "Fintech",
-      "edtech": "EdTech"
-    },
-    "ecommerce": {
-      "title": "Fashion E-commerce",
-      "description": "Complete online store with payment integration and inventory management."
-    },
-    "delivery": {
-      "title": "Delivery App",
-      "description": "Mobile application for orders and deliveries with real-time tracking."
-    },
-    "institutional": {
-      "title": "Corporate Website",
-      "description": "Responsive website with SEO optimization and CRM integration."
-    },
-    "dashboard": {
-      "title": "Analytics Dashboard",
-      "description": "Control panel with business metrics and custom reports."
-    },
-    "social": {
-      "title": "Corporate Social Network",
-      "description": "Private platform for communication and collaboration between employees."
-    },
-    "marketplace": {
-      "title": "B2B Marketplace",
-      "description": "Portal to connect suppliers and buyers in the industrial sector."
-    },
-    "finance": {
-      "title": "Financial Management App",
-      "description": "Application for personal finance control with expense analysis."
-    },
-    "education": {
-      "title": "Educational Portal",
-      "description": "Online course platform with student area and digital certification."
-    }
+    "cta": "Learn More",
+    "imageAlt": "Digital Agency Services"
   },
   "services": {
     "title": "Our Services",
-    "subtitle": "We offer complete digital solutions to transform your online presence and drive your business growth.",
+    "subtitle": "What We Do",
+    "description": "We offer a comprehensive range of digital services to help your business thrive in the online world.",
     "websites": {
-      "title": "Website Creation",
-      "description": "Responsive websites, optimized for SEO and with modern design for your brand to stand out online."
+      "title": "Website Development",
+      "description": "Custom websites that reflect your brand and engage your audience."
     },
     "ecommerce": {
-      "title": "Online Stores",
-      "description": "Complete e-commerce platforms with product management, payments and integrated logistics."
+      "title": "E-commerce Solutions",
+      "description": "Online stores that drive sales and provide a seamless shopping experience."
     },
     "apps": {
-      "title": "Mobile Apps",
-      "description": "Native or hybrid applications for Android and iOS focusing on usability and performance."
-    },
-    "lms": {
-      "title": "Virtual Environments",
-      "description": "Customized educational platforms (LMS) for online courses and corporate training."
+      "title": "Mobile Applications",
+      "description": "Native and cross-platform mobile applications for iOS and Android."
     },
     "marketing": {
       "title": "Digital Marketing",
-      "description": "Complete digital marketing strategies for positioning and growth of your brand."
-    },
-    "social": {
-      "title": "Media Management",
-      "description": "Professional management of social networks to amplify your digital presence."
+      "description": "Result-driven strategies to increase your online presence and reach."
     },
     "design": {
-      "title": "Graphic Design",
-      "description": "Visual identity, graphic materials and visual elements to strengthen your brand."
+      "title": "UI/UX Design",
+      "description": "User-centered design that focuses on creating memorable experiences."
     },
-    "political": {
-      "title": "Political Marketing",
-      "description": "Digital strategies for election campaigns and political presence for the 2026 elections."
+    "cta": "View All Services"
+  },
+  "portfolio": {
+    "title": "Our Portfolio",
+    "subtitle": "Recent Projects",
+    "description": "Check out some of our recent work that showcases our expertise and creativity.",
+    "viewAll": "View All Projects",
+    "categories": {
+      "all": "All",
+      "websites": "Websites",
+      "ecommerce": "E-commerce",
+      "apps": "Mobile Apps",
+      "branding": "Branding"
     }
   },
   "testimonials": {
-    "title": "What our clients say",
-    "subtitle": "Our clients' satisfaction is our greatest success indicator. See what they have to say about our solutions.",
-    "quotes": {
-      "first": "The team exceeded all our expectations. Our website was delivered on time and with an exceptional design that perfectly reflects our brand.",
-      "second": "Our online store increased sales by 150% after the redesign and implementation of marketing strategies suggested by the team.",
-      "third": "The developed application revolutionized how we communicate with our customers. Intuitive interface and bug-free."
+    "title": "Testimonials",
+    "subtitle": "What Our Clients Say",
+    "description": "Don't just take our word for it. See what our clients have to say about working with us."
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Get in Touch",
+    "description": "Have a project in mind or want to know more about our services? Send us a message and we'll get back to you.",
+    "formName": "Your Name",
+    "formEmail": "Your Email",
+    "formPhone": "Phone Number",
+    "formSubject": "Subject",
+    "formMessage": "Message",
+    "formSubmit": "Send Message",
+    "successTitle": "Message Sent!",
+    "successDescription": "We'll get back to you as soon as possible.",
+    "errorTitle": "Error",
+    "errorDescription": "Something went wrong. Please try again."
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "Our Story",
+    "description": "Learn more about our team and our mission to deliver exceptional digital solutions.",
+    "mission": {
+      "title": "Our Mission",
+      "description": "To help businesses succeed in the digital world by providing innovative solutions that drive growth and engagement."
     },
-    "roles": {
-      "ceo": "CEO",
-      "commercial": "Commercial Director",
-      "product": "Product Manager"
+    "vision": {
+      "title": "Our Vision",
+      "description": "To be the leading digital agency known for creativity, innovation, and customer satisfaction."
+    },
+    "values": {
+      "title": "Our Values",
+      "items": {
+        "excellence": {
+          "title": "Excellence",
+          "description": "We strive for excellence in everything we do."
+        },
+        "innovation": {
+          "title": "Innovation",
+          "description": "We embrace new technologies and approaches to solve complex problems."
+        },
+        "integrity": {
+          "title": "Integrity",
+          "description": "We conduct our business with honesty and transparency."
+        },
+        "collaboration": {
+          "title": "Collaboration",
+          "description": "We believe in working together to achieve common goals."
+        }
+      }
+    },
+    "team": {
+      "title": "Our Team",
+      "description": "Meet the talented individuals behind our success."
     }
   },
-  "siteTitle": {
-    "agency": "Agency",
-    "digital": "Digital"
-  },
-  "teamMembers": {
-    "seo": "SEO and AI Scientist",
-    "seoBio": "Specialist in search engine optimization and artificial intelligence applications for digital businesses.",
-    "security": "Senior CyberSecurity",
-    "securityBio": "Responsible for digital security and client data protection, with extensive experience in threat prevention.",
-    "traffic": "Traffic Manager",
-    "trafficBio": "Specialist in generating qualified traffic and conversion strategies for digital campaigns.",
-    "design": "Graphic Design Manager",
-    "designBio": "Leads the graphic design team, ensuring visual excellence in all company projects and materials."
-  },
   "calendly": {
-    "openingSchedule": "Opening scheduling calendar",
-    "chooseTime": "Choose an available time",
-    "scheduleTitle": "Schedule Your Meeting"
+    "openingSchedule": "Opening scheduler",
+    "chooseTime": "Choose a time that works for you",
+    "scheduleTitle": "Schedule a Meeting"
+  },
+  "footer": {
+    "aboutText": "We are a digital agency specializing in website development, mobile applications, e-commerce solutions, and digital marketing. Our mission is to help businesses thrive in the digital world.",
+    "links": "Quick Links",
+    "contact": "Contact Info",
+    "address": "123 Digital Street, Tech City, 12345",
+    "newsletter": "Subscribe to our newsletter to get updates on our latest projects and news.",
+    "emailPlaceholder": "Your email address",
+    "subscribe": "Subscribe",
+    "error": "Error",
+    "emailInvalid": "Please enter a valid email address.",
+    "success": "Success",
+    "subscribed": "Thank you for subscribing!",
+    "rights": "All Rights Reserved",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use",
+    "faq": "FAQ"
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "description": "The page you are looking for might have been removed or is temporarily unavailable.",
+    "button": "Go Back to Home"
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last Updated",
+    "introduction": {
+      "title": "Introduction",
+      "p1": "At Agency Digital, we respect your privacy and are committed to protecting your personal data. This privacy policy will inform you how we look after your personal data when you visit our website and tell you about your privacy rights and how the law protects you.",
+      "p2": "Please read this privacy policy carefully before using our services."
+    },
+    "dataCollection": {
+      "title": "Information We Collect",
+      "p1": "We may collect, use, store and transfer different kinds of personal data about you which we have grouped together as follows:",
+      "items": {
+        "personal": "Personal Data: Name, email address, phone number, company name, and job title.",
+        "usage": "Usage Data: Information about how you use our website and services.",
+        "technical": "Technical Data: Internet protocol (IP) address, browser type and version, time zone setting, browser plug-in types and versions, operating system and platform."
+      }
+    },
+    "dataUse": {
+      "title": "How We Use Your Information",
+      "p1": "We will only use your personal data when the law allows us to. Most commonly, we will use your personal data in the following circumstances:",
+      "items": {
+        "provide": "To provide and maintain our services.",
+        "improve": "To improve and personalize our services.",
+        "communicate": "To communicate with you about our services, including sending updates and marketing materials.",
+        "security": "To monitor and analyze the use of our services and detect, prevent and address technical issues."
+      }
+    },
+    "cookies": {
+      "title": "Cookies and Tracking Technologies",
+      "p1": "We use cookies and similar tracking technologies to track activity on our website and store certain information. Cookies are files with small amount of data which may include an anonymous unique identifier.",
+      "p2": "You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. However, if you do not accept cookies, you may not be able to use some portions of our services."
+    },
+    "thirdParty": {
+      "title": "Third-Party Services",
+      "p1": "Our service may contain links to other websites that are not operated by us. If you click on a third party link, you will be directed to that third party's site. We strongly advise you to review the Privacy Policy of every site you visit."
+    },
+    "dataRetention": {
+      "title": "Data Retention",
+      "p1": "We will only retain your personal data for as long as necessary to fulfill the purposes we collected it for, including for the purposes of satisfying any legal, accounting, or reporting requirements."
+    },
+    "rights": {
+      "title": "Your Data Protection Rights",
+      "p1": "Under certain circumstances, you have rights under data protection laws in relation to your personal data, including the right to:",
+      "items": {
+        "access": "Request access to your personal data.",
+        "rectification": "Request correction of your personal data.",
+        "erasure": "Request erasure of your personal data.",
+        "restrict": "Request restriction of processing your personal data.",
+        "portability": "Request the transfer of your personal data."
+      }
+    },
+    "changes": {
+      "title": "Changes to This Privacy Policy",
+      "p1": "We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the 'Last Updated' date at the top of this Privacy Policy."
+    },
+    "contact": {
+      "title": "Contact Us",
+      "p1": "If you have any questions about this Privacy Policy, please contact us:"
+    }
+  },
+  "terms": {
+    "title": "Terms of Use",
+    "lastUpdated": "Last Updated",
+    "introduction": {
+      "title": "Introduction",
+      "p1": "Welcome to Agency Digital. These Terms of Use govern your use of our website and the services we provide.",
+      "p2": "By accessing or using our website, you agree to be bound by these Terms. If you disagree with any part of the terms, then you may not access our services."
+    },
+    "use": {
+      "title": "Use of Our Services",
+      "p1": "Our services are intended for users who are at least 18 years old. By using our services, you confirm that you are at least 18 years old.",
+      "items": {
+        "license": "License: We grant you a limited, non-exclusive, non-transferable license to access and use our services for your personal or business purposes.",
+        "restrictions": "Restrictions: You may not use our services for any illegal purposes or in any manner that could damage, disable, overburden, or impair our services.",
+        "modifications": "Modifications: We reserve the right to modify or discontinue, temporarily or permanently, our services with or without notice."
+      }
+    },
+    "content": {
+      "title": "Content on Our Website",
+      "p1": "Our website may contain content that is provided by us, our users, or third parties. We do not guarantee the accuracy, completeness, or usefulness of any content on our website.",
+      "p2": "We are not responsible for any loss or damage that may result from your reliance on such content."
+    },
+    "accounts": {
+      "title": "User Accounts",
+      "p1": "When you create an account with us, you must provide us information that is accurate, complete, and current at all times.",
+      "p2": "You are responsible for safeguarding the password that you use to access our services and for any activities or actions under your password."
+    },
+    "intellectual": {
+      "title": "Intellectual Property",
+      "p1": "Our services and all content included on our website, such as text, graphics, logos, button icons, images, audio clips, digital downloads, data compilations, and software, are the property of Agency Digital or its content suppliers and protected by international copyright laws.",
+      "items": {
+        "copyright": "Copyright: All content included on our website is the property of Agency Digital or its content suppliers and protected by international copyright laws.",
+        "trademarks": "Trademarks: All trademarks, service marks, and trade names used on our website are the property of their respective owners.",
+        "use": "Use of Content: You may not use, reproduce, distribute, or create derivative works from any content on our website without our prior written consent."
+      }
+    },
+    "userContent": {
+      "title": "User Content",
+      "p1": "By posting content on our website, you grant us a non-exclusive, royalty-free, transferable, sub-licensable, worldwide license to use, display, reproduce, and distribute such content in connection with our services.",
+      "p2": "You represent and warrant that you own or have the necessary rights to the content you post on our website, and that the posting of your content does not violate any copyright, trademark, or other intellectual property rights."
+    },
+    "privacy": {
+      "title": "Privacy",
+      "p1": "Your privacy is important to us. Our Privacy Policy explains how we collect, use, and share your personal information. By using our services, you agree to our ",
+      "link": "Privacy Policy"
+    },
+    "termination": {
+      "title": "Termination",
+      "p1": "We may terminate or suspend your account immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach these Terms of Use.",
+      "p2": "Upon termination, your right to use our services will immediately cease. If you wish to terminate your account, you may simply discontinue using our services."
+    },
+    "liability": {
+      "title": "Limitation of Liability",
+      "p1": "In no event shall Agency Digital, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from your access to or use of or inability to access or use our services.",
+      "p2": "To the maximum extent permitted by applicable law, the total liability of Agency Digital and its affiliates, for any claims under these terms, including for any implied warranties, is limited to the amount you paid us to use our services."
+    },
+    "changes": {
+      "title": "Changes to These Terms",
+      "p1": "We reserve the right, at our sole discretion, to modify or replace these Terms of Use at any time. If a revision is material, we will try to provide at least 30 days' notice prior to any new terms taking effect."
+    },
+    "contact": {
+      "title": "Contact Us",
+      "p1": "If you have any questions about these Terms of Use, please contact us:"
+    }
   }
 }

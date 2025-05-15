@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import LanguageSelector from './LanguageSelector';
@@ -15,6 +15,7 @@ const Header = () => {
   const isMobile = useIsMobile();
   const { openCalendly } = useCalendly();
   const location = useLocation();
+  const navigate = useNavigate();
   
   useEffect(() => {
     const handleScroll = () => {
@@ -55,6 +56,10 @@ const Header = () => {
     { label: t('nav.contact'), path: '/#contact' },
   ];
 
+  const handleScheduleClick = () => {
+    navigate('/agendar');
+  };
+
   return (
     <header 
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
@@ -84,7 +89,7 @@ const Header = () => {
             <LanguageSelector />
             <Button 
               className="bg-orange hover:bg-orange-dark text-white"
-              onClick={openCalendly}
+              onClick={handleScheduleClick}
             >
               {t('nav.schedule')}
             </Button>
@@ -123,7 +128,7 @@ const Header = () => {
                 className="bg-orange hover:bg-orange-dark text-white mt-2"
                 onClick={() => {
                   setIsMenuOpen(false);
-                  openCalendly();
+                  navigate('/agendar');
                 }}
               >
                 {t('nav.schedule')}

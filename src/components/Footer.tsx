@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { 
   Facebook, 
@@ -266,8 +267,8 @@ const Footer: React.FC = () => {
             © {new Date().getFullYear()} <span className="text-orange">{t('siteTitle.agency')}</span><span className="text-white">{t('siteTitle.digital')}</span>. {t('footer.rights')}
           </p>
           <div className="flex gap-4 mt-2 md:mt-0">
-            <a href="/politica-privacidade" className="text-gray-400 hover:text-orange text-sm">{t('footer.privacy')}</a>
-            <a href="/termos-uso" className="text-gray-400 hover:text-orange text-sm">{t('footer.terms')}</a>
+            <Link to="/politica-privacidade" className="text-gray-400 hover:text-orange text-sm">{t('footer.privacy')}</Link>
+            <Link to="/termos-uso" className="text-gray-400 hover:text-orange text-sm">{t('footer.terms')}</Link>
           </div>
         </div>
       </div>
