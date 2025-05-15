@@ -14,34 +14,40 @@ import TermsOfUse from "./pages/TermsOfUse";
 import { CalendlyProvider } from "./components/CalendlyProvider";
 import { LanguageProvider } from "./components/LanguageProvider";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 const queryClient = new QueryClient();
 
-// Ensure language updates apply to the entire app
-const AppWithLanguage = () => {
+// Component to force re-render when language changes
+const LanguageHandler = () => {
+  const { i18n } = useTranslation();
+  
   useEffect(() => {
-    // Force all components to re-render when language changes
-    const lang = localStorage.getItem('preferredLanguage') || 'pt-BR';
-    document.documentElement.lang = lang;
-
-    // Register a global event listener for language changes
     const handleLanguageChange = () => {
-      console.log('Language changed in App');
-      // Force re-render by updating lang attribute
-      document.documentElement.lang = localStorage.getItem('preferredLanguage') || 'pt-BR';
+      console.log('Language change detected in App');
     };
 
     window.addEventListener('languageChanged', handleLanguageChange);
+    i18n.on('languageChanged', (lng) => {
+      console.log('i18n language changed to:', lng);
+    });
     
     return () => {
       window.removeEventListener('languageChanged', handleLanguageChange);
+      i18n.off('languageChanged');
     };
-  }, []);
+  }, [i18n]);
 
+  return null;
+};
+
+// Ensure language updates apply to the entire app
+const AppWithLanguage = () => {
   return (
     <LanguageProvider>
       <BrowserRouter>
         <CalendlyProvider>
+          <LanguageHandler />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/sobre-nos" element={<SobreNos />} />

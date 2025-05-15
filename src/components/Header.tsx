@@ -33,23 +33,37 @@ const Header = () => {
     setIsMenuOpen(false);
   }, [location]);
   
-  // Re-render when language changes
+  // Force re-render when language changes
   useEffect(() => {
-    const handleLanguageChange = () => {
-      // Force re-render on language change
-      console.log('Language changed in header:', i18n.language);
+    // Direct listener for i18n language changes
+    const handleI18nLanguageChange = (lng: string) => {
+      console.log('Header detected i18n language change to:', lng);
+      // Force re-render by setting a state
+      setForceUpdate(prev => prev + 1);
     };
-
-    window.addEventListener('languageChanged', handleLanguageChange);
+    
+    // Global event listener for language changes
+    const handleGlobalLanguageChange = () => {
+      console.log('Header detected global language change event');
+      // Force re-render by setting a state
+      setForceUpdate(prev => prev + 1);
+    };
+    
+    i18n.on('languageChanged', handleI18nLanguageChange);
+    window.addEventListener('languageChanged', handleGlobalLanguageChange);
     
     return () => {
-      window.removeEventListener('languageChanged', handleLanguageChange);
+      i18n.off('languageChanged', handleI18nLanguageChange);
+      window.removeEventListener('languageChanged', handleGlobalLanguageChange);
     };
   }, [i18n]);
+  
+  // This state is only used to force re-renders
+  const [forceUpdate, setForceUpdate] = useState(0);
 
   const navItems = [
     { label: t('nav.home'), path: '/' },
-    { label: t('nav.about'), path: '/sobre-nos' }, // Ensure this path is correct
+    { label: t('nav.about'), path: '/sobre-nos' },
     { label: t('nav.services'), path: '/#services' },
     { label: t('nav.portfolio'), path: '/#portfolio' },
     { label: t('nav.testimonials'), path: '/#testimonials' },

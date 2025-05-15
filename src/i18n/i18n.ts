@@ -24,11 +24,28 @@ const resources = {
   }
 };
 
+// Get browser language or stored preference
+const detectUserLanguage = () => {
+  const storedLanguage = localStorage.getItem('preferredLanguage');
+  if (storedLanguage && Object.keys(resources).includes(storedLanguage)) {
+    return storedLanguage;
+  }
+  
+  // Try to detect browser language
+  const browserLang = navigator.language;
+  if (browserLang && Object.keys(resources).includes(browserLang)) {
+    return browserLang;
+  }
+  
+  // Default fallback
+  return 'pt-BR';
+};
+
 i18n
   .use(initReactI18next) // passes i18n down to react-i18next
   .init({
     resources,
-    lng: localStorage.getItem('preferredLanguage') || 'pt-BR',
+    lng: detectUserLanguage(),
     fallbackLng: 'pt-BR',
     interpolation: {
       escapeValue: false // react already safes from xss
