@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Menu, X, Calendar, Whatsapp } from 'lucide-react';
+import { Menu, X, Calendar, MessageCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useCalendly } from '@/components/CalendlyProvider';
 import { toast } from "@/components/ui/use-toast";
@@ -81,7 +81,7 @@ const Header: React.FC = () => {
             className="bg-[#25D366] hover:bg-[#20b958] flex items-center gap-2"
             onClick={handleWhatsAppClick}
           >
-            Fale Conosco <Whatsapp size={16} />
+            Fale Conosco <MessageCircle size={16} />
           </Button>
           <LanguageSelector />
         </nav>
@@ -136,7 +136,7 @@ const Header: React.FC = () => {
               className="bg-[#25D366] hover:bg-[#20b958] w-full flex items-center justify-center gap-2"
               onClick={handleWhatsAppClick}
             >
-              Fale Conosco <Whatsapp size={16} />
+              Fale Conosco <MessageCircle size={16} />
             </Button>
           </div>
         </div>

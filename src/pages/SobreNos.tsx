@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar, Users, Building, Phone, MapPin, Mail, Whatsapp } from 'lucide-react';
+import { Calendar, Users, Building, Phone, MapPin, Mail, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
@@ -96,7 +96,7 @@ const SobreNos = () => {
                   className="bg-[#25D366] hover:bg-[#20b958] flex items-center gap-2"
                   onClick={handleWhatsAppClick}
                 >
-                  Fale Conosco <Whatsapp className="h-5 w-5" />
+                  Fale Conosco <MessageCircle className="h-5 w-5" />
                 </Button>
                 <Button
                   className="bg-orange hover:bg-orange-dark flex items-center gap-2"
