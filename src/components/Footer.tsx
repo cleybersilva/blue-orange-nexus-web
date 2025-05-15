@@ -15,10 +15,12 @@ import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { useCalendly } from '@/components/CalendlyProvider';
 import { toast } from "@/components/ui/use-toast";
+import { useTranslation } from 'react-i18next';
 
 const Footer: React.FC = () => {
   const { openCalendly } = useCalendly();
   const [email, setEmail] = useState('');
+  const { t } = useTranslation();
   
   const scrollToSection = (sectionId: string) => {
     const section = document.getElementById(sectionId);
@@ -31,15 +33,18 @@ const Footer: React.FC = () => {
     e.preventDefault();
     
     if (!email || !email.includes('@') || !email.includes('.')) {
-      toast.error("Email inválido", {
-        description: "Por favor, insira um email válido",
+      toast({
+        variant: "destructive",
+        title: t('footer.error'),
+        description: t('footer.emailInvalid'),
       });
       return;
     }
     
     // Simulate subscription success
-    toast.success("Inscrição realizada com sucesso!", {
-      description: "Você receberá nossas atualizações em breve",
+    toast({
+      title: t('footer.success'),
+      description: t('footer.subscribed'),
     });
     setEmail('');
     console.log("Newsletter subscription:", email);
@@ -54,7 +59,7 @@ const Footer: React.FC = () => {
               <span className="text-orange">Agência</span>Digital
             </h2>
             <p className="text-gray-300 mb-6">
-              Transformando ideias em experiências digitais memoráveis que conectam marcas aos seus públicos.
+              {t('footer.aboutText')}
             </p>
             <div className="flex space-x-4">
               <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-orange transition-colors">
@@ -76,7 +81,7 @@ const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-6">Serviços</h3>
+            <h3 className="text-lg font-semibold mb-6">{t('services.title')}</h3>
             <ul className="space-y-3">
               <li>
                 <a 
@@ -88,7 +93,7 @@ const Footer: React.FC = () => {
                   className="text-gray-300 hover:text-orange transition-colors flex items-center"
                 >
                   <ChevronRight size={16} className="mr-2" /> 
-                  Criação de Sites
+                  {t('services.websites.title')}
                 </a>
               </li>
               <li>
@@ -101,7 +106,7 @@ const Footer: React.FC = () => {
                   className="text-gray-300 hover:text-orange transition-colors flex items-center"
                 >
                   <ChevronRight size={16} className="mr-2" /> 
-                  Lojas Virtuais
+                  {t('services.ecommerce.title')}
                 </a>
               </li>
               <li>
@@ -114,7 +119,7 @@ const Footer: React.FC = () => {
                   className="text-gray-300 hover:text-orange transition-colors flex items-center"
                 >
                   <ChevronRight size={16} className="mr-2" /> 
-                  Apps Móveis
+                  {t('services.apps.title')}
                 </a>
               </li>
               <li>
@@ -127,7 +132,7 @@ const Footer: React.FC = () => {
                   className="text-gray-300 hover:text-orange transition-colors flex items-center"
                 >
                   <ChevronRight size={16} className="mr-2" /> 
-                  Marketing Digital
+                  {t('services.marketing.title')}
                 </a>
               </li>
               <li>
@@ -140,19 +145,19 @@ const Footer: React.FC = () => {
                   className="text-gray-300 hover:text-orange transition-colors flex items-center"
                 >
                   <ChevronRight size={16} className="mr-2" /> 
-                  Design Gráfico
+                  {t('services.design.title')}
                 </a>
               </li>
             </ul>
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-6">Links Úteis</h3>
+            <h3 className="text-lg font-semibold mb-6">{t('footer.links')}</h3>
             <ul className="space-y-3">
               <li>
                 <Link to="/sobre-nos" className="text-gray-300 hover:text-orange transition-colors flex items-center">
                   <ChevronRight size={16} className="mr-2" /> 
-                  Sobre Nós
+                  {t('nav.about')}
                 </Link>
               </li>
               <li>
@@ -165,7 +170,7 @@ const Footer: React.FC = () => {
                   className="text-gray-300 hover:text-orange transition-colors flex items-center"
                 >
                   <ChevronRight size={16} className="mr-2" /> 
-                  Portfólio
+                  {t('nav.portfolio')}
                 </a>
               </li>
               <li>
@@ -178,7 +183,7 @@ const Footer: React.FC = () => {
                   className="text-gray-300 hover:text-orange transition-colors flex items-center"
                 >
                   <ChevronRight size={16} className="mr-2" /> 
-                  Depoimentos
+                  {t('nav.testimonials')}
                 </a>
               </li>
               <li>
@@ -191,7 +196,7 @@ const Footer: React.FC = () => {
                   className="text-gray-300 hover:text-orange transition-colors flex items-center"
                 >
                   <ChevronRight size={16} className="mr-2" /> 
-                  Perguntas Frequentes
+                  {t('footer.faq')}
                 </a>
               </li>
               <li>
@@ -204,18 +209,18 @@ const Footer: React.FC = () => {
                   className="text-gray-300 hover:text-orange transition-colors flex items-center"
                 >
                   <ChevronRight size={16} className="mr-2" /> 
-                  Agendar
+                  {t('nav.schedule')}
                 </a>
               </li>
             </ul>
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-6">Contato</h3>
+            <h3 className="text-lg font-semibold mb-6">{t('footer.contact')}</h3>
             <ul className="space-y-4">
               <li className="flex items-start">
                 <MapPin size={18} className="mr-2 mt-1 text-orange" />
-                <span className="text-gray-300">Rua Goiás, 562 - João Pessoa/PB</span>
+                <span className="text-gray-300">{t('footer.address')}</span>
               </li>
               <li className="flex items-center">
                 <Facebook size={18} className="mr-2 text-orange" />
@@ -233,11 +238,11 @@ const Footer: React.FC = () => {
             
             <div className="mt-6">
               <p className="text-gray-300 mb-4">
-                Inscreva-se para receber dicas, novidades e ofertas especiais.
+                {t('footer.newsletter')}
               </p>
               <form onSubmit={handleSubscribe} className="space-y-3">
                 <Input
-                  placeholder="Seu e-mail"
+                  placeholder={t('footer.emailPlaceholder')}
                   className="bg-navy-light border-navy-light focus:border-orange"
                   type="email"
                   value={email}
@@ -248,7 +253,7 @@ const Footer: React.FC = () => {
                   type="submit" 
                   className="bg-orange hover:bg-orange-dark w-full flex items-center justify-center gap-2"
                 >
-                  Inscrever-se <Mail size={16} />
+                  {t('footer.subscribe')} <Mail size={16} />
                 </Button>
               </form>
             </div>
@@ -259,11 +264,11 @@ const Footer: React.FC = () => {
 
         <div className="flex flex-col md:flex-row justify-between">
           <p className="text-gray-400 text-sm">
-            © {new Date().getFullYear()} Agência Digital. Todos os direitos reservados.
+            © {new Date().getFullYear()} Agência Digital. {t('footer.rights')}
           </p>
           <div className="flex gap-4 mt-2 md:mt-0">
-            <a href="/politica-privacidade" className="text-gray-400 hover:text-orange text-sm">Política de Privacidade</a>
-            <a href="/termos-uso" className="text-gray-400 hover:text-orange text-sm">Termos de Uso</a>
+            <a href="/politica-privacidade" className="text-gray-400 hover:text-orange text-sm">{t('footer.privacy')}</a>
+            <a href="/termos-uso" className="text-gray-400 hover:text-orange text-sm">{t('footer.terms')}</a>
           </div>
         </div>
       </div>

@@ -36,7 +36,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
     window.dispatchEvent(new Event('languageChanged'));
     
     console.log('Language provider initialized with:', currentLanguage);
-  }, [i18n, currentLanguage]);
+  }, []);
 
   // Handle language change
   const changeLanguage = (lang: string) => {

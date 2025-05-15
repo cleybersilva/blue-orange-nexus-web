@@ -4,9 +4,11 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, Calendar } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useCalendly } from '@/components/CalendlyProvider';
+import { useTranslation } from 'react-i18next';
 
 const Hero: React.FC = () => {
   const { openCalendly } = useCalendly();
+  const { t } = useTranslation();
   
   return (
     <section id="hero" className="relative bg-navy pt-32 pb-20 md:pt-40 md:pb-32">
@@ -20,10 +22,10 @@ const Hero: React.FC = () => {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="text-white space-y-6">
             <h1 className="heading-xl leading-tight">
-              Transforme sua <span className="text-orange">presença digital</span> em resultados
+              {t('hero.title')} <span className="text-orange">{t('hero.subtitle')}</span>
             </h1>
             <p className="text-lg text-gray-300 max-w-lg">
-              Somos especialistas em criar experiências digitais que conectam marcas com seus públicos através de websites, lojas virtuais, aplicativos e estratégias de marketing eficientes.
+              {t('hero.description')}
             </p>
             <div className="flex flex-wrap gap-4 pt-4">
               <Button 
@@ -33,7 +35,7 @@ const Hero: React.FC = () => {
                   console.log("Calendly opened from Hero section");
                 }}
               >
-                Agendar Reunião <Calendar size={16} />
+                {t('hero.scheduleButton')} <Calendar size={16} />
               </Button>
               <Button 
                 variant="outline" 
@@ -45,7 +47,7 @@ const Hero: React.FC = () => {
                   }
                 }}
               >
-                Conheça Nossos Serviços
+                {t('hero.cta')}
               </Button>
             </div>
           </div>
@@ -56,7 +58,7 @@ const Hero: React.FC = () => {
                 <div className="aspect-video rounded-lg overflow-hidden">
                   <img 
                     src="https://images.unsplash.com/photo-1487014679447-9f8336841d58?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-                    alt="Desenvolvimento de website responsivo" 
+                    alt={t('hero.imageAlt')} 
                     className="w-full h-full object-cover"
                     onError={(e) => {
                       // Fallback image if the primary one fails

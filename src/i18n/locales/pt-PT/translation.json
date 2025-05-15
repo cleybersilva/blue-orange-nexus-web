@@ -10,9 +10,12 @@
     "schedule": "Agendar"
   },
   "hero": {
-    "title": "Transforme a sua presença digital",
-    "subtitle": "Soluções completas para o seu negócio",
-    "cta": "Conheça os nossos serviços"
+    "title": "Transforme a sua",
+    "subtitle": "presença digital",
+    "description": "Somos especialistas em criar experiências digitais que ligam marcas aos seus públicos através de websites, lojas virtuais, aplicações e estratégias de marketing eficientes.",
+    "cta": "Conheça os nossos serviços",
+    "scheduleButton": "Agendar Reunião",
+    "imageAlt": "Desenvolvimento de website responsivo"
   },
   "footer": {
     "about": "Sobre a Agência Digital",
@@ -20,7 +23,17 @@
     "links": "Links rápidos",
     "contact": "Entre em contacto",
     "address": "R. Empresário Lourival Lopes Filho, 105, Jardim Oceania, João Pessoa - PB",
-    "rights": "Todos os direitos reservados"
+    "rights": "Todos os direitos reservados",
+    "newsletter": "Inscreva-se para receber dicas, novidades e ofertas especiais.",
+    "emailPlaceholder": "O seu e-mail",
+    "subscribe": "Inscrever-se",
+    "error": "Erro",
+    "emailInvalid": "Por favor, insira um email válido",
+    "success": "Inscrição realizada com sucesso!",
+    "subscribed": "Receberá as nossas atualizações em breve",
+    "faq": "Perguntas Frequentes",
+    "privacy": "Política de Privacidade",
+    "terms": "Termos de Utilização"
   },
   "language": {
     "changed": "Idioma alterado",

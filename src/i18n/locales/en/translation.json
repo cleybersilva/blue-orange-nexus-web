@@ -10,9 +10,12 @@
     "schedule": "Schedule"
   },
   "hero": {
-    "title": "Transform your digital presence",
-    "subtitle": "Complete solutions for your business",
-    "cta": "Discover our services"
+    "title": "Transform your",
+    "subtitle": "digital presence",
+    "description": "We are experts in creating digital experiences that connect brands with their audiences through websites, online stores, applications and efficient marketing strategies.",
+    "cta": "Discover our services",
+    "scheduleButton": "Schedule a Meeting",
+    "imageAlt": "Responsive website development"
   },
   "footer": {
     "about": "About Digital Agency",
@@ -20,7 +23,17 @@
     "links": "Quick links",
     "contact": "Contact us",
     "address": "R. Empresário Lourival Lopes Filho, 105, Jardim Oceania, João Pessoa - PB",
-    "rights": "All rights reserved"
+    "rights": "All rights reserved",
+    "newsletter": "Subscribe to receive tips, news and special offers.",
+    "emailPlaceholder": "Your email",
+    "subscribe": "Subscribe",
+    "error": "Error",
+    "emailInvalid": "Please enter a valid email",
+    "success": "Subscription successful!",
+    "subscribed": "You will receive our updates soon",
+    "faq": "Frequently Asked Questions",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use"
   },
   "language": {
     "changed": "Language changed",
