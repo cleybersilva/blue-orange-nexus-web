@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -61,7 +60,6 @@ export const useScheduleForm = () => {
     },
   });
 
-  // Validate only the current stage fields
   const validateCurrentStage = async () => {
     let fieldsToValidate: string[] = [];
     
