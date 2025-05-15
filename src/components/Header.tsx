@@ -6,11 +6,13 @@ import { Link } from 'react-router-dom';
 import { useCalendly } from '@/components/CalendlyProvider';
 import { toast } from "@/components/ui/use-toast";
 import LanguageSelector from './LanguageSelector';
+import { useTranslation } from 'react-i18next';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { openCalendly } = useCalendly();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,12 +24,12 @@ const Header: React.FC = () => {
   }, []);
 
   const navItems = [
-    { name: 'Home', href: '/' },
-    { name: 'Sobre Nós', href: '/sobre-nos' },
-    { name: 'Serviços', href: '/#services' },
-    { name: 'Portfólio', href: '/#portfolio' },
-    { name: 'Depoimentos', href: '/#testimonials' },
-    { name: 'Contato', href: '/#contact' },
+    { name: t('nav.home'), href: '/' },
+    { name: t('nav.about'), href: '/sobre-nos' },
+    { name: t('nav.services'), href: '/#services' },
+    { name: t('nav.portfolio'), href: '/#portfolio' },
+    { name: t('nav.testimonials'), href: '/#testimonials' },
+    { name: t('nav.contact'), href: '/#contact' },
   ];
 
   const handleCalendlyOpen = () => {
@@ -71,7 +73,7 @@ const Header: React.FC = () => {
             className="bg-orange hover:bg-orange-dark flex items-center gap-2"
             onClick={handleCalendlyOpen}
           >
-            Agendar <Calendar size={16} />
+            {t('nav.schedule')} <Calendar size={16} />
           </Button>
           <LanguageSelector />
         </nav>
@@ -120,7 +122,7 @@ const Header: React.FC = () => {
                 handleCalendlyOpen();
               }}
             >
-              Agendar <Calendar size={16} />
+              {t('nav.schedule')} <Calendar size={16} />
             </Button>
           </div>
         </div>

@@ -10,26 +10,29 @@ import SobreNos from "./pages/SobreNos";
 import Agendar from "./pages/Agendar";
 import ProjectsPage from "./pages/ProjectsPage";
 import { CalendlyProvider } from "./components/CalendlyProvider";
+import { LanguageProvider } from "./components/LanguageProvider";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <BrowserRouter>
-        <CalendlyProvider>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/sobre-nos" element={<SobreNos />} />
-            <Route path="/agendar" element={<Agendar />} />
-            <Route path="/projetos" element={<ProjectsPage />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          <Toaster />
-          <Sonner />
-        </CalendlyProvider>
-      </BrowserRouter>
+      <LanguageProvider>
+        <BrowserRouter>
+          <CalendlyProvider>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/sobre-nos" element={<SobreNos />} />
+              <Route path="/agendar" element={<Agendar />} />
+              <Route path="/projetos" element={<ProjectsPage />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+            <Toaster />
+            <Sonner />
+          </CalendlyProvider>
+        </BrowserRouter>
+      </LanguageProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );

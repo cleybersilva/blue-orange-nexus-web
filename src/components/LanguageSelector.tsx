@@ -9,6 +9,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Globe } from 'lucide-react';
 import { toast } from "@/components/ui/use-toast";
+import { useTranslation } from 'react-i18next';
 
 // Define languages with country codes
 const languages = [
@@ -19,10 +20,16 @@ const languages = [
 ];
 
 const LanguageSelector = () => {
+  const { i18n, t } = useTranslation();
   const [selectedLanguage, setSelectedLanguage] = React.useState(() => {
     // Get saved language from localStorage or default to pt-BR
     return localStorage.getItem('preferredLanguage') || 'pt-BR';
   });
+
+  // Set the language on component mount
+  useEffect(() => {
+    i18n.changeLanguage(selectedLanguage);
+  }, [i18n, selectedLanguage]);
 
   // Update localStorage when language changes
   useEffect(() => {
@@ -33,14 +40,15 @@ const LanguageSelector = () => {
     if (langCode === selectedLanguage) return;
     
     setSelectedLanguage(langCode);
+    i18n.changeLanguage(langCode);
+    
     // Show toast notification
     toast({
-      title: "Idioma alterado",
-      description: `O idioma foi alterado para ${languages.find(lang => lang.code === langCode)?.name}`,
+      title: t('language.changed'),
+      description: t('language.changedTo', { language: languages.find(lang => lang.code === langCode)?.name }),
       duration: 3000,
     });
     
-    // Here you would implement actual i18n logic
     console.log('Language changed to:', langCode);
   };
 

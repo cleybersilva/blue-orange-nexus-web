@@ -1,0 +1,29 @@
+
+{
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "services": "Services",
+    "portfolio": "Portfolio",
+    "testimonials": "Testimonials",
+    "contact": "Contact",
+    "schedule": "Schedule"
+  },
+  "hero": {
+    "title": "Transform your digital presence",
+    "subtitle": "Complete solutions for your business",
+    "cta": "Discover our services"
+  },
+  "footer": {
+    "about": "About Digital Agency",
+    "aboutText": "We are a full-service digital agency, specialized in transforming ideas into results through innovative digital solutions.",
+    "links": "Quick links",
+    "contact": "Contact us",
+    "address": "R. Empresário Lourival Lopes Filho, 105, Jardim Oceania, João Pessoa - PB",
+    "rights": "All rights reserved"
+  },
+  "language": {
+    "changed": "Language changed",
+    "changedTo": "The language has been changed to {{language}}"
+  }
+}
