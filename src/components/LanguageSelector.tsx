@@ -7,7 +7,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { Flag } from 'lucide-react';
+import { Globe } from 'lucide-react';
 
 // Define languages with country codes
 const languages = [
@@ -34,18 +34,26 @@ const LanguageSelector = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="sm" className="h-8 w-8 px-0 flex items-center justify-center">
-          <span className="text-lg">{getCurrentLanguageFlag()}</span>
+        <Button 
+          variant="ghost" 
+          size="sm" 
+          className="h-8 flex items-center gap-2 px-2 hover:bg-white/10"
+          aria-label="Select language"
+        >
+          <Globe className="h-4 w-4" />
+          <span className="text-sm hidden sm:inline">
+            {getCurrentLanguageFlag()}
+          </span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent align="end" className="bg-navy-dark border-navy">
         {languages.map((language) => (
           <DropdownMenuItem
             key={language.code}
             onClick={() => handleLanguageChange(language.code)}
-            className="flex items-center gap-2 cursor-pointer"
+            className="flex items-center gap-2 cursor-pointer hover:bg-navy/80"
           >
-            <span className="text-lg">{language.flag}</span>
+            <span className="text-base">{language.flag}</span>
             <span>{language.name}</span>
           </DropdownMenuItem>
         ))}

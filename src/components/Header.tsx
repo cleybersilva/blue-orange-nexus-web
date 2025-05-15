@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Menu, X, Calendar, MessageCircle } from 'lucide-react';
+import { Menu, X, Calendar } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useCalendly } from '@/components/CalendlyProvider';
 import { toast } from "@/components/ui/use-toast";
@@ -33,10 +33,6 @@ const Header: React.FC = () => {
   const handleCalendlyOpen = () => {
     openCalendly();
     console.log("Calendly opened from header");
-  };
-
-  const handleWhatsAppClick = () => {
-    window.open('https://wa.me/5583988329018', '_blank');
   };
 
   return (
@@ -76,12 +72,6 @@ const Header: React.FC = () => {
             onClick={handleCalendlyOpen}
           >
             Agendar <Calendar size={16} />
-          </Button>
-          <Button
-            className="bg-[#25D366] hover:bg-[#20b958] flex items-center gap-2"
-            onClick={handleWhatsAppClick}
-          >
-            Fale Conosco <MessageCircle size={16} />
           </Button>
           <LanguageSelector />
         </nav>
@@ -131,12 +121,6 @@ const Header: React.FC = () => {
               }}
             >
               Agendar <Calendar size={16} />
-            </Button>
-            <Button
-              className="bg-[#25D366] hover:bg-[#20b958] w-full flex items-center justify-center gap-2"
-              onClick={handleWhatsAppClick}
-            >
-              Fale Conosco <MessageCircle size={16} />
             </Button>
           </div>
         </div>
