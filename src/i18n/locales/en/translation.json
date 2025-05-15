@@ -223,6 +223,16 @@
   },
   "testimonials": {
     "title": "What our clients say",
-    "subtitle": "Our clients' satisfaction is our greatest success indicator. See what they have to say about our solutions."
+    "subtitle": "Our clients' satisfaction is our greatest success indicator. See what they have to say about our solutions.",
+    "quotes": {
+      "first": "The team exceeded all our expectations. Our website was delivered on time and with an exceptional design that perfectly reflects our brand.",
+      "second": "Our online store increased sales by 150% after the redesign and implementation of marketing strategies suggested by the team.",
+      "third": "The developed application revolutionized how we communicate with our customers. Intuitive interface and bug-free."
+    },
+    "roles": {
+      "ceo": "CEO",
+      "commercial": "Commercial Director",
+      "product": "Product Manager"
+    }
   }
 }

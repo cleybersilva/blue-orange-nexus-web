@@ -223,6 +223,16 @@
   },
   "testimonials": {
     "title": "Lo que dicen nuestros clientes",
-    "subtitle": "La satisfacción de nuestros clientes es nuestro mayor indicador de éxito. Mira lo que tienen que decir sobre nuestras soluciones."
+    "subtitle": "La satisfacción de nuestros clientes es nuestro mayor indicador de éxito. Mira lo que tienen que decir sobre nuestras soluciones.",
+    "quotes": {
+      "first": "El equipo superó todas nuestras expectativas. Nuestro sitio web fue entregado a tiempo y con un diseño excepcional que refleja perfectamente nuestra marca.",
+      "second": "Nuestra tienda en línea aumentó las ventas en un 150% después del rediseño y la implementación de las estrategias de marketing sugeridas por el equipo.",
+      "third": "La aplicación desarrollada revolucionó la forma en que nos comunicamos con nuestros clientes. Interfaz intuitiva y sin errores."
+    },
+    "roles": {
+      "ceo": "CEO",
+      "commercial": "Director Comercial",
+      "product": "Gerente de Producto"
+    }
   }
 }

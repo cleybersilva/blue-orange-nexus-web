@@ -1,72 +1,82 @@
 
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Star } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 interface TestimonialProps {
-  quote: string;
+  quoteKey: string;
   author: string;
   role: string;
   company: string;
   rating: number;
+  imageUrl: string;
 }
 
 const TestimonialCard: React.FC<TestimonialProps> = ({ 
-  quote, 
+  quoteKey, 
   author, 
   role, 
   company,
-  rating
-}) => (
-  <Card className="bg-white card-shadow border-none hover:scale-[1.02] transition-transform duration-300">
-    <CardContent className="p-8">
-      <div className="flex gap-1 mb-4">
-        {[...Array(rating)].map((_, i) => (
-          <Star key={i} size={18} className="fill-orange text-orange" />
-        ))}
-      </div>
-      <blockquote className="text-gray-700 mb-6">
-        "{quote}"
-      </blockquote>
-      <div className="flex items-center gap-4">
-        <Avatar className="h-12 w-12 bg-navy-light">
-          <AvatarFallback className="text-white">{author.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-        </Avatar>
-        <div>
-          <h4 className="font-semibold text-navy">{author}</h4>
-          <p className="text-gray-500 text-sm">{role}, {company}</p>
+  rating,
+  imageUrl
+}) => {
+  const { t } = useTranslation();
+  
+  return (
+    <Card className="bg-white card-shadow border-none hover:scale-[1.02] transition-transform duration-300">
+      <CardContent className="p-8">
+        <div className="flex gap-1 mb-4">
+          {[...Array(rating)].map((_, i) => (
+            <Star key={i} size={18} className="fill-orange text-orange" />
+          ))}
         </div>
-      </div>
-    </CardContent>
-  </Card>
-);
+        <blockquote className="text-gray-700 mb-6">
+          "{t(quoteKey)}"
+        </blockquote>
+        <div className="flex items-center gap-4">
+          <Avatar className="h-12 w-12 bg-navy-light">
+            <AvatarImage src={imageUrl} alt={author} />
+            <AvatarFallback className="text-white">{author.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+          </Avatar>
+          <div>
+            <h4 className="font-semibold text-navy">{author}</h4>
+            <p className="text-gray-500 text-sm">{role}, {company}</p>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
 
 const Testimonials: React.FC = () => {
   const { t } = useTranslation();
   
   const testimonials = [
     {
-      quote: "A equipe superou todas as nossas expectativas. Nosso site foi entregue dentro do prazo e com um design excepcional que reflete perfeitamente nossa marca.",
+      quoteKey: "testimonials.quotes.first",
       author: "Ana Silva",
-      role: "CEO",
+      role: t("testimonials.roles.ceo"),
       company: "TechSolutions",
-      rating: 5
+      rating: 5,
+      imageUrl: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
     },
     {
-      quote: "Nossa loja virtual aumentou as vendas em 150% após o redesign e implementação das estratégias de marketing sugeridas pela equipe.",
+      quoteKey: "testimonials.quotes.second",
       author: "Carlos Mendes",
-      role: "Diretor Comercial",
+      role: t("testimonials.roles.commercial"),
       company: "ModaStore",
-      rating: 5
+      rating: 5,
+      imageUrl: "https://images.unsplash.com/photo-1500673922987-e212871fec22?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
     },
     {
-      quote: "O aplicativo desenvolvido revolucionou a forma como nos comunicamos com nossos clientes. Interface intuitiva e sem bugs.",
+      quoteKey: "testimonials.quotes.third",
       author: "Patricia Lopes",
-      role: "Gerente de Produto",
+      role: t("testimonials.roles.product"),
       company: "DeliveryExpress",
-      rating: 4
+      rating: 4,
+      imageUrl: "https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
     },
   ];
 
@@ -84,11 +94,12 @@ const Testimonials: React.FC = () => {
           {testimonials.map((testimonial, index) => (
             <TestimonialCard 
               key={index}
-              quote={testimonial.quote}
+              quoteKey={testimonial.quoteKey}
               author={testimonial.author}
               role={testimonial.role}
               company={testimonial.company}
               rating={testimonial.rating}
+              imageUrl={testimonial.imageUrl}
             />
           ))}
         </div>
