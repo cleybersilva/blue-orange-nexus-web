@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { Globe } from 'lucide-react';
+import { toast } from "@/components/ui/use-toast";
 
 // Define languages with country codes
 const languages = [
@@ -18,11 +19,28 @@ const languages = [
 ];
 
 const LanguageSelector = () => {
-  const [selectedLanguage, setSelectedLanguage] = React.useState('pt-BR');
+  const [selectedLanguage, setSelectedLanguage] = React.useState(() => {
+    // Get saved language from localStorage or default to pt-BR
+    return localStorage.getItem('preferredLanguage') || 'pt-BR';
+  });
+
+  // Update localStorage when language changes
+  useEffect(() => {
+    localStorage.setItem('preferredLanguage', selectedLanguage);
+  }, [selectedLanguage]);
 
   const handleLanguageChange = (langCode: string) => {
+    if (langCode === selectedLanguage) return;
+    
     setSelectedLanguage(langCode);
-    // Here you would implement i18n logic
+    // Show toast notification
+    toast({
+      title: "Idioma alterado",
+      description: `O idioma foi alterado para ${languages.find(lang => lang.code === langCode)?.name}`,
+      duration: 3000,
+    });
+    
+    // Here you would implement actual i18n logic
     console.log('Language changed to:', langCode);
   };
 
@@ -37,7 +55,7 @@ const LanguageSelector = () => {
         <Button 
           variant="ghost" 
           size="sm" 
-          className="h-8 flex items-center gap-2 px-2 hover:bg-white/10"
+          className="h-8 flex items-center gap-2 px-2 hover:bg-white/10 text-white transition-colors duration-300"
           aria-label="Select language"
         >
           <Globe className="h-4 w-4" />
@@ -46,12 +64,17 @@ const LanguageSelector = () => {
           </span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="bg-navy-dark border-navy">
+      <DropdownMenuContent 
+        align="end" 
+        className="bg-orange border-orange animate-in fade-in-80 data-[side=bottom]:slide-in-from-top-2"
+      >
         {languages.map((language) => (
           <DropdownMenuItem
             key={language.code}
             onClick={() => handleLanguageChange(language.code)}
-            className="flex items-center gap-2 cursor-pointer hover:bg-navy/80"
+            className={`flex items-center gap-2 cursor-pointer text-navy hover:bg-orange-light transition-colors duration-200 ${
+              selectedLanguage === language.code ? 'bg-orange-light font-medium' : ''
+            }`}
           >
             <span className="text-base">{language.flag}</span>
             <span>{language.name}</span>
