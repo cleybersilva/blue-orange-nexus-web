@@ -9,6 +9,9 @@ import NotFound from "./pages/NotFound";
 import SobreNos from "./pages/SobreNos";
 import Agendar from "./pages/Agendar";
 import ProjectsPage from "./pages/ProjectsPage";
+import ServicosPage from "./pages/ServicosPage";
+import BlogPage from "./pages/BlogPage";
+import WebsitesPage from "./pages/services/WebsitesPage";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfUse from "./pages/TermsOfUse";
 import { CalendlyProvider } from "./components/CalendlyProvider";
@@ -53,6 +56,9 @@ const AppWithLanguage = () => {
             <Route path="/sobre-nos" element={<SobreNos />} />
             <Route path="/agendar" element={<Agendar />} />
             <Route path="/projetos" element={<ProjectsPage />} />
+            <Route path="/servicos" element={<ServicosPage />} />
+            <Route path="/servicos/websites" element={<WebsitesPage />} />
+            <Route path="/blog" element={<BlogPage />} />
             <Route path="/politica-privacidade" element={<PrivacyPolicy />} />
             <Route path="/termos-uso" element={<TermsOfUse />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
