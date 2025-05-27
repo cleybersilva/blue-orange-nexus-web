@@ -51,6 +51,44 @@ export type Database = {
         }
         Relationships: []
       }
+      article_analytics: {
+        Row: {
+          article_id: string
+          created_at: string | null
+          id: string
+          likes_count: number | null
+          shares_count: number | null
+          view_date: string | null
+          views_count: number | null
+        }
+        Insert: {
+          article_id: string
+          created_at?: string | null
+          id?: string
+          likes_count?: number | null
+          shares_count?: number | null
+          view_date?: string | null
+          views_count?: number | null
+        }
+        Update: {
+          article_id?: string
+          created_at?: string | null
+          id?: string
+          likes_count?: number | null
+          shares_count?: number | null
+          view_date?: string | null
+          views_count?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "article_analytics_article_id_fkey"
+            columns: ["article_id"]
+            isOneToOne: false
+            referencedRelation: "articles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       articles: {
         Row: {
           author_id: string
@@ -59,15 +97,18 @@ export type Database = {
           cover_image_url: string | null
           created_at: string | null
           id: string
+          likes: number | null
           published_at: string | null
           read_time: number | null
           scheduled_at: string | null
+          shares: number | null
           slug: string
           status: Database["public"]["Enums"]["article_status"] | null
           subtitle: string | null
           summary: string
           title: string
           updated_at: string | null
+          views: number | null
         }
         Insert: {
           author_id: string
@@ -76,15 +117,18 @@ export type Database = {
           cover_image_url?: string | null
           created_at?: string | null
           id?: string
+          likes?: number | null
           published_at?: string | null
           read_time?: number | null
           scheduled_at?: string | null
+          shares?: number | null
           slug: string
           status?: Database["public"]["Enums"]["article_status"] | null
           subtitle?: string | null
           summary: string
           title: string
           updated_at?: string | null
+          views?: number | null
         }
         Update: {
           author_id?: string
@@ -93,15 +137,18 @@ export type Database = {
           cover_image_url?: string | null
           created_at?: string | null
           id?: string
+          likes?: number | null
           published_at?: string | null
           read_time?: number | null
           scheduled_at?: string | null
+          shares?: number | null
           slug?: string
           status?: Database["public"]["Enums"]["article_status"] | null
           subtitle?: string | null
           summary?: string
           title?: string
           updated_at?: string | null
+          views?: number | null
         }
         Relationships: [
           {
@@ -145,6 +192,7 @@ export type Database = {
       }
       profiles: {
         Row: {
+          admin_level: Database["public"]["Enums"]["admin_level"] | null
           approved: boolean | null
           created_at: string | null
           email: string | null
@@ -154,6 +202,7 @@ export type Database = {
           updated_at: string | null
         }
         Insert: {
+          admin_level?: Database["public"]["Enums"]["admin_level"] | null
           approved?: boolean | null
           created_at?: string | null
           email?: string | null
@@ -163,6 +212,7 @@ export type Database = {
           updated_at?: string | null
         }
         Update: {
+          admin_level?: Database["public"]["Enums"]["admin_level"] | null
           approved?: boolean | null
           created_at?: string | null
           email?: string | null
@@ -182,8 +232,21 @@ export type Database = {
         Args: { request_id: string }
         Returns: undefined
       }
+      increment_article_likes: {
+        Args: { article_slug: string }
+        Returns: undefined
+      }
+      increment_article_shares: {
+        Args: { article_slug: string }
+        Returns: undefined
+      }
+      increment_article_views: {
+        Args: { article_slug: string }
+        Returns: undefined
+      }
     }
     Enums: {
+      admin_level: "root" | "admin"
       article_status: "draft" | "published" | "scheduled"
       request_status: "pending" | "approved" | "rejected"
     }
@@ -301,6 +364,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      admin_level: ["root", "admin"],
       article_status: ["draft", "published", "scheduled"],
       request_status: ["pending", "approved", "rejected"],
     },

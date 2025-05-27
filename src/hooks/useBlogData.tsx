@@ -24,6 +24,9 @@ export interface Article {
   scheduled_at?: string;
   read_time?: number;
   category?: string;
+  views?: number;
+  shares?: number;
+  likes?: number;
   created_at: string;
   updated_at: string;
   author?: Author;
@@ -39,6 +42,27 @@ export interface AdminRequest {
   requested_at: string;
   reviewed_at?: string;
   reviewed_by?: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ArticleAnalytics {
+  id: string;
+  article_id: string;
+  view_date: string;
+  views_count: number;
+  shares_count: number;
+  likes_count: number;
+  created_at: string;
+}
+
+export interface UserProfile {
+  id: string;
+  email?: string;
+  full_name?: string;
+  role?: string;
+  approved?: boolean;
+  admin_level?: 'root' | 'admin';
   created_at: string;
   updated_at: string;
 }
@@ -141,19 +165,102 @@ export const useAuthors = () => {
   });
 };
 
-// Hook para verificar se o usuário é admin aprovado
+// Hook para verificar se o usuário é admin aprovado e seu nível
 export const useIsApprovedAdmin = () => {
   return useQuery({
     queryKey: ['is-approved-admin'],
     queryFn: async () => {
+      const { data: user } = await supabase.auth.getUser();
+      if (!user.user) return { isAdmin: false, isRoot: false, profile: null };
+
       const { data, error } = await supabase
         .from('profiles')
-        .select('role, approved')
-        .eq('id', (await supabase.auth.getUser()).data.user?.id)
+        .select('role, approved, admin_level, email, full_name')
+        .eq('id', user.user.id)
         .single();
 
+      if (error) return { isAdmin: false, isRoot: false, profile: null };
+      
+      const isAdmin = data?.role === 'admin' && data?.approved === true;
+      const isRoot = isAdmin && data?.admin_level === 'root';
+      
+      return { 
+        isAdmin, 
+        isRoot, 
+        profile: data as UserProfile
+      };
+    }
+  });
+};
+
+// Hook para buscar analytics dos artigos
+export const useArticleAnalytics = () => {
+  return useQuery({
+    queryKey: ['article-analytics'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('article_analytics')
+        .select(`
+          *,
+          article:articles(title, slug)
+        `)
+        .order('view_date', { ascending: false });
+
       if (error) throw error;
-      return data?.role === 'admin' && data?.approved === true;
+      return data;
+    }
+  });
+};
+
+// Hook para buscar estatísticas gerais
+export const useAnalyticsStats = () => {
+  return useQuery({
+    queryKey: ['analytics-stats'],
+    queryFn: async () => {
+      // Buscar artigos mais visitados
+      const { data: mostViewed, error: viewError } = await supabase
+        .from('articles')
+        .select('title, slug, views, shares, likes')
+        .eq('status', 'published')
+        .order('views', { ascending: false })
+        .limit(10);
+
+      if (viewError) throw viewError;
+
+      // Buscar estatísticas totais
+      const { data: totalStats, error: statsError } = await supabase
+        .from('articles')
+        .select('views, shares, likes')
+        .eq('status', 'published');
+
+      if (statsError) throw statsError;
+
+      const totals = totalStats?.reduce((acc, article) => ({
+        totalViews: acc.totalViews + (article.views || 0),
+        totalShares: acc.totalShares + (article.shares || 0),
+        totalLikes: acc.totalLikes + (article.likes || 0)
+      }), { totalViews: 0, totalShares: 0, totalLikes: 0 });
+
+      return {
+        mostViewed: mostViewed || [],
+        totals: totals || { totalViews: 0, totalShares: 0, totalLikes: 0 }
+      };
+    }
+  });
+};
+
+// Hook para buscar todos os perfis de usuário (apenas para root)
+export const useUserProfiles = () => {
+  return useQuery({
+    queryKey: ['user-profiles'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      return data as UserProfile[];
     }
   });
 };
@@ -429,6 +536,107 @@ export const useRejectAdminRequest = () => {
         description: error.message,
         variant: "destructive",
       });
+    }
+  });
+};
+
+// Mutation para deletar perfil de usuário (apenas root)
+export const useDeleteUserProfile = () => {
+  const queryClient = useQueryClient();
+  const { toast } = useToast();
+
+  return useMutation({
+    mutationFn: async (userId: string) => {
+      const { error } = await supabase
+        .from('profiles')
+        .delete()
+        .eq('id', userId);
+
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['user-profiles'] });
+      toast({
+        title: "Usuário removido com sucesso!",
+        description: "O perfil do usuário foi deletado permanentemente.",
+      });
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Erro ao remover usuário",
+        description: error.message,
+        variant: "destructive",
+      });
+    }
+  });
+};
+
+// Mutation para atualizar nível de admin
+export const useUpdateAdminLevel = () => {
+  const queryClient = useQueryClient();
+  const { toast } = useToast();
+
+  return useMutation({
+    mutationFn: async ({ userId, adminLevel }: { userId: string; adminLevel: 'admin' | 'root' }) => {
+      const { error } = await supabase
+        .from('profiles')
+        .update({ 
+          admin_level: adminLevel,
+          updated_at: new Date().toISOString()
+        })
+        .eq('id', userId);
+
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['user-profiles'] });
+      toast({
+        title: "Nível atualizado com sucesso!",
+        description: "O nível de administrador foi alterado.",
+      });
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Erro ao atualizar nível",
+        description: error.message,
+        variant: "destructive",
+      });
+    }
+  });
+};
+
+// Função para incrementar views
+export const useIncrementViews = () => {
+  return useMutation({
+    mutationFn: async (slug: string) => {
+      const { error } = await supabase.rpc('increment_article_views', {
+        article_slug: slug
+      });
+      if (error) throw error;
+    }
+  });
+};
+
+// Função para incrementar shares
+export const useIncrementShares = () => {
+  return useMutation({
+    mutationFn: async (slug: string) => {
+      const { error } = await supabase.rpc('increment_article_shares', {
+        article_slug: slug
+      });
+      if (error) throw error;
+    }
+  });
+};
+
+// Função para incrementar likes
+export const useIncrementLikes = () => {
+  return useMutation({
+    mutationFn: async (slug: string) => {
+      const { error } = await supabase.rpc('increment_article_likes', {
+        article_slug: slug
+      });
+      if (error) throw error;
     }
   });
 };
