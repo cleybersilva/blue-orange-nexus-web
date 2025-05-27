@@ -83,11 +83,11 @@ const Header = () => {
     >
       <div className="container-custom flex justify-between items-center">
         <Link to="/" className="flex items-center gap-2">
-          <HubHighlight className="text-2xl font-bold" />
           <span className="text-2xl font-bold">
             <span className="text-orange">Agência</span>
             <span className="text-white">Digital</span>
           </span>
+          <HubHighlight className="text-2xl font-bold" />
         </Link>
 
         {/* Desktop Nav */}
