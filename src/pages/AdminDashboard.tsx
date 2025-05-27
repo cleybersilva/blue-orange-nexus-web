@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -6,14 +7,15 @@ import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useAuth } from '@/hooks/useAuth';
-import { useAllArticles, useAuthors, useDeleteArticle, useIsApprovedAdmin, useAdminRequests } from '@/hooks/useBlogData';
-import { Loader2, Plus, Edit, Eye, Users, FileText, LogOut, Trash2, UserCheck, Clock, BarChart3, Crown, Shield } from 'lucide-react';
+import { useAllArticles, useMyArticles, useAuthors, useDeleteArticle, useIsApprovedAdmin, useAdminRequests } from '@/hooks/useBlogData';
+import { Loader2, Plus, Edit, Eye, Users, FileText, LogOut, Trash2, UserCheck, Clock, BarChart3, Crown, Shield, BookOpen } from 'lucide-react';
 import { format } from 'date-fns';
 import AnalyticsDashboard from '@/components/admin/AnalyticsDashboard';
 
 const AdminDashboard = () => {
   const { user, signOut, loading: authLoading } = useAuth();
-  const { data: articles, isLoading: articlesLoading } = useAllArticles();
+  const { data: allArticles, isLoading: allArticlesLoading } = useAllArticles();
+  const { data: myArticles, isLoading: myArticlesLoading } = useMyArticles();
   const { data: authors, isLoading: authorsLoading } = useAuthors();
   const { data: adminInfo, isLoading: checkingAdmin } = useIsApprovedAdmin();
   const { data: adminRequests } = useAdminRequests();
@@ -27,7 +29,7 @@ const AdminDashboard = () => {
   }, [user, authLoading, navigate]);
 
   useEffect(() => {
-    if (user && !checkingAdmin && !adminInfo?.isAdmin) {
+    if (user && !checkingAdmin && (!adminInfo?.isAdmin && !adminInfo?.isAuthorAdmin && !adminInfo?.isAuthor)) {
       navigate('/admin/login');
     }
   }, [user, adminInfo, checkingAdmin, navigate]);
@@ -40,7 +42,7 @@ const AdminDashboard = () => {
     );
   }
 
-  if (!adminInfo?.isAdmin) {
+  if (!adminInfo?.isAdmin && !adminInfo?.isAuthorAdmin && !adminInfo?.isAuthor) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
         <Card className="w-full max-w-md">
@@ -75,9 +77,50 @@ const AdminDashboard = () => {
     }
   };
 
+  // Determinar quais artigos mostrar baseado no role do usuário
+  const articles = adminInfo?.isAuthor ? myArticles : allArticles;
+  const articlesLoading = adminInfo?.isAuthor ? myArticlesLoading : allArticlesLoading;
+  
   const publishedArticles = articles?.filter(article => article.status === 'published') || [];
   const draftArticles = articles?.filter(article => article.status === 'draft') || [];
   const pendingRequests = adminRequests?.filter(req => req.status === 'pending') || [];
+
+  // Determinar o badge do usuário
+  const getUserBadge = () => {
+    if (adminInfo?.isRoot) {
+      return (
+        <Badge variant="destructive" className="flex items-center gap-1">
+          <Crown size={12} />
+          Admin Root
+        </Badge>
+      );
+    } else if (adminInfo?.isAdmin) {
+      return (
+        <Badge variant="secondary" className="flex items-center gap-1">
+          <Shield size={12} />
+          Admin
+        </Badge>
+      );
+    } else if (adminInfo?.isAuthorAdmin) {
+      return (
+        <Badge variant="outline" className="flex items-center gap-1">
+          <Users size={12} />
+          Author Admin
+        </Badge>
+      );
+    } else if (adminInfo?.isAuthor) {
+      return (
+        <Badge variant="outline" className="flex items-center gap-1">
+          <BookOpen size={12} />
+          Autor
+        </Badge>
+      );
+    }
+    return null;
+  };
+
+  // Determinar se pode ver analytics
+  const canViewAnalytics = adminInfo?.isAdmin || adminInfo?.isAuthorAdmin;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -91,19 +134,7 @@ const AdminDashboard = () => {
                 <span className="text-navy">Digital</span>
               </span>
             </Link>
-            <div className="flex items-center gap-2">
-              {adminInfo?.isRoot ? (
-                <Badge variant="destructive" className="flex items-center gap-1">
-                  <Crown size={12} />
-                  Admin Root
-                </Badge>
-              ) : (
-                <Badge variant="secondary" className="flex items-center gap-1">
-                  <Shield size={12} />
-                  Admin
-                </Badge>
-              )}
-            </div>
+            {getUserBadge()}
           </div>
           
           <div className="flex items-center gap-4">
@@ -120,12 +151,18 @@ const AdminDashboard = () => {
 
       <main className="container-custom py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-navy mb-2">Dashboard Administrativo</h1>
-          <p className="text-gray-600">Gerencie artigos, autores e conteúdo do blog</p>
+          <h1 className="text-3xl font-bold text-navy mb-2">
+            Dashboard {adminInfo?.isAuthor ? 'do Autor' : 'Administrativo'}
+          </h1>
+          <p className="text-gray-600">
+            {adminInfo?.isAuthor 
+              ? 'Gerencie seus artigos e conteúdo' 
+              : 'Gerencie artigos, autores e conteúdo do blog'}
+          </p>
         </div>
 
-        {/* Alerta de solicitações pendentes */}
-        {pendingRequests.length > 0 && (
+        {/* Alerta de solicitações pendentes - apenas para admins e author_admins */}
+        {pendingRequests.length > 0 && (adminInfo?.isAdmin || adminInfo?.isAuthorAdmin) && (
           <Alert className="mb-6 border-orange bg-orange-50">
             <Clock className="h-4 w-4 text-orange" />
             <AlertDescription className="flex items-center justify-between">
@@ -143,20 +180,24 @@ const AdminDashboard = () => {
         )}
 
         <Tabs defaultValue="dashboard" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-2">
+          <TabsList className={`grid w-full ${canViewAnalytics ? 'grid-cols-2' : 'grid-cols-1'}`}>
             <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
-            <TabsTrigger value="analytics" className="flex items-center gap-2">
-              <BarChart3 size={16} />
-              Analytics
-            </TabsTrigger>
+            {canViewAnalytics && (
+              <TabsTrigger value="analytics" className="flex items-center gap-2">
+                <BarChart3 size={16} />
+                Analytics
+              </TabsTrigger>
+            )}
           </TabsList>
 
           <TabsContent value="dashboard" className="space-y-6">
             {/* Stats Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Total de Artigos</CardTitle>
+                  <CardTitle className="text-sm font-medium">
+                    {adminInfo?.isAuthor ? 'Meus Artigos' : 'Total de Artigos'}
+                  </CardTitle>
                   <FileText className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
@@ -183,26 +224,18 @@ const AdminDashboard = () => {
                   <div className="text-2xl font-bold text-orange">{draftArticles.length}</div>
                 </CardContent>
               </Card>
-              
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Autores</CardTitle>
-                  <Users className="h-4 w-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">{authors?.length || 0}</div>
-                </CardContent>
-              </Card>
 
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Solicitações</CardTitle>
-                  <UserCheck className="h-4 w-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold text-orange">{pendingRequests.length}</div>
-                </CardContent>
-              </Card>
+              {(adminInfo?.isAdmin || adminInfo?.isAuthorAdmin) && (
+                <Card>
+                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                    <CardTitle className="text-sm font-medium">Solicitações</CardTitle>
+                    <UserCheck className="h-4 w-4 text-muted-foreground" />
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-2xl font-bold text-orange">{pendingRequests.length}</div>
+                  </CardContent>
+                </Card>
+              )}
             </div>
 
             {/* Quick Actions */}
@@ -220,27 +253,33 @@ const AdminDashboard = () => {
                     <Plus size={16} className="mr-2" />
                     Criar Novo Artigo
                   </Button>
-                  <Button 
-                    variant="outline" 
-                    className="w-full" 
-                    onClick={() => navigate('/admin/authors')}
-                  >
-                    <Users size={16} className="mr-2" />
-                    Gerenciar Autores
-                  </Button>
-                  <Button 
-                    variant="outline" 
-                    className="w-full" 
-                    onClick={() => navigate('/admin/requests')}
-                  >
-                    <UserCheck size={16} className="mr-2" />
-                    Gerenciar Solicitações
-                    {pendingRequests.length > 0 && (
-                      <Badge variant="secondary" className="ml-2">
-                        {pendingRequests.length}
-                      </Badge>
-                    )}
-                  </Button>
+                  
+                  {(adminInfo?.isAdmin || adminInfo?.isAuthorAdmin) && (
+                    <>
+                      <Button 
+                        variant="outline" 
+                        className="w-full" 
+                        onClick={() => navigate('/admin/authors')}
+                      >
+                        <Users size={16} className="mr-2" />
+                        Gerenciar Autores
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        className="w-full" 
+                        onClick={() => navigate('/admin/requests')}
+                      >
+                        <UserCheck size={16} className="mr-2" />
+                        Gerenciar Solicitações
+                        {pendingRequests.length > 0 && (
+                          <Badge variant="secondary" className="ml-2">
+                            {pendingRequests.length}
+                          </Badge>
+                        )}
+                      </Button>
+                    </>
+                  )}
+                  
                   {adminInfo?.isRoot && (
                     <Button 
                       variant="outline" 
@@ -251,6 +290,7 @@ const AdminDashboard = () => {
                       Gerenciar Usuários
                     </Button>
                   )}
+                  
                   <Button variant="outline" className="w-full" onClick={() => navigate('/blog')}>
                     <Eye size={16} className="mr-2" />
                     Ver Blog Público
@@ -260,8 +300,12 @@ const AdminDashboard = () => {
 
               <Card>
                 <CardHeader>
-                  <CardTitle>Artigos Recentes</CardTitle>
-                  <CardDescription>Últimos artigos criados ou editados</CardDescription>
+                  <CardTitle>
+                    {adminInfo?.isAuthor ? 'Meus Artigos Recentes' : 'Artigos Recentes'}
+                  </CardTitle>
+                  <CardDescription>
+                    {adminInfo?.isAuthor ? 'Seus últimos artigos' : 'Últimos artigos criados ou editados'}
+                  </CardDescription>
                 </CardHeader>
                 <CardContent>
                   {articlesLoading ? (
@@ -304,8 +348,14 @@ const AdminDashboard = () => {
             {/* All Articles Table */}
             <Card>
               <CardHeader>
-                <CardTitle>Todos os Artigos</CardTitle>
-                <CardDescription>Gerencie todos os artigos do blog</CardDescription>
+                <CardTitle>
+                  {adminInfo?.isAuthor ? 'Meus Artigos' : 'Todos os Artigos'}
+                </CardTitle>
+                <CardDescription>
+                  {adminInfo?.isAuthor 
+                    ? 'Gerencie seus artigos do blog' 
+                    : 'Gerencie todos os artigos do blog'}
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 {articlesLoading ? (
@@ -348,14 +398,16 @@ const AdminDashboard = () => {
                             <Edit size={14} className="mr-1" />
                             Editar
                           </Button>
-                          <Button 
-                            size="sm" 
-                            variant="outline"
-                            onClick={() => handleDeleteArticle(article.id)}
-                            className="text-red-600 hover:text-red-700"
-                          >
-                            <Trash2 size={14} />
-                          </Button>
+                          {(adminInfo?.isAdmin || adminInfo?.isRoot) && (
+                            <Button 
+                              size="sm" 
+                              variant="outline"
+                              onClick={() => handleDeleteArticle(article.id)}
+                              className="text-red-600 hover:text-red-700"
+                            >
+                              <Trash2 size={14} />
+                            </Button>
+                          )}
                         </div>
                       </div>
                     ))}
@@ -363,7 +415,11 @@ const AdminDashboard = () => {
                       <div className="text-center py-8">
                         <FileText size={48} className="mx-auto text-gray-400 mb-4" />
                         <h3 className="text-lg font-medium text-gray-900 mb-2">Nenhum artigo encontrado</h3>
-                        <p className="text-gray-600 mb-4">Comece criando seu primeiro artigo</p>
+                        <p className="text-gray-600 mb-4">
+                          {adminInfo?.isAuthor 
+                            ? 'Comece criando seu primeiro artigo' 
+                            : 'Comece criando o primeiro artigo'}
+                        </p>
                         <Button 
                           onClick={() => navigate('/admin/articles/new')}
                           className="bg-orange hover:bg-orange-dark text-white"
@@ -379,9 +435,11 @@ const AdminDashboard = () => {
             </Card>
           </TabsContent>
 
-          <TabsContent value="analytics">
-            <AnalyticsDashboard />
-          </TabsContent>
+          {canViewAnalytics && (
+            <TabsContent value="analytics">
+              <AnalyticsDashboard />
+            </TabsContent>
+          )}
         </Tabs>
       </main>
     </div>

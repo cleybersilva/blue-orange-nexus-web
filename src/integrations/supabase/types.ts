@@ -198,7 +198,7 @@ export type Database = {
           email: string | null
           full_name: string | null
           id: string
-          role: string | null
+          role: Database["public"]["Enums"]["user_role"] | null
           updated_at: string | null
         }
         Insert: {
@@ -208,7 +208,7 @@ export type Database = {
           email?: string | null
           full_name?: string | null
           id: string
-          role?: string | null
+          role?: Database["public"]["Enums"]["user_role"] | null
           updated_at?: string | null
         }
         Update: {
@@ -218,10 +218,39 @@ export type Database = {
           email?: string | null
           full_name?: string | null
           id?: string
-          role?: string | null
+          role?: Database["public"]["Enums"]["user_role"] | null
           updated_at?: string | null
         }
         Relationships: []
+      }
+      user_articles: {
+        Row: {
+          article_id: string
+          created_at: string | null
+          id: string
+          user_id: string
+        }
+        Insert: {
+          article_id: string
+          created_at?: string | null
+          id?: string
+          user_id: string
+        }
+        Update: {
+          article_id?: string
+          created_at?: string | null
+          id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_articles_article_id_fkey"
+            columns: ["article_id"]
+            isOneToOne: false
+            referencedRelation: "articles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
@@ -249,6 +278,7 @@ export type Database = {
       admin_level: "root" | "admin"
       article_status: "draft" | "published" | "scheduled"
       request_status: "pending" | "approved" | "rejected"
+      user_role: "admin" | "author_admin" | "author"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -367,6 +397,7 @@ export const Constants = {
       admin_level: ["root", "admin"],
       article_status: ["draft", "published", "scheduled"],
       request_status: ["pending", "approved", "rejected"],
+      user_role: ["admin", "author_admin", "author"],
     },
   },
 } as const

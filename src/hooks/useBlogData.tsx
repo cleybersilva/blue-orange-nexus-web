@@ -60,14 +60,14 @@ export interface UserProfile {
   id: string;
   email?: string;
   full_name?: string;
-  role?: string;
+  role?: 'admin' | 'author_admin' | 'author';
   approved?: boolean;
   admin_level?: 'root' | 'admin';
   created_at: string;
   updated_at: string;
 }
 
-// Hook para buscar todos os artigos (incluindo rascunhos para admin)
+// Hook para buscar todos os artigos (com base no nível de permissão do usuário)
 export const useAllArticles = () => {
   return useQuery({
     queryKey: ['all-articles'],
@@ -82,6 +82,30 @@ export const useAllArticles = () => {
 
       if (error) throw error;
       return data as Article[];
+    }
+  });
+};
+
+// Hook para buscar artigos do usuário atual (para authors)
+export const useMyArticles = () => {
+  return useQuery({
+    queryKey: ['my-articles'],
+    queryFn: async () => {
+      const { data: user } = await supabase.auth.getUser();
+      if (!user.user) return [];
+
+      const { data, error } = await supabase
+        .from('user_articles')
+        .select(`
+          article:articles(
+            *,
+            author:authors(*)
+          )
+        `)
+        .eq('user_id', user.user.id);
+
+      if (error) throw error;
+      return data?.map(item => item.article).filter(Boolean) as Article[];
     }
   });
 };
@@ -165,13 +189,13 @@ export const useAuthors = () => {
   });
 };
 
-// Hook para verificar se o usuário é admin aprovado e seu nível
+// Hook atualizado para verificar permissões do usuário
 export const useIsApprovedAdmin = () => {
   return useQuery({
     queryKey: ['is-approved-admin'],
     queryFn: async () => {
       const { data: user } = await supabase.auth.getUser();
-      if (!user.user) return { isAdmin: false, isRoot: false, profile: null };
+      if (!user.user) return { isAdmin: false, isRoot: false, isAuthorAdmin: false, isAuthor: false, profile: null };
 
       const { data, error } = await supabase
         .from('profiles')
@@ -179,14 +203,18 @@ export const useIsApprovedAdmin = () => {
         .eq('id', user.user.id)
         .single();
 
-      if (error) return { isAdmin: false, isRoot: false, profile: null };
+      if (error) return { isAdmin: false, isRoot: false, isAuthorAdmin: false, isAuthor: false, profile: null };
       
       const isAdmin = data?.role === 'admin' && data?.approved === true;
       const isRoot = isAdmin && data?.admin_level === 'root';
+      const isAuthorAdmin = data?.role === 'author_admin' && data?.approved === true;
+      const isAuthor = data?.role === 'author' && data?.approved === true;
       
       return { 
         isAdmin, 
         isRoot, 
+        isAuthorAdmin,
+        isAuthor,
         profile: data as UserProfile
       };
     }
@@ -298,7 +326,7 @@ export const useMyAdminRequest = () => {
   });
 };
 
-// Mutation para criar artigo
+// Mutation para criar artigo (agora cria vínculo automático para authors)
 export const useCreateArticle = () => {
   const queryClient = useQueryClient();
   const { toast } = useToast();
@@ -316,6 +344,7 @@ export const useCreateArticle = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['all-articles'] });
+      queryClient.invalidateQueries({ queryKey: ['my-articles'] });
       queryClient.invalidateQueries({ queryKey: ['blog-articles'] });
       toast({
         title: "Artigo criado com sucesso!",
@@ -351,6 +380,7 @@ export const useUpdateArticle = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['all-articles'] });
+      queryClient.invalidateQueries({ queryKey: ['my-articles'] });
       queryClient.invalidateQueries({ queryKey: ['blog-articles'] });
       queryClient.invalidateQueries({ queryKey: ['article-edit'] });
       toast({
@@ -384,6 +414,7 @@ export const useDeleteArticle = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['all-articles'] });
+      queryClient.invalidateQueries({ queryKey: ['my-articles'] });
       queryClient.invalidateQueries({ queryKey: ['blog-articles'] });
       toast({
         title: "Artigo deletado com sucesso!",
@@ -433,13 +464,13 @@ export const useCreateAuthor = () => {
   });
 };
 
-// Mutation para criar solicitação de admin
+// Mutation para criar solicitação de admin com seleção de role
 export const useCreateAdminRequest = () => {
   const queryClient = useQueryClient();
   const { toast } = useToast();
 
   return useMutation({
-    mutationFn: async (requestData: { email: string; full_name: string; message?: string }) => {
+    mutationFn: async (requestData: { email: string; full_name: string; message?: string; role: 'admin' | 'author_admin' | 'author' }) => {
       const user = (await supabase.auth.getUser()).data.user;
       if (!user) throw new Error('Usuário não autenticado');
 
@@ -462,7 +493,7 @@ export const useCreateAdminRequest = () => {
       queryClient.invalidateQueries({ queryKey: ['admin-requests'] });
       toast({
         title: "Solicitação enviada!",
-        description: "Sua solicitação de acesso administrativo foi enviada. Aguarde a aprovação.",
+        description: "Sua solicitação de acesso foi enviada. Aguarde a aprovação.",
       });
     },
     onError: (error: any) => {
@@ -475,24 +506,54 @@ export const useCreateAdminRequest = () => {
   });
 };
 
-// Mutation para aprovar solicitação
+// Mutation para aprovar solicitação com role específico
 export const useApproveAdminRequest = () => {
   const queryClient = useQueryClient();
   const { toast } = useToast();
 
   return useMutation({
-    mutationFn: async (requestId: string) => {
-      const { error } = await supabase.rpc('approve_admin_request', {
-        request_id: requestId
-      });
+    mutationFn: async ({ requestId, role }: { requestId: string; role: 'admin' | 'author_admin' | 'author' }) => {
+      // Primeiro, buscar dados da solicitação
+      const { data: request, error: requestError } = await supabase
+        .from('admin_requests')
+        .select('*')
+        .eq('id', requestId)
+        .single();
 
-      if (error) throw error;
+      if (requestError) throw requestError;
+
+      // Atualizar status da solicitação
+      const { error: updateError } = await supabase
+        .from('admin_requests')
+        .update({ 
+          status: 'approved',
+          reviewed_at: new Date().toISOString(),
+          reviewed_by: (await supabase.auth.getUser()).data.user?.id
+        })
+        .eq('id', requestId);
+
+      if (updateError) throw updateError;
+
+      // Criar ou atualizar perfil com o role selecionado
+      const { error: profileError } = await supabase
+        .from('profiles')
+        .upsert({
+          id: request.user_id,
+          email: request.email,
+          full_name: request.full_name,
+          role: role,
+          approved: true,
+          updated_at: new Date().toISOString()
+        });
+
+      if (profileError) throw profileError;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['admin-requests'] });
+      queryClient.invalidateQueries({ queryKey: ['user-profiles'] });
       toast({
         title: "Solicitação aprovada!",
-        description: "O usuário agora tem acesso administrativo.",
+        description: "O usuário agora tem acesso com o role selecionado.",
       });
     },
     onError: (error: any) => {
@@ -598,6 +659,40 @@ export const useUpdateAdminLevel = () => {
     onError: (error: any) => {
       toast({
         title: "Erro ao atualizar nível",
+        description: error.message,
+        variant: "destructive",
+      });
+    }
+  });
+};
+
+// Mutation para alterar role do usuário
+export const useUpdateUserRole = () => {
+  const queryClient = useQueryClient();
+  const { toast } = useToast();
+
+  return useMutation({
+    mutationFn: async ({ userId, role }: { userId: string; role: 'admin' | 'author_admin' | 'author' }) => {
+      const { error } = await supabase
+        .from('profiles')
+        .update({ 
+          role: role,
+          updated_at: new Date().toISOString()
+        })
+        .eq('id', userId);
+
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['user-profiles'] });
+      toast({
+        title: "Role atualizado com sucesso!",
+        description: "O role do usuário foi alterado.",
+      });
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Erro ao atualizar role",
         description: error.message,
         variant: "destructive",
       });
