@@ -56,12 +56,12 @@ const Hero: React.FC = () => {
               <div className="relative bg-navy-light p-8 rounded-lg">
                 <div className="aspect-video rounded-lg overflow-hidden">
                   <img 
-                    src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                    src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
                     alt={t('hero.imageAlt')} 
                     className="w-full h-full object-cover"
                     onError={(e) => {
                       // Fallback image if the primary one fails
-                      e.currentTarget.src = "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80";
+                      e.currentTarget.src = "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80";
                     }}
                   />
                 </div>
