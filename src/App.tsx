@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -20,6 +21,12 @@ import DesignPage from "./pages/services/DesignPage";
 import PoliticalPage from "./pages/services/PoliticalPage";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfUse from "./pages/TermsOfUse";
+import IAMarketingDigital2025 from "./pages/blog/IAMarketingDigital2025";
+import TendenciasUXUI2025 from "./pages/blog/TendenciasUXUI2025";
+import CaseEcommerceIA from "./pages/blog/CaseEcommerceIA";
+import ChatbotsAutomacao from "./pages/blog/ChatbotsAutomacao";
+import MarketingDataDriven from "./pages/blog/MarketingDataDriven";
+import PWAFuturo2025 from "./pages/blog/PWAFuturo2025";
 import { CalendlyProvider } from "./components/CalendlyProvider";
 import { LanguageProvider } from "./components/LanguageProvider";
 import { useEffect } from "react";

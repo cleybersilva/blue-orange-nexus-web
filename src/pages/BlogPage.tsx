@@ -21,13 +21,14 @@ const BlogPage = () => {
   const blogPosts = [
     {
       id: 1,
-      title: "Como a IA está Revolucionando o Marketing Digital em 2024",
+      title: "Como a IA está Revolucionando o Marketing Digital em 2025",
       summary: "Descubra as principais tendências e ferramentas de inteligência artificial que estão transformando as estratégias de marketing digital.",
       category: "Inteligência Artificial",
       date: "15 Nov 2024",
-      author: "Equipe AgênciaDigital",
+      author: "Cleyber Silva",
       image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      readTime: "5 min"
+      readTime: "5 min",
+      link: "/blog/ia-no-marketing-digital-2025"
     },
     {
       id: 2,
@@ -35,9 +36,10 @@ const BlogPage = () => {
       summary: "Explore as principais tendências visuais e de usabilidade que definirão o design digital no próximo ano.",
       category: "UX/UI Design",
       date: "12 Nov 2024",
-      author: "Design Team",
+      author: "Cleyber Silva",
       image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      readTime: "7 min"
+      readTime: "7 min",
+      link: "/blog/tendencias-ux-ui-2025"
     },
     {
       id: 3,
@@ -45,9 +47,10 @@ const BlogPage = () => {
       summary: "Como implementamos soluções de inteligência artificial em um e-commerce e alcançamos resultados extraordinários.",
       category: "Cases de Sucesso",
       date: "08 Nov 2024",
-      author: "Equipe Técnica",
+      author: "Cleyber Silva",
       image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      readTime: "6 min"
+      readTime: "6 min",
+      link: "/blog/case-ecommerce-ia-vendas"
     },
     {
       id: 4,
@@ -55,9 +58,10 @@ const BlogPage = () => {
       summary: "Aprenda a implementar assistentes virtuais inteligentes para melhorar a experiência do cliente e reduzir custos.",
       category: "Automação",
       date: "05 Nov 2024",
-      author: "IA Team",
+      author: "Cleyber Silva",
       image: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      readTime: "4 min"
+      readTime: "4 min",
+      link: "/blog/chatbots-automacao-atendimento"
     },
     {
       id: 5,
@@ -65,9 +69,10 @@ const BlogPage = () => {
       summary: "Como utilizar análise de dados e machine learning para criar campanhas de marketing mais eficazes.",
       category: "Marketing Digital",
       date: "02 Nov 2024",
-      author: "Marketing Team",
+      author: "Cleyber Silva",
       image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      readTime: "8 min"
+      readTime: "8 min",
+      link: "/blog/marketing-digital-data-driven"
     },
     {
       id: 6,
@@ -75,9 +80,10 @@ const BlogPage = () => {
       summary: "Entenda como os Progressive Web Apps estão evoluindo e por que sua empresa deveria considerar essa tecnologia.",
       category: "Tecnologia",
       date: "30 Out 2024",
-      author: "Dev Team",
+      author: "Cleyber Silva",
       image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      readTime: "6 min"
+      readTime: "6 min",
+      link: "/blog/pwa-futuro-2025"
     }
   ];
 
@@ -155,7 +161,7 @@ const BlogPage = () => {
                   <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
                     <div className="flex items-center gap-2">
                       <User size={14} />
-                      <span>{post.author}</span>
+                      <span>Autor: {post.author}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Calendar size={14} />
@@ -163,13 +169,15 @@ const BlogPage = () => {
                     </div>
                   </div>
                   
-                  <Button 
-                    variant="outline" 
-                    className="w-full group-hover:bg-orange group-hover:text-white group-hover:border-orange transition-all duration-300"
-                  >
-                    Ler Artigo Completo
-                    <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
-                  </Button>
+                  <Link to={post.link}>
+                    <Button 
+                      variant="outline" 
+                      className="w-full group-hover:bg-orange group-hover:text-white group-hover:border-orange transition-all duration-300"
+                    >
+                      Ler Artigo Completo
+                      <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+                    </Button>
+                  </Link>
                 </div>
               </article>
             ))}
