@@ -1,7 +1,7 @@
 {
   "siteTitle": {
-    "agency": "Evolution",
-    "digital": "Digital Hub"
+    "agency": "Agency",
+    "digital": "Digital"
   },
   "nav": {
     "home": "Home",
@@ -101,7 +101,7 @@
     "subtitle": "What Our Clients Say",
     "description": "Don't just take our word for it. See what our clients have to say about working with us.",
     "quotes": {
-      "first": "Working with the Evolution Digital Hub team was an excellent experience. They delivered our e-commerce platform ahead of schedule and the results exceeded our expectations in terms of user engagement and sales conversion.",
+      "first": "Working with the Agency Digital team was an excellent experience. They delivered our e-commerce platform ahead of schedule and the results exceeded our expectations in terms of user engagement and sales conversion.",
       "second": "The website redesign completely transformed our brand image. We've seen a 40% increase in inquiries and our bounce rate has significantly decreased. Highly recommend their services!",
       "third": "Their mobile app development skills are unmatched. Our delivery app has received outstanding reviews on both App Store and Google Play. The user experience is intuitive and the performance is flawless."
     },
@@ -196,7 +196,7 @@
     "lastUpdated": "Last Updated",
     "introduction": {
       "title": "Introduction",
-      "p1": "At Evolution Digital Hub, we respect your privacy and are committed to protecting your personal data. This privacy policy will inform you how we look after your personal data when you visit our website and tell you about your privacy rights and how the law protects you.",
+      "p1": "At Agency Digital, we respect your privacy and are committed to protecting your personal data. This privacy policy will inform you how we look after your personal data when you visit our website and tell you about your privacy rights and how the law protects you.",
       "p2": "Please read this privacy policy carefully before using our services."
     },
     "dataCollection": {
@@ -256,7 +256,7 @@
     "lastUpdated": "Last Updated",
     "introduction": {
       "title": "Introduction",
-      "p1": "Welcome to Evolution Digital Hub. These Terms of Use govern your use of our website and the services we provide.",
+      "p1": "Welcome to Agency Digital. These Terms of Use govern your use of our website and the services we provide.",
       "p2": "By accessing or using our website, you agree to be bound by these Terms. If you disagree with any part of the terms, then you may not access our services."
     },
     "use": {
@@ -280,9 +280,9 @@
     },
     "intellectual": {
       "title": "Intellectual Property",
-      "p1": "Our services and all content included on our website, such as text, graphics, logos, button icons, images, audio clips, digital downloads, data compilations, and software, are the property of Evolution Digital Hub or its content suppliers and protected by international copyright laws.",
+      "p1": "Our services and all content included on our website, such as text, graphics, logos, button icons, images, audio clips, digital downloads, data compilations, and software, are the property of Agency Digital or its content suppliers and protected by international copyright laws.",
       "items": {
-        "copyright": "Copyright: All content included on our website is the property of Evolution Digital Hub or its content suppliers and protected by international copyright laws.",
+        "copyright": "Copyright: All content included on our website is the property of Agency Digital or its content suppliers and protected by international copyright laws.",
         "trademarks": "Trademarks: All trademarks, service marks, and trade names used on our website are the property of their respective owners.",
         "use": "Use of Content: You may not use, reproduce, distribute, or create derivative works from any content on our website without our prior written consent."
       }
@@ -304,8 +304,8 @@
     },
     "liability": {
       "title": "Limitation of Liability",
-      "p1": "In no event shall Evolution Digital Hub, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from your access to or use of or inability to access or use our services.",
-      "p2": "To the maximum extent permitted by applicable law, the total liability of Evolution Digital Hub and its affiliates, for any claims under these terms, including for any implied warranties, is limited to the amount you paid us to use our services."
+      "p1": "In no event shall Agency Digital, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from your access to or use of or inability to access or use our services.",
+      "p2": "To the maximum extent permitted by applicable law, the total liability of Agency Digital and its affiliates, for any claims under these terms, including for any implied warranties, is limited to the amount you paid us to use our services."
     },
     "changes": {
       "title": "Changes to These Terms",
