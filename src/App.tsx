@@ -11,6 +11,7 @@ import Agendar from "./pages/Agendar";
 import ProjectsPage from "./pages/ProjectsPage";
 import ServicosPage from "./pages/ServicosPage";
 import BlogPage from "./pages/BlogPage";
+import BlogArticlePage from "./pages/BlogArticlePage";
 import WebsitesPage from "./pages/services/WebsitesPage";
 import EcommercePage from "./pages/services/EcommercePage";
 import AppsPage from "./pages/services/AppsPage";
@@ -79,8 +80,16 @@ const AppWithLanguage = () => {
             <Route path="/servicos/design" element={<DesignPage />} />
             <Route path="/servicos/politicas" element={<PoliticalPage />} />
             <Route path="/blog" element={<BlogPage />} />
+            <Route path="/blog/:slug" element={<BlogArticlePage />} />
             <Route path="/politica-privacidade" element={<PrivacyPolicy />} />
             <Route path="/termos-uso" element={<TermsOfUse />} />
+            {/* Legacy routes for backward compatibility */}
+            <Route path="/blog/ia-no-marketing-digital-2025" element={<IAMarketingDigital2025 />} />
+            <Route path="/blog/tendencias-ux-ui-2025" element={<TendenciasUXUI2025 />} />
+            <Route path="/blog/case-ecommerce-ia-vendas" element={<CaseEcommerceIA />} />
+            <Route path="/blog/chatbots-automacao-atendimento" element={<ChatbotsAutomacao />} />
+            <Route path="/blog/marketing-digital-data-driven" element={<MarketingDataDriven />} />
+            <Route path="/blog/pwa-futuro-2025" element={<PWAFuturo2025 />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

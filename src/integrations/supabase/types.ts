@@ -9,7 +9,98 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      articles: {
+        Row: {
+          author_id: string
+          category: string | null
+          content: string
+          cover_image_url: string | null
+          created_at: string | null
+          id: string
+          published_at: string | null
+          read_time: number | null
+          scheduled_at: string | null
+          slug: string
+          status: Database["public"]["Enums"]["article_status"] | null
+          subtitle: string | null
+          summary: string
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          author_id: string
+          category?: string | null
+          content: string
+          cover_image_url?: string | null
+          created_at?: string | null
+          id?: string
+          published_at?: string | null
+          read_time?: number | null
+          scheduled_at?: string | null
+          slug: string
+          status?: Database["public"]["Enums"]["article_status"] | null
+          subtitle?: string | null
+          summary: string
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          author_id?: string
+          category?: string | null
+          content?: string
+          cover_image_url?: string | null
+          created_at?: string | null
+          id?: string
+          published_at?: string | null
+          read_time?: number | null
+          scheduled_at?: string | null
+          slug?: string
+          status?: Database["public"]["Enums"]["article_status"] | null
+          subtitle?: string | null
+          summary?: string
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "articles_author_id_fkey"
+            columns: ["author_id"]
+            isOneToOne: false
+            referencedRelation: "authors"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      authors: {
+        Row: {
+          avatar_url: string | null
+          bio: string | null
+          created_at: string | null
+          id: string
+          name: string
+          social_links: Json | null
+          updated_at: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string | null
+          id?: string
+          name: string
+          social_links?: Json | null
+          updated_at?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string | null
+          id?: string
+          name?: string
+          social_links?: Json | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -18,7 +109,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      article_status: "draft" | "published" | "scheduled"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -133,6 +224,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      article_status: ["draft", "published", "scheduled"],
+    },
   },
 } as const

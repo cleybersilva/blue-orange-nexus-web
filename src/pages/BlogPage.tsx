@@ -4,10 +4,13 @@ import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
-import { Calendar, User, Tag, ArrowRight } from 'lucide-react';
+import { Calendar, User, Tag, ArrowRight, Loader2 } from 'lucide-react';
+import { useBlogArticles } from '@/hooks/useBlogData';
+import { format } from 'date-fns';
 
 const BlogPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('Todos');
+  const { data: articles, isLoading, error } = useBlogArticles();
 
   const categories = [
     'Todos',
@@ -19,78 +22,42 @@ const BlogPage = () => {
     'Automação'
   ];
 
-  const blogPosts = [
-    {
-      id: 1,
-      title: "Como a IA está Revolucionando o Marketing Digital em 2025",
-      summary: "Descubra as principais tendências e ferramentas de inteligência artificial que estão transformando as estratégias de marketing digital.",
-      category: "Inteligência Artificial",
-      date: "15 Nov 2024",
-      author: "Cleyber Silva",
-      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      readTime: "5 min",
-      link: "/blog/ia-no-marketing-digital-2025"
-    },
-    {
-      id: 2,
-      title: "Tendências de UX/UI Design para 2025: O Futuro da Experiência Digital",
-      summary: "Explore as principais tendências visuais e de usabilidade que definirão o design digital no próximo ano.",
-      category: "UX/UI Design",
-      date: "12 Nov 2024",
-      author: "Cleyber Silva",
-      image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      readTime: "7 min",
-      link: "/blog/tendencias-ux-ui-2025"
-    },
-    {
-      id: 3,
-      title: "Case de Sucesso: E-commerce com IA Aumenta Vendas em 300%",
-      summary: "Como implementamos soluções de inteligência artificial em um e-commerce e alcançamos resultados extraordinários.",
-      category: "Cases de Sucesso",
-      date: "08 Nov 2024",
-      author: "Cleyber Silva",
-      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      readTime: "6 min",
-      link: "/blog/case-ecommerce-ia-vendas"
-    },
-    {
-      id: 4,
-      title: "Automação com Chatbots: Como Otimizar o Atendimento ao Cliente",
-      summary: "Aprenda a implementar assistentes virtuais inteligentes para melhorar a experiência do cliente e reduzir custos.",
-      category: "Automação",
-      date: "05 Nov 2024",
-      author: "Cleyber Silva",
-      image: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      readTime: "4 min",
-      link: "/blog/chatbots-automacao-atendimento"
-    },
-    {
-      id: 5,
-      title: "Marketing Digital Data-Driven: Estratégias Baseadas em Dados",
-      summary: "Como utilizar análise de dados e machine learning para criar campanhas de marketing mais eficazes.",
-      category: "Marketing Digital",
-      date: "02 Nov 2024",
-      author: "Cleyber Silva",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      readTime: "8 min",
-      link: "/blog/marketing-digital-data-driven"
-    },
-    {
-      id: 6,
-      title: "O Futuro dos PWAs: Progressive Web Apps em 2025",
-      summary: "Entenda como os Progressive Web Apps estão evoluindo e por que sua empresa deveria considerar essa tecnologia.",
-      category: "Tecnologia",
-      date: "30 Out 2024",
-      author: "Cleyber Silva",
-      image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      readTime: "6 min",
-      link: "/blog/pwa-futuro-2025"
-    }
-  ];
+  const filteredArticles = selectedCategory === 'Todos' 
+    ? articles || []
+    : articles?.filter(article => article.category === selectedCategory) || [];
 
-  const filteredPosts = selectedCategory === 'Todos' 
-    ? blogPosts 
-    : blogPosts.filter(post => post.category === selectedCategory);
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <Header />
+        <main className="pt-32 pb-20">
+          <div className="container-custom flex items-center justify-center">
+            <div className="text-center">
+              <Loader2 className="w-8 h-8 animate-spin mx-auto mb-4 text-orange" />
+              <p className="text-gray-600">Carregando artigos...</p>
+            </div>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <Header />
+        <main className="pt-32 pb-20">
+          <div className="container-custom">
+            <div className="text-center">
+              <p className="text-red-600">Erro ao carregar artigos. Tente novamente mais tarde.</p>
+            </div>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -126,15 +93,15 @@ const BlogPage = () => {
 
           {/* Blog Posts Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredPosts.map((post) => (
+            {filteredArticles.map((article) => (
               <article
-                key={post.id}
+                key={article.id}
                 className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group"
               >
                 <div className="aspect-video overflow-hidden">
                   <img 
-                    src={post.image} 
-                    alt={post.title}
+                    src={article.cover_image_url || "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"} 
+                    alt={article.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     onError={(e) => {
                       e.currentTarget.src = "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80";
@@ -146,31 +113,31 @@ const BlogPage = () => {
                   <div className="flex items-center gap-2 mb-3">
                     <span className="inline-block bg-orange/10 text-orange px-2 py-1 rounded-full text-xs font-medium">
                       <Tag size={12} className="inline mr-1" />
-                      {post.category}
+                      {article.category}
                     </span>
-                    <span className="text-gray-500 text-xs">{post.readTime} de leitura</span>
+                    <span className="text-gray-500 text-xs">{article.read_time} min de leitura</span>
                   </div>
                   
                   <h2 className="text-xl font-bold mb-3 text-navy group-hover:text-orange transition-colors duration-300 line-clamp-2">
-                    {post.title}
+                    {article.title}
                   </h2>
                   
                   <p className="text-gray-600 mb-4 text-sm leading-relaxed line-clamp-3">
-                    {post.summary}
+                    {article.summary}
                   </p>
                   
                   <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
                     <div className="flex items-center gap-2">
                       <User size={14} />
-                      <span>Autor: {post.author}</span>
+                      <span>Por: {article.author?.name}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Calendar size={14} />
-                      <span>{post.date}</span>
+                      <span>{article.published_at ? format(new Date(article.published_at), 'dd MMM yyyy') : ''}</span>
                     </div>
                   </div>
                   
-                  <Link to={post.link}>
+                  <Link to={`/blog/${article.slug}`}>
                     <Button 
                       variant="outline" 
                       className="w-full group-hover:bg-orange group-hover:text-white group-hover:border-orange transition-all duration-300"
@@ -183,6 +150,12 @@ const BlogPage = () => {
               </article>
             ))}
           </div>
+
+          {filteredArticles.length === 0 && (
+            <div className="text-center py-12">
+              <p className="text-gray-500">Nenhum artigo encontrado nesta categoria.</p>
+            </div>
+          )}
 
           {/* Newsletter CTA */}
           <div className="bg-navy rounded-2xl p-12 mt-16 text-center">
