@@ -10,6 +10,7 @@ interface RoleSelectorProps {
   userRole?: 'admin' | 'author_admin' | 'author';
   adminLevel?: 'root' | 'admin';
   disabled?: boolean;
+  showAsSelector?: boolean;
 }
 
 const RoleSelector: React.FC<RoleSelectorProps> = ({ 
@@ -17,7 +18,8 @@ const RoleSelector: React.FC<RoleSelectorProps> = ({
   onRoleChange, 
   userRole, 
   adminLevel,
-  disabled = false 
+  disabled = false,
+  showAsSelector = true
 }) => {
   const getRoleIcon = (role: string) => {
     switch (role) {
@@ -70,12 +72,14 @@ const RoleSelector: React.FC<RoleSelectorProps> = ({
       // Author admin pode atribuir apenas author
       return ['author'];
     }
-    return [];
+    // Para solicitações de acesso, mostrar todas as opções
+    return ['admin', 'author_admin', 'author'];
   };
 
   const availableRoles = getAvailableRoles();
 
-  if (currentRole && !disabled) {
+  // Exibir como badge quando não é seletor
+  if (currentRole && !showAsSelector) {
     return (
       <div className="flex items-center gap-2">
         <Badge variant="outline" className="flex items-center gap-1">

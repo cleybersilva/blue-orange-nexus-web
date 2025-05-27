@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -11,12 +10,14 @@ import { Badge } from '@/components/ui/badge';
 import { useAuth } from '@/hooks/useAuth';
 import { useIsApprovedAdmin, useMyAdminRequest, useCreateAdminRequest } from '@/hooks/useBlogData';
 import { Loader2, Eye, EyeOff, Clock, CheckCircle, XCircle } from 'lucide-react';
+import RoleSelector from '@/components/admin/RoleSelector';
 
 const AdminLoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [fullName, setFullName] = useState('');
   const [message, setMessage] = useState('');
+  const [requestedRole, setRequestedRole] = useState<'admin' | 'author_admin' | 'author'>('author');
   const [isSignUp, setIsSignUp] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
@@ -71,7 +72,8 @@ const AdminLoginPage = () => {
       await createAdminRequest.mutateAsync({
         email: user.email || '',
         full_name: fullName || user.user_metadata?.full_name || '',
-        message
+        message,
+        role: requestedRole
       });
       setShowAccessRequest(false);
     } catch (error) {
@@ -233,6 +235,17 @@ const AdminLoginPage = () => {
                       onChange={(e) => setFullName(e.target.value)}
                       required
                       placeholder="Seu nome completo"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="role">Tipo de Acesso Solicitado</Label>
+                    <RoleSelector
+                      currentRole={requestedRole}
+                      onRoleChange={(role) => setRequestedRole(role)}
+                      userRole="admin"
+                      adminLevel="root"
+                      disabled={false}
                     />
                   </div>
 
