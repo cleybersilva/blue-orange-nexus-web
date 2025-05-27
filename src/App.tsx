@@ -12,6 +12,8 @@ import ProjectsPage from "./pages/ProjectsPage";
 import ServicosPage from "./pages/ServicosPage";
 import BlogPage from "./pages/BlogPage";
 import BlogArticlePage from "./pages/BlogArticlePage";
+import AdminLoginPage from "./pages/AdminLoginPage";
+import AdminDashboard from "./pages/AdminDashboard";
 import WebsitesPage from "./pages/services/WebsitesPage";
 import EcommercePage from "./pages/services/EcommercePage";
 import AppsPage from "./pages/services/AppsPage";
@@ -30,6 +32,7 @@ import MarketingDataDriven from "./pages/blog/MarketingDataDriven";
 import PWAFuturo2025 from "./pages/blog/PWAFuturo2025";
 import { CalendlyProvider } from "./components/CalendlyProvider";
 import { LanguageProvider } from "./components/LanguageProvider";
+import { AuthProvider } from "./hooks/useAuth";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -62,41 +65,45 @@ const LanguageHandler = () => {
 const AppWithLanguage = () => {
   return (
     <LanguageProvider>
-      <BrowserRouter>
-        <CalendlyProvider>
-          <LanguageHandler />
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/sobre-nos" element={<SobreNos />} />
-            <Route path="/agendar" element={<Agendar />} />
-            <Route path="/projetos" element={<ProjectsPage />} />
-            <Route path="/servicos" element={<ServicosPage />} />
-            <Route path="/servicos/websites" element={<WebsitesPage />} />
-            <Route path="/servicos/ecommerce" element={<EcommercePage />} />
-            <Route path="/servicos/aplicativos" element={<AppsPage />} />
-            <Route path="/servicos/lms" element={<LMSPage />} />
-            <Route path="/servicos/marketing" element={<MarketingPage />} />
-            <Route path="/servicos/midias-sociais" element={<SocialMediaPage />} />
-            <Route path="/servicos/design" element={<DesignPage />} />
-            <Route path="/servicos/politicas" element={<PoliticalPage />} />
-            <Route path="/blog" element={<BlogPage />} />
-            <Route path="/blog/:slug" element={<BlogArticlePage />} />
-            <Route path="/politica-privacidade" element={<PrivacyPolicy />} />
-            <Route path="/termos-uso" element={<TermsOfUse />} />
-            {/* Legacy routes for backward compatibility */}
-            <Route path="/blog/ia-no-marketing-digital-2025" element={<IAMarketingDigital2025 />} />
-            <Route path="/blog/tendencias-ux-ui-2025" element={<TendenciasUXUI2025 />} />
-            <Route path="/blog/case-ecommerce-ia-vendas" element={<CaseEcommerceIA />} />
-            <Route path="/blog/chatbots-automacao-atendimento" element={<ChatbotsAutomacao />} />
-            <Route path="/blog/marketing-digital-data-driven" element={<MarketingDataDriven />} />
-            <Route path="/blog/pwa-futuro-2025" element={<PWAFuturo2025 />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          <Toaster />
-          <Sonner />
-        </CalendlyProvider>
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <CalendlyProvider>
+            <LanguageHandler />
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/sobre-nos" element={<SobreNos />} />
+              <Route path="/agendar" element={<Agendar />} />
+              <Route path="/projetos" element={<ProjectsPage />} />
+              <Route path="/servicos" element={<ServicosPage />} />
+              <Route path="/servicos/websites" element={<WebsitesPage />} />
+              <Route path="/servicos/ecommerce" element={<EcommercePage />} />
+              <Route path="/servicos/aplicativos" element={<AppsPage />} />
+              <Route path="/servicos/lms" element={<LMSPage />} />
+              <Route path="/servicos/marketing" element={<MarketingPage />} />
+              <Route path="/servicos/midias-sociais" element={<SocialMediaPage />} />
+              <Route path="/servicos/design" element={<DesignPage />} />
+              <Route path="/servicos/politicas" element={<PoliticalPage />} />
+              <Route path="/blog" element={<BlogPage />} />
+              <Route path="/blog/:slug" element={<BlogArticlePage />} />
+              <Route path="/admin/login" element={<AdminLoginPage />} />
+              <Route path="/admin/blog" element={<AdminDashboard />} />
+              <Route path="/politica-privacidade" element={<PrivacyPolicy />} />
+              <Route path="/termos-uso" element={<TermsOfUse />} />
+              {/* Legacy routes for backward compatibility */}
+              <Route path="/blog/ia-no-marketing-digital-2025" element={<IAMarketingDigital2025 />} />
+              <Route path="/blog/tendencias-ux-ui-2025" element={<TendenciasUXUI2025 />} />
+              <Route path="/blog/case-ecommerce-ia-vendas" element={<CaseEcommerceIA />} />
+              <Route path="/blog/chatbots-automacao-atendimento" element={<ChatbotsAutomacao />} />
+              <Route path="/blog/marketing-digital-data-driven" element={<MarketingDataDriven />} />
+              <Route path="/blog/pwa-futuro-2025" element={<PWAFuturo2025 />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+            <Toaster />
+            <Sonner />
+          </CalendlyProvider>
+        </BrowserRouter>
+      </AuthProvider>
     </LanguageProvider>
   );
 };
