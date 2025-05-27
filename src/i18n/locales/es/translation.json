@@ -17,7 +17,7 @@
     "imageAlt": "Desarrollo de sitio web responsivo"
   },
   "footer": {
-    "about": "Sobre Agencia Digital",
+    "about": "Sobre Evolution Digital Hub",
     "aboutText": "Somos una agencia digital completa, especializada en transformar ideas en resultados a través de soluciones digitales innovadoras.",
     "links": "Enlaces rápidos",
     "contact": "Contáctanos",
@@ -225,7 +225,7 @@
     "title": "Lo que dicen nuestros clientes",
     "subtitle": "La satisfacción de nuestros clientes es nuestro mayor indicador de éxito. Mira lo que tienen que decir sobre nuestras soluciones.",
     "quotes": {
-      "first": "El equipo superó todas nuestras expectativas. Nuestro sitio web fue entregado a tiempo y con un diseño excepcional que refleja perfectamente nuestra marca.",
+      "first": "El equipo de Evolution Digital Hub superó todas nuestras expectativas. Nuestro sitio web fue entregado a tiempo y con un diseño excepcional que refleja perfectamente nuestra marca.",
       "second": "Nuestra tienda en línea aumentó las ventas en un 150% después del rediseño y la implementación de las estrategias de marketing sugeridas por el equipo.",
       "third": "La aplicación desarrollada revolucionó la forma en que nos comunicamos con nuestros clientes. Interfaz intuitiva y sin errores."
     },
@@ -235,7 +235,10 @@
       "product": "Gerente de Producto"
     }
   },
-  "siteTitle": "AGENCIA DIGITAL",
+  "siteTitle": {
+    "agency": "Evolution",
+    "digital": "Digital Hub"
+  },
   "teamMembers": {
     "seo": "SEO y AI Scientist",
     "seoBio": "Especialista en optimización para motores de búsqueda y aplicaciones de inteligencia artificial para negocios digitales.",
