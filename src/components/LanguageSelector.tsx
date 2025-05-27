@@ -7,7 +7,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { Globe } from 'lucide-react';
 import { toast } from "@/components/ui/use-toast";
 import { useTranslation } from 'react-i18next';
 import { useLanguage } from './LanguageProvider';
@@ -53,8 +52,7 @@ const LanguageSelector = () => {
           className="h-8 flex items-center gap-2 px-2 hover:bg-white/10 text-white transition-colors duration-300"
           aria-label="Select language"
         >
-          <Globe className="h-4 w-4" />
-          <span className="text-sm hidden sm:inline">
+          <span className="text-lg">
             {getCurrentLanguageFlag()}
           </span>
         </Button>
