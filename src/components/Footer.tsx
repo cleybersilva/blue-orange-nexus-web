@@ -214,6 +214,15 @@ const Footer: React.FC = () => {
                   {t('nav.schedule')}
                 </a>
               </li>
+              <li>
+                <Link 
+                  to="/admin/login" 
+                  className="text-gray-300 hover:text-orange transition-colors flex items-center"
+                >
+                  <ChevronRight size={16} className="mr-2" /> 
+                  Painel Administrativo
+                </Link>
+              </li>
             </ul>
           </div>
 
