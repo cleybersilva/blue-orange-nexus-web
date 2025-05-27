@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -12,6 +11,13 @@ import ProjectsPage from "./pages/ProjectsPage";
 import ServicosPage from "./pages/ServicosPage";
 import BlogPage from "./pages/BlogPage";
 import WebsitesPage from "./pages/services/WebsitesPage";
+import EcommercePage from "./pages/services/EcommercePage";
+import AppsPage from "./pages/services/AppsPage";
+import LMSPage from "./pages/services/LMSPage";
+import MarketingPage from "./pages/services/MarketingPage";
+import SocialMediaPage from "./pages/services/SocialMediaPage";
+import DesignPage from "./pages/services/DesignPage";
+import PoliticalPage from "./pages/services/PoliticalPage";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfUse from "./pages/TermsOfUse";
 import { CalendlyProvider } from "./components/CalendlyProvider";
@@ -58,6 +64,13 @@ const AppWithLanguage = () => {
             <Route path="/projetos" element={<ProjectsPage />} />
             <Route path="/servicos" element={<ServicosPage />} />
             <Route path="/servicos/websites" element={<WebsitesPage />} />
+            <Route path="/servicos/ecommerce" element={<EcommercePage />} />
+            <Route path="/servicos/aplicativos" element={<AppsPage />} />
+            <Route path="/servicos/lms" element={<LMSPage />} />
+            <Route path="/servicos/marketing" element={<MarketingPage />} />
+            <Route path="/servicos/midias-sociais" element={<SocialMediaPage />} />
+            <Route path="/servicos/design" element={<DesignPage />} />
+            <Route path="/servicos/politicas" element={<PoliticalPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/politica-privacidade" element={<PrivacyPolicy />} />
             <Route path="/termos-uso" element={<TermsOfUse />} />
