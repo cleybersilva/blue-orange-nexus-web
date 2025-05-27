@@ -4,15 +4,18 @@ import { useNavigate, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useAuth } from '@/hooks/useAuth';
-import { useAllArticles, useAuthors, useDeleteArticle } from '@/hooks/useBlogData';
-import { Loader2, Plus, Edit, Eye, Users, FileText, LogOut, Trash2 } from 'lucide-react';
+import { useAllArticles, useAuthors, useDeleteArticle, useIsApprovedAdmin, useAdminRequests } from '@/hooks/useBlogData';
+import { Loader2, Plus, Edit, Eye, Users, FileText, LogOut, Trash2, UserCheck, Clock } from 'lucide-react';
 import { format } from 'date-fns';
 
 const AdminDashboard = () => {
   const { user, signOut, loading: authLoading } = useAuth();
   const { data: articles, isLoading: articlesLoading } = useAllArticles();
   const { data: authors, isLoading: authorsLoading } = useAuthors();
+  const { data: isApprovedAdmin, isLoading: checkingAdmin } = useIsApprovedAdmin();
+  const { data: adminRequests } = useAdminRequests();
   const deleteArticle = useDeleteArticle();
   const navigate = useNavigate();
 
@@ -22,10 +25,40 @@ const AdminDashboard = () => {
     }
   }, [user, authLoading, navigate]);
 
-  if (authLoading || !user) {
+  useEffect(() => {
+    if (user && !checkingAdmin && !isApprovedAdmin) {
+      navigate('/admin/login');
+    }
+  }, [user, isApprovedAdmin, checkingAdmin, navigate]);
+
+  if (authLoading || checkingAdmin || !user) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <Loader2 className="w-8 h-8 animate-spin text-orange" />
+      </div>
+    );
+  }
+
+  if (!isApprovedAdmin) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+        <Card className="w-full max-w-md">
+          <CardHeader>
+            <CardTitle className="text-center">Acesso Não Autorizado</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Alert>
+              <AlertDescription>
+                Você não tem permissão para acessar o painel administrativo. Entre em contato com o administrador.
+              </AlertDescription>
+            </Alert>
+            <div className="text-center mt-4">
+              <Link to="/" className="text-gray-600 hover:text-orange transition-colors">
+                ← Voltar ao site
+              </Link>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     );
   }
@@ -43,6 +76,7 @@ const AdminDashboard = () => {
 
   const publishedArticles = articles?.filter(article => article.status === 'published') || [];
   const draftArticles = articles?.filter(article => article.status === 'draft') || [];
+  const pendingRequests = adminRequests?.filter(req => req.status === 'pending') || [];
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -77,8 +111,26 @@ const AdminDashboard = () => {
           <p className="text-gray-600">Gerencie artigos, autores e conteúdo do blog</p>
         </div>
 
+        {/* Alerta de solicitações pendentes */}
+        {pendingRequests.length > 0 && (
+          <Alert className="mb-6 border-orange bg-orange-50">
+            <Clock className="h-4 w-4 text-orange" />
+            <AlertDescription className="flex items-center justify-between">
+              <span>Você tem {pendingRequests.length} solicitação(ões) de acesso pendente(s)</span>
+              <Button 
+                size="sm" 
+                variant="outline" 
+                onClick={() => navigate('/admin/requests')}
+                className="ml-4"
+              >
+                Ver Solicitações
+              </Button>
+            </AlertDescription>
+          </Alert>
+        )}
+
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-6 mb-8">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Total de Artigos</CardTitle>
@@ -118,6 +170,16 @@ const AdminDashboard = () => {
               <div className="text-2xl font-bold">{authors?.length || 0}</div>
             </CardContent>
           </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Solicitações</CardTitle>
+              <UserCheck className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-orange">{pendingRequests.length}</div>
+            </CardContent>
+          </Card>
         </div>
 
         {/* Quick Actions */}
@@ -142,6 +204,19 @@ const AdminDashboard = () => {
               >
                 <Users size={16} className="mr-2" />
                 Gerenciar Autores
+              </Button>
+              <Button 
+                variant="outline" 
+                className="w-full" 
+                onClick={() => navigate('/admin/requests')}
+              >
+                <UserCheck size={16} className="mr-2" />
+                Gerenciar Solicitações
+                {pendingRequests.length > 0 && (
+                  <Badge variant="secondary" className="ml-2">
+                    {pendingRequests.length}
+                  </Badge>
+                )}
               </Button>
               <Button variant="outline" className="w-full" onClick={() => navigate('/blog')}>
                 <Eye size={16} className="mr-2" />

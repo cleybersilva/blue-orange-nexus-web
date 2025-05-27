@@ -9,6 +9,48 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      admin_requests: {
+        Row: {
+          created_at: string | null
+          email: string
+          full_name: string
+          id: string
+          message: string | null
+          requested_at: string | null
+          reviewed_at: string | null
+          reviewed_by: string | null
+          status: Database["public"]["Enums"]["request_status"] | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          email: string
+          full_name: string
+          id?: string
+          message?: string | null
+          requested_at?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: Database["public"]["Enums"]["request_status"] | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          email?: string
+          full_name?: string
+          id?: string
+          message?: string | null
+          requested_at?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: Database["public"]["Enums"]["request_status"] | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       articles: {
         Row: {
           author_id: string
@@ -103,6 +145,7 @@ export type Database = {
       }
       profiles: {
         Row: {
+          approved: boolean | null
           created_at: string | null
           email: string | null
           full_name: string | null
@@ -111,6 +154,7 @@ export type Database = {
           updated_at: string | null
         }
         Insert: {
+          approved?: boolean | null
           created_at?: string | null
           email?: string | null
           full_name?: string | null
@@ -119,6 +163,7 @@ export type Database = {
           updated_at?: string | null
         }
         Update: {
+          approved?: boolean | null
           created_at?: string | null
           email?: string | null
           full_name?: string | null
@@ -133,10 +178,14 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      approve_admin_request: {
+        Args: { request_id: string }
+        Returns: undefined
+      }
     }
     Enums: {
       article_status: "draft" | "published" | "scheduled"
+      request_status: "pending" | "approved" | "rejected"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -253,6 +302,7 @@ export const Constants = {
   public: {
     Enums: {
       article_status: ["draft", "published", "scheduled"],
+      request_status: ["pending", "approved", "rejected"],
     },
   },
 } as const

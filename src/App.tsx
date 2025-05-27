@@ -15,6 +15,7 @@ import BlogArticlePage from "./pages/BlogArticlePage";
 import AdminLoginPage from "./pages/AdminLoginPage";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminAuthorsPage from "./pages/AdminAuthorsPage";
+import AdminRequestsPage from "./pages/AdminRequestsPage";
 import ArticleEditor from "./components/admin/ArticleEditor";
 import WebsitesPage from "./pages/services/WebsitesPage";
 import EcommercePage from "./pages/services/EcommercePage";
@@ -92,6 +93,7 @@ const AppWithLanguage = () => {
               <Route path="/admin/login" element={<AdminLoginPage />} />
               <Route path="/admin/blog" element={<AdminDashboard />} />
               <Route path="/admin/authors" element={<AdminAuthorsPage />} />
+              <Route path="/admin/requests" element={<AdminRequestsPage />} />
               <Route path="/admin/articles/new" element={<ArticleEditor />} />
               <Route path="/admin/articles/edit/:id" element={<ArticleEditor />} />
               
