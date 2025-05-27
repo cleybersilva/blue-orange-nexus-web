@@ -38,9 +38,8 @@ const LanguageSelector = () => {
     console.log('Language changed to:', langCode);
   };
 
-  const getCurrentLanguageFlag = () => {
-    const language = languages.find(lang => lang.code === currentLanguage);
-    return language?.flag || '🇧🇷';
+  const getCurrentLanguage = () => {
+    return languages.find(lang => lang.code === currentLanguage);
   };
 
   return (
@@ -49,28 +48,31 @@ const LanguageSelector = () => {
         <Button 
           variant="ghost" 
           size="sm" 
-          className="h-8 flex items-center gap-2 px-2 hover:bg-white/10 text-white transition-colors duration-300"
+          className="h-10 flex items-center gap-3 px-3 hover:bg-white/10 text-white transition-colors duration-300 border border-orange/30 hover:border-orange"
           aria-label="Select language"
         >
-          <span className="text-lg">
-            {getCurrentLanguageFlag()}
+          <span className="text-xl">
+            {getCurrentLanguage()?.flag}
+          </span>
+          <span className="text-sm font-medium">
+            {getCurrentLanguage()?.name}
           </span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent 
         align="end" 
-        className="bg-navy border-navy animate-in fade-in-80 data-[side=bottom]:slide-in-from-top-2"
+        className="bg-navy border-orange/20 animate-in fade-in-80 data-[side=bottom]:slide-in-from-top-2 min-w-[220px]"
       >
         {languages.map((language) => (
           <DropdownMenuItem
             key={language.code}
             onClick={() => handleLanguageChange(language.code)}
-            className={`flex items-center gap-2 cursor-pointer text-orange hover:bg-navy-light transition-colors duration-200 ${
-              currentLanguage === language.code ? 'bg-navy-light font-medium' : ''
+            className={`flex items-center gap-3 cursor-pointer text-white hover:bg-navy-light transition-colors duration-200 py-3 px-4 ${
+              currentLanguage === language.code ? 'bg-orange/20 border-l-4 border-orange' : ''
             }`}
           >
-            <span className="text-base">{language.flag}</span>
-            <span>{language.name}</span>
+            <span className="text-lg">{language.flag}</span>
+            <span className="text-sm">{language.name}</span>
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>
