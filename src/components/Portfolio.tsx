@@ -3,6 +3,7 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { ExternalLink } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
 interface ProjectProps {
   title: string;
@@ -38,7 +39,7 @@ const ProjectCard: React.FC<ProjectProps> = ({ title, category, image, link }) =
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-white hover:text-orange transition-colors"
             >
-              <span>{t('projects.viewProject')}</span> <ExternalLink size={16} />
+              <span>Ver Projeto</span> <ExternalLink size={16} />
             </a>
           </div>
         </div>
@@ -52,38 +53,38 @@ const Portfolio: React.FC = () => {
   
   const projects = [
     {
-      title: t('projects.ecommerce.title'),
-      category: t('projects.categories.ecommerce'),
+      title: "E-commerce de Moda",
+      category: "Loja Virtual",
       image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
       link: '#',
     },
     {
-      title: t('projects.delivery.title'),
-      category: t('projects.categories.mobile'),
+      title: "App de Delivery",
+      category: "Aplicativo Móvel",
       image: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
       link: '#',
     },
     {
-      title: t('projects.institutional.title'),
-      category: t('projects.categories.website'),
+      title: "Site Institucional",
+      category: "Website",
       image: 'https://images.unsplash.com/photo-1487014679447-9f8336841d58?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
       link: '#',
     },
     {
-      title: t('projects.dashboard.title'),
-      category: t('projects.categories.software'),
+      title: "Dashboard Analítico",
+      category: "Software",
       image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
       link: '#',
     },
     {
-      title: t('projects.social.title'),
-      category: t('projects.categories.platform'),
+      title: "Rede Social Corporativa",
+      category: "Plataforma Web",
       image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
       link: '#',
     },
     {
-      title: t('projects.marketplace.title'),
-      category: t('projects.categories.marketplace'),
+      title: "Marketplace B2B",
+      category: "Marketplace",
       image: 'https://images.unsplash.com/photo-1600866920583-1ccd4ba2525e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
       link: '#',
     },
@@ -93,9 +94,9 @@ const Portfolio: React.FC = () => {
     <section id="portfolio" className="section-padding">
       <div className="container-custom">
         <div className="text-center mb-16">
-          <h2 className="heading-lg text-navy mb-4">{t('projects.title')}</h2>
+          <h2 className="heading-lg text-navy mb-4">Nosso Portfólio</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            {t('projects.subtitle')}
+            Conheça alguns dos projetos que desenvolvemos para nossos clientes, sempre focando em qualidade, inovação e resultados.
           </p>
         </div>
         
@@ -112,15 +113,11 @@ const Portfolio: React.FC = () => {
         </div>
         
         <div className="text-center">
-          <Button 
-            className="btn-secondary"
-            onClick={() => {
-              // This could link to a more detailed portfolio page in the future
-              console.log("Ver mais projetos clicked");
-            }}
-          >
-            {t('projects.viewDetails')}
-          </Button>
+          <Link to="/projetos">
+            <Button className="btn-secondary">
+              Ver Mais Projetos
+            </Button>
+          </Link>
         </div>
       </div>
     </section>
