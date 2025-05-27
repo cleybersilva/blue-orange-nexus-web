@@ -14,6 +14,8 @@ import BlogPage from "./pages/BlogPage";
 import BlogArticlePage from "./pages/BlogArticlePage";
 import AdminLoginPage from "./pages/AdminLoginPage";
 import AdminDashboard from "./pages/AdminDashboard";
+import AdminAuthorsPage from "./pages/AdminAuthorsPage";
+import ArticleEditor from "./components/admin/ArticleEditor";
 import WebsitesPage from "./pages/services/WebsitesPage";
 import EcommercePage from "./pages/services/EcommercePage";
 import AppsPage from "./pages/services/AppsPage";
@@ -85,10 +87,17 @@ const AppWithLanguage = () => {
               <Route path="/servicos/politicas" element={<PoliticalPage />} />
               <Route path="/blog" element={<BlogPage />} />
               <Route path="/blog/:slug" element={<BlogArticlePage />} />
+              
+              {/* Admin Routes */}
               <Route path="/admin/login" element={<AdminLoginPage />} />
               <Route path="/admin/blog" element={<AdminDashboard />} />
+              <Route path="/admin/authors" element={<AdminAuthorsPage />} />
+              <Route path="/admin/articles/new" element={<ArticleEditor />} />
+              <Route path="/admin/articles/edit/:id" element={<ArticleEditor />} />
+              
               <Route path="/politica-privacidade" element={<PrivacyPolicy />} />
               <Route path="/termos-uso" element={<TermsOfUse />} />
+              
               {/* Legacy routes for backward compatibility */}
               <Route path="/blog/ia-no-marketing-digital-2025" element={<IAMarketingDigital2025 />} />
               <Route path="/blog/tendencias-ux-ui-2025" element={<TendenciasUXUI2025 />} />
@@ -96,6 +105,7 @@ const AppWithLanguage = () => {
               <Route path="/blog/chatbots-automacao-atendimento" element={<ChatbotsAutomacao />} />
               <Route path="/blog/marketing-digital-data-driven" element={<MarketingDataDriven />} />
               <Route path="/blog/pwa-futuro-2025" element={<PWAFuturo2025 />} />
+              
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

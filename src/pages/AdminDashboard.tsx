@@ -5,14 +5,15 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useAuth } from '@/hooks/useAuth';
-import { useBlogArticles, useAuthors } from '@/hooks/useBlogData';
-import { Loader2, Plus, Edit, Eye, Users, FileText, LogOut, BarChart3 } from 'lucide-react';
+import { useAllArticles, useAuthors, useDeleteArticle } from '@/hooks/useBlogData';
+import { Loader2, Plus, Edit, Eye, Users, FileText, LogOut, Trash2 } from 'lucide-react';
 import { format } from 'date-fns';
 
 const AdminDashboard = () => {
   const { user, signOut, loading: authLoading } = useAuth();
-  const { data: articles, isLoading: articlesLoading } = useBlogArticles();
+  const { data: articles, isLoading: articlesLoading } = useAllArticles();
   const { data: authors, isLoading: authorsLoading } = useAuthors();
+  const deleteArticle = useDeleteArticle();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,6 +33,12 @@ const AdminDashboard = () => {
   const handleSignOut = async () => {
     await signOut();
     navigate('/admin/login');
+  };
+
+  const handleDeleteArticle = async (id: string) => {
+    if (window.confirm('Tem certeza que deseja deletar este artigo? Esta ação não pode ser desfeita.')) {
+      await deleteArticle.mutateAsync(id);
+    }
   };
 
   const publishedArticles = articles?.filter(article => article.status === 'published') || [];
@@ -121,11 +128,18 @@ const AdminDashboard = () => {
               <CardDescription>Ferramentas principais de gerenciamento</CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
-              <Button className="w-full bg-orange hover:bg-orange-dark text-white" onClick={() => navigate('/admin/blog/new')}>
+              <Button 
+                className="w-full bg-orange hover:bg-orange-dark text-white" 
+                onClick={() => navigate('/admin/articles/new')}
+              >
                 <Plus size={16} className="mr-2" />
                 Criar Novo Artigo
               </Button>
-              <Button variant="outline" className="w-full" onClick={() => navigate('/admin/authors')}>
+              <Button 
+                variant="outline" 
+                className="w-full" 
+                onClick={() => navigate('/admin/authors')}
+              >
                 <Users size={16} className="mr-2" />
                 Gerenciar Autores
               </Button>
@@ -163,7 +177,7 @@ const AdminDashboard = () => {
                         <Button 
                           size="sm" 
                           variant="outline"
-                          onClick={() => navigate(`/admin/blog/edit/${article.id}`)}
+                          onClick={() => navigate(`/admin/articles/edit/${article.id}`)}
                         >
                           <Edit size={14} />
                         </Button>
@@ -202,30 +216,55 @@ const AdminDashboard = () => {
                         <span>{format(new Date(article.created_at), 'dd/MM/yyyy')}</span>
                         <span>{article.read_time} min de leitura</span>
                         <Badge variant={article.status === 'published' ? 'default' : 'secondary'} className="text-xs">
-                          {article.status === 'published' ? 'Publicado' : 'Rascunho'}
+                          {article.status === 'published' ? 'Publicado' : 
+                           article.status === 'scheduled' ? 'Agendado' : 'Rascunho'}
                         </Badge>
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
+                      {article.status === 'published' && (
+                        <Button 
+                          size="sm" 
+                          variant="outline"
+                          onClick={() => window.open(`/blog/${article.slug}`, '_blank')}
+                        >
+                          <Eye size={14} className="mr-1" />
+                          Ver
+                        </Button>
+                      )}
                       <Button 
                         size="sm" 
                         variant="outline"
-                        onClick={() => navigate(`/blog/${article.slug}`)}
-                      >
-                        <Eye size={14} className="mr-1" />
-                        Ver
-                      </Button>
-                      <Button 
-                        size="sm" 
-                        variant="outline"
-                        onClick={() => navigate(`/admin/blog/edit/${article.id}`)}
+                        onClick={() => navigate(`/admin/articles/edit/${article.id}`)}
                       >
                         <Edit size={14} className="mr-1" />
                         Editar
                       </Button>
+                      <Button 
+                        size="sm" 
+                        variant="outline"
+                        onClick={() => handleDeleteArticle(article.id)}
+                        className="text-red-600 hover:text-red-700"
+                      >
+                        <Trash2 size={14} />
+                      </Button>
                     </div>
                   </div>
                 ))}
+                {articles?.length === 0 && (
+                  <div className="text-center py-8">
+                    <FileText size={48} className="mx-auto text-gray-400 mb-4" />
+                    <h3 className="text-lg font-medium text-gray-900 mb-2">Nenhum artigo encontrado</h3>
+                    <p className="text-gray-600 mb-4">Comece criando seu primeiro artigo</p>
+                    <Button 
+                      onClick={() => navigate('/admin/articles/new')}
+                      className="bg-orange hover:bg-orange-dark text-white"
+                    >
+                      <Plus size={16} className="mr-2" />
+                      Criar Primeiro Artigo
+                    </Button>
+                  </div>
+                )}
               </div>
             )}
           </CardContent>
