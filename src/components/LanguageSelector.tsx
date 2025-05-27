@@ -11,11 +11,11 @@ import { toast } from "@/components/ui/use-toast";
 import { useTranslation } from 'react-i18next';
 import { useLanguage } from './LanguageProvider';
 
-// Define languages with country flags
+// Define languages with country codes
 const languages = [
   { code: 'pt-BR', name: 'Português (Brasil)', flag: '🇧🇷' },
   { code: 'pt-PT', name: 'Português (Portugal)', flag: '🇵🇹' },
-  { code: 'en', name: 'English', flag: '🇺🇸' },
+  { code: 'en', name: 'English', flag: '🇬🇧' },
   { code: 'es', name: 'Español', flag: '🇪🇸' },
 ];
 
