@@ -7,6 +7,7 @@ import LanguageSelector from './LanguageSelector';
 import { useCalendly } from './CalendlyProvider';
 import { useTranslation } from 'react-i18next';
 import { useIsMobile } from '@/hooks/use-mobile';
+import HubHighlight from './ui/hub-highlight';
 
 const Header = () => {
   const { t, i18n } = useTranslation();
@@ -81,9 +82,10 @@ const Header = () => {
       }`}
     >
       <div className="container-custom flex justify-between items-center">
-        <Link to="/" className="flex items-center">
+        <Link to="/" className="flex items-center gap-2">
+          <HubHighlight className="text-2xl font-bold" />
           <span className="text-2xl font-bold">
-            <span className="text-orange">{t('siteTitle.agency')}</span>
+            <span className="text-orange">Agência</span>
             <span className="text-white">Digital</span>
           </span>
         </Link>
