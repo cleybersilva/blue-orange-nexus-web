@@ -1,4 +1,8 @@
 {
+  "siteTitle": {
+    "agency": "Agência Digital",
+    "hub": "Hub"
+  },
   "nav": {
     "home": "Página Inicial",
     "about": "Sobre Nós",
@@ -236,7 +240,7 @@
     }
   },
   "siteTitle": {
-    "agency": "Agência",
+    "agency": "Agência Digital",
     "digital": "Digital"
   },
   "teamMembers": {

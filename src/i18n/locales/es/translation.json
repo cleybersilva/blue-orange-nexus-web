@@ -1,4 +1,8 @@
 {
+  "siteTitle": {
+    "agency": "Agencia Digital",
+    "hub": "Hub"
+  },
   "nav": {
     "home": "Inicio",
     "about": "Sobre Nosotros",
@@ -235,7 +239,6 @@
       "product": "Gerente de Producto"
     }
   },
-  "siteTitle": "AGENCIA DIGITAL",
   "teamMembers": {
     "seo": "SEO y AI Scientist",
     "seoBio": "Especialista en optimización para motores de búsqueda y aplicaciones de inteligencia artificial para negocios digitales.",
