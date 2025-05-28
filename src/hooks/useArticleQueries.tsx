@@ -8,6 +8,8 @@ export const useAllArticles = () => {
   return useQuery({
     queryKey: ['all-articles'],
     queryFn: async () => {
+      console.log('useAllArticles - Fetching all articles...');
+      
       const { data, error } = await supabase
         .from('articles')
         .select(`
@@ -16,9 +18,19 @@ export const useAllArticles = () => {
         `)
         .order('created_at', { ascending: false });
 
-      if (error) throw error;
+      console.log('useAllArticles - Articles data:', data);
+      console.log('useAllArticles - Articles error:', error);
+
+      if (error) {
+        console.error('useAllArticles - Error fetching articles:', error);
+        throw error;
+      }
+      
       return data as Article[];
-    }
+    },
+    retry: 2,
+    staleTime: 1000 * 60 * 5, // Cache por 5 minutos
+    refetchOnWindowFocus: false
   });
 };
 
@@ -27,10 +39,18 @@ export const useMyArticles = () => {
   return useQuery({
     queryKey: ['my-articles'],
     queryFn: async () => {
+      console.log('useMyArticles - Fetching user articles...');
+      
       const { data: user } = await supabase.auth.getUser();
-      if (!user.user) return [];
+      if (!user.user) {
+        console.log('useMyArticles - No user found');
+        return [];
+      }
 
-      const { data, error } = await supabase
+      console.log('useMyArticles - Current user:', user.user.email);
+
+      // Primeiro tentar buscar por user_articles
+      const { data: userArticles, error: userArticlesError } = await supabase
         .from('user_articles')
         .select(`
           article:articles(
@@ -40,9 +60,22 @@ export const useMyArticles = () => {
         `)
         .eq('user_id', user.user.id);
 
-      if (error) throw error;
-      return data?.map(item => item.article).filter(Boolean) as Article[];
-    }
+      console.log('useMyArticles - User articles data:', userArticles);
+      console.log('useMyArticles - User articles error:', userArticlesError);
+
+      if (userArticlesError) {
+        console.error('useMyArticles - Error fetching user articles:', userArticlesError);
+        return [];
+      }
+
+      const articles = userArticles?.map(item => item.article).filter(Boolean) as Article[];
+      console.log('useMyArticles - Final articles:', articles);
+      
+      return articles || [];
+    },
+    retry: 2,
+    staleTime: 1000 * 60 * 5, // Cache por 5 minutos
+    refetchOnWindowFocus: false
   });
 };
 
@@ -51,6 +84,8 @@ export const useBlogArticles = () => {
   return useQuery({
     queryKey: ['blog-articles'],
     queryFn: async () => {
+      console.log('useBlogArticles - Fetching published articles...');
+      
       const { data, error } = await supabase
         .from('articles')
         .select(`
@@ -61,9 +96,18 @@ export const useBlogArticles = () => {
         .lte('published_at', new Date().toISOString())
         .order('published_at', { ascending: false });
 
-      if (error) throw error;
+      console.log('useBlogArticles - Published articles data:', data);
+      console.log('useBlogArticles - Published articles error:', error);
+
+      if (error) {
+        console.error('useBlogArticles - Error fetching published articles:', error);
+        throw error;
+      }
+      
       return data as Article[];
-    }
+    },
+    retry: 2,
+    staleTime: 1000 * 60 * 5 // Cache por 5 minutos
   });
 };
 
@@ -71,6 +115,8 @@ export const useArticleBySlug = (slug: string) => {
   return useQuery({
     queryKey: ['article', slug],
     queryFn: async () => {
+      console.log('useArticleBySlug - Fetching article by slug:', slug);
+      
       const { data, error } = await supabase
         .from('articles')
         .select(`
@@ -82,10 +128,19 @@ export const useArticleBySlug = (slug: string) => {
         .lte('published_at', new Date().toISOString())
         .single();
 
-      if (error) throw error;
+      console.log('useArticleBySlug - Article data:', data);
+      console.log('useArticleBySlug - Article error:', error);
+
+      if (error) {
+        console.error('useArticleBySlug - Error fetching article by slug:', error);
+        throw error;
+      }
+      
       return data as Article;
     },
-    enabled: !!slug
+    enabled: !!slug,
+    retry: 2,
+    staleTime: 1000 * 60 * 10 // Cache por 10 minutos
   });
 };
 
@@ -94,6 +149,8 @@ export const useArticleById = (id: string) => {
   return useQuery({
     queryKey: ['article-edit', id],
     queryFn: async () => {
+      console.log('useArticleById - Fetching article by ID:', id);
+      
       const { data, error } = await supabase
         .from('articles')
         .select(`
@@ -103,9 +160,18 @@ export const useArticleById = (id: string) => {
         .eq('id', id)
         .single();
 
-      if (error) throw error;
+      console.log('useArticleById - Article data:', data);
+      console.log('useArticleById - Article error:', error);
+
+      if (error) {
+        console.error('useArticleById - Error fetching article by ID:', error);
+        throw error;
+      }
+      
       return data as Article;
     },
-    enabled: !!id
+    enabled: !!id,
+    retry: 2,
+    staleTime: 1000 * 60 * 5 // Cache por 5 minutos
   });
 };

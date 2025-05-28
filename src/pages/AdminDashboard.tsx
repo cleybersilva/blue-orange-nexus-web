@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -8,15 +7,15 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useAuth } from '@/hooks/useAuth';
 import { useAllArticles, useMyArticles, useAuthors, useDeleteArticle, useIsApprovedAdmin, useAdminRequests } from '@/hooks/useBlogData';
-import { Loader2, Plus, Edit, Eye, Users, FileText, LogOut, Trash2, UserCheck, Clock, BarChart3, Crown, Shield, BookOpen } from 'lucide-react';
+import { Loader2, Plus, Edit, Eye, Users, FileText, LogOut, Trash2, UserCheck, Clock, BarChart3, Crown, Shield, BookOpen, RefreshCw } from 'lucide-react';
 import { format } from 'date-fns';
 import AnalyticsDashboard from '@/components/admin/AnalyticsDashboard';
 import HubHighlight from '@/components/ui/hub-highlight';
 
 const AdminDashboard = () => {
   const { user, signOut, loading: authLoading } = useAuth();
-  const { data: allArticles, isLoading: allArticlesLoading } = useAllArticles();
-  const { data: myArticles, isLoading: myArticlesLoading } = useMyArticles();
+  const { data: allArticles, isLoading: allArticlesLoading, refetch: refetchAllArticles } = useAllArticles();
+  const { data: myArticles, isLoading: myArticlesLoading, refetch: refetchMyArticles } = useMyArticles();
   const { data: authors, isLoading: authorsLoading } = useAuthors();
   const { data: adminInfo, isLoading: checkingAdmin } = useIsApprovedAdmin();
   const { data: adminRequests } = useAdminRequests();
@@ -25,8 +24,19 @@ const AdminDashboard = () => {
 
   console.log('AdminDashboard - User:', user?.email);
   console.log('AdminDashboard - Admin Info:', adminInfo);
+  console.log('AdminDashboard - All Articles:', allArticles);
+  console.log('AdminDashboard - My Articles:', myArticles);
   console.log('AdminDashboard - Auth Loading:', authLoading);
   console.log('AdminDashboard - Checking Admin:', checkingAdmin);
+
+  // Force refetch articles when dashboard loads
+  useEffect(() => {
+    if (user && adminInfo && (adminInfo.isAdmin || adminInfo.isAuthorAdmin || adminInfo.isAuthor)) {
+      console.log('AdminDashboard - Forcing articles refetch...');
+      refetchAllArticles();
+      refetchMyArticles();
+    }
+  }, [user, adminInfo, refetchAllArticles, refetchMyArticles]);
 
   useEffect(() => {
     if (!authLoading && !user) {
@@ -83,6 +93,12 @@ const AdminDashboard = () => {
     if (window.confirm('Tem certeza que deseja deletar este artigo? Esta ação não pode ser desfeita.')) {
       await deleteArticle.mutateAsync(id);
     }
+  };
+
+  const handleRefreshArticles = () => {
+    console.log('AdminDashboard - Manually refreshing articles...');
+    refetchAllArticles();
+    refetchMyArticles();
   };
 
   // Determinar quais artigos mostrar baseado no role do usuário
@@ -160,14 +176,26 @@ const AdminDashboard = () => {
 
       <main className="container-custom py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-navy mb-2">
-            Dashboard {adminInfo?.isAuthor ? 'do Autor' : 'Administrativo'}
-          </h1>
-          <p className="text-gray-600">
-            {adminInfo?.isAuthor 
-              ? 'Gerencie seus artigos e conteúdo' 
-              : 'Gerencie artigos, autores e conteúdo do blog'}
-          </p>
+          <div className="flex justify-between items-center">
+            <div>
+              <h1 className="text-3xl font-bold text-navy mb-2">
+                Dashboard {adminInfo?.isAuthor ? 'do Autor' : 'Administrativo'}
+              </h1>
+              <p className="text-gray-600">
+                {adminInfo?.isAuthor 
+                  ? 'Gerencie seus artigos e conteúdo' 
+                  : 'Gerencie artigos, autores e conteúdo do blog'}
+              </p>
+            </div>
+            <Button 
+              onClick={handleRefreshArticles}
+              variant="outline"
+              className="border-navy/20 text-navy hover:bg-navy hover:text-white"
+            >
+              <RefreshCw size={16} className="mr-2" />
+              Atualizar Artigos
+            </Button>
+          </div>
         </div>
 
         {/* Alerta de solicitações pendentes - apenas para admins e author_admins */}
@@ -362,14 +390,27 @@ const AdminDashboard = () => {
             {/* All Articles Table */}
             <Card className="border-navy/20">
               <CardHeader>
-                <CardTitle className="text-navy">
-                  {adminInfo?.isAuthor ? 'Meus Artigos' : 'Todos os Artigos'}
-                </CardTitle>
-                <CardDescription>
-                  {adminInfo?.isAuthor 
-                    ? 'Gerencie seus artigos do blog' 
-                    : 'Gerencie todos os artigos do blog'}
-                </CardDescription>
+                <div className="flex justify-between items-center">
+                  <div>
+                    <CardTitle className="text-navy">
+                      {adminInfo?.isAuthor ? 'Meus Artigos' : 'Todos os Artigos'}
+                    </CardTitle>
+                    <CardDescription>
+                      {adminInfo?.isAuthor 
+                        ? 'Gerencie seus artigos do blog' 
+                        : 'Gerencie todos os artigos do blog'}
+                    </CardDescription>
+                  </div>
+                  <Button 
+                    onClick={handleRefreshArticles}
+                    size="sm"
+                    variant="outline"
+                    className="border-navy/20 text-navy hover:bg-navy hover:text-white"
+                  >
+                    <RefreshCw size={14} className="mr-1" />
+                    Atualizar
+                  </Button>
+                </div>
               </CardHeader>
               <CardContent>
                 {articlesLoading ? (
