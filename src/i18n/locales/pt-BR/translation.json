@@ -1,3 +1,4 @@
+
 {
   "nav": {
     "home": "Início",
@@ -56,6 +57,10 @@
     "learnMore": "Saiba Mais"
   },
   "aboutPage": {
+    "ourHistory": "Nossa História",
+    "historyIntro": "Fundada em 2020, a Agência Digital Hub nasceu com o propósito de democratizar o acesso a soluções digitais de qualidade. Começamos como uma pequena equipe de desenvolvedores e designers apaixonados por tecnologia e hoje somos referência em transformação digital para empresas de todos os portes.",
+    "contactUs": "Fale Conosco",
+    "scheduleCall": "Agendar Consulta",
     "hero": {
       "title": "Sobre a Agência Digital Hub",
       "subtitle": "Transformando ideias em soluções digitais inovadoras desde 2020"
@@ -64,46 +69,68 @@
       "title": "Nossa História",
       "description": "Fundada em 2020, a Agência Digital Hub nasceu com o propósito de democratizar o acesso a soluções digitais de qualidade. Começamos como uma pequena equipe de desenvolvedores e designers apaixonados por tecnologia e hoje somos referência em transformação digital para empresas de todos os portes."
     },
-    "mission": {
-      "title": "Nossa Missão",
-      "description": "Capacitar empresas através de soluções digitais inovadoras que geram resultados reais e sustentáveis."
-    },
-    "vision": {
-      "title": "Nossa Visão",
-      "description": "Ser reconhecida como a principal agência digital do Brasil, referência em inovação e excelência em atendimento."
-    },
-    "values": {
-      "title": "Nossos Valores",
-      "innovation": "Inovação constante em todos os projetos",
-      "quality": "Qualidade e excelência em cada entrega",
-      "transparency": "Transparência total em nossos processos",
-      "results": "Foco em resultados mensuráveis",
-      "partnership": "Relacionamento de parceria com clientes"
+    "mvv": {
+      "title": "Missão, Visão e Valores",
+      "mission": "Nossa Missão",
+      "missionText": "Capacitar empresas através de soluções digitais inovadoras que geram resultados reais e sustentáveis.",
+      "vision": "Nossa Visão",
+      "visionText": "Ser reconhecida como a principal agência digital do Brasil, referência em inovação e excelência em atendimento.",
+      "values": "Nossos Valores",
+      "valuesList": [
+        "Excelência",
+        "Inovação",
+        "Transparência",
+        "Compromisso",
+        "Resultados"
+      ]
     },
     "team": {
       "title": "Nossa Equipe",
-      "subtitle": "Profissionais especializados e apaixonados pelo que fazem",
-      "ceo": {
-        "name": "Cleyber Silva",
-        "role": "CEO & Founder",
-        "description": "Visionário e estrategista, lidera a empresa com foco em inovação e resultados excepcionais."
+      "subtitle": "Profissionais especializados e apaixonados pelo que fazem"
+    },
+    "teamMembers": {
+      "seo": "Especialista em SEO",
+      "seoBio": "Especialista em otimização para mecanismos de busca e estratégias de crescimento orgânico.",
+      "security": "Especialista em Segurança",
+      "securityBio": "Profissional focado em segurança digital e proteção de dados para aplicações web.",
+      "traffic": "Gestor de Tráfego",
+      "trafficBio": "Especialista em campanhas de tráfego pago e análise de performance de anúncios digitais.",
+      "design": "Designer",
+      "designBio": "Designer criativo focado em experiência do usuário e interfaces visuais impactantes."
+    },
+    "differentials": {
+      "title": "Nossos Diferenciais",
+      "subtitle": "O que nos torna únicos no mercado digital",
+      "agility": {
+        "title": "Agilidade",
+        "description": "Entregamos projetos com rapidez sem comprometer a qualidade."
       },
-      "cto": {
-        "name": "Ana Costa",
-        "role": "CTO",
-        "description": "Especialista em tecnologia, garante que utilizemos sempre as melhores práticas e ferramentas do mercado."
+      "innovation": {
+        "title": "Inovação",
+        "description": "Utilizamos as mais modernas tecnologias e tendências do mercado."
       },
-      "designer": {
-        "name": "Carlos Mendes",
-        "role": "Design Lead",
-        "description": "Criativo e detalhista, transforma ideias em experiências visuais memoráveis."
+      "team": {
+        "title": "Equipe Especializada",
+        "description": "Profissionais qualificados e experientes em suas áreas de atuação."
+      },
+      "security": {
+        "title": "Segurança",
+        "description": "Máxima segurança em todos os nossos projetos e processos."
+      },
+      "cloud": {
+        "title": "Tecnologia em Nuvem",
+        "description": "Soluções escaláveis e confiáveis na nuvem."
+      },
+      "support": {
+        "title": "Suporte 24/7",
+        "description": "Atendimento contínuo para garantir o sucesso do seu projeto."
       }
     },
-    "stats": {
-      "projects": "Projetos Entregues",
-      "clients": "Clientes Satisfeitos",
-      "experience": "Anos de Experiência",
-      "team": "Profissionais"
+    "cta": {
+      "title": "Pronto para transformar seu negócio?",
+      "subtitle": "Entre em contato conosco e descubra como podemos ajudar sua empresa a alcançar o próximo nível digital.",
+      "schedule": "Agendar Consulta Gratuita",
+      "contact": "Fale Conosco"
     },
     "location": {
       "title": "Nossa Localização",
@@ -111,14 +138,7 @@
       "office": "Escritório Principal",
       "phone": "Telefone",
       "email": "E-mail"
-    },
-    "cta": {
-      "title": "Pronto para transformar seu negócio?",
-      "subtitle": "Entre em contato conosco e descubra como podemos ajudar sua empresa a alcançar o próximo nível digital.",
-      "schedule": "Agendar Consulta Gratuita"
-    },
-    "contactUs": "Fale Conosco",
-    "scheduleCall": "Agende uma conversa gratuita com nossos especialistas."
+    }
   },
   "portfolio": {
     "title": "Nosso Portfólio",

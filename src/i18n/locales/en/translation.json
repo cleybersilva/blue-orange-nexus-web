@@ -1,3 +1,4 @@
+
 {
   "nav": {
     "home": "Home",
@@ -56,6 +57,10 @@
     "learnMore": "Learn More"
   },
   "aboutPage": {
+    "ourHistory": "Our History",
+    "historyIntro": "Founded in 2020, Digital Hub Agency was born with the purpose of democratizing access to quality digital solutions. We started as a small team of developers and designers passionate about technology and today we are a reference in digital transformation for companies of all sizes.",
+    "contactUs": "Contact Us",
+    "scheduleCall": "Schedule Call",
     "hero": {
       "title": "About Digital Hub Agency",
       "subtitle": "Transforming ideas into innovative digital solutions since 2020"
@@ -64,46 +69,68 @@
       "title": "Our Story",
       "description": "Founded in 2020, Digital Hub Agency was born with the purpose of democratizing access to quality digital solutions. We started as a small team of developers and designers passionate about technology and today we are a reference in digital transformation for companies of all sizes."
     },
-    "mission": {
-      "title": "Our Mission",
-      "description": "Empower companies through innovative digital solutions that generate real and sustainable results."
-    },
-    "vision": {
-      "title": "Our Vision",
-      "description": "To be recognized as Brazil's leading digital agency, a reference in innovation and excellence in service."
-    },
-    "values": {
-      "title": "Our Values",
-      "innovation": "Constant innovation in all projects",
-      "quality": "Quality and excellence in every delivery",
-      "transparency": "Total transparency in our processes",
-      "results": "Focus on measurable results",
-      "partnership": "Partnership relationship with clients"
+    "mvv": {
+      "title": "Mission, Vision and Values",
+      "mission": "Our Mission",
+      "missionText": "Empower companies through innovative digital solutions that generate real and sustainable results.",
+      "vision": "Our Vision",
+      "visionText": "To be recognized as Brazil's leading digital agency, a reference in innovation and excellence in service.",
+      "values": "Our Values",
+      "valuesList": [
+        "Excellence",
+        "Innovation",
+        "Transparency",
+        "Commitment",
+        "Results"
+      ]
     },
     "team": {
       "title": "Our Team",
-      "subtitle": "Specialized professionals passionate about what they do",
-      "ceo": {
-        "name": "Cleyber Silva",
-        "role": "CEO & Founder",
-        "description": "Visionary and strategist, leads the company with a focus on innovation and exceptional results."
+      "subtitle": "Specialized professionals passionate about what they do"
+    },
+    "teamMembers": {
+      "seo": "SEO Specialist",
+      "seoBio": "Expert in search engine optimization and organic growth strategies.",
+      "security": "Security Specialist",
+      "securityBio": "Professional focused on digital security and data protection for web applications.",
+      "traffic": "Traffic Manager",
+      "trafficBio": "Expert in paid traffic campaigns and digital advertising performance analysis.",
+      "design": "Designer",
+      "designBio": "Creative designer focused on user experience and impactful visual interfaces."
+    },
+    "differentials": {
+      "title": "Our Differentials",
+      "subtitle": "What makes us unique in the digital market",
+      "agility": {
+        "title": "Agility",
+        "description": "We deliver projects quickly without compromising quality."
       },
-      "cto": {
-        "name": "Ana Costa",
-        "role": "CTO",
-        "description": "Technology specialist, ensures we always use the best practices and tools in the market."
+      "innovation": {
+        "title": "Innovation",
+        "description": "We use the most modern technologies and market trends."
       },
-      "designer": {
-        "name": "Carlos Mendes",
-        "role": "Design Lead",
-        "description": "Creative and detail-oriented, transforms ideas into memorable visual experiences."
+      "team": {
+        "title": "Specialized Team",
+        "description": "Qualified and experienced professionals in their areas of expertise."
+      },
+      "security": {
+        "title": "Security",
+        "description": "Maximum security in all our projects and processes."
+      },
+      "cloud": {
+        "title": "Cloud Technology",
+        "description": "Scalable and reliable cloud solutions."
+      },
+      "support": {
+        "title": "24/7 Support",
+        "description": "Continuous support to ensure the success of your project."
       }
     },
-    "stats": {
-      "projects": "Projects Delivered",
-      "clients": "Satisfied Clients",
-      "experience": "Years of Experience",
-      "team": "Professionals"
+    "cta": {
+      "title": "Ready to transform your business?",
+      "subtitle": "Contact us and discover how we can help your company reach the next digital level.",
+      "schedule": "Schedule Free Consultation",
+      "contact": "Contact Us"
     },
     "location": {
       "title": "Our Location",
@@ -111,14 +138,7 @@
       "office": "Main Office",
       "phone": "Phone",
       "email": "Email"
-    },
-    "cta": {
-      "title": "Ready to transform your business?",
-      "subtitle": "Contact us and discover how we can help your company reach the next digital level.",
-      "schedule": "Schedule Free Consultation"
-    },
-    "contactUs": "Contact Us",
-    "scheduleCall": "Schedule a free conversation with our specialists."
+    }
   },
   "portfolio": {
     "title": "Our Portfolio",

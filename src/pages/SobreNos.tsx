@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { Calendar, Users, Building, Phone, MapPin, Mail, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -40,26 +41,26 @@ const SobreNos = () => {
   const teamMembers = [
     {
       name: "Cleyber Silva",
-      role: t('teamMembers.seo'),
-      bio: t('teamMembers.seoBio'),
+      role: t('aboutPage.teamMembers.seo'),
+      bio: t('aboutPage.teamMembers.seoBio'),
       image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     {
       name: "Marcos Túlio",
-      role: t('teamMembers.security'),
-      bio: t('teamMembers.securityBio'),
+      role: t('aboutPage.teamMembers.security'),
+      bio: t('aboutPage.teamMembers.securityBio'),
       image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     {
       name: "Euthelys Arthur",
-      role: t('teamMembers.traffic'),
-      bio: t('teamMembers.trafficBio'),
+      role: t('aboutPage.teamMembers.traffic'),
+      bio: t('aboutPage.teamMembers.trafficBio'),
       image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=2576&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     {
       name: "Vini",
-      role: t('teamMembers.design'),
-      bio: t('teamMembers.designBio'),
+      role: t('aboutPage.teamMembers.design'),
+      bio: t('aboutPage.teamMembers.designBio'),
       image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     }
   ];

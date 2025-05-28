@@ -100,7 +100,7 @@ const Services: React.FC = () => {
 
         <div className="text-center">
           <Link to="/servicos">
-            <Button className="bg-orange hover:bg-orange-dark text-white flex items-center gap-2 mx-auto">
+            <Button className="bg-navy hover:bg-navy-dark text-white flex items-center gap-2 mx-auto">
               {t('services.viewAll')}
               <ArrowRight size={16} />
             </Button>
