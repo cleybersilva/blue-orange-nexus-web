@@ -11,6 +11,7 @@ import { useAllArticles, useMyArticles, useAuthors, useDeleteArticle, useIsAppro
 import { Loader2, Plus, Edit, Eye, Users, FileText, LogOut, Trash2, UserCheck, Clock, BarChart3, Crown, Shield, BookOpen } from 'lucide-react';
 import { format } from 'date-fns';
 import AnalyticsDashboard from '@/components/admin/AnalyticsDashboard';
+import HubHighlight from '@/components/ui/hub-highlight';
 
 const AdminDashboard = () => {
   const { user, signOut, loading: authLoading } = useAuth();
@@ -22,14 +23,21 @@ const AdminDashboard = () => {
   const deleteArticle = useDeleteArticle();
   const navigate = useNavigate();
 
+  console.log('AdminDashboard - User:', user?.email);
+  console.log('AdminDashboard - Admin Info:', adminInfo);
+  console.log('AdminDashboard - Auth Loading:', authLoading);
+  console.log('AdminDashboard - Checking Admin:', checkingAdmin);
+
   useEffect(() => {
     if (!authLoading && !user) {
+      console.log('No user found, redirecting to login');
       navigate('/admin/login');
     }
   }, [user, authLoading, navigate]);
 
   useEffect(() => {
     if (user && !checkingAdmin && (!adminInfo?.isAdmin && !adminInfo?.isAuthorAdmin && !adminInfo?.isAuthor)) {
+      console.log('User not authorized, redirecting to login');
       navigate('/admin/login');
     }
   }, [user, adminInfo, checkingAdmin, navigate]);
@@ -45,13 +53,13 @@ const AdminDashboard = () => {
   if (!adminInfo?.isAdmin && !adminInfo?.isAuthorAdmin && !adminInfo?.isAuthor) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-        <Card className="w-full max-w-md">
+        <Card className="w-full max-w-md border-navy/20">
           <CardHeader>
-            <CardTitle className="text-center">Acesso Não Autorizado</CardTitle>
+            <CardTitle className="text-center text-navy">Acesso Não Autorizado</CardTitle>
           </CardHeader>
           <CardContent>
-            <Alert>
-              <AlertDescription>
+            <Alert className="border-orange/20 bg-orange/5">
+              <AlertDescription className="text-navy">
                 Você não tem permissão para acessar o painel administrativo. Entre em contato com o administrador.
               </AlertDescription>
             </Alert>
@@ -89,28 +97,28 @@ const AdminDashboard = () => {
   const getUserBadge = () => {
     if (adminInfo?.isRoot) {
       return (
-        <Badge variant="destructive" className="flex items-center gap-1">
+        <Badge variant="destructive" className="flex items-center gap-1 bg-orange text-white">
           <Crown size={12} />
           Admin Root
         </Badge>
       );
     } else if (adminInfo?.isAdmin) {
       return (
-        <Badge variant="secondary" className="flex items-center gap-1">
+        <Badge variant="secondary" className="flex items-center gap-1 bg-navy/10 text-navy">
           <Shield size={12} />
           Admin
         </Badge>
       );
     } else if (adminInfo?.isAuthorAdmin) {
       return (
-        <Badge variant="outline" className="flex items-center gap-1">
+        <Badge variant="outline" className="flex items-center gap-1 border-navy/20 text-navy">
           <Users size={12} />
           Author Admin
         </Badge>
       );
     } else if (adminInfo?.isAuthor) {
       return (
-        <Badge variant="outline" className="flex items-center gap-1">
+        <Badge variant="outline" className="flex items-center gap-1 border-navy/20 text-navy">
           <BookOpen size={12} />
           Autor
         </Badge>
@@ -125,13 +133,14 @@ const AdminDashboard = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b">
+      <header className="bg-white shadow-sm border-b border-navy/10">
         <div className="container-custom flex justify-between items-center py-4">
           <div className="flex items-center gap-4">
             <Link to="/" className="flex items-center gap-2">
               <span className="text-2xl font-bold">
                 <span className="text-orange">Agência</span>
                 <span className="text-navy">Digital</span>
+                <HubHighlight />
               </span>
             </Link>
             {getUserBadge()}
@@ -141,7 +150,7 @@ const AdminDashboard = () => {
             <span className="text-sm text-gray-600">
               Bem-vindo, {adminInfo?.profile?.full_name || user.email}
             </span>
-            <Button variant="outline" onClick={handleSignOut}>
+            <Button variant="outline" onClick={handleSignOut} className="border-navy/20 text-navy hover:bg-navy hover:text-white">
               <LogOut size={16} className="mr-2" />
               Sair
             </Button>
@@ -163,15 +172,15 @@ const AdminDashboard = () => {
 
         {/* Alerta de solicitações pendentes - apenas para admins e author_admins */}
         {pendingRequests.length > 0 && (adminInfo?.isAdmin || adminInfo?.isAuthorAdmin) && (
-          <Alert className="mb-6 border-orange bg-orange-50">
+          <Alert className="mb-6 border-orange/20 bg-orange/5">
             <Clock className="h-4 w-4 text-orange" />
-            <AlertDescription className="flex items-center justify-between">
+            <AlertDescription className="flex items-center justify-between text-navy">
               <span>Você tem {pendingRequests.length} solicitação(ões) de acesso pendente(s)</span>
               <Button 
                 size="sm" 
                 variant="outline" 
                 onClick={() => navigate('/admin/requests')}
-                className="ml-4"
+                className="ml-4 border-navy/20 text-navy hover:bg-navy hover:text-white"
               >
                 Ver Solicitações
               </Button>
@@ -180,10 +189,10 @@ const AdminDashboard = () => {
         )}
 
         <Tabs defaultValue="dashboard" className="space-y-6">
-          <TabsList className={`grid w-full ${canViewAnalytics ? 'grid-cols-2' : 'grid-cols-1'}`}>
-            <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
+          <TabsList className={`grid w-full ${canViewAnalytics ? 'grid-cols-2' : 'grid-cols-1'} bg-white border border-navy/20`}>
+            <TabsTrigger value="dashboard" className="data-[state=active]:bg-orange data-[state=active]:text-white">Dashboard</TabsTrigger>
             {canViewAnalytics && (
-              <TabsTrigger value="analytics" className="flex items-center gap-2">
+              <TabsTrigger value="analytics" className="flex items-center gap-2 data-[state=active]:bg-orange data-[state=active]:text-white">
                 <BarChart3 size={16} />
                 Analytics
               </TabsTrigger>
@@ -193,32 +202,32 @@ const AdminDashboard = () => {
           <TabsContent value="dashboard" className="space-y-6">
             {/* Stats Cards */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-              <Card>
+              <Card className="border-navy/20">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">
+                  <CardTitle className="text-sm font-medium text-navy">
                     {adminInfo?.isAuthor ? 'Meus Artigos' : 'Total de Artigos'}
                   </CardTitle>
-                  <FileText className="h-4 w-4 text-muted-foreground" />
+                  <FileText className="h-4 w-4 text-orange" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{articles?.length || 0}</div>
+                  <div className="text-2xl font-bold text-navy">{articles?.length || 0}</div>
                 </CardContent>
               </Card>
               
-              <Card>
+              <Card className="border-navy/20">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Publicados</CardTitle>
-                  <Eye className="h-4 w-4 text-muted-foreground" />
+                  <CardTitle className="text-sm font-medium text-navy">Publicados</CardTitle>
+                  <Eye className="h-4 w-4 text-orange" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold text-green-600">{publishedArticles.length}</div>
                 </CardContent>
               </Card>
               
-              <Card>
+              <Card className="border-navy/20">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Rascunhos</CardTitle>
-                  <Edit className="h-4 w-4 text-muted-foreground" />
+                  <CardTitle className="text-sm font-medium text-navy">Rascunhos</CardTitle>
+                  <Edit className="h-4 w-4 text-orange" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold text-orange">{draftArticles.length}</div>
@@ -226,10 +235,10 @@ const AdminDashboard = () => {
               </Card>
 
               {(adminInfo?.isAdmin || adminInfo?.isAuthorAdmin) && (
-                <Card>
+                <Card className="border-navy/20">
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">Solicitações</CardTitle>
-                    <UserCheck className="h-4 w-4 text-muted-foreground" />
+                    <CardTitle className="text-sm font-medium text-navy">Solicitações</CardTitle>
+                    <UserCheck className="h-4 w-4 text-orange" />
                   </CardHeader>
                   <CardContent>
                     <div className="text-2xl font-bold text-orange">{pendingRequests.length}</div>
@@ -240,9 +249,9 @@ const AdminDashboard = () => {
 
             {/* Quick Actions */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Card>
+              <Card className="border-navy/20">
                 <CardHeader>
-                  <CardTitle>Ações Rápidas</CardTitle>
+                  <CardTitle className="text-navy">Ações Rápidas</CardTitle>
                   <CardDescription>Ferramentas principais de gerenciamento</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-3">
@@ -258,7 +267,7 @@ const AdminDashboard = () => {
                     <>
                       <Button 
                         variant="outline" 
-                        className="w-full" 
+                        className="w-full border-navy/20 text-navy hover:bg-navy hover:text-white" 
                         onClick={() => navigate('/admin/authors')}
                       >
                         <Users size={16} className="mr-2" />
@@ -266,13 +275,13 @@ const AdminDashboard = () => {
                       </Button>
                       <Button 
                         variant="outline" 
-                        className="w-full" 
+                        className="w-full border-navy/20 text-navy hover:bg-navy hover:text-white" 
                         onClick={() => navigate('/admin/requests')}
                       >
                         <UserCheck size={16} className="mr-2" />
                         Gerenciar Solicitações
                         {pendingRequests.length > 0 && (
-                          <Badge variant="secondary" className="ml-2">
+                          <Badge variant="secondary" className="ml-2 bg-orange/10 text-orange">
                             {pendingRequests.length}
                           </Badge>
                         )}
@@ -283,7 +292,7 @@ const AdminDashboard = () => {
                   {adminInfo?.isRoot && (
                     <Button 
                       variant="outline" 
-                      className="w-full" 
+                      className="w-full border-navy/20 text-navy hover:bg-navy hover:text-white" 
                       onClick={() => navigate('/admin/users')}
                     >
                       <Crown size={16} className="mr-2" />
@@ -291,16 +300,20 @@ const AdminDashboard = () => {
                     </Button>
                   )}
                   
-                  <Button variant="outline" className="w-full" onClick={() => navigate('/blog')}>
+                  <Button 
+                    variant="outline" 
+                    className="w-full border-navy/20 text-navy hover:bg-navy hover:text-white" 
+                    onClick={() => navigate('/blog')}
+                  >
                     <Eye size={16} className="mr-2" />
                     Ver Blog Público
                   </Button>
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="border-navy/20">
                 <CardHeader>
-                  <CardTitle>
+                  <CardTitle className="text-navy">
                     {adminInfo?.isAuthor ? 'Meus Artigos Recentes' : 'Artigos Recentes'}
                   </CardTitle>
                   <CardDescription>
@@ -315,21 +328,22 @@ const AdminDashboard = () => {
                   ) : (
                     <div className="space-y-3">
                       {articles?.slice(0, 5).map((article) => (
-                        <div key={article.id} className="flex items-center justify-between p-3 border rounded-lg">
+                        <div key={article.id} className="flex items-center justify-between p-3 border border-navy/10 rounded-lg">
                           <div className="flex-1 min-w-0">
-                            <h4 className="text-sm font-medium truncate">{article.title}</h4>
+                            <h4 className="text-sm font-medium truncate text-navy">{article.title}</h4>
                             <p className="text-xs text-gray-500">
                               {format(new Date(article.created_at), 'dd/MM/yyyy')}
                             </p>
                           </div>
                           <div className="flex items-center gap-2">
-                            <Badge variant={article.status === 'published' ? 'default' : 'secondary'}>
+                            <Badge variant={article.status === 'published' ? 'default' : 'secondary'} className={article.status === 'published' ? 'bg-orange text-white' : 'bg-navy/10 text-navy'}>
                               {article.status === 'published' ? 'Publicado' : 'Rascunho'}
                             </Badge>
                             <Button 
                               size="sm" 
                               variant="outline"
                               onClick={() => navigate(`/admin/articles/edit/${article.id}`)}
+                              className="border-navy/20 text-navy hover:bg-navy hover:text-white"
                             >
                               <Edit size={14} />
                             </Button>
@@ -346,9 +360,9 @@ const AdminDashboard = () => {
             </div>
 
             {/* All Articles Table */}
-            <Card>
+            <Card className="border-navy/20">
               <CardHeader>
-                <CardTitle>
+                <CardTitle className="text-navy">
                   {adminInfo?.isAuthor ? 'Meus Artigos' : 'Todos os Artigos'}
                 </CardTitle>
                 <CardDescription>
@@ -365,15 +379,15 @@ const AdminDashboard = () => {
                 ) : (
                   <div className="space-y-4">
                     {articles?.map((article) => (
-                      <div key={article.id} className="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50">
+                      <div key={article.id} className="flex items-center justify-between p-4 border border-navy/10 rounded-lg hover:bg-gray-50">
                         <div className="flex-1">
-                          <h3 className="font-medium">{article.title}</h3>
+                          <h3 className="font-medium text-navy">{article.title}</h3>
                           <p className="text-sm text-gray-600 mt-1">{article.summary}</p>
                           <div className="flex items-center gap-4 mt-2 text-xs text-gray-500">
                             <span>Por: {article.author?.name}</span>
                             <span>{format(new Date(article.created_at), 'dd/MM/yyyy')}</span>
                             <span>{article.read_time} min de leitura</span>
-                            <Badge variant={article.status === 'published' ? 'default' : 'secondary'} className="text-xs">
+                            <Badge variant={article.status === 'published' ? 'default' : 'secondary'} className={`text-xs ${article.status === 'published' ? 'bg-orange text-white' : 'bg-navy/10 text-navy'}`}>
                               {article.status === 'published' ? 'Publicado' : 
                                article.status === 'scheduled' ? 'Agendado' : 'Rascunho'}
                             </Badge>
@@ -385,6 +399,7 @@ const AdminDashboard = () => {
                               size="sm" 
                               variant="outline"
                               onClick={() => window.open(`/blog/${article.slug}`, '_blank')}
+                              className="border-navy/20 text-navy hover:bg-navy hover:text-white"
                             >
                               <Eye size={14} className="mr-1" />
                               Ver
@@ -394,6 +409,7 @@ const AdminDashboard = () => {
                             size="sm" 
                             variant="outline"
                             onClick={() => navigate(`/admin/articles/edit/${article.id}`)}
+                            className="border-navy/20 text-navy hover:bg-navy hover:text-white"
                           >
                             <Edit size={14} className="mr-1" />
                             Editar
@@ -403,7 +419,7 @@ const AdminDashboard = () => {
                               size="sm" 
                               variant="outline"
                               onClick={() => handleDeleteArticle(article.id)}
-                              className="text-red-600 hover:text-red-700"
+                              className="text-red-600 hover:text-red-700 border-red-200 hover:bg-red-50"
                             >
                               <Trash2 size={14} />
                             </Button>
