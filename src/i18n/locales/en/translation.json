@@ -1,4 +1,3 @@
-
 {
   "nav": {
     "home": "Home",
@@ -149,11 +148,31 @@
     "subtitle": "Real testimonials from companies that transformed their businesses with us"
   },
   "timeline": {
-    "title": "Business Hours",
-    "weekdays": "Monday to Friday",
-    "hours": "9am to 6pm",
-    "weekend": "Weekends",
-    "appointment": "By appointment"
+    "title": "Company History Timeline",
+    "2018": {
+      "title": "Journey Begins",
+      "description": "First steps in the digital world with responsive website projects."
+    },
+    "2019": {
+      "title": "Service Expansion",
+      "description": "Portfolio expansion with e-commerce development and mobile applications."
+    },
+    "2020": {
+      "title": "Official Foundation",
+      "description": "Official creation of Digital Hub Agency focused on digital transformation."
+    },
+    "2022": {
+      "title": "Accelerated Growth",
+      "description": "Team expansion and acquisition of major clients in the national market."
+    },
+    "2023": {
+      "title": "Technological Innovation",
+      "description": "Implementation of cloud solutions and artificial intelligence."
+    },
+    "2024": {
+      "title": "Market Leadership",
+      "description": "Consolidation as a reference in digital solutions in Northeast Brazil."
+    }
   },
   "footer": {
     "company": "Digital Hub Agency",
