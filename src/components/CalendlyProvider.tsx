@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { useCalendlyDialog } from '@/hooks/useCalendlyDialog';
+import { useCalendlyModal } from '@/hooks/useCalendlyModal';
 
 type CalendlyContextType = {
   openCalendly: () => void;
@@ -10,12 +10,12 @@ type CalendlyContextType = {
 export const CalendlyContext = React.createContext<CalendlyContextType | undefined>(undefined);
 
 export const CalendlyProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const { openCalendly, closeCalendly, CalendlyDialog } = useCalendlyDialog();
+  const { openCalendly, closeCalendly, CalendlyModal } = useCalendlyModal();
 
   return (
     <CalendlyContext.Provider value={{ openCalendly, closeCalendly }}>
       {children}
-      <CalendlyDialog />
+      <CalendlyModal />
     </CalendlyContext.Provider>
   );
 };

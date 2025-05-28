@@ -32,12 +32,11 @@ const ContactInfo: React.FC = () => {
         </div>
         <div className="flex items-center md:col-span-2">
           <Calendar className="mr-3 text-orange" />
-          <div>
-            <p className="font-medium">{t('form.onlineScheduling')}</p>
+          <div className="flex-1">
+            <p className="font-medium mb-2">{t('form.onlineScheduling')}</p>
             <Button 
-              variant="link" 
               onClick={() => openCalendly()}
-              className="p-0 h-auto text-sm text-gray-200 hover:text-orange"
+              className="bg-orange hover:bg-orange-dark text-white px-4 py-2 rounded-md transition-colors"
             >
               {t('form.scheduleCalendly')}
             </Button>
