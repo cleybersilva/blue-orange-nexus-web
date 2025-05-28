@@ -144,32 +144,57 @@ export const useArticleBySlug = (slug: string) => {
   });
 };
 
-// Hook para buscar artigo por ID (para edição) - CORRIGIDO
+// Hook para buscar artigo por ID (para edição) - CORRIGIDO COMPLETAMENTE
 export const useArticleById = (id: string) => {
   return useQuery({
     queryKey: ['article-edit', id],
     queryFn: async () => {
-      console.log('useArticleById - Fetching article by ID:', id);
+      console.log('useArticleById - Starting fetch for ID:', id);
       
-      if (!id) {
-        console.log('useArticleById - No ID provided');
+      if (!id || id === 'undefined' || id === 'null') {
+        console.log('useArticleById - Invalid ID provided:', id);
         return null;
       }
+      
+      console.log('useArticleById - Making Supabase query for ID:', id);
       
       const { data, error } = await supabase
         .from('articles')
         .select(`
-          *,
-          author:authors(*)
+          id,
+          title,
+          subtitle,
+          slug,
+          summary,
+          content,
+          cover_image_url,
+          author_id,
+          status,
+          published_at,
+          scheduled_at,
+          read_time,
+          category,
+          views,
+          shares,
+          likes,
+          created_at,
+          updated_at,
+          author:authors(
+            id,
+            name,
+            bio,
+            avatar_url,
+            social_links
+          )
         `)
         .eq('id', id)
-        .maybeSingle(); // Mudança para maybeSingle() para evitar erro se não encontrar
+        .maybeSingle();
 
-      console.log('useArticleById - Raw response data:', data);
-      console.log('useArticleById - Raw response error:', error);
+      console.log('useArticleById - Supabase response data:', data);
+      console.log('useArticleById - Supabase response error:', error);
 
       if (error) {
-        console.error('useArticleById - Error fetching article by ID:', error);
+        console.error('useArticleById - Error fetching article:', error);
         throw error;
       }
 
@@ -178,13 +203,26 @@ export const useArticleById = (id: string) => {
         return null;
       }
       
-      console.log('useArticleById - Final article data:', data);
+      // Log detalhado dos dados encontrados
+      console.log('useArticleById - Article found:', {
+        id: data.id,
+        title: data.title,
+        subtitle: data.subtitle,
+        summary: data.summary,
+        content: data.content ? `${data.content.substring(0, 100)}...` : 'No content',
+        author_id: data.author_id,
+        status: data.status,
+        category: data.category,
+        cover_image_url: data.cover_image_url,
+        read_time: data.read_time
+      });
+      
       return data as Article;
     },
-    enabled: !!id,
-    retry: 3,
-    staleTime: 1000 * 30, // Cache reduzido para 30 segundos
-    refetchOnWindowFocus: true, // Permitir refetch quando a janela ganhar foco
-    refetchOnMount: true // Sempre refetch quando o hook for montado
+    enabled: !!id && id !== 'undefined' && id !== 'null',
+    retry: 2,
+    staleTime: 1000 * 10, // Cache muito baixo para edição
+    refetchOnWindowFocus: true,
+    refetchOnMount: true
   });
 };

@@ -16,15 +16,20 @@ const ArticleEditor = () => {
   const navigate = useNavigate();
   const isEditing = !!id;
   
-  const { data: article, isLoading: articleLoading, refetch: refetchArticle } = useArticleById(id || '');
+  console.log('ArticleEditor - Component mounted with ID:', id);
+  console.log('ArticleEditor - Is editing mode:', isEditing);
+  
+  const { data: article, isLoading: articleLoading, error: articleError, refetch: refetchArticle } = useArticleById(id || '');
   const { data: authors } = useAuthors();
   const createArticle = useCreateArticle();
   const updateArticle = useUpdateArticle();
 
-  console.log('ArticleEditor - ID:', id);
-  console.log('ArticleEditor - Article data:', article);
-  console.log('ArticleEditor - Article loading:', articleLoading);
-  console.log('ArticleEditor - Is editing:', isEditing);
+  console.log('ArticleEditor - Hook results:', {
+    article: article,
+    articleLoading: articleLoading,
+    articleError: articleError,
+    authorsCount: authors?.length || 0
+  });
 
   const [formData, setFormData] = useState({
     title: '',
@@ -40,14 +45,38 @@ const ArticleEditor = () => {
     scheduled_at: ''
   });
 
-  // Efeito para popular o formulário com os dados do artigo
+  const [isFormPopulated, setIsFormPopulated] = useState(false);
+
+  // Debug do estado do formulário
   useEffect(() => {
-    console.log('ArticleEditor - useEffect triggered with article:', article);
+    console.log('ArticleEditor - Form data state:', formData);
+    console.log('ArticleEditor - Is form populated:', isFormPopulated);
+  }, [formData, isFormPopulated]);
+
+  // Efeito principal para popular o formulário
+  useEffect(() => {
+    console.log('ArticleEditor - Main effect triggered:', {
+      isEditing,
+      hasArticle: !!article,
+      articleId: article?.id,
+      isFormPopulated
+    });
     
-    if (article && isEditing) {
-      console.log('ArticleEditor - Populating form with article data');
+    if (isEditing && article && !isFormPopulated) {
+      console.log('ArticleEditor - Populating form with article data:', article);
       
-      setFormData({
+      // Converter datas para formato input datetime-local
+      const formatDateForInput = (dateString: string | null) => {
+        if (!dateString) return '';
+        try {
+          return new Date(dateString).toISOString().slice(0, 16);
+        } catch (error) {
+          console.error('Error formatting date:', error);
+          return '';
+        }
+      };
+      
+      const newFormData = {
         title: article.title || '',
         subtitle: article.subtitle || '',
         summary: article.summary || '',
@@ -57,25 +86,27 @@ const ArticleEditor = () => {
         category: article.category || 'Tecnologia',
         cover_image_url: article.cover_image_url || '',
         read_time: article.read_time || 5,
-        published_at: article.published_at || '',
-        scheduled_at: article.scheduled_at || ''
-      });
+        published_at: formatDateForInput(article.published_at),
+        scheduled_at: formatDateForInput(article.scheduled_at)
+      };
       
-      console.log('ArticleEditor - Form populated with data:', {
-        title: article.title,
-        subtitle: article.subtitle,
-        summary: article.summary,
-        author_id: article.author_id,
-        status: article.status,
-        category: article.category
-      });
+      console.log('ArticleEditor - Setting new form data:', newFormData);
+      setFormData(newFormData);
+      setIsFormPopulated(true);
+      
+      console.log('ArticleEditor - Form populated successfully');
+    } else if (!isEditing) {
+      // Reset para novo artigo
+      setIsFormPopulated(false);
+      console.log('ArticleEditor - New article mode, form reset');
     }
-  }, [article, isEditing]);
+  }, [article, isEditing, isFormPopulated]);
 
-  // Efeito para debug do formData
+  // Efeito para resetar quando o ID muda
   useEffect(() => {
-    console.log('ArticleEditor - Form data state updated:', formData);
-  }, [formData]);
+    console.log('ArticleEditor - ID changed, resetting form population flag');
+    setIsFormPopulated(false);
+  }, [id]);
 
   const generateSlug = (title: string) => {
     return title
@@ -126,22 +157,54 @@ const ArticleEditor = () => {
 
   const handleRefreshArticle = () => {
     console.log('ArticleEditor - Manually refreshing article data');
+    setIsFormPopulated(false);
     refetchArticle();
   };
 
+  // Loading state
   if (articleLoading && isEditing) {
+    console.log('ArticleEditor - Showing loading state');
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <Loader2 className="w-8 h-8 animate-spin text-orange mx-auto mb-4" />
           <p className="text-gray-600">Carregando dados do artigo...</p>
+          <p className="text-sm text-gray-500 mt-2">ID: {id}</p>
         </div>
       </div>
     );
   }
 
-  // Verificar se o artigo não foi encontrado
-  if (isEditing && !articleLoading && !article) {
+  // Error state
+  if (articleError && isEditing) {
+    console.log('ArticleEditor - Showing error state');
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <Card className="w-full max-w-md">
+          <CardHeader>
+            <CardTitle className="text-center text-navy">Erro ao Carregar Artigo</CardTitle>
+          </CardHeader>
+          <CardContent className="text-center">
+            <p className="text-gray-600 mb-4">
+              Erro: {articleError?.message || 'Erro desconhecido'}
+            </p>
+            <div className="space-y-2">
+              <Button onClick={handleRefreshArticle} className="bg-orange hover:bg-orange-dark text-white">
+                Tentar Novamente
+              </Button>
+              <Button variant="outline" onClick={() => navigate('/admin/blog')}>
+                Voltar ao Dashboard
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
+  // Not found state
+  if (isEditing && !articleLoading && !article && !articleError) {
+    console.log('ArticleEditor - Showing not found state');
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <Card className="w-full max-w-md">
@@ -150,6 +213,7 @@ const ArticleEditor = () => {
           </CardHeader>
           <CardContent className="text-center">
             <p className="text-gray-600 mb-4">O artigo que você está tentando editar não foi encontrado.</p>
+            <p className="text-sm text-gray-500 mb-4">ID: {id}</p>
             <Button onClick={() => navigate('/admin/blog')} className="bg-orange hover:bg-orange-dark text-white">
               Voltar ao Dashboard
             </Button>
@@ -158,6 +222,8 @@ const ArticleEditor = () => {
       </div>
     );
   }
+
+  console.log('ArticleEditor - Rendering main form');
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -204,7 +270,7 @@ const ArticleEditor = () => {
                   <CardTitle>Conteúdo do Artigo</CardTitle>
                   {isEditing && (
                     <CardDescription>
-                      Editando: {article?.title || 'Carregando...'}
+                      Editando: {article?.title || formData.title || 'Carregando...'}
                     </CardDescription>
                   )}
                 </CardHeader>
@@ -348,8 +414,8 @@ const ArticleEditor = () => {
                       <Input
                         id="published_at"
                         type="datetime-local"
-                        value={formData.published_at ? new Date(formData.published_at).toISOString().slice(0, 16) : ''}
-                        onChange={(e) => setFormData({ ...formData, published_at: e.target.value ? new Date(e.target.value).toISOString() : '' })}
+                        value={formData.published_at}
+                        onChange={(e) => setFormData({ ...formData, published_at: e.target.value })}
                       />
                     </div>
                   )}
@@ -360,8 +426,8 @@ const ArticleEditor = () => {
                       <Input
                         id="scheduled_at"
                         type="datetime-local"
-                        value={formData.scheduled_at ? new Date(formData.scheduled_at).toISOString().slice(0, 16) : ''}
-                        onChange={(e) => setFormData({ ...formData, scheduled_at: e.target.value ? new Date(e.target.value).toISOString() : '' })}
+                        value={formData.scheduled_at}
+                        onChange={(e) => setFormData({ ...formData, scheduled_at: e.target.value })}
                         required={formData.status === 'scheduled'}
                       />
                     </div>
