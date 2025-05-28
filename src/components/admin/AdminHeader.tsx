@@ -13,11 +13,11 @@ const AdminHeader: React.FC<AdminHeaderProps> = ({ subtitle }) => {
       <Link to="/" className="inline-block">
         <span className="text-3xl font-bold">
           <span className="text-orange">Agência</span>
-          <span className="text-navy">Digital</span>
-          <HubHighlight />
+          <span className="text-white">Digital</span>
+          <HubHighlight className="text-white" />
         </span>
       </Link>
-      <p className="text-gray-600 mt-2">{subtitle}</p>
+      <p className="text-white/80 mt-2 font-medium">{subtitle}</p>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Loader2 } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { useIsApprovedAdmin, useMyAdminRequest, useCreateAdminRequest } from '@/hooks/useBlogData';
@@ -29,7 +29,12 @@ const AdminLoginPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log('AdminLoginPage - User:', user?.email);
+    console.log('AdminLoginPage - Is Approved Admin:', isApprovedAdmin);
+    console.log('AdminLoginPage - Checking Admin:', checkingAdmin);
+    
     if (user && isApprovedAdmin) {
+      console.log('AdminLoginPage - Redirecting to admin dashboard');
       navigate('/admin/blog');
     }
   }, [user, isApprovedAdmin, navigate]);
@@ -41,21 +46,29 @@ const AdminLoginPage = () => {
 
     try {
       if (isSignUp) {
+        console.log('AdminLoginPage - Attempting sign up for:', email);
         const { error } = await signUp(email, password, fullName);
         if (error) {
+          console.error('AdminLoginPage - Sign up error:', error);
           setError(error.message);
         } else {
+          console.log('AdminLoginPage - Sign up successful');
           setError('Conta criada com sucesso! Agora você pode solicitar acesso administrativo.');
           setIsSignUp(false);
           setShowAccessRequest(true);
         }
       } else {
+        console.log('AdminLoginPage - Attempting sign in for:', email);
         const { error } = await signIn(email, password);
         if (error) {
+          console.error('AdminLoginPage - Sign in error:', error);
           setError('Credenciais inválidas. Verifique seu email e senha.');
+        } else {
+          console.log('AdminLoginPage - Sign in successful');
         }
       }
     } catch (err) {
+      console.error('AdminLoginPage - Unexpected error:', err);
       setError('Erro inesperado. Tente novamente.');
     } finally {
       setLoading(false);
@@ -82,21 +95,22 @@ const AdminLoginPage = () => {
   // Mostrar loader durante verificações
   if (checkingAdmin || checkingRequest) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-navy flex items-center justify-center">
         <Loader2 className="w-8 h-8 animate-spin text-orange" />
       </div>
     );
   }
 
-  // Layout base da página
+  // Layout base da página para outros estados
   const PageLayout = ({ children }: { children: React.ReactNode }) => (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-navy flex items-center justify-center p-4">
       <div className="w-full max-w-md">
+        <AdminHeader subtitle="Painel Administrativo" />
         {children}
         <div className="text-center mt-6">
-          <Link to="/" className="text-gray-600 hover:text-orange transition-colors">
+          <a href="/" className="text-white/80 hover:text-orange transition-colors font-medium">
             ← Voltar ao site
-          </Link>
+          </a>
         </div>
       </div>
     </div>
@@ -106,7 +120,6 @@ const AdminLoginPage = () => {
   if (user && myRequest && !checkingAdmin && !checkingRequest) {
     return (
       <PageLayout>
-        <AdminHeader subtitle="Status da Solicitação" />
         <RequestStatusCard request={myRequest} />
       </PageLayout>
     );
@@ -116,7 +129,6 @@ const AdminLoginPage = () => {
   if (user && showAccessRequest) {
     return (
       <PageLayout>
-        <AdminHeader subtitle="Solicitar Acesso" />
         <AccessRequestForm
           fullName={fullName}
           setFullName={setFullName}
@@ -136,33 +148,29 @@ const AdminLoginPage = () => {
   if (user && !checkingAdmin && !isApprovedAdmin && !showAccessRequest) {
     return (
       <PageLayout>
-        <AdminHeader subtitle="Acesso Não Autorizado" />
         <AccessDeniedCard onRequestAccess={() => setShowAccessRequest(true)} />
       </PageLayout>
     );
   }
 
-  // Formulário de login/signup
+  // Formulário de login/signup - não usa PageLayout pois o AdminLoginForm já tem seu próprio layout
   return (
-    <PageLayout>
-      <AdminHeader subtitle="Painel Administrativo" />
-      <AdminLoginForm
-        email={email}
-        setEmail={setEmail}
-        password={password}
-        setPassword={setPassword}
-        fullName={fullName}
-        setFullName={setFullName}
-        isSignUp={isSignUp}
-        setIsSignUp={setIsSignUp}
-        showPassword={showPassword}
-        setShowPassword={setShowPassword}
-        error={error}
-        setError={setError}
-        loading={loading}
-        onSubmit={handleSubmit}
-      />
-    </PageLayout>
+    <AdminLoginForm
+      email={email}
+      setEmail={setEmail}
+      password={password}
+      setPassword={setPassword}
+      fullName={fullName}
+      setFullName={setFullName}
+      isSignUp={isSignUp}
+      setIsSignUp={setIsSignUp}
+      showPassword={showPassword}
+      setShowPassword={setShowPassword}
+      error={error}
+      setError={setError}
+      loading={loading}
+      onSubmit={handleSubmit}
+    />
   );
 };
 
