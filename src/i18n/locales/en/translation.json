@@ -1,10 +1,11 @@
-
 {
   "nav": {
     "home": "Home",
     "about": "About",
     "services": "Services",
     "projects": "Projects",
+    "portfolio": "Portfolio",
+    "testimonials": "Testimonials",
     "blog": "Blog",
     "contact": "Contact",
     "schedule": "Schedule"
@@ -13,12 +14,13 @@
     "title": "We transform ideas into",
     "subtitle": "digital solutions",
     "description": "We create websites, applications and digital marketing strategies that drive your business growth.",
-    "ctaButton": "Contact Us",
+    "ctaButton": "Discover our services",
     "scheduleButton": "Schedule Meeting"
   },
   "services": {
     "title": "Our Services",
     "subtitle": "Complete solutions to transform your digital business",
+    "viewAll": "Discover all services",
     "websites": {
       "title": "Website Development",
       "description": "Professional and responsive websites that convert visitors into customers."
@@ -136,7 +138,9 @@
   "footer": {
     "company": "Digital Hub Agency",
     "description": "We transform ideas into digital solutions that generate real results for your business.",
+    "aboutText": "We are a complete digital agency, specialized in transforming ideas into results through innovative digital solutions.",
     "quickLinks": "Quick Links",
+    "links": "Useful Links",
     "services": "Services",
     "contact": "Contact",
     "newsletter": "Newsletter",
@@ -146,9 +150,12 @@
     "rights": "All rights reserved.",
     "privacy": "Privacy Policy",
     "terms": "Terms of Use",
-    "address": "São Paulo, SP - Brazil",
+    "address": "João Pessoa, PB - Brazil",
     "success": "Success!",
-    "subscribed": "You have been subscribed to our newsletter."
+    "subscribed": "You have been subscribed to our newsletter.",
+    "error": "Error",
+    "emailInvalid": "Please enter a valid email",
+    "faq": "Frequently Asked Questions"
   },
   "form": {
     "scheduleTitle": "Schedule your Free Consultation",

@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { 
   Facebook, 
@@ -7,20 +8,22 @@ import {
   Youtube, 
   ChevronRight,
   MapPin,
-  Mail
+  Mail,
+  Phone
 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { useCalendly } from '@/components/CalendlyProvider';
-import { toast } from "@/components/ui/use-toast";
 import { useTranslation } from 'react-i18next';
+import { useNewsletter } from '@/hooks/useNewsletter';
 import HubHighlight from './ui/hub-highlight';
 
 const Footer: React.FC = () => {
   const { openCalendly } = useCalendly();
   const [email, setEmail] = useState('');
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const { subscribe, isLoading } = useNewsletter();
   
   const scrollToSection = (sectionId: string) => {
     const section = document.getElementById(sectionId);
@@ -29,25 +32,18 @@ const Footer: React.FC = () => {
     }
   };
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  // Get contact email based on language
+  const getContactEmail = () => {
+    return i18n.language === 'en' ? 'contact@agenciadigitalhub.com' : 'contato@agenciadigitalhub.com';
+  };
+
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!email || !email.includes('@') || !email.includes('.')) {
-      toast({
-        variant: "destructive",
-        title: t('footer.error'),
-        description: t('footer.emailInvalid'),
-      });
-      return;
+    const success = await subscribe(email);
+    if (success) {
+      setEmail('');
     }
-    
-    // Simulate subscription success
-    toast({
-      title: t('footer.success'),
-      description: t('footer.subscribed'),
-    });
-    setEmail('');
-    console.log("Newsletter subscription:", email);
   };
 
   return (
@@ -86,69 +82,49 @@ const Footer: React.FC = () => {
             <h3 className="text-lg font-semibold mb-6">{t('services.title')}</h3>
             <ul className="space-y-3">
               <li>
-                <a 
-                  href="#services" 
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection('services');
-                  }}
+                <Link 
+                  to="/servicos"
                   className="text-gray-300 hover:text-orange transition-colors flex items-center"
                 >
                   <ChevronRight size={16} className="mr-2" /> 
                   {t('services.websites.title')}
-                </a>
+                </Link>
               </li>
               <li>
-                <a 
-                  href="#services" 
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection('services');
-                  }}
+                <Link 
+                  to="/servicos"
                   className="text-gray-300 hover:text-orange transition-colors flex items-center"
                 >
                   <ChevronRight size={16} className="mr-2" /> 
                   {t('services.ecommerce.title')}
-                </a>
+                </Link>
               </li>
               <li>
-                <a 
-                  href="#services" 
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection('services');
-                  }}
+                <Link 
+                  to="/servicos"
                   className="text-gray-300 hover:text-orange transition-colors flex items-center"
                 >
                   <ChevronRight size={16} className="mr-2" /> 
                   {t('services.apps.title')}
-                </a>
+                </Link>
               </li>
               <li>
-                <a 
-                  href="#services" 
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection('services');
-                  }}
+                <Link 
+                  to="/servicos"
                   className="text-gray-300 hover:text-orange transition-colors flex items-center"
                 >
                   <ChevronRight size={16} className="mr-2" /> 
                   {t('services.marketing.title')}
-                </a>
+                </Link>
               </li>
               <li>
-                <a 
-                  href="#services" 
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection('services');
-                  }}
+                <Link 
+                  to="/servicos"
                   className="text-gray-300 hover:text-orange transition-colors flex items-center"
                 >
                   <ChevronRight size={16} className="mr-2" /> 
                   {t('services.design.title')}
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -163,43 +139,16 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <a 
-                  href="#portfolio" 
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection('portfolio');
-                  }}
-                  className="text-gray-300 hover:text-orange transition-colors flex items-center"
-                >
+                <Link to="/projetos" className="text-gray-300 hover:text-orange transition-colors flex items-center">
                   <ChevronRight size={16} className="mr-2" /> 
                   {t('nav.portfolio')}
-                </a>
+                </Link>
               </li>
               <li>
-                <a 
-                  href="#testimonials" 
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection('testimonials');
-                  }}
-                  className="text-gray-300 hover:text-orange transition-colors flex items-center"
-                >
+                <Link to="/blog" className="text-gray-300 hover:text-orange transition-colors flex items-center">
                   <ChevronRight size={16} className="mr-2" /> 
-                  {t('nav.testimonials')}
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="#contact" 
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection('contact');
-                  }}
-                  className="text-gray-300 hover:text-orange transition-colors flex items-center"
-                >
-                  <ChevronRight size={16} className="mr-2" /> 
-                  {t('footer.faq')}
-                </a>
+                  {t('nav.blog')}
+                </Link>
               </li>
               <li>
                 <a 
@@ -234,37 +183,39 @@ const Footer: React.FC = () => {
                 <span className="text-gray-300">{t('footer.address')}</span>
               </li>
               <li className="flex items-center">
-                <Facebook size={18} className="mr-2 text-orange" />
+                <Phone size={18} className="mr-2 text-orange" />
                 <a href="tel:+5583988329018" className="text-gray-300 hover:text-orange">
                   (83) 98832-9018
                 </a>
               </li>
               <li className="flex items-center">
-                <Instagram size={18} className="mr-2 text-orange" />
-                <a href="mailto:contact@agenciadigital.com" className="text-gray-300 hover:text-orange">
-                  contact@agenciadigital.com
+                <Mail size={18} className="mr-2 text-orange" />
+                <a href={`mailto:${getContactEmail()}`} className="text-gray-300 hover:text-orange">
+                  {getContactEmail()}
                 </a>
               </li>
             </ul>
             
             <div className="mt-6">
               <p className="text-gray-300 mb-4">
-                {t('footer.newsletter')}
+                {t('footer.newsletterText')}
               </p>
               <form onSubmit={handleSubscribe} className="space-y-3">
                 <Input
-                  placeholder={t('footer.emailPlaceholder')}
+                  placeholder={t('footer.placeholder')}
                   className="bg-navy-light border-navy-light focus:border-orange"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
+                  disabled={isLoading}
                 />
                 <Button 
                   type="submit" 
                   className="bg-orange hover:bg-orange-dark w-full flex items-center justify-center gap-2"
+                  disabled={isLoading}
                 >
-                  {t('footer.subscribe')} <Mail size={16} />
+                  {isLoading ? "Processando..." : t('footer.subscribe')} <Mail size={16} />
                 </Button>
               </form>
             </div>

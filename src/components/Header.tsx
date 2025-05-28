@@ -65,10 +65,10 @@ const Header = () => {
   const navItems = [
     { label: t('nav.home'), path: '/' },
     { label: t('nav.about'), path: '/sobre-nos' },
-    { label: 'Serviços', path: '/servicos' },
-    { label: 'Portfólio', path: '/projetos' },
-    { label: 'Blog', path: '/blog' },
-    { label: 'Contato', path: '/agendar' },
+    { label: t('nav.services'), path: '/servicos' },
+    { label: t('nav.portfolio'), path: '/projetos' },
+    { label: t('nav.blog'), path: '/blog' },
+    { label: t('nav.contact'), path: '/agendar' },
   ];
 
   const handleScheduleClick = () => {

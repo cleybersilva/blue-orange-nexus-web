@@ -1,10 +1,11 @@
-
 {
   "nav": {
     "home": "Início",
     "about": "Sobre",
     "services": "Serviços",
     "projects": "Projetos",
+    "portfolio": "Portfólio",
+    "testimonials": "Depoimentos",
     "blog": "Blog",
     "contact": "Contato",
     "schedule": "Agendar"
@@ -13,12 +14,13 @@
     "title": "Transformamos ideias em",
     "subtitle": "soluções digitais",
     "description": "Criamos websites, aplicativos e estratégias de marketing digital que impulsionam o crescimento do seu negócio.",
-    "ctaButton": "Fale Conosco",
+    "ctaButton": "Conheça nossos serviços",
     "scheduleButton": "Agendar Reunião"
   },
   "services": {
     "title": "Nossos Serviços",
     "subtitle": "Soluções completas para transformar seu negócio digital",
+    "viewAll": "Conheça todos os serviços",
     "websites": {
       "title": "Desenvolvimento de Sites",
       "description": "Sites profissionais e responsivos que convertem visitantes em clientes."
@@ -136,7 +138,9 @@
   "footer": {
     "company": "Agência Digital Hub",
     "description": "Transformamos ideias em soluções digitais que geram resultados reais para o seu negócio.",
+    "aboutText": "Somos uma agência digital completa, especializada em transformar ideias em resultados através de soluções digitais inovadoras.",
     "quickLinks": "Links Rápidos",
+    "links": "Links Úteis",
     "services": "Serviços",
     "contact": "Contato",
     "newsletter": "Newsletter",
@@ -146,9 +150,12 @@
     "rights": "Todos os direitos reservados.",
     "privacy": "Política de Privacidade",
     "terms": "Termos de Uso",
-    "address": "São Paulo, SP - Brasil",
+    "address": "João Pessoa, PB - Brasil",
     "success": "Sucesso!",
-    "subscribed": "Você foi inscrito na nossa newsletter."
+    "subscribed": "Você foi inscrito na nossa newsletter.",
+    "error": "Erro",
+    "emailInvalid": "Por favor, insira um email válido",
+    "faq": "Perguntas Frequentes"
   },
   "form": {
     "scheduleTitle": "Agende sua Consulta Gratuita",

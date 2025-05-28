@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Calendar, User, Tag, ArrowRight, Loader2 } from 'lucide-react';
 import { useBlogArticles } from '@/hooks/useBlogData';
 import { format } from 'date-fns';
+import HubHighlight from '@/components/ui/hub-highlight';
 
 const BlogPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('Todos');
@@ -67,7 +68,10 @@ const BlogPage = () => {
         <div className="container-custom">
           {/* Hero Section */}
           <div className="text-center mb-16">
-            <h1 className="heading-lg mb-6">Blog AgênciaDigital</h1>
+            <h1 className="heading-lg mb-6 flex items-center justify-center gap-2">
+              Blog <span className="text-orange">Agência</span><span className="text-navy">Digital</span>
+              <HubHighlight />
+            </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Insights sobre tecnologia, marketing digital, IA e tendências que moldam o futuro dos negócios digitais.
             </p>

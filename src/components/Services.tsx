@@ -8,9 +8,12 @@ import {
   BarChartBig, 
   Users, 
   Palette,
-  Vote 
+  Vote,
+  ArrowRight
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
 interface ServiceProps {
   icon: React.ReactNode;
@@ -84,7 +87,7 @@ const Services: React.FC = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
           {services.map((service, index) => (
             <ServiceCard 
               key={index}
@@ -93,6 +96,15 @@ const Services: React.FC = () => {
               description={service.description}
             />
           ))}
+        </div>
+
+        <div className="text-center">
+          <Link to="/servicos">
+            <Button className="bg-orange hover:bg-orange-dark text-white flex items-center gap-2 mx-auto">
+              {t('services.viewAll')}
+              <ArrowRight size={16} />
+            </Button>
+          </Link>
         </div>
       </div>
     </section>
