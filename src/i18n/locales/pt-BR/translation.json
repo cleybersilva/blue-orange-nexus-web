@@ -1,7 +1,7 @@
 {
   "nav": {
     "home": "Início",
-    "about": "Sobre",
+    "about": "Sobre Nós",
     "services": "Serviços",
     "projects": "Projetos",
     "portfolio": "Portfólio",
@@ -34,7 +34,7 @@
       "description": "Apps mobile e web personalizados para iOS e Android."
     },
     "lms": {
-      "title": "Plataformas de Ensino (AVA)",
+      "title": "Plataformas EAD",
       "description": "Ambientes virtuais de aprendizagem completos e interativos."
     },
     "marketing": {
@@ -58,8 +58,8 @@
   "aboutPage": {
     "ourHistory": "Nossa História",
     "historyIntro": "Fundada em 2018, a Agência Digital Hub nasceu com o propósito de democratizar o acesso a soluções digitais de qualidade. Começamos como uma pequena equipe de desenvolvedores e designers apaixonados por tecnologia e hoje somos referência em transformação digital para empresas de todos os portes.",
-    "contactUs": "Fale Conosco",
-    "scheduleCall": "Agendar Consulta",
+    "contactUs": "Entre em Contato",
+    "scheduleCall": "Agendar Ligação",
     "hero": {
       "title": "Sobre a Agência Digital Hub",
       "subtitle": "Transformando ideias em soluções digitais inovadoras desde 2018"
@@ -73,13 +73,13 @@
       "mission": "Nossa Missão",
       "missionText": "Capacitar empresas através de soluções digitais inovadoras que geram resultados reais e sustentáveis.",
       "vision": "Nossa Visão",
-      "visionText": "Ser reconhecida como a principal agência digital do Brasil, referência em inovação e excelência em atendimento.",
+      "visionText": "Ser reconhecida como a principal agência digital do Brasil, referência em inovação e excelência no atendimento.",
       "values": "Nossos Valores",
       "valuesList": [
         "Excelência",
         "Inovação",
         "Transparência",
-        "Compromisso",
+        "Comprometimento",
         "Resultados"
       ]
     },
@@ -102,11 +102,11 @@
       "subtitle": "O que nos torna únicos no mercado digital",
       "agility": {
         "title": "Agilidade",
-        "description": "Entregamos projetos com rapidez sem comprometer a qualidade."
+        "description": "Entregamos projetos rapidamente sem comprometer a qualidade."
       },
       "innovation": {
         "title": "Inovação",
-        "description": "Utilizamos as mais modernas tecnologias e tendências do mercado."
+        "description": "Utilizamos as tecnologias mais modernas e tendências do mercado."
       },
       "team": {
         "title": "Equipe Especializada",
@@ -118,18 +118,18 @@
       },
       "cloud": {
         "title": "Tecnologia em Nuvem",
-        "description": "Soluções escaláveis e confiáveis na nuvem."
+        "description": "Soluções em nuvem escaláveis e confiáveis."
       },
       "support": {
         "title": "Suporte 24/7",
-        "description": "Atendimento contínuo para garantir o sucesso do seu projeto."
+        "description": "Suporte contínuo para garantir o sucesso do seu projeto."
       }
     },
     "cta": {
       "title": "Pronto para transformar seu negócio?",
       "subtitle": "Entre em contato conosco e descubra como podemos ajudar sua empresa a alcançar o próximo nível digital.",
       "schedule": "Agendar Consulta Gratuita",
-      "contact": "Fale Conosco"
+      "contact": "Entrar em Contato"
     },
     "location": {
       "title": "Nossa Localização",
@@ -154,12 +154,12 @@
       "description": "Primeiros passos no mundo digital com projetos de websites responsivos."
     },
     "2019": {
-      "title": "Expansão dos Serviços",
+      "title": "Expansão de Serviços",
       "description": "Ampliação do portfólio com desenvolvimento de e-commerce e aplicativos mobile."
     },
     "2020": {
       "title": "Fundação Oficial",
-      "description": "Criação oficial da Agência Digital Hub com foco em transformação digital."
+      "description": "Criação oficial da Agência Digital Hub focada em transformação digital."
     },
     "2022": {
       "title": "Crescimento Acelerado",
@@ -195,9 +195,9 @@
     "terms": "Termos de Uso",
     "address": "João Pessoa, PB - Brasil",
     "success": "Sucesso!",
-    "subscribed": "Você foi inscrito na nossa newsletter.",
+    "subscribed": "Você foi inscrito em nossa newsletter.",
     "error": "Erro",
-    "emailInvalid": "Por favor, insira um email válido",
+    "emailInvalid": "Por favor, insira um e-mail válido",
     "faq": "Perguntas Frequentes"
   },
   "form": {
@@ -216,7 +216,7 @@
     "email": "E-mail",
     "emailPlaceholder": "seu@email.com",
     "phone": "Telefone",
-    "phonePlaceholder": "(00) 00000-0000",
+    "phonePlaceholder": "(83) 98832-9018",
     "role": "Cargo/Função",
     "rolePlaceholder": "Seu cargo na empresa",
     "aboutCompany": "Sobre sua Empresa",
@@ -228,8 +228,8 @@
     "companySize": "Tamanho da Empresa",
     "companySizePlaceholder": "Ex: 1-10, 11-50, 51-200 funcionários",
     "website": "Website",
-    "websitePlaceholder": "https://seusite.com.br",
-    "websiteDescription": "Se sua empresa já possui um website, informe aqui",
+    "websitePlaceholder": "https://seusite.com",
+    "websiteDescription": "Se sua empresa já possui um site, informe aqui",
     "aboutProject": "Sobre seu Projeto",
     "projectDetails": "Conte-nos sobre o projeto que você tem em mente",
     "serviceType": "Tipo de Serviço",
@@ -263,7 +263,7 @@
     "systemInfo": "Informações do Sistema",
     "submissionTime": "Horário de Envio",
     "language": "Idioma",
-    "size": "Porte",
+    "size": "Tamanho",
     "description": "Descrição",
     "budget": "Orçamento",
     "notProvided": "Não informado",
@@ -272,13 +272,16 @@
     "willContactSoon": "Entraremos em contato em breve para discutir seu projeto.",
     "validationError": "Erro de Validação",
     "submissionError": "Erro no Envio",
-    "pleaseSelectContactMethod": "Por favor, selecione pelo menos uma forma de contato.",
+    "pleaseSelectContactMethod": "Por favor, selecione pelo menos um método de contato.",
+    "pleaseCheckRequiredFields": "Por favor, verifique os campos obrigatórios.",
+    "stepCompleted": "Etapa Concluída",
+    "proceedingToNextStep": "Prosseguindo para a próxima etapa...",
     "needImmediateHelp": "Precisa de ajuda imediata?",
     "contactDirectly": "Entre em contato diretamente pelos canais abaixo:",
     "phoneWhatsApp": "Telefone/WhatsApp",
     "scheduleYourMeeting": "Agende sua Reunião",
     "backToForm": "Voltar ao Formulário",
-    "lang": "pt",
+    "lang": "pt-BR",
     "errors": {
       "nameMin": "Nome deve ter pelo menos 3 caracteres",
       "emailInvalid": "E-mail inválido",

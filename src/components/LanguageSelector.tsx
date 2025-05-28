@@ -67,7 +67,7 @@ const LanguageSelector = () => {
           <DropdownMenuItem
             key={language.code}
             onClick={() => handleLanguageChange(language.code)}
-            className={`flex items-center gap-3 cursor-pointer text-white hover:bg-navy-light transition-colors duration-200 py-3 px-4 ${
+            className={`flex items-center gap-3 cursor-pointer text-white hover:bg-orange/20 hover:text-white transition-colors duration-200 py-3 px-4 ${
               currentLanguage === language.code ? 'bg-orange/20 border-l-4 border-orange' : ''
             }`}
           >

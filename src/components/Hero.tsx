@@ -46,7 +46,7 @@ const Hero: React.FC = () => {
                   }
                 }}
               >
-                {t('hero.cta')}
+                {t('hero.ctaButton')}
               </Button>
             </div>
           </div>
