@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Loader2 } from 'lucide-react';
@@ -20,6 +21,7 @@ const AdminLoginPage = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [showAccessRequest, setShowAccessRequest] = useState(false);
+  const [hasRedirected, setHasRedirected] = useState(false);
   
   const { signIn, signUp, user } = useAuth();
   const { data: isApprovedAdmin, isLoading: checkingAdmin } = useIsApprovedAdmin();
@@ -27,52 +29,56 @@ const AdminLoginPage = () => {
   const createAdminRequest = useCreateAdminRequest();
   const navigate = useNavigate();
 
+  // Função centralizada para redirecionamento
+  const redirectToDashboard = () => {
+    if (!hasRedirected) {
+      console.log('AdminLoginPage - Redirecting to dashboard...');
+      setHasRedirected(true);
+      navigate('/admin/blog', { replace: true });
+    }
+  };
+
+  // Effect principal para verificar permissões e redirecionar
   useEffect(() => {
+    console.log('AdminLoginPage - Main effect triggered');
     console.log('AdminLoginPage - User:', user?.email);
-    console.log('AdminLoginPage - User ID:', user?.id);
     console.log('AdminLoginPage - Is Approved Admin:', isApprovedAdmin);
-    console.log('AdminLoginPage - My Request:', myRequest);
     console.log('AdminLoginPage - Checking Admin:', checkingAdmin);
     console.log('AdminLoginPage - Checking Request:', checkingRequest);
+    console.log('AdminLoginPage - Has Redirected:', hasRedirected);
     
-    // PRIORIDADE MÁXIMA: Admin Root Cleyber
+    // Bypass completo para admin root
     if (user?.email === 'cleyber.silva@live.com') {
-      console.log('AdminLoginPage - ROOT ADMIN CLEYBER DETECTED - IMMEDIATE REDIRECT');
-      navigate('/admin/blog', { replace: true });
+      console.log('AdminLoginPage - ROOT ADMIN DETECTED - IMMEDIATE REDIRECT');
+      redirectToDashboard();
       return;
     }
     
-    // Se o usuário está logado e as verificações terminaram
-    if (user && !checkingAdmin && !checkingRequest) {
-      console.log('AdminLoginPage - All checks completed, processing permissions...');
-      console.log('AdminLoginPage - Full permission object:', isApprovedAdmin);
-      
-      // Verificação para qualquer admin root
-      if (isApprovedAdmin && (isApprovedAdmin.isRoot || 
-          (isApprovedAdmin.isAdmin && isApprovedAdmin.profile?.admin_level === 'root'))) {
-        console.log('AdminLoginPage - ROOT ADMIN detected, redirecting immediately');
-        navigate('/admin/blog', { replace: true });
-        return;
-      }
-      
-      // Qualquer tipo de admin aprovado
-      if (isApprovedAdmin && (isApprovedAdmin.isAdmin || isApprovedAdmin.isAuthorAdmin || isApprovedAdmin.isAuthor)) {
-        console.log('AdminLoginPage - User has admin access, redirecting to dashboard');
-        navigate('/admin/blog', { replace: true });
-        return;
-      }
-      
-      console.log('AdminLoginPage - User does not have admin access');
-      console.log('AdminLoginPage - isApprovedAdmin detailed:', {
-        exists: !!isApprovedAdmin,
-        isAdmin: isApprovedAdmin?.isAdmin,
-        isRoot: isApprovedAdmin?.isRoot,
-        isAuthorAdmin: isApprovedAdmin?.isAuthorAdmin,
-        isAuthor: isApprovedAdmin?.isAuthor,
-        profile: isApprovedAdmin?.profile
-      });
+    // Se ainda está carregando, aguardar
+    if (checkingAdmin || checkingRequest) {
+      console.log('AdminLoginPage - Still loading permissions...');
+      return;
     }
-  }, [user, isApprovedAdmin, myRequest, checkingAdmin, checkingRequest, navigate]);
+    
+    // Se usuário está logado e as verificações terminaram
+    if (user && !checkingAdmin && !checkingRequest) {
+      console.log('AdminLoginPage - Processing permissions for user:', user.email);
+      
+      // Verificar qualquer tipo de admin aprovado
+      if (isApprovedAdmin && (
+        isApprovedAdmin.isAdmin || 
+        isApprovedAdmin.isRoot || 
+        isApprovedAdmin.isAuthorAdmin || 
+        isApprovedAdmin.isAuthor
+      )) {
+        console.log('AdminLoginPage - User has admin permissions, redirecting');
+        redirectToDashboard();
+        return;
+      }
+      
+      console.log('AdminLoginPage - User does not have admin permissions');
+    }
+  }, [user, isApprovedAdmin, checkingAdmin, checkingRequest, hasRedirected, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -91,8 +97,7 @@ const AdminLoginPage = () => {
           
           // Verificação especial para admin root após signup
           if (email === 'cleyber.silva@live.com') {
-            console.log('AdminLoginPage - Root admin signed up, redirecting immediately');
-            navigate('/admin/blog', { replace: true });
+            console.log('AdminLoginPage - Root admin signed up, will redirect after auth state change');
             return;
           }
           
@@ -107,14 +112,8 @@ const AdminLoginPage = () => {
           console.error('AdminLoginPage - Sign in error:', error);
           setError('Credenciais inválidas. Verifique seu email e senha.');
         } else {
-          console.log('AdminLoginPage - Sign in successful');
-          
-          // Verificação especial para admin root após login
-          if (email === 'cleyber.silva@live.com') {
-            console.log('AdminLoginPage - Root admin logged in, redirecting immediately');
-            navigate('/admin/blog', { replace: true });
-            return;
-          }
+          console.log('AdminLoginPage - Sign in successful, auth state will handle redirect');
+          // Não fazer redirect aqui - deixar o useEffect handle
         }
       }
     } catch (err) {
@@ -142,24 +141,20 @@ const AdminLoginPage = () => {
     }
   };
 
-  // Mostrar loader durante verificações (exceto para admin root)
+  // Mostrar loader durante verificações iniciais
   if (checkingAdmin || checkingRequest) {
-    // Bypass loader para admin root
-    if (user?.email === 'cleyber.silva@live.com') {
-      console.log('AdminLoginPage - Root admin bypassing loader, redirecting...');
-      navigate('/admin/blog', { replace: true });
-      return null;
-    }
-    
-    console.log('AdminLoginPage - Still checking permissions...');
+    console.log('AdminLoginPage - Showing loader while checking permissions');
     return (
       <div className="min-h-screen bg-navy flex items-center justify-center">
-        <Loader2 className="w-8 h-8 animate-spin text-orange" />
+        <div className="text-center">
+          <Loader2 className="w-8 h-8 animate-spin text-orange mx-auto mb-4" />
+          <p className="text-white/80">Verificando permissões...</p>
+        </div>
       </div>
     );
   }
 
-  // Layout base da página para outros estados
+  // Layout base da página
   const PageLayout = ({ children }: { children: React.ReactNode }) => (
     <div className="min-h-screen bg-navy flex items-center justify-center p-4">
       <div className="w-full max-w-md">
@@ -174,55 +169,8 @@ const AdminLoginPage = () => {
     </div>
   );
 
-  // Debug especial para verificar estado do usuário
-  if (user) {
-    console.log('AdminLoginPage - RENDER DEBUG:', {
-      userEmail: user.email,
-      userId: user.id,
-      hasIsApprovedAdmin: !!isApprovedAdmin,
-      isApprovedAdminValue: isApprovedAdmin,
-      hasMyRequest: !!myRequest,
-      myRequestValue: myRequest,
-      showAccessRequest
-    });
-  }
-
-  // PROTEÇÃO EXTRA: Admin root nunca deve ver outras telas
-  if (user?.email === 'cleyber.silva@live.com') {
-    console.log('AdminLoginPage - Root admin in render, forcing redirect');
-    navigate('/admin/blog', { replace: true });
-    return (
-      <div className="min-h-screen bg-navy flex items-center justify-center">
-        <Loader2 className="w-8 h-8 animate-spin text-orange" />
-      </div>
-    );
-  }
-
-  // Verificação extra para admin root - nunca deve mostrar solicitação
-  if (user && isApprovedAdmin && (isApprovedAdmin.isRoot || 
-      (isApprovedAdmin.isAdmin && isApprovedAdmin.profile?.admin_level === 'root'))) {
-    console.log('AdminLoginPage - Root admin detected in render, forcing redirect');
-    navigate('/admin/blog', { replace: true });
-    return (
-      <div className="min-h-screen bg-navy flex items-center justify-center">
-        <Loader2 className="w-8 h-8 animate-spin text-orange" />
-      </div>
-    );
-  }
-
-  // IMPORTANTE: Admin com qualquer permissão deve ser redirecionado
-  if (user && isApprovedAdmin && (isApprovedAdmin.isAdmin || isApprovedAdmin.isAuthorAdmin || isApprovedAdmin.isAuthor)) {
-    console.log('AdminLoginPage - Admin user detected in render, forcing redirect');
-    navigate('/admin/blog', { replace: true });
-    return (
-      <div className="min-h-screen bg-navy flex items-center justify-center">
-        <Loader2 className="w-8 h-8 animate-spin text-orange" />
-      </div>
-    );
-  }
-
   // Status da solicitação existente - só mostra se não tem permissões admin
-  if (user && myRequest && !isApprovedAdmin?.isAdmin && !isApprovedAdmin?.isAuthorAdmin && !isApprovedAdmin?.isAuthor) {
+  if (user && myRequest && !isApprovedAdmin?.isAdmin && !isApprovedAdmin?.isAuthorAdmin && !isApprovedAdmin?.isAuthor && !isApprovedAdmin?.isRoot) {
     return (
       <PageLayout>
         <RequestStatusCard request={myRequest} />
@@ -250,7 +198,7 @@ const AdminLoginPage = () => {
   }
 
   // Card de acesso negado - só mostra se não tem permissões admin e não tem solicitação pendente
-  if (user && !isApprovedAdmin?.isAdmin && !isApprovedAdmin?.isAuthorAdmin && !isApprovedAdmin?.isAuthor && !myRequest && !showAccessRequest) {
+  if (user && !isApprovedAdmin?.isAdmin && !isApprovedAdmin?.isAuthorAdmin && !isApprovedAdmin?.isAuthor && !isApprovedAdmin?.isRoot && !myRequest && !showAccessRequest) {
     return (
       <PageLayout>
         <AccessDeniedCard onRequestAccess={() => setShowAccessRequest(true)} />

@@ -189,59 +189,43 @@ export const useAuthors = () => {
   });
 };
 
-// Hook atualizado para verificar permissões do usuário com correção para admin root
+// Hook otimizado para verificar permissões do usuário
 export const useIsApprovedAdmin = () => {
   return useQuery({
     queryKey: ['is-approved-admin'],
     queryFn: async () => {
       const { data: user } = await supabase.auth.getUser();
       console.log('useIsApprovedAdmin - Current user:', user.user?.email);
-      console.log('useIsApprovedAdmin - User ID:', user.user?.id);
       
       if (!user.user) {
         console.log('useIsApprovedAdmin - No user found');
         return { isAdmin: false, isRoot: false, isAuthorAdmin: false, isAuthor: false, profile: null };
       }
 
-      // CORREÇÃO ESPECÍFICA: Verificação direta para admin root Cleyber
+      // PRIORIDADE MÁXIMA: Admin root Cleyber
       if (user.user.email === 'cleyber.silva@live.com') {
         console.log('useIsApprovedAdmin - ROOT ADMIN DETECTED: cleyber.silva@live.com');
         
-        // Garantir que o perfil existe no banco com as permissões corretas
-        const { data: existingProfile, error: profileError } = await supabase
+        // Garantir que o perfil existe com permissões corretas
+        const { data: updatedProfile, error: updateError } = await supabase
           .from('profiles')
-          .select('*')
-          .eq('email', 'cleyber.silva@live.com')
+          .upsert({
+            id: user.user.id,
+            email: 'cleyber.silva@live.com',
+            full_name: 'Cleyber Gomes da Silva',
+            role: 'admin',
+            admin_level: 'root',
+            approved: true,
+            updated_at: new Date().toISOString()
+          })
+          .select()
           .single();
 
-        console.log('useIsApprovedAdmin - Root admin profile check:', existingProfile);
-        
-        if (!existingProfile || profileError) {
-          console.log('useIsApprovedAdmin - Creating/updating root admin profile');
-          
-          // Criar ou atualizar perfil do admin root
-          const { data: updatedProfile, error: updateError } = await supabase
-            .from('profiles')
-            .upsert({
-              id: user.user.id,
-              email: 'cleyber.silva@live.com',
-              full_name: 'Cleyber Gomes da Silva',
-              role: 'admin',
-              admin_level: 'root',
-              approved: true,
-              updated_at: new Date().toISOString()
-            })
-            .select()
-            .single();
-
-          if (updateError) {
-            console.error('useIsApprovedAdmin - Error updating root admin profile:', updateError);
-          } else {
-            console.log('useIsApprovedAdmin - Root admin profile updated:', updatedProfile);
-          }
+        if (updateError) {
+          console.error('useIsApprovedAdmin - Error updating root admin profile:', updateError);
         }
 
-        // Retornar permissões completas para o admin root
+        // Retornar permissões completas sempre
         return {
           isAdmin: true,
           isRoot: true,
@@ -260,7 +244,7 @@ export const useIsApprovedAdmin = () => {
         };
       }
 
-      // Buscar perfil do usuário para outros usuários
+      // Buscar perfil para outros usuários
       const { data, error } = await supabase
         .from('profiles')
         .select('*')
@@ -268,47 +252,33 @@ export const useIsApprovedAdmin = () => {
         .single();
 
       console.log('useIsApprovedAdmin - Profile query result:', data);
-      console.log('useIsApprovedAdmin - Profile query error:', error);
+
+      if (error && error.code === 'PGRST116') {
+        // Tentar buscar por email como fallback
+        const { data: emailProfile, error: emailError } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('email', user.user.email)
+          .single();
+        
+        if (emailProfile) {
+          const isAdmin = emailProfile.role === 'admin' && emailProfile.approved === true;
+          const isRoot = isAdmin && emailProfile.admin_level === 'root';
+          const isAuthorAdmin = emailProfile.role === 'author_admin' && emailProfile.approved === true;
+          const isAuthor = emailProfile.role === 'author' && emailProfile.approved === true;
+          
+          return { 
+            isAdmin, 
+            isRoot, 
+            isAuthorAdmin,
+            isAuthor,
+            profile: emailProfile as UserProfile
+          };
+        }
+      }
 
       if (error) {
         console.error('useIsApprovedAdmin - Error fetching profile:', error);
-        
-        // Se não encontrou o perfil, tentar buscar por email como fallback
-        if (error.code === 'PGRST116') {
-          console.log('useIsApprovedAdmin - Profile not found, trying by email...');
-          const { data: emailProfile, error: emailError } = await supabase
-            .from('profiles')
-            .select('*')
-            .eq('email', user.user.email)
-            .single();
-          
-          console.log('useIsApprovedAdmin - Email profile result:', emailProfile);
-          console.log('useIsApprovedAdmin - Email profile error:', emailError);
-          
-          if (emailProfile) {
-            const isAdmin = emailProfile.role === 'admin' && emailProfile.approved === true;
-            const isRoot = isAdmin && emailProfile.admin_level === 'root';
-            const isAuthorAdmin = emailProfile.role === 'author_admin' && emailProfile.approved === true;
-            const isAuthor = emailProfile.role === 'author' && emailProfile.approved === true;
-            
-            console.log('useIsApprovedAdmin - Email-based permissions:', {
-              isAdmin,
-              isRoot,
-              isAuthorAdmin,
-              isAuthor,
-              profile: emailProfile
-            });
-            
-            return { 
-              isAdmin, 
-              isRoot, 
-              isAuthorAdmin,
-              isAuthor,
-              profile: emailProfile as UserProfile
-            };
-          }
-        }
-        
         return { isAdmin: false, isRoot: false, isAuthorAdmin: false, isAuthor: false, profile: null };
       }
       
@@ -322,8 +292,7 @@ export const useIsApprovedAdmin = () => {
         isRoot,
         isAuthorAdmin,
         isAuthor,
-        profile: data,
-        rawData: data
+        profile: data
       });
       
       return { 
@@ -335,8 +304,8 @@ export const useIsApprovedAdmin = () => {
       };
     },
     retry: 1,
-    staleTime: 0, // Sem cache para garantir dados atualizados
-    refetchOnWindowFocus: true,
+    staleTime: 1000 * 60 * 2, // Cache por 2 minutos
+    refetchOnWindowFocus: false,
     refetchOnMount: true
   });
 };
