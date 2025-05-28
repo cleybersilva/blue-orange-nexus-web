@@ -21,6 +21,7 @@ const AdminLoginPage = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [showAccessRequest, setShowAccessRequest] = useState(false);
+  const [hasCheckedPermissions, setHasCheckedPermissions] = useState(false);
   
   const { signIn, signUp, user } = useAuth();
   const { data: isApprovedAdmin, isLoading: checkingAdmin } = useIsApprovedAdmin();
@@ -32,12 +33,19 @@ const AdminLoginPage = () => {
     console.log('AdminLoginPage - User:', user?.email);
     console.log('AdminLoginPage - Is Approved Admin:', isApprovedAdmin);
     console.log('AdminLoginPage - Checking Admin:', checkingAdmin);
+    console.log('AdminLoginPage - Has Checked Permissions:', hasCheckedPermissions);
     
-    if (user && isApprovedAdmin) {
-      console.log('AdminLoginPage - Redirecting to admin dashboard');
-      navigate('/admin/blog');
+    // Só processa o redirecionamento se o usuário estiver logado e as verificações terminaram
+    if (user && !checkingAdmin && !checkingRequest) {
+      setHasCheckedPermissions(true);
+      
+      // Se o usuário tem permissões administrativas, redireciona para o dashboard
+      if (isApprovedAdmin?.isAdmin || isApprovedAdmin?.isAuthorAdmin || isApprovedAdmin?.isAuthor) {
+        console.log('AdminLoginPage - Redirecting to admin dashboard');
+        navigate('/admin/blog');
+      }
     }
-  }, [user, isApprovedAdmin, navigate]);
+  }, [user, isApprovedAdmin, checkingAdmin, checkingRequest, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -65,6 +73,8 @@ const AdminLoginPage = () => {
           setError('Credenciais inválidas. Verifique seu email e senha.');
         } else {
           console.log('AdminLoginPage - Sign in successful');
+          // Reset o estado de verificação para permitir nova verificação
+          setHasCheckedPermissions(false);
         }
       }
     } catch (err) {
@@ -92,8 +102,8 @@ const AdminLoginPage = () => {
     }
   };
 
-  // Mostrar loader durante verificações
-  if (checkingAdmin || checkingRequest) {
+  // Mostrar loader durante verificações iniciais ou se ainda não verificou permissões após login
+  if (checkingAdmin || checkingRequest || (user && !hasCheckedPermissions)) {
     return (
       <div className="min-h-screen bg-navy flex items-center justify-center">
         <Loader2 className="w-8 h-8 animate-spin text-orange" />
@@ -117,7 +127,7 @@ const AdminLoginPage = () => {
   );
 
   // Status da solicitação existente
-  if (user && myRequest && !checkingAdmin && !checkingRequest) {
+  if (user && myRequest && hasCheckedPermissions) {
     return (
       <PageLayout>
         <RequestStatusCard request={myRequest} />
@@ -144,8 +154,8 @@ const AdminLoginPage = () => {
     );
   }
 
-  // Card de acesso negado
-  if (user && !checkingAdmin && !isApprovedAdmin && !showAccessRequest) {
+  // Card de acesso negado - só mostra se já verificou as permissões
+  if (user && hasCheckedPermissions && !isApprovedAdmin?.isAdmin && !isApprovedAdmin?.isAuthorAdmin && !isApprovedAdmin?.isAuthor && !showAccessRequest) {
     return (
       <PageLayout>
         <AccessDeniedCard onRequestAccess={() => setShowAccessRequest(true)} />
