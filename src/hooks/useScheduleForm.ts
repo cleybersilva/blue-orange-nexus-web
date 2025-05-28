@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useTranslation } from 'react-i18next';
-import { toast } from "@/components/ui/use-toast";
+import { toast } from "@/hooks/use-toast";
 import { useState } from "react";
 import { FormStage } from "@/components/agendar/FormProgress";
 import { useCalendly } from "@/components/CalendlyProvider";
@@ -67,14 +67,20 @@ export const useScheduleForm = () => {
 
   // Handle stage navigation
   const goToNextStage = () => {
+    console.log('goToNextStage called, current stage:', stage);
     if (stage < FormStage.CONFIRMATION) {
-      setStage(stage + 1);
+      const nextStage = stage + 1;
+      console.log('Moving to next stage:', nextStage);
+      setStage(nextStage);
     }
   };
 
   const goToPreviousStage = () => {
+    console.log('goToPreviousStage called, current stage:', stage);
     if (stage > FormStage.PERSONAL) {
-      setStage(stage - 1);
+      const prevStage = stage - 1;
+      console.log('Moving to previous stage:', prevStage);
+      setStage(prevStage);
     }
   };
 
@@ -92,9 +98,27 @@ export const useScheduleForm = () => {
     return 'contato@agenciadigitalhub.com';
   };
 
+  // Get fields to validate for each stage
+  const getFieldsForStage = (currentStage: FormStage): (keyof ScheduleFormValues)[] => {
+    switch (currentStage) {
+      case FormStage.PERSONAL:
+        return ['name', 'email', 'phone', 'role'];
+      case FormStage.COMPANY:
+        return ['companyName', 'segment', 'companySize'];
+      case FormStage.PROJECT:
+        return ['serviceType', 'projectDescription', 'deadline'];
+      case FormStage.CONFIRMATION:
+        return [];
+      default:
+        return [];
+    }
+  };
+
   // Validate current stage before proceeding
   const validateCurrentStage = async () => {
     const fieldsToValidate = getFieldsForStage(stage);
+    console.log('Validating fields for stage:', stage, 'Fields:', fieldsToValidate);
+    
     const result = await form.trigger(fieldsToValidate);
     
     if (!result) {
@@ -115,23 +139,8 @@ export const useScheduleForm = () => {
       return false;
     }
     
+    console.log('Validation passed for stage:', stage);
     return true;
-  };
-
-  // Get fields to validate for each stage
-  const getFieldsForStage = (currentStage: FormStage): (keyof ScheduleFormValues)[] => {
-    switch (currentStage) {
-      case FormStage.PERSONAL:
-        return ['name', 'email', 'phone', 'role'];
-      case FormStage.COMPANY:
-        return ['companyName', 'segment', 'companySize'];
-      case FormStage.PROJECT:
-        return ['serviceType', 'projectDescription', 'deadline'];
-      case FormStage.CONFIRMATION:
-        return [];
-      default:
-        return [];
-    }
   };
 
   // Handle form submission
@@ -141,10 +150,18 @@ export const useScheduleForm = () => {
 
     // If not on confirmation stage, validate and go to next stage
     if (stage < FormStage.CONFIRMATION) {
+      console.log('Not on confirmation stage, validating current stage...');
       const isValid = await validateCurrentStage();
       if (isValid) {
         console.log('Stage validation passed, moving to next stage');
+        
+        // Store current form data in localStorage
+        localStorage.setItem('scheduleFormData', JSON.stringify(values));
+        console.log('Form data stored in localStorage');
+        
         goToNextStage();
+      } else {
+        console.log('Stage validation failed, staying on current stage');
       }
       return;
     }
