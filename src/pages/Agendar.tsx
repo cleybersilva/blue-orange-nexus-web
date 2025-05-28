@@ -10,7 +10,6 @@ import Footer from "@/components/Footer";
 import { FormProgress, FormStage } from "@/components/agendar/FormProgress";
 import FormStages from "@/components/agendar/FormStages";
 import ContactInfo from "@/components/agendar/ContactInfo";
-import CalendlyWidget from "@/components/agendar/CalendlyWidget";
 import { useScheduleForm } from "@/hooks/useScheduleForm";
 
 const Agendar = () => {
@@ -31,31 +30,25 @@ const Agendar = () => {
         <Header />
         
         <div className="container mx-auto py-16 md:py-24 flex-grow">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-3xl mx-auto">
             <div className="bg-white p-6 rounded-lg shadow-md">
-              <h2 className="text-2xl font-bold mb-6 text-navy text-center">
-                {t('form.scheduleYourMeeting')}
-              </h2>
-              
-              <CalendlyWidget 
-                onEventScheduled={() => {
-                  console.log('Event scheduled from Agendar page');
-                  setTimeout(() => {
-                    closeCalendly();
-                  }, 2000);
-                }}
-                className="mb-6"
-              />
-              
-              <div className="text-center">
-                <Button 
-                  onClick={closeCalendly} 
-                  variant="outline"
-                  className="mt-4 hover:bg-gray-50"
-                >
-                  {t('form.backToForm')}
-                </Button>
+              <h2 className="text-xl font-bold mb-4">{t('form.scheduleYourMeeting')}</h2>
+              <div className="calendly-embed mb-6" style={{ minHeight: '650px' }}>
+                <iframe
+                  src={`https://calendly.com/agenciadigital/30min?lang=${t('form.lang')}`}
+                  width="100%"
+                  height="650"
+                  frameBorder="0"
+                  title={t('form.scheduleTitle')}
+                ></iframe>
               </div>
+              <Button 
+                onClick={closeCalendly} 
+                variant="outline"
+                className="mt-4"
+              >
+                {t('form.backToForm')}
+              </Button>
             </div>
           </div>
         </div>
