@@ -57,16 +57,16 @@
   },
   "aboutPage": {
     "ourHistory": "Our History",
-    "historyIntro": "Founded in 2020, Digital Hub Agency was born with the purpose of democratizing access to quality digital solutions. We started as a small team of developers and designers passionate about technology and today we are a reference in digital transformation for companies of all sizes.",
+    "historyIntro": "Founded in 2018, Digital Hub Agency was born with the purpose of democratizing access to quality digital solutions. We started as a small team of developers and designers passionate about technology and today we are a reference in digital transformation for companies of all sizes.",
     "contactUs": "Contact Us",
     "scheduleCall": "Schedule Call",
     "hero": {
       "title": "About Digital Hub Agency",
-      "subtitle": "Transforming ideas into innovative digital solutions since 2020"
+      "subtitle": "Transforming ideas into innovative digital solutions since 2018"
     },
     "story": {
       "title": "Our Story",
-      "description": "Founded in 2020, Digital Hub Agency was born with the purpose of democratizing access to quality digital solutions. We started as a small team of developers and designers passionate about technology and today we are a reference in digital transformation for companies of all sizes."
+      "description": "Founded in 2018, Digital Hub Agency was born with the purpose of democratizing access to quality digital solutions. We started as a small team of developers and designers passionate about technology and today we are a reference in digital transformation for companies of all sizes."
     },
     "mvv": {
       "title": "Mission, Vision and Values",
@@ -148,7 +148,7 @@
     "subtitle": "Real testimonials from companies that transformed their businesses with us"
   },
   "timeline": {
-    "title": "Company History Timeline",
+    "title": "Timeline - History of DigitalHub Agency",
     "2018": {
       "title": "Journey Begins",
       "description": "First steps in the digital world with responsive website projects."

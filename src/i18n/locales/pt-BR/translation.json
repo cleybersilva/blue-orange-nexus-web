@@ -57,16 +57,16 @@
   },
   "aboutPage": {
     "ourHistory": "Nossa História",
-    "historyIntro": "Fundada em 2020, a Agência Digital Hub nasceu com o propósito de democratizar o acesso a soluções digitais de qualidade. Começamos como uma pequena equipe de desenvolvedores e designers apaixonados por tecnologia e hoje somos referência em transformação digital para empresas de todos os portes.",
+    "historyIntro": "Fundada em 2018, a Agência Digital Hub nasceu com o propósito de democratizar o acesso a soluções digitais de qualidade. Começamos como uma pequena equipe de desenvolvedores e designers apaixonados por tecnologia e hoje somos referência em transformação digital para empresas de todos os portes.",
     "contactUs": "Fale Conosco",
     "scheduleCall": "Agendar Consulta",
     "hero": {
       "title": "Sobre a Agência Digital Hub",
-      "subtitle": "Transformando ideias em soluções digitais inovadoras desde 2020"
+      "subtitle": "Transformando ideias em soluções digitais inovadoras desde 2018"
     },
     "story": {
       "title": "Nossa História",
-      "description": "Fundada em 2020, a Agência Digital Hub nasceu com o propósito de democratizar o acesso a soluções digitais de qualidade. Começamos como uma pequena equipe de desenvolvedores e designers apaixonados por tecnologia e hoje somos referência em transformação digital para empresas de todos os portes."
+      "description": "Fundada em 2018, a Agência Digital Hub nasceu com o propósito de democratizar o acesso a soluções digitais de qualidade. Começamos como uma pequena equipe de desenvolvedores e designers apaixonados por tecnologia e hoje somos referência em transformação digital para empresas de todos os portes."
     },
     "mvv": {
       "title": "Missão, Visão e Valores",
@@ -148,7 +148,7 @@
     "subtitle": "Depoimentos reais de empresas que transformaram seus negócios conosco"
   },
   "timeline": {
-    "title": "Timeline da História da Empresa",
+    "title": "Timeline - História da AgênciaDigital Hub",
     "2018": {
       "title": "Início da Jornada",
       "description": "Primeiros passos no mundo digital com projetos de websites responsivos."
