@@ -196,23 +196,62 @@ export const useIsApprovedAdmin = () => {
     queryFn: async () => {
       const { data: user } = await supabase.auth.getUser();
       console.log('useIsApprovedAdmin - Current user:', user.user?.email);
+      console.log('useIsApprovedAdmin - User ID:', user.user?.id);
       
       if (!user.user) {
         console.log('useIsApprovedAdmin - No user found');
         return { isAdmin: false, isRoot: false, isAuthorAdmin: false, isAuthor: false, profile: null };
       }
 
+      // Buscar perfil do usuário com logs detalhados
       const { data, error } = await supabase
         .from('profiles')
-        .select('role, approved, admin_level, email, full_name')
+        .select('*')
         .eq('id', user.user.id)
         .single();
 
-      console.log('useIsApprovedAdmin - Profile data:', data);
-      console.log('useIsApprovedAdmin - Profile error:', error);
+      console.log('useIsApprovedAdmin - Profile query result:', data);
+      console.log('useIsApprovedAdmin - Profile query error:', error);
 
       if (error) {
         console.error('useIsApprovedAdmin - Error fetching profile:', error);
+        
+        // Se não encontrou o perfil, tentar buscar por email como fallback
+        if (error.code === 'PGRST116') {
+          console.log('useIsApprovedAdmin - Profile not found, trying by email...');
+          const { data: emailProfile, error: emailError } = await supabase
+            .from('profiles')
+            .select('*')
+            .eq('email', user.user.email)
+            .single();
+          
+          console.log('useIsApprovedAdmin - Email profile result:', emailProfile);
+          console.log('useIsApprovedAdmin - Email profile error:', emailError);
+          
+          if (emailProfile) {
+            const isAdmin = emailProfile.role === 'admin' && emailProfile.approved === true;
+            const isRoot = isAdmin && emailProfile.admin_level === 'root';
+            const isAuthorAdmin = emailProfile.role === 'author_admin' && emailProfile.approved === true;
+            const isAuthor = emailProfile.role === 'author' && emailProfile.approved === true;
+            
+            console.log('useIsApprovedAdmin - Email-based permissions:', {
+              isAdmin,
+              isRoot,
+              isAuthorAdmin,
+              isAuthor,
+              profile: emailProfile
+            });
+            
+            return { 
+              isAdmin, 
+              isRoot, 
+              isAuthorAdmin,
+              isAuthor,
+              profile: emailProfile as UserProfile
+            };
+          }
+        }
+        
         return { isAdmin: false, isRoot: false, isAuthorAdmin: false, isAuthor: false, profile: null };
       }
       
@@ -221,12 +260,13 @@ export const useIsApprovedAdmin = () => {
       const isAuthorAdmin = data?.role === 'author_admin' && data?.approved === true;
       const isAuthor = data?.role === 'author' && data?.approved === true;
       
-      console.log('useIsApprovedAdmin - Calculated permissions:', {
+      console.log('useIsApprovedAdmin - Final permissions:', {
         isAdmin,
         isRoot,
         isAuthorAdmin,
         isAuthor,
-        profile: data
+        profile: data,
+        rawData: data
       });
       
       return { 
@@ -238,7 +278,8 @@ export const useIsApprovedAdmin = () => {
       };
     },
     retry: 1,
-    staleTime: 1000 * 60 * 5 // Cache por 5 minutos
+    staleTime: 0, // Remover cache temporariamente para debug
+    refetchOnWindowFocus: true
   });
 };
 

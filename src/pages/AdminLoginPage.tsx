@@ -29,37 +29,41 @@ const AdminLoginPage = () => {
 
   useEffect(() => {
     console.log('AdminLoginPage - User:', user?.email);
+    console.log('AdminLoginPage - User ID:', user?.id);
     console.log('AdminLoginPage - Is Approved Admin:', isApprovedAdmin);
     console.log('AdminLoginPage - My Request:', myRequest);
     console.log('AdminLoginPage - Checking Admin:', checkingAdmin);
     console.log('AdminLoginPage - Checking Request:', checkingRequest);
     
     // Se o usuário está logado e as verificações terminaram
-    if (user && !checkingAdmin && !checkingRequest && isApprovedAdmin) {
+    if (user && !checkingAdmin && !checkingRequest) {
       console.log('AdminLoginPage - All checks completed, processing permissions...');
+      console.log('AdminLoginPage - Full permission object:', isApprovedAdmin);
       
-      // Prioridade 1: Admin Root - redirecionamento imediato
-      if (isApprovedAdmin.isRoot) {
-        console.log('AdminLoginPage - ROOT ADMIN detected (isRoot=true), redirecting immediately');
+      // Verificação especial para admin root
+      if (isApprovedAdmin && (isApprovedAdmin.isRoot || 
+          (isApprovedAdmin.isAdmin && isApprovedAdmin.profile?.admin_level === 'root'))) {
+        console.log('AdminLoginPage - ROOT ADMIN detected, redirecting immediately');
         navigate('/admin/blog', { replace: true });
         return;
       }
       
-      // Prioridade 2: Admin com nível root
-      if (isApprovedAdmin.isAdmin && isApprovedAdmin.profile?.admin_level === 'root') {
-        console.log('AdminLoginPage - ROOT ADMIN detected (admin_level=root), redirecting immediately');
-        navigate('/admin/blog', { replace: true });
-        return;
-      }
-      
-      // Prioridade 3: Qualquer tipo de admin aprovado
-      if (isApprovedAdmin.isAdmin || isApprovedAdmin.isAuthorAdmin || isApprovedAdmin.isAuthor) {
+      // Qualquer tipo de admin aprovado
+      if (isApprovedAdmin && (isApprovedAdmin.isAdmin || isApprovedAdmin.isAuthorAdmin || isApprovedAdmin.isAuthor)) {
         console.log('AdminLoginPage - User has admin access, redirecting to dashboard');
         navigate('/admin/blog', { replace: true });
         return;
       }
       
       console.log('AdminLoginPage - User does not have admin access');
+      console.log('AdminLoginPage - isApprovedAdmin detailed:', {
+        exists: !!isApprovedAdmin,
+        isAdmin: isApprovedAdmin?.isAdmin,
+        isRoot: isApprovedAdmin?.isRoot,
+        isAuthorAdmin: isApprovedAdmin?.isAuthorAdmin,
+        isAuthor: isApprovedAdmin?.isAuthor,
+        profile: isApprovedAdmin?.profile
+      });
     }
   }, [user, isApprovedAdmin, myRequest, checkingAdmin, checkingRequest, navigate]);
 
@@ -141,9 +145,34 @@ const AdminLoginPage = () => {
     </div>
   );
 
+  // Debug especial para verificar estado do usuário
+  if (user) {
+    console.log('AdminLoginPage - RENDER DEBUG:', {
+      userEmail: user.email,
+      userId: user.id,
+      hasIsApprovedAdmin: !!isApprovedAdmin,
+      isApprovedAdminValue: isApprovedAdmin,
+      hasMyRequest: !!myRequest,
+      myRequestValue: myRequest,
+      showAccessRequest
+    });
+  }
+
   // Verificação extra para admin root - nunca deve mostrar solicitação
-  if (user && isApprovedAdmin && (isApprovedAdmin.isRoot || (isApprovedAdmin.isAdmin && isApprovedAdmin.profile?.admin_level === 'root'))) {
+  if (user && isApprovedAdmin && (isApprovedAdmin.isRoot || 
+      (isApprovedAdmin.isAdmin && isApprovedAdmin.profile?.admin_level === 'root'))) {
     console.log('AdminLoginPage - Root admin detected in render, forcing redirect');
+    navigate('/admin/blog', { replace: true });
+    return (
+      <div className="min-h-screen bg-navy flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-orange" />
+      </div>
+    );
+  }
+
+  // IMPORTANTE: Admin com qualquer permissão deve ser redirecionado
+  if (user && isApprovedAdmin && (isApprovedAdmin.isAdmin || isApprovedAdmin.isAuthorAdmin || isApprovedAdmin.isAuthor)) {
+    console.log('AdminLoginPage - Admin user detected in render, forcing redirect');
     navigate('/admin/blog', { replace: true });
     return (
       <div className="min-h-screen bg-navy flex items-center justify-center">
