@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useTranslation } from 'react-i18next';
 import { toast } from "@/hooks/use-toast";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FormStage } from "@/components/agendar/FormProgress";
 import { useCalendly } from "@/components/CalendlyProvider";
 
@@ -65,6 +65,44 @@ export const useScheduleForm = () => {
     },
   });
 
+  // Load stored data on component mount
+  useEffect(() => {
+    const storedData = localStorage.getItem('scheduleFormData');
+    const storedStage = localStorage.getItem('scheduleFormStage');
+    
+    if (storedData) {
+      try {
+        const parsedData = JSON.parse(storedData);
+        console.log('Loading stored form data:', parsedData);
+        
+        // Reset form with stored data
+        form.reset(parsedData);
+      } catch (error) {
+        console.error('Error parsing stored form data:', error);
+      }
+    }
+    
+    if (storedStage) {
+      const parsedStage = parseInt(storedStage);
+      if (parsedStage >= FormStage.PERSONAL && parsedStage <= FormStage.CONFIRMATION) {
+        console.log('Loading stored stage:', parsedStage);
+        setStage(parsedStage);
+      }
+    }
+  }, [form]);
+
+  // Save data to localStorage whenever form values change
+  const saveFormData = (data: ScheduleFormValues) => {
+    localStorage.setItem('scheduleFormData', JSON.stringify(data));
+    console.log('Form data saved to localStorage');
+  };
+
+  // Save current stage to localStorage
+  const saveCurrentStage = (currentStage: FormStage) => {
+    localStorage.setItem('scheduleFormStage', currentStage.toString());
+    console.log('Current stage saved to localStorage:', currentStage);
+  };
+
   // Handle stage navigation
   const goToNextStage = () => {
     console.log('goToNextStage called, current stage:', stage);
@@ -72,6 +110,7 @@ export const useScheduleForm = () => {
       const nextStage = stage + 1;
       console.log('Moving to next stage:', nextStage);
       setStage(nextStage);
+      saveCurrentStage(nextStage);
     }
   };
 
@@ -81,6 +120,7 @@ export const useScheduleForm = () => {
       const prevStage = stage - 1;
       console.log('Moving to previous stage:', prevStage);
       setStage(prevStage);
+      saveCurrentStage(prevStage);
     }
   };
 
@@ -115,11 +155,17 @@ export const useScheduleForm = () => {
   };
 
   // Validate current stage before proceeding
-  const validateCurrentStage = async () => {
+  const validateCurrentStage = async (): Promise<boolean> => {
     const fieldsToValidate = getFieldsForStage(stage);
     console.log('Validating fields for stage:', stage, 'Fields:', fieldsToValidate);
     
+    if (fieldsToValidate.length === 0) {
+      console.log('No fields to validate for this stage');
+      return true;
+    }
+    
     const result = await form.trigger(fieldsToValidate);
+    console.log('Validation result:', result);
     
     if (!result) {
       console.log('Validation failed for stage:', stage);
@@ -127,11 +173,18 @@ export const useScheduleForm = () => {
       console.log('Form errors:', errors);
       
       // Show first error message
-      const firstError = Object.values(errors)[0];
-      if (firstError?.message) {
+      const firstErrorField = fieldsToValidate.find(field => errors[field]);
+      if (firstErrorField && errors[firstErrorField]?.message) {
         toast({
           title: t('form.validationError'),
-          description: firstError.message,
+          description: errors[firstErrorField]?.message as string,
+          variant: "destructive",
+          duration: 4000,
+        });
+      } else {
+        toast({
+          title: t('form.validationError'),
+          description: t('form.pleaseCheckRequiredFields'),
           variant: "destructive",
           duration: 4000,
         });
@@ -143,6 +196,30 @@ export const useScheduleForm = () => {
     return true;
   };
 
+  // Handle next button click with validation
+  const handleNext = async () => {
+    console.log('handleNext called for stage:', stage);
+    
+    const isValid = await validateCurrentStage();
+    if (!isValid) {
+      console.log('Validation failed, staying on current stage');
+      return;
+    }
+    
+    // Save current form data
+    const currentValues = form.getValues();
+    saveFormData(currentValues);
+    
+    // Move to next stage
+    goToNextStage();
+    
+    toast({
+      title: t('form.stepCompleted'),
+      description: t('form.proceedingToNextStep'),
+      duration: 2000,
+    });
+  };
+
   // Handle form submission
   const onSubmit = async (values: ScheduleFormValues) => {
     console.log('Form submission triggered for stage:', stage);
@@ -150,28 +227,26 @@ export const useScheduleForm = () => {
 
     // If not on confirmation stage, validate and go to next stage
     if (stage < FormStage.CONFIRMATION) {
-      console.log('Not on confirmation stage, validating current stage...');
-      const isValid = await validateCurrentStage();
-      if (isValid) {
-        console.log('Stage validation passed, moving to next stage');
-        
-        // Store current form data in localStorage
-        localStorage.setItem('scheduleFormData', JSON.stringify(values));
-        console.log('Form data stored in localStorage');
-        
-        goToNextStage();
-      } else {
-        console.log('Stage validation failed, staying on current stage');
-      }
+      await handleNext();
       return;
     }
 
     // Final submission on confirmation stage
     console.log('Final submission - processing form data');
 
+    // Validate that at least one contact method is selected
+    if (!values.preferWhatsApp && !values.preferEmail && !values.preferPhone && !values.preferCalendly) {
+      toast({
+        title: t('form.submissionError'),
+        description: t('form.pleaseSelectContactMethod'),
+        variant: "destructive",
+        duration: 4000,
+      });
+      return;
+    }
+
     // Store form data in localStorage for persistence
-    localStorage.setItem('scheduleFormData', JSON.stringify(values));
-    console.log('Form data stored in localStorage');
+    saveFormData(values);
 
     // Formatting data for submission
     const contactEmail = getContactEmail();
@@ -270,8 +345,9 @@ ${t('form.language')}: ${i18n.language}
         form.reset();
         setStage(FormStage.PERSONAL);
         localStorage.removeItem('scheduleFormData');
+        localStorage.removeItem('scheduleFormStage');
         console.log('Form reset completed');
-      }, 2000);
+      }, 3000);
     }
   };
   
@@ -281,6 +357,7 @@ ${t('form.language')}: ${i18n.language}
     form.reset();
     setStage(FormStage.PERSONAL);
     localStorage.removeItem('scheduleFormData');
+    localStorage.removeItem('scheduleFormStage');
   };
 
   return {
