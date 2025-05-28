@@ -45,25 +45,23 @@ const ArticleEditor = () => {
     scheduled_at: ''
   });
 
-  const [isFormPopulated, setIsFormPopulated] = useState(false);
-
   // Debug do estado do formulário
   useEffect(() => {
-    console.log('ArticleEditor - Form data state:', formData);
-    console.log('ArticleEditor - Is form populated:', isFormPopulated);
-  }, [formData, isFormPopulated]);
+    console.log('ArticleEditor - Current form data:', formData);
+  }, [formData]);
 
-  // Efeito principal para popular o formulário
+  // Efeito principal para popular o formulário - CORRIGIDO
   useEffect(() => {
-    console.log('ArticleEditor - Main effect triggered:', {
+    console.log('ArticleEditor - Population effect triggered:', {
       isEditing,
       hasArticle: !!article,
       articleId: article?.id,
-      isFormPopulated
+      articleTitle: article?.title,
+      articleContent: article?.content ? `${article.content.substring(0, 50)}...` : 'No content'
     });
     
-    if (isEditing && article && !isFormPopulated) {
-      console.log('ArticleEditor - Populating form with article data:', article);
+    if (isEditing && article) {
+      console.log('ArticleEditor - Starting form population with article data');
       
       // Converter datas para formato input datetime-local
       const formatDateForInput = (dateString: string | null) => {
@@ -90,23 +88,12 @@ const ArticleEditor = () => {
         scheduled_at: formatDateForInput(article.scheduled_at)
       };
       
-      console.log('ArticleEditor - Setting new form data:', newFormData);
+      console.log('ArticleEditor - Setting form data:', newFormData);
       setFormData(newFormData);
-      setIsFormPopulated(true);
       
       console.log('ArticleEditor - Form populated successfully');
-    } else if (!isEditing) {
-      // Reset para novo artigo
-      setIsFormPopulated(false);
-      console.log('ArticleEditor - New article mode, form reset');
     }
-  }, [article, isEditing, isFormPopulated]);
-
-  // Efeito para resetar quando o ID muda
-  useEffect(() => {
-    console.log('ArticleEditor - ID changed, resetting form population flag');
-    setIsFormPopulated(false);
-  }, [id]);
+  }, [article, isEditing]); // Removido isFormPopulated da dependência
 
   const generateSlug = (title: string) => {
     return title
@@ -157,7 +144,6 @@ const ArticleEditor = () => {
 
   const handleRefreshArticle = () => {
     console.log('ArticleEditor - Manually refreshing article data');
-    setIsFormPopulated(false);
     refetchArticle();
   };
 
@@ -224,6 +210,12 @@ const ArticleEditor = () => {
   }
 
   console.log('ArticleEditor - Rendering main form');
+  console.log('ArticleEditor - Current form values:', {
+    title: formData.title,
+    content: formData.content ? `${formData.content.substring(0, 50)}...` : 'EMPTY',
+    summary: formData.summary,
+    author_id: formData.author_id
+  });
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -270,7 +262,7 @@ const ArticleEditor = () => {
                   <CardTitle>Conteúdo do Artigo</CardTitle>
                   {isEditing && (
                     <CardDescription>
-                      Editando: {article?.title || formData.title || 'Carregando...'}
+                      Editando: {formData.title || 'Carregando...'}
                     </CardDescription>
                   )}
                 </CardHeader>
