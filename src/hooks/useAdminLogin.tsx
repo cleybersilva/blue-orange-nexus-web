@@ -18,7 +18,7 @@ export const useAdminLogin = () => {
   const [hasRedirected, setHasRedirected] = useState(false);
   
   const { signIn, signUp, user } = useAuth();
-  const { data: isApprovedAdmin, isLoading: checkingAdmin } = useIsApprovedAdmin();
+  const { data: isApprovedAdmin, isLoading: checkingAdmin, refetch: refetchAdmin } = useIsApprovedAdmin();
   const { data: myRequest, isLoading: checkingRequest } = useMyAdminRequest();
   const createAdminRequest = useCreateAdminRequest();
   const navigate = useNavigate();
@@ -41,13 +41,6 @@ export const useAdminLogin = () => {
     console.log('AdminLoginPage - Checking Request:', checkingRequest);
     console.log('AdminLoginPage - Has Redirected:', hasRedirected);
     
-    // Bypass completo para admin root
-    if (user?.email === 'cleyber.silva@live.com') {
-      console.log('AdminLoginPage - ROOT ADMIN DETECTED - IMMEDIATE REDIRECT');
-      redirectToDashboard();
-      return;
-    }
-    
     // Se ainda está carregando, aguardar
     if (checkingAdmin || checkingRequest) {
       console.log('AdminLoginPage - Still loading permissions...');
@@ -55,7 +48,7 @@ export const useAdminLogin = () => {
     }
     
     // Se usuário está logado e as verificações terminaram
-    if (user && !checkingAdmin && !checkingRequest) {
+    if (user && !checkingAdmin && !checkingRequest && !hasRedirected) {
       console.log('AdminLoginPage - Processing permissions for user:', user.email);
       
       // Verificar qualquer tipo de admin aprovado
@@ -88,13 +81,6 @@ export const useAdminLogin = () => {
           setError(error.message);
         } else {
           console.log('AdminLoginPage - Sign up successful');
-          
-          // Verificação especial para admin root após signup
-          if (email === 'cleyber.silva@live.com') {
-            console.log('AdminLoginPage - Root admin signed up, will redirect after auth state change');
-            return;
-          }
-          
           setError('Conta criada com sucesso! Agora você pode solicitar acesso administrativo.');
           setIsSignUp(false);
           setShowAccessRequest(true);
@@ -106,8 +92,11 @@ export const useAdminLogin = () => {
           console.error('AdminLoginPage - Sign in error:', error);
           setError('Credenciais inválidas. Verifique seu email e senha.');
         } else {
-          console.log('AdminLoginPage - Sign in successful, auth state will handle redirect');
-          // Não fazer redirect aqui - deixar o useEffect handle
+          console.log('AdminLoginPage - Sign in successful, forcing refetch...');
+          // Forçar refetch das permissões após login bem-sucedido
+          setTimeout(() => {
+            refetchAdmin();
+          }, 100);
         }
       }
     } catch (err) {
