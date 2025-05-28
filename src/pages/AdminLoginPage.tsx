@@ -36,7 +36,14 @@ const AdminLoginPage = () => {
     
     // Se o usuário está logado e as verificações terminaram
     if (user && !checkingAdmin && !checkingRequest) {
-      // Verifica se tem permissões administrativas
+      // Prioridade máxima para admin root - redireciona imediatamente
+      if (isApprovedAdmin?.isRoot || (isApprovedAdmin?.isAdmin && isApprovedAdmin?.profile?.admin_level === 'root')) {
+        console.log('AdminLoginPage - ROOT ADMIN detected, redirecting immediately');
+        navigate('/admin/blog');
+        return;
+      }
+      
+      // Verifica se tem outras permissões administrativas
       const hasAdminAccess = isApprovedAdmin?.isAdmin || isApprovedAdmin?.isAuthorAdmin || isApprovedAdmin?.isAuthor;
       
       if (hasAdminAccess) {
@@ -125,6 +132,16 @@ const AdminLoginPage = () => {
       </div>
     </div>
   );
+
+  // NUNCA mostrar solicitação para admin root - verificação extra de segurança
+  const isRootAdmin = isApprovedAdmin?.isRoot || (isApprovedAdmin?.isAdmin && isApprovedAdmin?.profile?.admin_level === 'root');
+  
+  if (user && isRootAdmin) {
+    console.log('AdminLoginPage - Root admin detected, should have redirected already');
+    // Força redirecionamento se por algum motivo chegou aqui
+    navigate('/admin/blog');
+    return null;
+  }
 
   // Status da solicitação existente - só mostra se não tem permissões admin
   if (user && myRequest && !isApprovedAdmin?.isAdmin && !isApprovedAdmin?.isAuthorAdmin && !isApprovedAdmin?.isAuthor) {
