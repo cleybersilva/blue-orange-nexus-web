@@ -60,7 +60,7 @@ const AdminLoginForm: React.FC<AdminLoginFormProps> = ({
           <span className="text-3xl font-bold">
             <span className="text-orange">Agência</span>
             <span className="text-white">Digital</span>
-            <HubHighlight className="text-white" />
+            <HubHighlight />
           </span>
           <p className="text-white/80 mt-2 font-medium">Painel Administrativo</p>
         </div>
