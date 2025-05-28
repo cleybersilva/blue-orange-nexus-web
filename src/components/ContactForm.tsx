@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -72,9 +71,9 @@ const ContactForm: React.FC = () => {
       }
 
       toast({
-        title: t('footer.success'),
-        description: t('footer.subscribed'),
-        duration: 5000,
+        title: "🎉 Mensagem enviada com sucesso!",
+        description: "Recebemos sua solicitação! Nossa equipe entrará em contato em até 24 horas para agendarmos uma reunião e discutirmos seu projeto. Prepare-se para transformar suas ideias em realidade digital! 🚀",
+        duration: 7000,
       });
 
       // Reset form
@@ -89,8 +88,8 @@ const ContactForm: React.FC = () => {
     } catch (error) {
       console.error('Form submission error:', error);
       toast({
-        title: t('footer.error'),
-        description: 'Erro ao enviar mensagem. Tente novamente.',
+        title: "❌ Ops! Algo deu errado",
+        description: 'Erro ao enviar mensagem. Tente novamente ou entre em contato diretamente pelo WhatsApp: (83) 98832-9018',
         variant: "destructive",
         duration: 5000,
       });
@@ -170,7 +169,7 @@ const ContactForm: React.FC = () => {
                   <Input
                     id="phone"
                     name="phone"
-                    placeholder="(00) 00000-0000"
+                    placeholder="(83) 98832-9018"
                     value={formData.phone}
                     onChange={handleChange}
                     className="w-full"
