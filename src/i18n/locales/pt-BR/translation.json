@@ -1,132 +1,250 @@
-
 {
   "nav": {
     "home": "Início",
-    "services": "Serviços",
     "about": "Sobre Nós",
+    "services": "Serviços",
     "projects": "Projetos",
+    "portfolio": "Portfólio",
+    "testimonials": "Depoimentos",
     "blog": "Blog",
-    "schedule": "Agendar",
-    "contact": "Contato"
+    "contact": "Contato",
+    "schedule": "Agendar"
   },
   "hero": {
-    "title": "Transformamos suas ideias em soluções digitais inovadoras",
-    "subtitle": "Somos uma agência digital especializada em desenvolvimento web, aplicativos móveis e estratégias de marketing digital que impulsionam o crescimento do seu negócio.",
-    "cta": "Agendar Reunião",
-    "ctaSecondary": "Ver Projetos"
+    "title": "Transformamos ideias em",
+    "subtitle": "soluções digitais",
+    "description": "Criamos websites, aplicativos e estratégias de marketing digital que impulsionam o crescimento do seu negócio.",
+    "ctaButton": "Conheça nossos serviços",
+    "scheduleButton": "Agendar Reunião"
   },
   "services": {
     "title": "Nossos Serviços",
-    "subtitle": "Oferecemos soluções completas para transformar sua presença digital",
+    "subtitle": "Soluções completas para transformar seu negócio digital",
+    "viewAll": "Conheça todos os serviços",
     "websites": {
-      "title": "Websites & Landing Pages",
-      "description": "Sites responsivos e otimizados para conversão"
+      "title": "Desenvolvimento de Sites",
+      "description": "Sites profissionais e responsivos que convertem visitantes em clientes."
     },
     "ecommerce": {
       "title": "E-commerce",
-      "description": "Lojas virtuais completas e seguras"
+      "description": "Lojas virtuais completas com integração de pagamento e gestão de estoque."
     },
     "apps": {
-      "title": "Aplicativos Mobile",
-      "description": "Apps nativos e híbridos para iOS e Android"
+      "title": "Aplicativos",
+      "description": "Apps mobile e web personalizados para iOS e Android."
     },
     "lms": {
-      "title": "Plataformas de Ensino (LMS)",
-      "description": "Sistemas de gestão de aprendizagem personalizados"
+      "title": "Plataformas EAD",
+      "description": "Ambientes virtuais de aprendizagem completos e interativos."
     },
     "marketing": {
       "title": "Marketing Digital",
-      "description": "Estratégias para aumentar sua presença online"
+      "description": "Estratégias de marketing digital para aumentar sua presença online."
     },
     "social": {
       "title": "Gestão de Redes Sociais",
-      "description": "Gerenciamento completo das suas redes sociais"
+      "description": "Criação e gestão de conteúdo para suas redes sociais."
     },
     "design": {
-      "title": "Design Gráfico & UI/UX",
-      "description": "Identidade visual e experiência do usuário"
+      "title": "Design Gráfico",
+      "description": "Identidade visual e materiais gráficos profissionais."
     },
     "political": {
       "title": "Marketing Político",
-      "description": "Campanhas digitais e gestão de imagem política"
+      "description": "Estratégias digitais especializadas para campanhas políticas."
+    },
+    "learnMore": "Saiba Mais"
+  },
+  "aboutPage": {
+    "ourHistory": "Nossa História",
+    "historyIntro": "Fundada em 2018, a Agência Digital Hub nasceu com o propósito de democratizar o acesso a soluções digitais de qualidade. Começamos como uma pequena equipe de desenvolvedores e designers apaixonados por tecnologia e hoje somos referência em transformação digital para empresas de todos os portes.",
+    "contactUs": "Entre em Contato",
+    "scheduleCall": "Agendar Ligação",
+    "hero": {
+      "title": "Sobre a Agência Digital Hub",
+      "subtitle": "Transformando ideias em soluções digitais inovadoras desde 2018"
+    },
+    "story": {
+      "title": "Nossa História",
+      "description": "Fundada em 2018, a Agência Digital Hub nasceu com o propósito de democratizar o acesso a soluções digitais de qualidade. Começamos como uma pequena equipe de desenvolvedores e designers apaixonados por tecnologia e hoje somos referência em transformação digital para empresas de todos os portes."
+    },
+    "mvv": {
+      "title": "Missão, Visão e Valores",
+      "mission": "Nossa Missão",
+      "missionText": "Capacitar empresas através de soluções digitais inovadoras que geram resultados reais e sustentáveis.",
+      "vision": "Nossa Visão",
+      "visionText": "Ser reconhecida como a principal agência digital do Brasil, referência em inovação e excelência no atendimento.",
+      "values": "Nossos Valores",
+      "valuesList": [
+        "Excelência",
+        "Inovação",
+        "Transparência",
+        "Comprometimento",
+        "Resultados"
+      ]
+    },
+    "team": {
+      "title": "Nossa Equipe",
+      "subtitle": "Profissionais especializados e apaixonados pelo que fazem"
+    },
+    "teamMembers": {
+      "seo": "Especialista em SEO",
+      "seoBio": "Especialista em otimização para mecanismos de busca e estratégias de crescimento orgânico.",
+      "security": "Especialista em Segurança",
+      "securityBio": "Profissional focado em segurança digital e proteção de dados para aplicações web.",
+      "traffic": "Gestor de Tráfego",
+      "trafficBio": "Especialista em campanhas de tráfego pago e análise de performance de anúncios digitais.",
+      "design": "Designer",
+      "designBio": "Designer criativo focado em experiência do usuário e interfaces visuais impactantes."
+    },
+    "differentials": {
+      "title": "Nossos Diferenciais",
+      "subtitle": "O que nos torna únicos no mercado digital",
+      "agility": {
+        "title": "Agilidade",
+        "description": "Entregamos projetos rapidamente sem comprometer a qualidade."
+      },
+      "innovation": {
+        "title": "Inovação",
+        "description": "Utilizamos as tecnologias mais modernas e tendências do mercado."
+      },
+      "team": {
+        "title": "Equipe Especializada",
+        "description": "Profissionais qualificados e experientes em suas áreas de atuação."
+      },
+      "security": {
+        "title": "Segurança",
+        "description": "Máxima segurança em todos os nossos projetos e processos."
+      },
+      "cloud": {
+        "title": "Tecnologia em Nuvem",
+        "description": "Soluções em nuvem escaláveis e confiáveis."
+      },
+      "support": {
+        "title": "Suporte 24/7",
+        "description": "Suporte contínuo para garantir o sucesso do seu projeto."
+      }
+    },
+    "cta": {
+      "title": "Pronto para transformar seu negócio?",
+      "subtitle": "Entre em contato conosco e descubra como podemos ajudar sua empresa a alcançar o próximo nível digital.",
+      "schedule": "Agendar Consulta Gratuita",
+      "contact": "Entrar em Contato"
+    },
+    "location": {
+      "title": "Nossa Localização",
+      "description": "Estamos estrategicamente localizados no coração tecnológico do Brasil",
+      "office": "Escritório Principal",
+      "phone": "Telefone",
+      "email": "E-mail"
     }
   },
   "portfolio": {
-    "title": "Nossos Projetos",
-    "subtitle": "Conheça alguns dos projetos que desenvolvemos com excelência",
-    "viewMore": "Ver Mais Projetos"
+    "title": "Nosso Portfólio",
+    "subtitle": "Projetos que transformaram negócios e geraram resultados excepcionais"
   },
   "testimonials": {
     "title": "O que nossos clientes dizem",
-    "subtitle": "Depoimentos reais de quem confia no nosso trabalho"
+    "subtitle": "Depoimentos reais de empresas que transformaram seus negócios conosco"
   },
-  "contact": {
-    "title": "Entre em Contato",
-    "subtitle": "Pronto para começar seu projeto? Vamos conversar!",
-    "form": {
-      "name": "Nome",
-      "email": "E-mail",
-      "phone": "Telefone",
-      "message": "Mensagem",
-      "send": "Enviar Mensagem",
-      "success": "Mensagem enviada com sucesso!",
-      "error": "Erro ao enviar mensagem. Tente novamente."
+  "timeline": {
+    "title": "História da AgênciaDigital Hub",
+    "2018": {
+      "title": "Início da Jornada",
+      "description": "Primeiros passos no mundo digital com projetos de websites responsivos."
     },
-    "info": {
-      "phone": "(83) 98832-9018",
-      "email": "contact@agenciadigital.com",
-      "address": "João Pessoa, PB - Brasil"
+    "2019": {
+      "title": "Expansão de Serviços",
+      "description": "Ampliação do portfólio com desenvolvimento de e-commerce e aplicativos mobile."
+    },
+    "2020": {
+      "title": "Fundação Oficial",
+      "description": "Criação oficial da Agência Digital Hub focada em transformação digital."
+    },
+    "2022": {
+      "title": "Crescimento Acelerado",
+      "description": "Expansão da equipe e conquista de grandes clientes no mercado nacional."
+    },
+    "2023": {
+      "title": "Inovação Tecnológica",
+      "description": "Implementação de soluções em nuvem e inteligência artificial."
+    },
+    "2024": {
+      "title": "Liderança no Mercado",
+      "description": "Consolidação como referência em soluções digitais no Nordeste brasileiro."
+    },
+    "2025": {
+      "title": "Era da Inteligência Artificial",
+      "description": "Implementação de IA de alto nível em todos os produtos e serviços, oferecendo soluções ainda mais inteligentes e personalizadas para nossos clientes."
     }
   },
   "footer": {
-    "description": "Transformamos ideias em soluções digitais inovadoras",
+    "company": "Agência Digital Hub",
+    "description": "Transformamos ideias em soluções digitais que geram resultados reais para o seu negócio.",
+    "aboutText": "Somos uma agência digital completa, especializada em transformar ideias em resultados através de soluções digitais inovadoras.",
     "quickLinks": "Links Rápidos",
+    "links": "Links Úteis",
     "services": "Serviços",
     "contact": "Contato",
-    "followUs": "Nos Siga",
+    "newsletter": "Newsletter",
+    "newsletterText": "Receba as últimas novidades e dicas sobre marketing digital.",
+    "subscribe": "Inscrever-se",
+    "placeholder": "Seu e-mail",
     "rights": "Todos os direitos reservados.",
     "privacy": "Política de Privacidade",
-    "terms": "Termos de Uso"
+    "terms": "Termos de Uso",
+    "address": "João Pessoa, PB - Brasil",
+    "success": "Sucesso!",
+    "subscribed": "Você foi inscrito em nossa newsletter.",
+    "error": "Erro",
+    "emailInvalid": "Por favor, insira um e-mail válido",
+    "faq": "Perguntas Frequentes"
   },
   "form": {
-    "scheduleTitle": "Agendar Reunião",
-    "briefingInstructions": "Preencha o formulário abaixo para agendarmos uma reunião e discutirmos seu projeto em detalhes.",
+    "scheduleTitle": "Agende sua Consulta Gratuita",
+    "briefingInstructions": "Preencha o formulário abaixo com as informações do seu projeto para que possamos oferecer a melhor solução para o seu negócio.",
+    "stages": {
+      "personal": "Pessoal",
+      "company": "Empresa",
+      "project": "Projeto",
+      "confirmation": "Confirmação"
+    },
     "personalData": "Dados Pessoais",
     "provideContactInfo": "Forneça suas informações de contato",
     "fullName": "Nome Completo",
-    "yourName": "Seu nome completo",
+    "yourName": "Seu nome",
     "email": "E-mail",
     "emailPlaceholder": "seu@email.com",
     "phone": "Telefone",
-    "phonePlaceholder": "(00) 00000-0000",
+    "phonePlaceholder": "(83) 98832-9018",
     "role": "Cargo/Função",
     "rolePlaceholder": "Seu cargo na empresa",
     "aboutCompany": "Sobre sua Empresa",
-    "companyInfo": "Conte-nos sobre sua empresa",
+    "companyInfo": "Conte-nos mais sobre sua empresa",
     "companyName": "Nome da Empresa",
     "companyNamePlaceholder": "Nome da sua empresa",
     "segment": "Segmento",
-    "segmentPlaceholder": "Ex: Tecnologia, Saúde, Educação",
+    "segmentPlaceholder": "Ex: Varejo, Tecnologia, Saúde",
     "companySize": "Tamanho da Empresa",
     "companySizePlaceholder": "Ex: 1-10, 11-50, 51-200 funcionários",
     "website": "Website",
     "websitePlaceholder": "https://seusite.com",
-    "websiteDescription": "Se já possui um site, informe a URL",
-    "aboutProject": "Sobre o Projeto",
-    "projectDetails": "Detalhes do seu projeto",
+    "websiteDescription": "Se sua empresa já possui um site, informe aqui",
+    "aboutProject": "Sobre seu Projeto",
+    "projectDetails": "Conte-nos sobre o projeto que você tem em mente",
     "serviceType": "Tipo de Serviço",
-    "serviceTypePlaceholder": "Selecione o serviço desejado",
+    "serviceTypePlaceholder": "Ex: Site, E-commerce, App, Marketing",
     "projectDescription": "Descrição do Projeto",
-    "projectDescriptionPlaceholder": "Descreva detalhadamente o que você precisa",
+    "projectDescriptionPlaceholder": "Descreva detalhadamente o que você precisa...",
     "desiredDeadline": "Prazo Desejado",
-    "deadlinePlaceholder": "Ex: 30 dias, 2 meses",
+    "deadlinePlaceholder": "Ex: 30 dias, 2 meses, urgente",
     "estimatedBudget": "Orçamento Estimado",
     "budgetPlaceholder": "Ex: R$ 5.000 - R$ 10.000",
-    "budgetDescription": "Informe uma faixa de orçamento para o projeto",
+    "budgetDescription": "Esta informação nos ajuda a sugerir a melhor solução",
     "confirmation": "Confirmação",
     "howPreferContact": "Como você prefere ser contatado?",
-    "sendBriefingWhatsApp": "Enviar briefing por WhatsApp",
-    "sendBriefingEmail": "Receber briefing por e-mail",
+    "sendBriefingWhatsApp": "Enviar briefing via WhatsApp",
+    "sendBriefingEmail": "Enviar briefing por e-mail",
     "preferPhone": "Prefiro contato telefônico",
     "onlineScheduling": "Agendamento Online",
     "scheduleCalendly": "Agendar reunião online",
@@ -138,23 +256,43 @@
     "back": "Voltar",
     "next": "Próximo",
     "send": "Enviar",
-    "stepCompleted": "Etapa concluída!",
-    "proceedingToNextStep": "Prosseguindo para a próxima etapa",
-    "submissionError": "Erro no envio",
-    "pleaseSelectContactMethod": "Por favor, selecione pelo menos uma forma de contato",
+    "newBriefing": "Novo Briefing - Agência Digital Hub",
+    "companyData": "Dados da Empresa",
+    "projectData": "Dados do Projeto",
+    "contactPreference": "Preferência de Contato",
+    "systemInfo": "Informações do Sistema",
+    "submissionTime": "Horário de Envio",
+    "language": "Idioma",
+    "size": "Tamanho",
+    "description": "Descrição",
+    "budget": "Orçamento",
+    "notProvided": "Não informado",
+    "newBriefingSubject": "Novo Briefing de Projeto - Agência Digital Hub",
     "briefingSentSuccess": "Briefing enviado com sucesso!",
-    "willContactSoon": "Entraremos em contato em breve",
+    "willContactSoon": "Entraremos em contato em breve para discutir seu projeto.",
+    "validationError": "Erro de Validação",
+    "submissionError": "Erro no Envio",
+    "pleaseSelectContactMethod": "Por favor, selecione pelo menos um método de contato.",
+    "pleaseCheckRequiredFields": "Por favor, verifique os campos obrigatórios.",
+    "stepCompleted": "Etapa Concluída",
+    "proceedingToNextStep": "Prosseguindo para a próxima etapa...",
     "needImmediateHelp": "Precisa de ajuda imediata?",
-    "contactDirectly": "Entre em contato diretamente conosco:",
+    "contactDirectly": "Entre em contato diretamente pelos canais abaixo:",
     "phoneWhatsApp": "Telefone/WhatsApp",
     "scheduleYourMeeting": "Agende sua Reunião",
-    "chooseTimeSlot": "Escolha o melhor horário disponível para nossa conversa",
     "backToForm": "Voltar ao Formulário",
-    "lang": "pt"
-  },
-  "calendly": {
-    "scheduleTitle": "Agendar Reunião",
-    "openingSchedule": "Abrindo agendamento",
-    "chooseTime": "Escolha o melhor horário para você"
+    "lang": "pt-BR",
+    "errors": {
+      "nameMin": "Nome deve ter pelo menos 3 caracteres",
+      "emailInvalid": "E-mail inválido",
+      "phoneInvalid": "Telefone deve ter pelo menos 10 dígitos",
+      "roleRequired": "Cargo é obrigatório",
+      "companyNameRequired": "Nome da empresa é obrigatório",
+      "segmentRequired": "Segmento é obrigatório",
+      "companySizeRequired": "Tamanho da empresa é obrigatório",
+      "serviceTypeRequired": "Tipo de serviço é obrigatório",
+      "descriptionMin": "Descrição deve ter pelo menos 20 caracteres",
+      "deadlineRequired": "Prazo é obrigatório"
+    }
   }
 }
