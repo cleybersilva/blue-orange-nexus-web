@@ -1,407 +1,245 @@
+
 {
-  "siteTitle": {
-    "agency": "Digital Agency",
-    "hub": "Hub"
-  },
   "nav": {
     "home": "Home",
-    "about": "About Us",
+    "about": "About",
     "services": "Services",
-    "portfolio": "Portfolio",
-    "testimonials": "Testimonials",
+    "projects": "Projects",
+    "blog": "Blog",
     "contact": "Contact",
     "schedule": "Schedule"
   },
   "hero": {
-    "title": "Transform Your Business with",
-    "subtitle": "Digital Solutions",
-    "description": "We create digital experiences that connect brands with their customers through innovative design and cutting-edge technology.",
-    "scheduleButton": "Schedule a Meeting",
-    "cta": "Learn More",
-    "imageAlt": "Digital Agency Services"
+    "title": "We transform ideas into",
+    "subtitle": "digital solutions",
+    "description": "We create websites, applications and digital marketing strategies that drive your business growth.",
+    "ctaButton": "Contact Us",
+    "scheduleButton": "Schedule Meeting"
   },
   "services": {
     "title": "Our Services",
-    "subtitle": "What We Do",
-    "description": "We offer a comprehensive range of digital services to help your business thrive in the online world.",
+    "subtitle": "Complete solutions to transform your digital business",
     "websites": {
       "title": "Website Development",
-      "description": "Custom websites that reflect your brand and engage your audience."
+      "description": "Professional and responsive websites that convert visitors into customers."
     },
     "ecommerce": {
-      "title": "E-commerce Solutions",
-      "description": "Online stores that drive sales and provide a seamless shopping experience."
+      "title": "E-commerce",
+      "description": "Complete online stores with payment integration and inventory management."
     },
     "apps": {
-      "title": "Mobile Applications",
-      "description": "Native and cross-platform mobile applications for iOS and Android."
+      "title": "Applications",
+      "description": "Custom mobile and web apps for iOS and Android."
     },
     "lms": {
       "title": "Learning Management Systems",
-      "description": "Custom educational platforms to streamline your training process."
+      "description": "Complete and interactive virtual learning environments."
     },
     "marketing": {
       "title": "Digital Marketing",
-      "description": "Result-driven strategies to increase your online presence and reach."
+      "description": "Digital marketing strategies to increase your online presence."
     },
     "social": {
       "title": "Social Media Management",
-      "description": "Comprehensive social media strategies to grow your audience and engagement."
+      "description": "Content creation and management for your social networks."
     },
     "design": {
-      "title": "UI/UX Design",
-      "description": "User-centered design that focuses on creating memorable experiences."
+      "title": "Graphic Design",
+      "description": "Visual identity and professional graphic materials."
     },
     "political": {
-      "title": "Political Campaign Solutions",
-      "description": "Digital tools and platforms for effective political campaigns."
+      "title": "Political Marketing",
+      "description": "Digital strategies specialized for political campaigns."
     },
-    "cta": "View All Services"
+    "learnMore": "Learn More"
   },
-  "portfolio": {
-    "title": "Our Portfolio",
-    "subtitle": "Recent Projects",
-    "description": "Check out some of our recent work that showcases our expertise and creativity.",
-    "viewAll": "View All Projects",
-    "viewProject": "View Project",
-    "viewDetails": "View More Projects",
-    "categories": {
-      "all": "All",
-      "websites": "Websites",
-      "ecommerce": "E-commerce",
-      "apps": "Mobile Apps",
-      "branding": "Branding",
-      "mobile": "Mobile",
-      "website": "Website",
-      "software": "Software",
-      "platform": "Platform",
-      "marketplace": "Marketplace"
+  "aboutPage": {
+    "hero": {
+      "title": "About Digital Hub Agency",
+      "subtitle": "Transforming ideas into innovative digital solutions since 2020"
     },
-    "ecommerce": {
-      "title": "E-commerce Platform"
+    "story": {
+      "title": "Our Story",
+      "description": "Founded in 2020, Digital Hub Agency was born with the purpose of democratizing access to quality digital solutions. We started as a small team of developers and designers passionate about technology and today we are a reference in digital transformation for companies of all sizes."
     },
-    "delivery": {
-      "title": "Delivery App"
-    },
-    "institutional": {
-      "title": "Corporate Website"
-    },
-    "dashboard": {
-      "title": "Analytics Dashboard"
-    },
-    "social": {
-      "title": "Social Network"
-    },
-    "marketplace": {
-      "title": "Online Marketplace"
-    }
-  },
-  "testimonials": {
-    "title": "Testimonials",
-    "subtitle": "What Our Clients Say",
-    "description": "Don't just take our word for it. See what our clients have to say about working with us.",
-    "quotes": {
-      "first": "Working with the Agency Digital team was an excellent experience. They delivered our e-commerce platform ahead of schedule and the results exceeded our expectations in terms of user engagement and sales conversion.",
-      "second": "The website redesign completely transformed our brand image. We've seen a 40% increase in inquiries and our bounce rate has significantly decreased. Highly recommend their services!",
-      "third": "Their mobile app development skills are unmatched. Our delivery app has received outstanding reviews on both App Store and Google Play. The user experience is intuitive and the performance is flawless."
-    },
-    "roles": {
-      "ceo": "CEO",
-      "commercial": "Commercial Director",
-      "product": "Product Manager"
-    }
-  },
-  "contact": {
-    "title": "Contact Us",
-    "subtitle": "Get in Touch",
-    "description": "Have a project in mind or want to know more about our services? Send us a message and we'll get back to you.",
-    "formName": "Your Name",
-    "formEmail": "Your Email",
-    "formPhone": "Phone Number",
-    "formSubject": "Subject",
-    "formMessage": "Message",
-    "formSubmit": "Send Message",
-    "successTitle": "Message Sent!",
-    "successDescription": "We'll get back to you as soon as possible.",
-    "errorTitle": "Error",
-    "errorDescription": "Something went wrong. Please try again."
-  },
-  "about": {
-    "title": "About Us",
-    "subtitle": "Our Story",
-    "description": "Learn more about our team and our mission to deliver exceptional digital solutions.",
     "mission": {
       "title": "Our Mission",
-      "description": "To help businesses succeed in the digital world by providing innovative solutions that drive growth and engagement."
+      "description": "Empower companies through innovative digital solutions that generate real and sustainable results."
     },
     "vision": {
       "title": "Our Vision",
-      "description": "To be the leading digital agency known for creativity, innovation, and customer satisfaction."
+      "description": "To be recognized as Brazil's leading digital agency, a reference in innovation and excellence in service."
     },
     "values": {
       "title": "Our Values",
-      "items": {
-        "excellence": {
-          "title": "Excellence",
-          "description": "We strive for excellence in everything we do."
-        },
-        "innovation": {
-          "title": "Innovation",
-          "description": "We embrace new technologies and approaches to solve complex problems."
-        },
-        "integrity": {
-          "title": "Integrity",
-          "description": "We conduct our business with honesty and transparency."
-        },
-        "collaboration": {
-          "title": "Collaboration",
-          "description": "We believe in working together to achieve common goals."
-        }
-      }
+      "innovation": "Constant innovation in all projects",
+      "quality": "Quality and excellence in every delivery",
+      "transparency": "Total transparency in our processes",
+      "results": "Focus on measurable results",
+      "partnership": "Partnership relationship with clients"
     },
     "team": {
       "title": "Our Team",
-      "description": "Meet the talented individuals behind our success."
-    }
+      "subtitle": "Specialized professionals passionate about what they do",
+      "ceo": {
+        "name": "Cleyber Silva",
+        "role": "CEO & Founder",
+        "description": "Visionary and strategist, leads the company with a focus on innovation and exceptional results."
+      },
+      "cto": {
+        "name": "Ana Costa",
+        "role": "CTO",
+        "description": "Technology specialist, ensures we always use the best practices and tools in the market."
+      },
+      "designer": {
+        "name": "Carlos Mendes",
+        "role": "Design Lead",
+        "description": "Creative and detail-oriented, transforms ideas into memorable visual experiences."
+      }
+    },
+    "stats": {
+      "projects": "Projects Delivered",
+      "clients": "Satisfied Clients",
+      "experience": "Years of Experience",
+      "team": "Professionals"
+    },
+    "location": {
+      "title": "Our Location",
+      "description": "We are strategically located in Brazil's technological heart",
+      "office": "Main Office",
+      "phone": "Phone",
+      "email": "Email"
+    },
+    "cta": {
+      "title": "Ready to transform your business?",
+      "subtitle": "Contact us and discover how we can help your company reach the next digital level.",
+      "schedule": "Schedule Free Consultation"
+    },
+    "contactUs": "Contact Us",
+    "scheduleCall": "Schedule a free conversation with our specialists."
   },
-  "calendly": {
-    "openingSchedule": "Opening scheduler",
-    "chooseTime": "Choose a time that works for you",
-    "scheduleTitle": "Schedule a Meeting"
+  "portfolio": {
+    "title": "Our Portfolio",
+    "subtitle": "Projects that transformed businesses and generated exceptional results"
+  },
+  "testimonials": {
+    "title": "What our clients say",
+    "subtitle": "Real testimonials from companies that transformed their businesses with us"
+  },
+  "timeline": {
+    "title": "Business Hours",
+    "weekdays": "Monday to Friday",
+    "hours": "9am to 6pm",
+    "weekend": "Weekends",
+    "appointment": "By appointment"
   },
   "footer": {
-    "aboutText": "We are a digital agency specializing in website development, mobile applications, e-commerce solutions, and digital marketing. Our mission is to help businesses thrive in the digital world.",
-    "links": "Quick Links",
-    "contact": "Contact Info",
-    "address": "123 Digital Street, Tech City, 12345",
-    "newsletter": "Subscribe to our newsletter to get updates on our latest projects and news.",
-    "emailPlaceholder": "Your email address",
+    "company": "Digital Hub Agency",
+    "description": "We transform ideas into digital solutions that generate real results for your business.",
+    "quickLinks": "Quick Links",
+    "services": "Services",
+    "contact": "Contact",
+    "newsletter": "Newsletter",
+    "newsletterText": "Receive the latest news and tips about digital marketing.",
     "subscribe": "Subscribe",
-    "error": "Error",
-    "emailInvalid": "Please enter a valid email address.",
-    "success": "Success",
-    "subscribed": "Thank you for subscribing!",
-    "rights": "All Rights Reserved",
+    "placeholder": "Your email",
+    "rights": "All rights reserved.",
     "privacy": "Privacy Policy",
     "terms": "Terms of Use",
-    "faq": "FAQ"
-  },
-  "notFound": {
-    "title": "Page Not Found",
-    "description": "The page you are looking for might have been removed or is temporarily unavailable.",
-    "button": "Go Back to Home"
-  },
-  "privacy": {
-    "title": "Privacy Policy",
-    "lastUpdated": "Last Updated",
-    "introduction": {
-      "title": "Introduction",
-      "p1": "At Agency Digital, we respect your privacy and are committed to protecting your personal data. This privacy policy will inform you how we look after your personal data when you visit our website and tell you about your privacy rights and how the law protects you.",
-      "p2": "Please read this privacy policy carefully before using our services."
-    },
-    "dataCollection": {
-      "title": "Information We Collect",
-      "p1": "We may collect, use, store and transfer different kinds of personal data about you which we have grouped together as follows:",
-      "items": {
-        "personal": "Personal Data: Name, email address, phone number, company name, and job title.",
-        "usage": "Usage Data: Information about how you use our website and services.",
-        "technical": "Technical Data: Internet protocol (IP) address, browser type and version, time zone setting, browser plug-in types and versions, operating system and platform."
-      }
-    },
-    "dataUse": {
-      "title": "How We Use Your Information",
-      "p1": "We will only use your personal data when the law allows us to. Most commonly, we will use your personal data in the following circumstances:",
-      "items": {
-        "provide": "To provide and maintain our services.",
-        "improve": "To improve and personalize our services.",
-        "communicate": "To communicate with you about our services, including sending updates and marketing materials.",
-        "security": "To monitor and analyze the use of our services and detect, prevent and address technical issues."
-      }
-    },
-    "cookies": {
-      "title": "Cookies and Tracking Technologies",
-      "p1": "We use cookies and similar tracking technologies to track activity on our website and store certain information. Cookies are files with small amount of data which may include an anonymous unique identifier.",
-      "p2": "You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. However, if you do not accept cookies, you may not be able to use some portions of our services."
-    },
-    "thirdParty": {
-      "title": "Third-Party Services",
-      "p1": "Our service may contain links to other websites that are not operated by us. If you click on a third party link, you will be directed to that third party's site. We strongly advise you to review the Privacy Policy of every site you visit."
-    },
-    "dataRetention": {
-      "title": "Data Retention",
-      "p1": "We will only retain your personal data for as long as necessary to fulfill the purposes we collected it for, including for the purposes of satisfying any legal, accounting, or reporting requirements."
-    },
-    "rights": {
-      "title": "Your Data Protection Rights",
-      "p1": "Under certain circumstances, you have rights under data protection laws in relation to your personal data, including the right to:",
-      "items": {
-        "access": "Request access to your personal data.",
-        "rectification": "Request correction of your personal data.",
-        "erasure": "Request erasure of your personal data.",
-        "restrict": "Request restriction of processing your personal data.",
-        "portability": "Request the transfer of your personal data."
-      }
-    },
-    "changes": {
-      "title": "Changes to This Privacy Policy",
-      "p1": "We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the 'Last Updated' date at the top of this Privacy Policy."
-    },
-    "contact": {
-      "title": "Contact Us",
-      "p1": "If you have any questions about this Privacy Policy, please contact us:"
-    }
-  },
-  "terms": {
-    "title": "Terms of Use",
-    "lastUpdated": "Last Updated",
-    "introduction": {
-      "title": "Introduction",
-      "p1": "Welcome to Agency Digital. These Terms of Use govern your use of our website and the services we provide.",
-      "p2": "By accessing or using our website, you agree to be bound by these Terms. If you disagree with any part of the terms, then you may not access our services."
-    },
-    "use": {
-      "title": "Use of Our Services",
-      "p1": "Our services are intended for users who are at least 18 years old. By using our services, you confirm that you are at least 18 years old.",
-      "items": {
-        "license": "License: We grant you a limited, non-exclusive, non-transferable license to access and use our services for your personal or business purposes.",
-        "restrictions": "Restrictions: You may not use our services for any illegal purposes or in any manner that could damage, disable, overburden, or impair our services.",
-        "modifications": "Modifications: We reserve the right to modify or discontinue, temporarily or permanently, our services with or without notice."
-      }
-    },
-    "content": {
-      "title": "Content on Our Website",
-      "p1": "Our website may contain content that is provided by us, our users, or third parties. We do not guarantee the accuracy, completeness, or usefulness of any content on our website.",
-      "p2": "We are not responsible for any loss or damage that may result from your reliance on such content."
-    },
-    "accounts": {
-      "title": "User Accounts",
-      "p1": "When you create an account with us, you must provide us information that is accurate, complete, and current at all times.",
-      "p2": "You are responsible for safeguarding the password that you use to access our services and for any activities or actions under your password."
-    },
-    "intellectual": {
-      "title": "Intellectual Property",
-      "p1": "Our services and all content included on our website, such as text, graphics, logos, button icons, images, audio clips, digital downloads, data compilations, and software, are the property of Agency Digital or its content suppliers and protected by international copyright laws.",
-      "items": {
-        "copyright": "Copyright: All content included on our website is the property of Agency Digital or its content suppliers and protected by international copyright laws.",
-        "trademarks": "Trademarks: All trademarks, service marks, and trade names used on our website are the property of their respective owners.",
-        "use": "Use of Content: You may not use, reproduce, distribute, or create derivative works from any content on our website without our prior written consent."
-      }
-    },
-    "userContent": {
-      "title": "User Content",
-      "p1": "By posting content on our website, you grant us a non-exclusive, royalty-free, transferable, sub-licensable, worldwide license to use, display, reproduce, and distribute such content in connection with our services.",
-      "p2": "You represent and warrant that you own or have the necessary rights to the content you post on our website, and that the posting of your content does not violate any copyright, trademark, or other intellectual property rights."
-    },
-    "privacy": {
-      "title": "Privacy",
-      "p1": "Your privacy is important to us. Our Privacy Policy explains how we collect, use, and share your personal information. By using our services, you agree to our ",
-      "link": "Privacy Policy"
-    },
-    "termination": {
-      "title": "Termination",
-      "p1": "We may terminate or suspend your account immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach these Terms of Use.",
-      "p2": "Upon termination, your right to use our services will immediately cease. If you wish to terminate your account, you may simply discontinue using our services."
-    },
-    "liability": {
-      "title": "Limitation of Liability",
-      "p1": "In no event shall Agency Digital, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from your access to or use of or inability to access or use our services.",
-      "p2": "To the maximum extent permitted by applicable law, the total liability of Agency Digital and its affiliates, for any claims under these terms, including for any implied warranties, is limited to the amount you paid us to use our services."
-    },
-    "changes": {
-      "title": "Changes to These Terms",
-      "p1": "We reserve the right, at our sole discretion, to modify or replace these Terms of Use at any time. If a revision is material, we will try to provide at least 30 days' notice prior to any new terms taking effect."
-    },
-    "contact": {
-      "title": "Contact Us",
-      "p1": "If you have any questions about these Terms of Use, please contact us:"
-    }
+    "address": "São Paulo, SP - Brazil",
+    "success": "Success!",
+    "subscribed": "You have been subscribed to our newsletter."
   },
   "form": {
-    "scheduleTitle": "Schedule a Meeting",
-    "briefingInstructions": "Fill out the form below to tell us about your project. We'll get back to you as soon as possible.",
+    "scheduleTitle": "Schedule your Free Consultation",
+    "briefingInstructions": "Fill out the form below with your project information so we can offer the best solution for your business.",
     "stages": {
       "personal": "Personal",
       "company": "Company",
       "project": "Project",
       "confirmation": "Confirmation"
     },
-    "personalData": "Your Information",
-    "provideContactInfo": "Please provide your contact information.",
+    "personalData": "Personal Data",
+    "provideContactInfo": "Provide your contact information",
     "fullName": "Full Name",
     "yourName": "Your name",
     "email": "Email",
     "emailPlaceholder": "your@email.com",
     "phone": "Phone",
-    "phonePlaceholder": "Your phone number",
-    "role": "Your Role",
+    "phonePlaceholder": "(00) 00000-0000",
+    "role": "Position/Role",
     "rolePlaceholder": "Your position in the company",
-    "aboutCompany": "About Your Company",
-    "companyInfo": "Tell us about your company.",
+    "aboutCompany": "About your Company",
+    "companyInfo": "Tell us more about your company",
     "companyName": "Company Name",
-    "companyNamePlaceholder": "Your company's name",
+    "companyNamePlaceholder": "Your company name",
     "segment": "Industry",
-    "segmentPlaceholder": "Your company's industry",
+    "segmentPlaceholder": "Ex: Retail, Technology, Healthcare",
     "companySize": "Company Size",
-    "companySizePlaceholder": "Number of employees",
+    "companySizePlaceholder": "Ex: 1-10, 11-50, 51-200 employees",
     "website": "Website",
-    "websitePlaceholder": "https://yourcompany.com",
-    "websiteDescription": "Optional. Your company's website.",
-    "aboutProject": "About Your Project",
-    "projectDetails": "Tell us about your project.",
+    "websitePlaceholder": "https://yoursite.com",
+    "websiteDescription": "If your company already has a website, enter it here",
+    "aboutProject": "About your Project",
+    "projectDetails": "Tell us about the project you have in mind",
     "serviceType": "Service Type",
-    "serviceTypePlaceholder": "What service are you looking for?",
+    "serviceTypePlaceholder": "Ex: Website, E-commerce, App, Marketing",
     "projectDescription": "Project Description",
-    "projectDescriptionPlaceholder": "Please describe your project in detail",
+    "projectDescriptionPlaceholder": "Describe in detail what you need...",
     "desiredDeadline": "Desired Deadline",
-    "deadlinePlaceholder": "When do you need this project completed?",
+    "deadlinePlaceholder": "Ex: 30 days, 2 months, urgent",
     "estimatedBudget": "Estimated Budget",
-    "budgetPlaceholder": "Optional. Your estimated budget for this project",
-    "budgetDescription": "This helps us understand the scope of your project.",
-    "confirmation": "Confirm Your Information",
-    "howPreferContact": "How would you prefer us to contact you?",
-    "sendBriefingWhatsApp": "Send me project updates via WhatsApp",
-    "sendBriefingEmail": "Send me project updates via email",
-    "preferPhone": "Call me to discuss the project details",
-    "onlineScheduling": "Online Meeting",
-    "scheduleCalendly": "Schedule a meeting via Calendly",
-    "informationSummary": "Information Summary",
+    "budgetPlaceholder": "Ex: $5,000 - $10,000",
+    "budgetDescription": "This information helps us suggest the best solution",
+    "confirmation": "Confirmation",
+    "howPreferContact": "How do you prefer to be contacted?",
+    "sendBriefingWhatsApp": "Send briefing via WhatsApp",
+    "sendBriefingEmail": "Send briefing by email",
+    "preferPhone": "I prefer phone contact",
+    "onlineScheduling": "Online Scheduling",
+    "scheduleCalendly": "Schedule online meeting",
+    "informationSummary": "Information Summary:",
     "name": "Name",
     "company": "Company",
     "service": "Service",
     "deadline": "Deadline",
-    "next": "Next",
     "back": "Back",
+    "next": "Next",
     "send": "Send",
-    "needImmediateHelp": "Need Immediate Help?",
-    "contactDirectly": "You can contact us directly through the following channels.",
-    "phoneWhatsApp": "Phone & WhatsApp",
-    "scheduleYourMeeting": "Schedule Your Meeting",
+    "newBriefing": "New Briefing - Digital Hub Agency",
+    "companyData": "Company Data",
+    "projectData": "Project Data",
+    "contactPreference": "Contact Preference",
+    "systemInfo": "System Information",
+    "submissionTime": "Submission Time",
+    "language": "Language",
+    "size": "Size",
+    "description": "Description",
+    "budget": "Budget",
+    "notProvided": "Not provided",
+    "newBriefingSubject": "New Project Briefing - Digital Hub Agency",
+    "briefingSentSuccess": "Briefing sent successfully!",
+    "willContactSoon": "We will contact you soon to discuss your project.",
+    "validationError": "Validation Error",
+    "submissionError": "Submission Error",
+    "pleaseSelectContactMethod": "Please select at least one contact method.",
+    "needImmediateHelp": "Need immediate help?",
+    "contactDirectly": "Contact us directly through the channels below:",
+    "phoneWhatsApp": "Phone/WhatsApp",
+    "scheduleYourMeeting": "Schedule your Meeting",
     "backToForm": "Back to Form",
+    "lang": "en",
     "errors": {
       "nameMin": "Name must be at least 3 characters",
-      "emailInvalid": "Please provide a valid email address",
-      "phoneInvalid": "Phone number must be at least 10 characters",
-      "roleRequired": "Your role is required",
+      "emailInvalid": "Invalid email",
+      "phoneInvalid": "Phone must be at least 10 digits",
+      "roleRequired": "Position is required",
       "companyNameRequired": "Company name is required",
       "segmentRequired": "Industry is required",
       "companySizeRequired": "Company size is required",
       "serviceTypeRequired": "Service type is required",
       "descriptionMin": "Description must be at least 20 characters",
       "deadlineRequired": "Deadline is required"
-    },
-    "newBriefing": "New Briefing",
-    "personalData": "Personal Data",
-    "companyData": "Company Data",
-    "projectData": "Project Data",
-    "contactPreference": "Contact Preference",
-    "notProvided": "Not provided",
-    "newBriefingSubject": "New Project Briefing",
-    "briefingSentSuccess": "Briefing Sent Successfully",
-    "willContactSoon": "We'll contact you soon about your project!",
-    "lang": "en"
-  },
-  "language": {
-    "changed": "Language Changed",
-    "changedTo": "Language changed to {{language}}"
+    }
   }
 }

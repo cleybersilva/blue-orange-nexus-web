@@ -1,510 +1,245 @@
+
 {
-  "siteTitle": {
-    "agency": "Agência Digital",
-    "hub": "Hub"
-  },
   "nav": {
     "home": "Início",
-    "about": "Sobre Nós",
+    "about": "Sobre",
     "services": "Serviços",
-    "portfolio": "Portfólio",
-    "testimonials": "Depoimentos",
+    "projects": "Projetos",
+    "blog": "Blog",
     "contact": "Contato",
     "schedule": "Agendar"
   },
   "hero": {
-    "title": "Transforme seu Negócio com",
-    "subtitle": "Soluções Digitais",
-    "description": "Criamos experiências digitais que conectam marcas com seus clientes através de design inovador e tecnologia de ponta.",
-    "scheduleButton": "Agendar Reunião",
-    "cta": "Saiba Mais",
-    "imageAlt": "Serviços de Agência Digital"
+    "title": "Transformamos ideias em",
+    "subtitle": "soluções digitais",
+    "description": "Criamos websites, aplicativos e estratégias de marketing digital que impulsionam o crescimento do seu negócio.",
+    "ctaButton": "Fale Conosco",
+    "scheduleButton": "Agendar Reunião"
   },
   "services": {
     "title": "Nossos Serviços",
-    "subtitle": "O Que Fazemos",
-    "description": "Oferecemos uma ampla gama de serviços digitais para ajudar seu negócio a prosperar no mundo online.",
+    "subtitle": "Soluções completas para transformar seu negócio digital",
     "websites": {
-      "title": "Desenvolvimento de Websites",
-      "description": "Sites personalizados que refletem sua marca e envolvem seu público."
+      "title": "Desenvolvimento de Sites",
+      "description": "Sites profissionais e responsivos que convertem visitantes em clientes."
     },
     "ecommerce": {
-      "title": "Soluções de E-commerce",
-      "description": "Lojas online que impulsionam vendas e oferecem uma experiência de compra perfeita."
+      "title": "E-commerce",
+      "description": "Lojas virtuais completas com integração de pagamento e gestão de estoque."
     },
     "apps": {
-      "title": "Aplicativos Móveis",
-      "description": "Aplicativos nativos e multiplataforma para iOS e Android."
+      "title": "Aplicativos",
+      "description": "Apps mobile e web personalizados para iOS e Android."
     },
     "lms": {
-      "title": "Sistemas de Gestão de Aprendizagem",
-      "description": "Plataformas educacionais personalizadas para otimizar seu processo de treinamento."
+      "title": "Plataformas de Ensino (AVA)",
+      "description": "Ambientes virtuais de aprendizagem completos e interativos."
     },
     "marketing": {
       "title": "Marketing Digital",
-      "description": "Estratégias orientadas a resultados para aumentar sua presença online e alcance."
+      "description": "Estratégias de marketing digital para aumentar sua presença online."
     },
     "social": {
-      "title": "Gestão de Mídias Sociais",
-      "description": "Estratégias abrangentes de mídia social para aumentar seu público e engajamento."
+      "title": "Gestão de Redes Sociais",
+      "description": "Criação e gestão de conteúdo para suas redes sociais."
     },
     "design": {
-      "title": "Design UI/UX",
-      "description": "Design centrado no usuário que foca em criar experiências memoráveis."
+      "title": "Design Gráfico",
+      "description": "Identidade visual e materiais gráficos profissionais."
     },
     "political": {
-      "title": "Soluções para Campanhas Políticas",
-      "description": "Ferramentas digitais e plataformas para campanhas políticas eficazes."
+      "title": "Marketing Político",
+      "description": "Estratégias digitais especializadas para campanhas políticas."
     },
-    "cta": "Ver Todos os Serviços"
+    "learnMore": "Saiba Mais"
   },
-  "portfolio": {
-    "title": "Nosso Portfólio",
-    "subtitle": "Projetos Recentes",
-    "description": "Confira alguns de nossos trabalhos recentes que demonstram nossa experiência e criatividade.",
-    "viewAll": "Ver Todos os Projetos",
-    "viewProject": "Ver Projeto",
-    "viewDetails": "Ver Mais Projetos",
-    "categories": {
-      "all": "Todos",
-      "websites": "Websites",
-      "ecommerce": "E-commerce",
-      "apps": "Aplicativos",
-      "branding": "Marca",
-      "mobile": "Mobile",
-      "website": "Website",
-      "software": "Software",
-      "platform": "Plataforma",
-      "marketplace": "Marketplace"
+  "aboutPage": {
+    "hero": {
+      "title": "Sobre a Agência Digital Hub",
+      "subtitle": "Transformando ideias em soluções digitais inovadoras desde 2020"
     },
-    "ecommerce": {
-      "title": "Plataforma de E-commerce"
+    "story": {
+      "title": "Nossa História",
+      "description": "Fundada em 2020, a Agência Digital Hub nasceu com o propósito de democratizar o acesso a soluções digitais de qualidade. Começamos como uma pequena equipe de desenvolvedores e designers apaixonados por tecnologia e hoje somos referência em transformação digital para empresas de todos os portes."
     },
-    "delivery": {
-      "title": "Aplicativo de Entregas"
-    },
-    "institutional": {
-      "title": "Site Institucional"
-    },
-    "dashboard": {
-      "title": "Dashboard Analítico"
-    },
-    "social": {
-      "title": "Rede Social"
-    },
-    "marketplace": {
-      "title": "Marketplace Online"
-    }
-  },
-  "testimonials": {
-    "title": "Depoimentos",
-    "subtitle": "O Que Nossos Clientes Dizem",
-    "description": "Não acredite apenas em nossa palavra. Veja o que nossos clientes têm a dizer sobre trabalhar conosco.",
-    "quotes": {
-      "first": "Trabalhar com a equipe da Agência Digital foi uma experiência excelente. Eles entregaram nossa plataforma de e-commerce antes do prazo e os resultados superaram nossas expectativas em termos de engajamento do usuário e conversão de vendas.",
-      "second": "O redesign do site transformou completamente a imagem da nossa marca. Vimos um aumento de 40% nas consultas e nossa taxa de rejeição diminuiu significativamente. Recomendo fortemente os serviços deles!",
-      "third": "As habilidades de desenvolvimento de aplicativos móveis deles são incomparáveis. Nosso aplicativo de entrega recebeu avaliações excelentes tanto na App Store quanto no Google Play. A experiência do usuário é intuitiva e o desempenho é impecável."
-    },
-    "roles": {
-      "ceo": "CEO",
-      "commercial": "Diretor Comercial",
-      "product": "Gerente de Produto"
-    }
-  },
-  "contact": {
-    "title": "Contato",
-    "subtitle": "Entre em Contato",
-    "description": "Tem um projeto em mente ou quer saber mais sobre nossos serviços? Envie-nos uma mensagem e retornaremos em breve.",
-    "formName": "Seu Nome",
-    "formEmail": "Seu Email",
-    "formPhone": "Telefone",
-    "formSubject": "Assunto",
-    "formMessage": "Mensagem",
-    "formSubmit": "Enviar Mensagem",
-    "successTitle": "Mensagem Enviada!",
-    "successDescription": "Responderemos o mais rápido possível.",
-    "errorTitle": "Erro",
-    "errorDescription": "Algo deu errado. Por favor, tente novamente."
-  },
-  "about": {
-    "title": "Sobre Nós",
-    "subtitle": "Nossa História",
-    "description": "Saiba mais sobre nossa equipe e nossa missão de entregar soluções digitais excepcionais.",
     "mission": {
       "title": "Nossa Missão",
-      "description": "Ajudar empresas a terem sucesso no mundo digital, fornecendo soluções inovadoras que impulsionam crescimento e engajamento."
+      "description": "Capacitar empresas através de soluções digitais inovadoras que geram resultados reais e sustentáveis."
     },
     "vision": {
       "title": "Nossa Visão",
-      "description": "Ser a principal agência digital reconhecida por criatividade, inovação e satisfação do cliente."
+      "description": "Ser reconhecida como a principal agência digital do Brasil, referência em inovação e excelência em atendimento."
     },
     "values": {
       "title": "Nossos Valores",
-      "items": {
-        "excellence": {
-          "title": "Excelência",
-          "description": "Buscamos a excelência em tudo o que fazemos."
-        },
-        "innovation": {
-          "title": "Inovação",
-          "description": "Abraçamos novas tecnologias e abordagens para resolver problemas complexos."
-        },
-        "integrity": {
-          "title": "Integridade",
-          "description": "Conduzimos nossos negócios com honestidade e transparência."
-        },
-        "collaboration": {
-          "title": "Colaboração",
-          "description": "Acreditamos no trabalho conjunto para alcançar objetivos comuns."
-        }
-      }
+      "innovation": "Inovação constante em todos os projetos",
+      "quality": "Qualidade e excelência em cada entrega",
+      "transparency": "Transparência total em nossos processos",
+      "results": "Foco em resultados mensuráveis",
+      "partnership": "Relacionamento de parceria com clientes"
     },
     "team": {
       "title": "Nossa Equipe",
-      "description": "Conheça os talentosos indivíduos por trás do nosso sucesso."
-    }
+      "subtitle": "Profissionais especializados e apaixonados pelo que fazem",
+      "ceo": {
+        "name": "Cleyber Silva",
+        "role": "CEO & Founder",
+        "description": "Visionário e estrategista, lidera a empresa com foco em inovação e resultados excepcionais."
+      },
+      "cto": {
+        "name": "Ana Costa",
+        "role": "CTO",
+        "description": "Especialista em tecnologia, garante que utilizemos sempre as melhores práticas e ferramentas do mercado."
+      },
+      "designer": {
+        "name": "Carlos Mendes",
+        "role": "Design Lead",
+        "description": "Criativo e detalhista, transforma ideias em experiências visuais memoráveis."
+      }
+    },
+    "stats": {
+      "projects": "Projetos Entregues",
+      "clients": "Clientes Satisfeitos",
+      "experience": "Anos de Experiência",
+      "team": "Profissionais"
+    },
+    "location": {
+      "title": "Nossa Localização",
+      "description": "Estamos estrategicamente localizados no coração tecnológico do Brasil",
+      "office": "Escritório Principal",
+      "phone": "Telefone",
+      "email": "E-mail"
+    },
+    "cta": {
+      "title": "Pronto para transformar seu negócio?",
+      "subtitle": "Entre em contato conosco e descubra como podemos ajudar sua empresa a alcançar o próximo nível digital.",
+      "schedule": "Agendar Consulta Gratuita"
+    },
+    "contactUs": "Fale Conosco",
+    "scheduleCall": "Agende uma conversa gratuita com nossos especialistas."
   },
-  "calendly": {
-    "openingSchedule": "Abrindo agenda",
-    "chooseTime": "Escolha um horário que funcione para você",
-    "scheduleTitle": "Agendar uma Reunião"
+  "portfolio": {
+    "title": "Nosso Portfólio",
+    "subtitle": "Projetos que transformaram negócios e geraram resultados excepcionais"
+  },
+  "testimonials": {
+    "title": "O que nossos clientes dizem",
+    "subtitle": "Depoimentos reais de empresas que transformaram seus negócios conosco"
+  },
+  "timeline": {
+    "title": "Horário de Funcionamento",
+    "weekdays": "Segunda à Sexta",
+    "hours": "9h às 18h",
+    "weekend": "Fins de semana",
+    "appointment": "Sob agendamento"
   },
   "footer": {
-    "aboutText": "Somos uma agência digital especializada em desenvolvimento de websites, aplicativos móveis, soluções de e-commerce e marketing digital. Nossa missão é ajudar empresas a prosperarem no mundo digital.",
-    "links": "Links Rápidos",
-    "contact": "Informações de Contato",
-    "address": "Rua Digital 123, Cidade Tech, 12345",
-    "newsletter": "Assine nossa newsletter para receber atualizações sobre nossos últimos projetos e notícias.",
-    "emailPlaceholder": "Seu endereço de email",
-    "subscribe": "Assinar",
-    "error": "Erro",
-    "emailInvalid": "Por favor, insira um endereço de email válido.",
-    "success": "Sucesso",
-    "subscribed": "Obrigado por se inscrever!",
-    "rights": "Todos os Direitos Reservados",
+    "company": "Agência Digital Hub",
+    "description": "Transformamos ideias em soluções digitais que geram resultados reais para o seu negócio.",
+    "quickLinks": "Links Rápidos",
+    "services": "Serviços",
+    "contact": "Contato",
+    "newsletter": "Newsletter",
+    "newsletterText": "Receba as últimas novidades e dicas sobre marketing digital.",
+    "subscribe": "Inscrever-se",
+    "placeholder": "Seu e-mail",
+    "rights": "Todos os direitos reservados.",
     "privacy": "Política de Privacidade",
     "terms": "Termos de Uso",
-    "faq": "FAQ"
-  },
-  "notFound": {
-    "title": "Página Não Encontrada",
-    "description": "A página que você está procurando pode ter sido removida ou está temporariamente indisponível.",
-    "button": "Voltar para o Início"
-  },
-  "privacy": {
-    "title": "Política de Privacidade",
-    "lastUpdated": "Última Atualização",
-    "introduction": {
-      "title": "Introdução",
-      "p1": "Na Agência Digital, respeitamos sua privacidade e estamos comprometidos em proteger seus dados pessoais. Esta política de privacidade o informará como cuidamos de seus dados pessoais quando você visita nosso site e o informará sobre seus direitos de privacidade e como a lei o protege.",
-      "p2": "Por favor, leia esta política de privacidade cuidadosamente antes de usar nossos serviços."
-    },
-    "dataCollection": {
-      "title": "Informações que Coletamos",
-      "p1": "Podemos coletar, usar, armazenar e transferir diferentes tipos de dados pessoais sobre você, os quais agrupamos da seguinte forma:",
-      "items": {
-        "personal": "Dados Pessoais: Nome, endereço de email, número de telefone, nome da empresa e cargo.",
-        "usage": "Dados de Uso: Informações sobre como você usa nosso site e serviços.",
-        "technical": "Dados Técnicos: Endereço de protocolo de internet (IP), tipo e versão do navegador, configuração de fuso horário, tipos e versões de plugins do navegador, sistema operacional e plataforma."
-      }
-    },
-    "dataUse": {
-      "title": "Como Usamos suas Informações",
-      "p1": "Só usaremos seus dados pessoais quando a lei nos permitir. Mais comumente, usaremos seus dados pessoais nas seguintes circunstâncias:",
-      "items": {
-        "provide": "Para fornecer e manter nossos serviços.",
-        "improve": "Para melhorar e personalizar nossos serviços.",
-        "communicate": "Para comunicar com você sobre nossos serviços, incluindo o envio de atualizações e materiais de marketing.",
-        "security": "Para monitorar e analisar o uso de nossos serviços e detectar, prevenir e abordar problemas técnicos."
-      }
-    },
-    "cookies": {
-      "title": "Cookies e Tecnologias de Rastreamento",
-      "p1": "Usamos cookies e tecnologias de rastreamento semelhantes para rastrear atividades em nosso site e armazenar certas informações. Cookies são arquivos com uma pequena quantidade de dados que podem incluir um identificador único anônimo.",
-      "p2": "Você pode instruir seu navegador a recusar todos os cookies ou para indicar quando um cookie está sendo enviado. No entanto, se você não aceitar cookies, pode não conseguir usar algumas partes de nossos serviços."
-    },
-    "thirdParty": {
-      "title": "Serviços de Terceiros",
-      "p1": "Nosso serviço pode conter links para outros sites que não são operados por nós. Se você clicar em um link de terceiros, será direcionado para o site desse terceiro. Aconselhamos fortemente que você revise a Política de Privacidade de todos os sites que visitar."
-    },
-    "dataRetention": {
-      "title": "Retenção de Dados",
-      "p1": "Manteremos seus dados pessoais apenas pelo tempo necessário para cumprir os propósitos para os quais os coletamos, inclusive para fins de satisfazer quaisquer requisitos legais, contábeis ou de relatórios."
-    },
-    "rights": {
-      "title": "Seus Direitos de Proteção de Dados",
-      "p1": "Em determinadas circunstâncias, você tem direitos sob as leis de proteção de dados em relação aos seus dados pessoais, incluindo o direito de:",
-      "items": {
-        "access": "Solicitar acesso aos seus dados pessoais.",
-        "rectification": "Solicitar correção dos seus dados pessoais.",
-        "erasure": "Solicitar apagamento dos seus dados pessoais.",
-        "restrict": "Solicitar restrição de processamento dos seus dados pessoais.",
-        "portability": "Solicitar a transferência dos seus dados pessoais."
-      }
-    },
-    "changes": {
-      "title": "Alterações nesta Política de Privacidade",
-      "p1": "Podemos atualizar nossa Política de Privacidade de tempos em tempos. Notificaremos você sobre quaisquer alterações, publicando a nova Política de Privacidade nesta página e atualizando a data de 'Última Atualização' no topo desta Política de Privacidade."
-    },
-    "contact": {
-      "title": "Entre em Contato",
-      "p1": "Se você tiver alguma dúvida sobre esta Política de Privacidade, entre em contato conosco:"
-    }
-  },
-  "terms": {
-    "title": "Termos de Uso",
-    "lastUpdated": "Última Atualização",
-    "introduction": {
-      "title": "Introdução",
-      "p1": "Bem-vindo à Agência Digital. Estes Termos de Uso regem o uso de nosso site e os serviços que fornecemos.",
-      "p2": "Ao acessar ou usar nosso site, você concorda em ficar vinculado a estes Termos. Se você discordar de qualquer parte dos termos, você não poderá acessar nossos serviços."
-    },
-    "use": {
-      "title": "Uso de Nossos Serviços",
-      "p1": "Nossos serviços são destinados a usuários que têm pelo menos 18 anos de idade. Ao usar nossos serviços, você confirma que tem pelo menos 18 anos de idade.",
-      "items": {
-        "license": "Licença: Concedemos a você uma licença limitada, não exclusiva e intransferível para acessar e usar nossos serviços para fins pessoais ou comerciais.",
-        "restrictions": "Restrições: Você não pode usar nossos serviços para fins ilegais ou de qualquer forma que possa danificar, desativar, sobrecarregar ou prejudicar nossos serviços.",
-        "modifications": "Modificações: Reservamo-nos o direito de modificar ou descontinuar, temporária ou permanentemente, nossos serviços com ou sem aviso prévio."
-      }
-    },
-    "content": {
-      "title": "Conteúdo em Nosso Site",
-      "p1": "Nosso site pode conter conteúdo fornecido por nós, nossos usuários ou terceiros. Não garantimos a precisão, integridade ou utilidade de qualquer conteúdo em nosso site.",
-      "p2": "Não somos responsáveis por qualquer perda ou dano que possa resultar de sua confiança em tal conteúdo."
-    },
-    "accounts": {
-      "title": "Contas de Usuário",
-      "p1": "Quando você cria uma conta conosco, deve fornecer informações que sejam precisas, completas e atualizadas em todos os momentos.",
-      "p2": "Você é responsável por proteger a senha que usa para acessar nossos serviços e por quaisquer atividades ou ações sob sua senha."
-    },
-    "intellectual": {
-      "title": "Propriedade Intelectual",
-      "p1": "Nossos serviços e todo o conteúdo incluído em nosso site, como texto, gráficos, logotipos, ícones de botões, imagens, clipes de áudio, downloads digitais, compilações de dados e software, são propriedade da Agência Digital ou de seus fornecedores de conteúdo e protegidos por leis de direitos autorais internacionais.",
-      "items": {
-        "copyright": "Direitos autorais: Todo o conteúdo incluído em nosso site é propriedade da Agência Digital ou de seus fornecedores de conteúdo e protegido por leis de direitos autorais internacionais.",
-        "trademarks": "Marcas registradas: Todas as marcas registradas, marcas de serviço e nomes comerciais usados em nosso site são propriedade de seus respectivos proprietários.",
-        "use": "Uso de Conteúdo: Você não pode usar, reproduzir, distribuir ou criar obras derivadas de qualquer conteúdo em nosso site sem nosso consentimento prévio por escrito."
-      }
-    },
-    "userContent": {
-      "title": "Conteúdo do Usuário",
-      "p1": "Ao postar conteúdo em nosso site, você nos concede uma licença não exclusiva, livre de royalties, transferível, sublicenciável e mundial para usar, exibir, reproduzir e distribuir tal conteúdo em conexão com nossos serviços.",
-      "p2": "Você declara e garante que possui ou tem os direitos necessários sobre o conteúdo que você publica em nosso site, e que a publicação de seu conteúdo não viola nenhum direito autoral, marca registrada ou outros direitos de propriedade intelectual."
-    },
-    "privacy": {
-      "title": "Privacidade",
-      "p1": "Sua privacidade é importante para nós. Nossa Política de Privacidade explica como coletamos, usamos e compartilhamos suas informações pessoais. Ao usar nossos serviços, você concorda com nossa ",
-      "link": "Política de Privacidade"
-    },
-    "termination": {
-      "title": "Rescisão",
-      "p1": "Podemos encerrar ou suspender sua conta imediatamente, sem aviso prévio ou responsabilidade, por qualquer motivo, incluindo, sem limitação, se você violar estes Termos de Uso.",
-      "p2": "Após a rescisão, seu direito de usar nossos serviços cessará imediatamente. Se desejar encerrar sua conta, você pode simplesmente descontinuar o uso de nossos serviços."
-    },
-    "liability": {
-      "title": "Limitação de Responsabilidade",
-      "p1": "Em nenhum caso a Agência Digital, nem seus diretores, funcionários, parceiros, agentes, fornecedores ou afiliados, serão responsáveis por quaisquer danos indiretos, incidentais, especiais, consequenciais ou punitivos, incluindo, sem limitação, perda de lucros, dados, uso, boa vontade ou outras perdas intangíveis, resultantes do seu acesso ou uso ou incapacidade de acessar ou usar nossos serviços.",
-      "p2": "Na medida máxima permitida pela lei aplicável, a responsabilidade total da Agência Digital e suas afiliadas, por quaisquer reclamações sob estes termos, incluindo quaisquer garantias implícitas, é limitada ao valor que você nos pagou para usar nossos serviços."
-    },
-    "changes": {
-      "title": "Alterações nestes Termos",
-      "p1": "Reservamo-nos o direito, a nosso exclusivo critério, de modificar ou substituir estes Termos de Uso a qualquer momento. Se uma revisão for material, tentaremos fornecer pelo menos 30 dias de aviso antes que quaisquer novos termos entrem em vigor."
-    },
-    "contact": {
-      "title": "Entre em Contato",
-      "p1": "Se você tiver alguma dúvida sobre estes Termos de Uso, entre em contato conosco:"
-    }
+    "address": "São Paulo, SP - Brasil",
+    "success": "Sucesso!",
+    "subscribed": "Você foi inscrito na nossa newsletter."
   },
   "form": {
-    "scheduleTitle": "Agendar uma Reunião",
-    "briefingInstructions": "Preencha o formulário abaixo para nos contar sobre seu projeto. Entraremos em contato o mais breve possível.",
+    "scheduleTitle": "Agende sua Consulta Gratuita",
+    "briefingInstructions": "Preencha o formulário abaixo com as informações do seu projeto para que possamos oferecer a melhor solução para o seu negócio.",
     "stages": {
       "personal": "Pessoal",
       "company": "Empresa",
       "project": "Projeto",
       "confirmation": "Confirmação"
     },
-    "personalData": "Suas Informações",
-    "provideContactInfo": "Por favor, forneça suas informações de contato.",
+    "personalData": "Dados Pessoais",
+    "provideContactInfo": "Forneça suas informações de contato",
     "fullName": "Nome Completo",
     "yourName": "Seu nome",
-    "email": "Email",
+    "email": "E-mail",
     "emailPlaceholder": "seu@email.com",
     "phone": "Telefone",
-    "phonePlaceholder": "Seu número de telefone",
-    "role": "Seu Cargo",
-    "rolePlaceholder": "Sua posição na empresa",
-    "aboutCompany": "Sobre Sua Empresa",
-    "companyInfo": "Conte-nos sobre sua empresa.",
+    "phonePlaceholder": "(00) 00000-0000",
+    "role": "Cargo/Função",
+    "rolePlaceholder": "Seu cargo na empresa",
+    "aboutCompany": "Sobre sua Empresa",
+    "companyInfo": "Conte-nos mais sobre sua empresa",
     "companyName": "Nome da Empresa",
     "companyNamePlaceholder": "Nome da sua empresa",
     "segment": "Segmento",
-    "segmentPlaceholder": "Segmento da sua empresa",
+    "segmentPlaceholder": "Ex: Varejo, Tecnologia, Saúde",
     "companySize": "Tamanho da Empresa",
-    "companySizePlaceholder": "Número de funcionários",
-    "website": "Site",
-    "websitePlaceholder": "https://suaempresa.com",
-    "websiteDescription": "Opcional. Site da sua empresa.",
-    "aboutProject": "Sobre Seu Projeto",
-    "projectDetails": "Conte-nos sobre seu projeto.",
+    "companySizePlaceholder": "Ex: 1-10, 11-50, 51-200 funcionários",
+    "website": "Website",
+    "websitePlaceholder": "https://seusite.com.br",
+    "websiteDescription": "Se sua empresa já possui um website, informe aqui",
+    "aboutProject": "Sobre seu Projeto",
+    "projectDetails": "Conte-nos sobre o projeto que você tem em mente",
     "serviceType": "Tipo de Serviço",
-    "serviceTypePlaceholder": "Qual serviço você está procurando?",
+    "serviceTypePlaceholder": "Ex: Site, E-commerce, App, Marketing",
     "projectDescription": "Descrição do Projeto",
-    "projectDescriptionPlaceholder": "Por favor, descreva seu projeto em detalhes",
+    "projectDescriptionPlaceholder": "Descreva detalhadamente o que você precisa...",
     "desiredDeadline": "Prazo Desejado",
-    "deadlinePlaceholder": "Quando você precisa que este projeto seja concluído?",
+    "deadlinePlaceholder": "Ex: 30 dias, 2 meses, urgente",
     "estimatedBudget": "Orçamento Estimado",
-    "budgetPlaceholder": "Opcional. Seu orçamento estimado para este projeto",
-    "budgetDescription": "Isso nos ajuda a entender o escopo do seu projeto.",
-    "confirmation": "Confirme Suas Informações",
-    "howPreferContact": "Como você prefere que entremos em contato?",
-    "sendBriefingWhatsApp": "Enviar atualizações do projeto via WhatsApp",
-    "sendBriefingEmail": "Enviar atualizações do projeto via email",
-    "preferPhone": "Me ligar para discutir os detalhes do projeto",
-    "onlineScheduling": "Reunião Online",
-    "scheduleCalendly": "Agendar uma reunião via Calendly",
-    "informationSummary": "Resumo das Informações",
+    "budgetPlaceholder": "Ex: R$ 5.000 - R$ 10.000",
+    "budgetDescription": "Esta informação nos ajuda a sugerir a melhor solução",
+    "confirmation": "Confirmação",
+    "howPreferContact": "Como você prefere ser contatado?",
+    "sendBriefingWhatsApp": "Enviar briefing via WhatsApp",
+    "sendBriefingEmail": "Enviar briefing por e-mail",
+    "preferPhone": "Prefiro contato telefônico",
+    "onlineScheduling": "Agendamento Online",
+    "scheduleCalendly": "Agendar reunião online",
+    "informationSummary": "Resumo das Informações:",
     "name": "Nome",
     "company": "Empresa",
     "service": "Serviço",
     "deadline": "Prazo",
-    "next": "Próximo",
     "back": "Voltar",
+    "next": "Próximo",
     "send": "Enviar",
-    "needImmediateHelp": "Precisa de Ajuda Imediata?",
-    "contactDirectly": "Você pode nos contatar diretamente através dos seguintes canais.",
-    "phoneWhatsApp": "Telefone & WhatsApp",
-    "scheduleYourMeeting": "Agende Sua Reunião",
-    "backToForm": "Voltar ao Formulário",
-    "errors": {
-      "nameMin": "O nome deve ter pelo menos 3 caracteres",
-      "emailInvalid": "Por favor, forneça um endereço de email válido",
-      "phoneInvalid": "O número de telefone deve ter pelo menos 10 caracteres",
-      "roleRequired": "Seu cargo é obrigatório",
-      "companyNameRequired": "O nome da empresa é obrigatório",
-      "segmentRequired": "O segmento é obrigatório",
-      "companySizeRequired": "O tamanho da empresa é obrigatório",
-      "serviceTypeRequired": "O tipo de serviço é obrigatório",
-      "descriptionMin": "A descrição deve ter pelo menos 20 caracteres",
-      "deadlineRequired": "O prazo é obrigatório"
-    },
-    "newBriefing": "Novo Briefing",
-    "personalData": "Dados Pessoais",
+    "newBriefing": "Novo Briefing - Agência Digital Hub",
     "companyData": "Dados da Empresa",
     "projectData": "Dados do Projeto",
     "contactPreference": "Preferência de Contato",
-    "notProvided": "Não fornecido",
-    "newBriefingSubject": "Novo Briefing de Projeto",
-    "briefingSentSuccess": "Briefing Enviado com Sucesso",
-    "willContactSoon": "Entraremos em contato em breve sobre seu projeto!",
-    "lang": "pt-BR"
-  },
-  "language": {
-    "changed": "Idioma Alterado",
-    "changedTo": "Idioma alterado para {{language}}"
-  },
-  "aboutPage": {
-    "ourHistory": "Nossa História",
-    "historyIntro": "Desde 2018, temos sido pioneiros em soluções digitais inovadoras que transformam negócios e elevam marcas. Nossa jornada é marcada por criatividade, excelência técnica e um compromisso inabalável com o sucesso de nossos clientes.",
-    "contactUs": "Fale Conosco",
-    "scheduleCall": "Agendar Reunião",
-    "mvv": {
-      "title": "Missão, Visão e Valores",
-      "mission": "Nossa Missão",
-      "missionText": "Potencializar o crescimento dos negócios de nossos clientes através de soluções digitais inovadoras e eficientes, oferecendo excelência técnica e criativa em cada projeto.",
-      "vision": "Nossa Visão",
-      "visionText": "Ser reconhecida como a principal referência em soluções digitais no Brasil, conhecida pela excelência, inovação e resultados extraordinários que entregamos aos nossos clientes.",
-      "values": "Nossos Valores",
-      "valuesList": [
-        "Excelência em tudo que fazemos",
-        "Inovação constante",
-        "Transparência e honestidade",
-        "Compromisso com resultados",
-        "Foco no cliente"
-      ]
-    },
-    "team": {
-      "title": "Nossa Equipe",
-      "subtitle": "Conheça os talentos que tornam nossos projetos realidade. Uma equipe multidisciplinar apaixonada por criar soluções digitais inovadoras."
-    },
-    "differentials": {
-      "title": "Nossos Diferenciais",
-      "subtitle": "O que nos torna diferentes e como isso beneficia seu negócio",
-      "agility": {
-        "title": "Agilidade",
-        "description": "Metodologias ágeis que garantem entregas rápidas e adaptáveis às necessidades do seu negócio."
-      },
-      "innovation": {
-        "title": "Inovação",
-        "description": "Sempre à frente com as mais recentes tecnologias e tendências do mercado digital."
-      },
-      "team": {
-        "title": "Equipe Especializada",
-        "description": "Profissionais altamente qualificados com experiência em projetos nacionais e internacionais."
-      },
-      "security": {
-        "title": "Segurança",
-        "description": "Protocolos avançados de segurança para proteger seus dados e de seus clientes."
-      },
-      "cloud": {
-        "title": "Infraestrutura em Nuvem",
-        "description": "Soluções escaláveis e de alta disponibilidade baseadas nas melhores plataformas cloud."
-      },
-      "support": {
-        "title": "Suporte Contínuo",
-        "description": "Acompanhamento constante e suporte técnico especializado mesmo após o lançamento."
-      }
-    },
-    "cta": {
-      "title": "Pronto para Transformar seu Negócio?",
-      "subtitle": "Vamos conversar sobre como podemos ajudar a alcançar seus objetivos digitais.",
-      "schedule": "Agendar Reunião",
-      "contact": "Fale Conosco"
-    },
-    "location": {
-      "title": "Onde Estamos",
-      "description": "Nossa sede está localizada em um hub tecnológico estratégico, facilitando a colaboração e inovação. Estamos sempre disponíveis para atender você presencialmente ou remotamente.",
-      "office": "Nosso Escritório",
-      "phone": "Telefone",
-      "email": "Email"
-    }
-  },
-  "teamMembers": {
-    "seo": "Especialista em SEO",
-    "seoBio": "Especialista em otimização para motores de busca com mais de 7 anos de experiência.",
-    "security": "Especialista em Segurança",
-    "securityBio": "Especialista em segurança cibernética com certificações internacionais.",
-    "traffic": "Gerente de Tráfego",
-    "trafficBio": "Especialista em estratégias de tráfego pago e orgânico com foco em ROI.",
-    "design": "UI/UX Designer",
-    "designBio": "Designer de experiência do usuário com forte background em design centrado no usuário."
-  },
-  "timeline": {
-    "title": "Nossa Trajetória",
-    "2018": {
-      "title": "Fundação da Empresa",
-      "description": "Iniciamos nossa jornada com a missão de transformar negócios através de soluções digitais inovadoras."
-    },
-    "2019": {
-      "title": "Primeiros Grandes Clientes",
-      "description": "Conquistamos a confiança de empresas renomadas e expandimos nossa carteira de clientes."
-    },
-    "2020": {
-      "title": "Adaptação à Pandemia",
-      "description": "Ajudamos empresas a se digitalizarem rapidamente durante os desafios da pandemia global."
-    },
-    "2022": {
-      "title": "Expansão Internacional",
-      "description": "Iniciamos operações em outros países, levando nossa expertise para novos mercados."
-    },
-    "2023": {
-      "title": "Inovação em IA",
-      "description": "Incorporamos soluções de inteligência artificial avançadas em nossos produtos e serviços."
-    },
-    "2024": {
-      "title": "Novos Horizontes",
-      "description": "Continuamos a expandir e inovar, sempre com foco na excelência e resultados para nossos clientes."
+    "systemInfo": "Informações do Sistema",
+    "submissionTime": "Horário de Envio",
+    "language": "Idioma",
+    "size": "Porte",
+    "description": "Descrição",
+    "budget": "Orçamento",
+    "notProvided": "Não informado",
+    "newBriefingSubject": "Novo Briefing de Projeto - Agência Digital Hub",
+    "briefingSentSuccess": "Briefing enviado com sucesso!",
+    "willContactSoon": "Entraremos em contato em breve para discutir seu projeto.",
+    "validationError": "Erro de Validação",
+    "submissionError": "Erro no Envio",
+    "pleaseSelectContactMethod": "Por favor, selecione pelo menos uma forma de contato.",
+    "needImmediateHelp": "Precisa de ajuda imediata?",
+    "contactDirectly": "Entre em contato diretamente pelos canais abaixo:",
+    "phoneWhatsApp": "Telefone/WhatsApp",
+    "scheduleYourMeeting": "Agende sua Reunião",
+    "backToForm": "Voltar ao Formulário",
+    "lang": "pt",
+    "errors": {
+      "nameMin": "Nome deve ter pelo menos 3 caracteres",
+      "emailInvalid": "E-mail inválido",
+      "phoneInvalid": "Telefone deve ter pelo menos 10 dígitos",
+      "roleRequired": "Cargo é obrigatório",
+      "companyNameRequired": "Nome da empresa é obrigatório",
+      "segmentRequired": "Segmento é obrigatório",
+      "companySizeRequired": "Tamanho da empresa é obrigatório",
+      "serviceTypeRequired": "Tipo de serviço é obrigatório",
+      "descriptionMin": "Descrição deve ter pelo menos 20 caracteres",
+      "deadlineRequired": "Prazo é obrigatório"
     }
   }
 }

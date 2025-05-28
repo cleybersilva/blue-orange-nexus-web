@@ -78,14 +78,88 @@ export const useScheduleForm = () => {
     }
   };
 
+  // Determine email based on language
+  const getContactEmail = () => {
+    const currentLanguage = i18n.language;
+    console.log('Current language:', currentLanguage);
+    
+    // For English, use contact@agenciadigitalhub.com
+    if (currentLanguage === 'en') {
+      return 'contact@agenciadigitalhub.com';
+    }
+    
+    // For Portuguese (BR and PT) and Spanish, use contato@agenciadigitalhub.com
+    return 'contato@agenciadigitalhub.com';
+  };
+
+  // Validate current stage before proceeding
+  const validateCurrentStage = async () => {
+    const fieldsToValidate = getFieldsForStage(stage);
+    const result = await form.trigger(fieldsToValidate);
+    
+    if (!result) {
+      console.log('Validation failed for stage:', stage);
+      const errors = form.formState.errors;
+      console.log('Form errors:', errors);
+      
+      // Show first error message
+      const firstError = Object.values(errors)[0];
+      if (firstError?.message) {
+        toast({
+          title: t('form.validationError'),
+          description: firstError.message,
+          variant: "destructive",
+          duration: 4000,
+        });
+      }
+      return false;
+    }
+    
+    return true;
+  };
+
+  // Get fields to validate for each stage
+  const getFieldsForStage = (currentStage: FormStage): (keyof ScheduleFormValues)[] => {
+    switch (currentStage) {
+      case FormStage.PERSONAL:
+        return ['name', 'email', 'phone', 'role'];
+      case FormStage.COMPANY:
+        return ['companyName', 'segment', 'companySize'];
+      case FormStage.PROJECT:
+        return ['serviceType', 'projectDescription', 'deadline'];
+      case FormStage.CONFIRMATION:
+        return [];
+      default:
+        return [];
+    }
+  };
+
   // Handle form submission
-  const onSubmit = (values: ScheduleFormValues) => {
+  const onSubmit = async (values: ScheduleFormValues) => {
+    console.log('Form submission triggered for stage:', stage);
+    console.log('Form values:', values);
+
+    // If not on confirmation stage, validate and go to next stage
     if (stage < FormStage.CONFIRMATION) {
-      goToNextStage();
+      const isValid = await validateCurrentStage();
+      if (isValid) {
+        console.log('Stage validation passed, moving to next stage');
+        goToNextStage();
+      }
       return;
     }
 
+    // Final submission on confirmation stage
+    console.log('Final submission - processing form data');
+
+    // Store form data in localStorage for persistence
+    localStorage.setItem('scheduleFormData', JSON.stringify(values));
+    console.log('Form data stored in localStorage');
+
     // Formatting data for submission
+    const contactEmail = getContactEmail();
+    console.log('Contact email determined:', contactEmail);
+
     const formattedMessage = `
 *${t('form.newBriefing')}*
 -------------------
@@ -112,46 +186,84 @@ ${values.preferWhatsApp ? "• WhatsApp" : ""}
 ${values.preferEmail ? `• ${t('form.email')}` : ""}
 ${values.preferPhone ? `• ${t('form.phone')}` : ""}
 ${values.preferCalendly ? `• ${t('form.onlineScheduling')}` : ""}
+
+*${t('form.systemInfo')}*
+${t('form.submissionTime')}: ${new Date().toLocaleString()}
+${t('form.language')}: ${i18n.language}
     `;
+
+    let submissionSuccess = false;
 
     // Sending to WhatsApp
     if (values.preferWhatsApp) {
-      const whatsappNumber = "5583988329018"; // Format: country code + area code + number
-      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(formattedMessage)}`;
-      window.open(whatsappUrl, "_blank");
+      try {
+        const whatsappNumber = "5583988329018";
+        const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(formattedMessage)}`;
+        console.log('Opening WhatsApp with message');
+        window.open(whatsappUrl, "_blank");
+        submissionSuccess = true;
+      } catch (error) {
+        console.error('Error opening WhatsApp:', error);
+      }
     }
     
     // Sending to email
     if (values.preferEmail) {
-      const emailSubject = t('form.newBriefingSubject');
-      const emailBody = formattedMessage;
-      const mailtoUrl = `mailto:contact@agenciadigital.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
-      window.location.href = mailtoUrl;
+      try {
+        const emailSubject = t('form.newBriefingSubject');
+        const emailBody = formattedMessage;
+        const mailtoUrl = `mailto:${contactEmail}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+        console.log('Opening email client with message to:', contactEmail);
+        window.location.href = mailtoUrl;
+        submissionSuccess = true;
+      } catch (error) {
+        console.error('Error opening email client:', error);
+      }
     }
     
     // Showing Calendly if preferred
     if (values.preferCalendly) {
+      console.log('Opening Calendly for scheduling');
       setShowCalendly(true);
       openCalendly();
+      submissionSuccess = true;
     }
-    
-    toast({
-      title: t('form.briefingSentSuccess'),
-      description: t('form.willContactSoon'),
-      duration: 3000,
-    });
+
+    // Show success message
+    if (submissionSuccess) {
+      toast({
+        title: t('form.briefingSentSuccess'),
+        description: t('form.willContactSoon'),
+        duration: 5000,
+      });
+      
+      console.log('Form submission completed successfully');
+    } else {
+      toast({
+        title: t('form.submissionError'),
+        description: t('form.pleaseSelectContactMethod'),
+        variant: "destructive",
+        duration: 4000,
+      });
+    }
     
     // Reset form if not using Calendly
     if (!values.preferCalendly) {
-      form.reset();
-      setStage(FormStage.PERSONAL);
+      setTimeout(() => {
+        form.reset();
+        setStage(FormStage.PERSONAL);
+        localStorage.removeItem('scheduleFormData');
+        console.log('Form reset completed');
+      }, 2000);
     }
   };
   
   const closeCalendly = () => {
+    console.log('Closing Calendly and resetting form');
     setShowCalendly(false);
     form.reset();
     setStage(FormStage.PERSONAL);
+    localStorage.removeItem('scheduleFormData');
   };
 
   return {
