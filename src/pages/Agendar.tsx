@@ -19,6 +19,7 @@ const Agendar = () => {
     stage,
     showCalendly,
     goToPreviousStage,
+    handleNext,
     onSubmit,
     closeCalendly
   } = useScheduleForm();
@@ -57,6 +58,17 @@ const Agendar = () => {
     );
   }
 
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (stage === FormStage.CONFIRMATION) {
+      // Final submission
+      form.handleSubmit(onSubmit)();
+    } else {
+      // Navigate to next stage
+      handleNext();
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -69,7 +81,7 @@ const Agendar = () => {
         
         <div className="max-w-2xl mx-auto">
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)}>
+            <form onSubmit={handleFormSubmit}>
               <Card className="shadow-md">
                 <FormProgress currentStage={stage} />
                 <FormStages stage={stage} form={form} />

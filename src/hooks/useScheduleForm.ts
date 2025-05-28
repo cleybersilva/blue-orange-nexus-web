@@ -175,6 +175,7 @@ export const useScheduleForm = () => {
     showCalendly,
     goToNextStage,
     goToPreviousStage,
+    handleNext,
     onSubmit,
     closeCalendly
   };
