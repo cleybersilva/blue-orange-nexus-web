@@ -9,17 +9,22 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
 import { useCreateArticle, useUpdateArticle, useArticleById, useAuthors } from '@/hooks/useBlogData';
-import { Loader2, Save, Eye, ArrowLeft } from 'lucide-react';
+import { Loader2, Save, Eye, ArrowLeft, RefreshCw } from 'lucide-react';
 
 const ArticleEditor = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const isEditing = !!id;
   
-  const { data: article, isLoading: articleLoading } = useArticleById(id || '');
+  const { data: article, isLoading: articleLoading, refetch: refetchArticle } = useArticleById(id || '');
   const { data: authors } = useAuthors();
   const createArticle = useCreateArticle();
   const updateArticle = useUpdateArticle();
+
+  console.log('ArticleEditor - ID:', id);
+  console.log('ArticleEditor - Article data:', article);
+  console.log('ArticleEditor - Article loading:', articleLoading);
+  console.log('ArticleEditor - Is editing:', isEditing);
 
   const [formData, setFormData] = useState({
     title: '',
@@ -35,23 +40,42 @@ const ArticleEditor = () => {
     scheduled_at: ''
   });
 
+  // Efeito para popular o formulário com os dados do artigo
   useEffect(() => {
+    console.log('ArticleEditor - useEffect triggered with article:', article);
+    
     if (article && isEditing) {
+      console.log('ArticleEditor - Populating form with article data');
+      
       setFormData({
-        title: article.title,
+        title: article.title || '',
         subtitle: article.subtitle || '',
-        summary: article.summary,
-        content: article.content,
-        author_id: article.author_id,
-        status: article.status,
+        summary: article.summary || '',
+        content: article.content || '',
+        author_id: article.author_id || '',
+        status: article.status || 'draft',
         category: article.category || 'Tecnologia',
         cover_image_url: article.cover_image_url || '',
         read_time: article.read_time || 5,
         published_at: article.published_at || '',
         scheduled_at: article.scheduled_at || ''
       });
+      
+      console.log('ArticleEditor - Form populated with data:', {
+        title: article.title,
+        subtitle: article.subtitle,
+        summary: article.summary,
+        author_id: article.author_id,
+        status: article.status,
+        category: article.category
+      });
     }
   }, [article, isEditing]);
+
+  // Efeito para debug do formData
+  useEffect(() => {
+    console.log('ArticleEditor - Form data state updated:', formData);
+  }, [formData]);
 
   const generateSlug = (title: string) => {
     return title
@@ -67,7 +91,10 @@ const ArticleEditor = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    console.log('ArticleEditor - Submitting form with data:', formData);
+    
     if (!formData.title || !formData.summary || !formData.content || !formData.author_id) {
+      console.log('ArticleEditor - Missing required fields');
       return;
     }
 
@@ -97,10 +124,37 @@ const ArticleEditor = () => {
     }
   };
 
+  const handleRefreshArticle = () => {
+    console.log('ArticleEditor - Manually refreshing article data');
+    refetchArticle();
+  };
+
   if (articleLoading && isEditing) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <Loader2 className="w-8 h-8 animate-spin text-orange" />
+        <div className="text-center">
+          <Loader2 className="w-8 h-8 animate-spin text-orange mx-auto mb-4" />
+          <p className="text-gray-600">Carregando dados do artigo...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Verificar se o artigo não foi encontrado
+  if (isEditing && !articleLoading && !article) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <Card className="w-full max-w-md">
+          <CardHeader>
+            <CardTitle className="text-center text-navy">Artigo Não Encontrado</CardTitle>
+          </CardHeader>
+          <CardContent className="text-center">
+            <p className="text-gray-600 mb-4">O artigo que você está tentando editar não foi encontrado.</p>
+            <Button onClick={() => navigate('/admin/blog')} className="bg-orange hover:bg-orange-dark text-white">
+              Voltar ao Dashboard
+            </Button>
+          </CardContent>
+        </Card>
       </div>
     );
   }
@@ -117,6 +171,12 @@ const ArticleEditor = () => {
             <h1 className="text-2xl font-bold text-navy">
               {isEditing ? 'Editar Artigo' : 'Novo Artigo'}
             </h1>
+            {isEditing && (
+              <Button variant="outline" size="sm" onClick={handleRefreshArticle}>
+                <RefreshCw size={16} className="mr-2" />
+                Recarregar
+              </Button>
+            )}
           </div>
           
           <div className="flex items-center gap-2">
@@ -142,6 +202,11 @@ const ArticleEditor = () => {
               <Card>
                 <CardHeader>
                   <CardTitle>Conteúdo do Artigo</CardTitle>
+                  {isEditing && (
+                    <CardDescription>
+                      Editando: {article?.title || 'Carregando...'}
+                    </CardDescription>
+                  )}
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div>

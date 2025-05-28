@@ -28,8 +28,8 @@ export const useAllArticles = () => {
       
       return data as Article[];
     },
-    retry: 2,
-    staleTime: 1000 * 60 * 5, // Cache por 5 minutos
+    retry: 3,
+    staleTime: 1000 * 30, // Cache por 30 segundos
     refetchOnWindowFocus: false
   });
 };
@@ -73,8 +73,8 @@ export const useMyArticles = () => {
       
       return articles || [];
     },
-    retry: 2,
-    staleTime: 1000 * 60 * 5, // Cache por 5 minutos
+    retry: 3,
+    staleTime: 1000 * 30, // Cache por 30 segundos
     refetchOnWindowFocus: false
   });
 };
@@ -106,7 +106,7 @@ export const useBlogArticles = () => {
       
       return data as Article[];
     },
-    retry: 2,
+    retry: 3,
     staleTime: 1000 * 60 * 5 // Cache por 5 minutos
   });
 };
@@ -139,17 +139,22 @@ export const useArticleBySlug = (slug: string) => {
       return data as Article;
     },
     enabled: !!slug,
-    retry: 2,
+    retry: 3,
     staleTime: 1000 * 60 * 10 // Cache por 10 minutos
   });
 };
 
-// Hook para buscar artigo por ID (para edição)
+// Hook para buscar artigo por ID (para edição) - CORRIGIDO
 export const useArticleById = (id: string) => {
   return useQuery({
     queryKey: ['article-edit', id],
     queryFn: async () => {
       console.log('useArticleById - Fetching article by ID:', id);
+      
+      if (!id) {
+        console.log('useArticleById - No ID provided');
+        return null;
+      }
       
       const { data, error } = await supabase
         .from('articles')
@@ -158,20 +163,28 @@ export const useArticleById = (id: string) => {
           author:authors(*)
         `)
         .eq('id', id)
-        .single();
+        .maybeSingle(); // Mudança para maybeSingle() para evitar erro se não encontrar
 
-      console.log('useArticleById - Article data:', data);
-      console.log('useArticleById - Article error:', error);
+      console.log('useArticleById - Raw response data:', data);
+      console.log('useArticleById - Raw response error:', error);
 
       if (error) {
         console.error('useArticleById - Error fetching article by ID:', error);
         throw error;
       }
+
+      if (!data) {
+        console.log('useArticleById - No article found with ID:', id);
+        return null;
+      }
       
+      console.log('useArticleById - Final article data:', data);
       return data as Article;
     },
     enabled: !!id,
-    retry: 2,
-    staleTime: 1000 * 60 * 5 // Cache por 5 minutos
+    retry: 3,
+    staleTime: 1000 * 30, // Cache reduzido para 30 segundos
+    refetchOnWindowFocus: true, // Permitir refetch quando a janela ganhar foco
+    refetchOnMount: true // Sempre refetch quando o hook for montado
   });
 };
