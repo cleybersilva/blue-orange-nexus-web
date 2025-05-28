@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Loader2 } from 'lucide-react';
@@ -31,30 +30,38 @@ const AdminLoginPage = () => {
   useEffect(() => {
     console.log('AdminLoginPage - User:', user?.email);
     console.log('AdminLoginPage - Is Approved Admin:', isApprovedAdmin);
+    console.log('AdminLoginPage - My Request:', myRequest);
     console.log('AdminLoginPage - Checking Admin:', checkingAdmin);
     console.log('AdminLoginPage - Checking Request:', checkingRequest);
     
     // Se o usuário está logado e as verificações terminaram
-    if (user && !checkingAdmin && !checkingRequest) {
-      // Prioridade máxima para admin root - redireciona imediatamente
-      if (isApprovedAdmin?.isRoot || (isApprovedAdmin?.isAdmin && isApprovedAdmin?.profile?.admin_level === 'root')) {
-        console.log('AdminLoginPage - ROOT ADMIN detected, redirecting immediately');
-        navigate('/admin/blog');
+    if (user && !checkingAdmin && !checkingRequest && isApprovedAdmin) {
+      console.log('AdminLoginPage - All checks completed, processing permissions...');
+      
+      // Prioridade 1: Admin Root - redirecionamento imediato
+      if (isApprovedAdmin.isRoot) {
+        console.log('AdminLoginPage - ROOT ADMIN detected (isRoot=true), redirecting immediately');
+        navigate('/admin/blog', { replace: true });
         return;
       }
       
-      // Verifica se tem outras permissões administrativas
-      const hasAdminAccess = isApprovedAdmin?.isAdmin || isApprovedAdmin?.isAuthorAdmin || isApprovedAdmin?.isAuthor;
+      // Prioridade 2: Admin com nível root
+      if (isApprovedAdmin.isAdmin && isApprovedAdmin.profile?.admin_level === 'root') {
+        console.log('AdminLoginPage - ROOT ADMIN detected (admin_level=root), redirecting immediately');
+        navigate('/admin/blog', { replace: true });
+        return;
+      }
       
-      if (hasAdminAccess) {
+      // Prioridade 3: Qualquer tipo de admin aprovado
+      if (isApprovedAdmin.isAdmin || isApprovedAdmin.isAuthorAdmin || isApprovedAdmin.isAuthor) {
         console.log('AdminLoginPage - User has admin access, redirecting to dashboard');
-        navigate('/admin/blog');
+        navigate('/admin/blog', { replace: true });
         return;
       }
       
       console.log('AdminLoginPage - User does not have admin access');
     }
-  }, [user, isApprovedAdmin, checkingAdmin, checkingRequest, navigate]);
+  }, [user, isApprovedAdmin, myRequest, checkingAdmin, checkingRequest, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -111,6 +118,7 @@ const AdminLoginPage = () => {
 
   // Mostrar loader durante verificações
   if (checkingAdmin || checkingRequest) {
+    console.log('AdminLoginPage - Still checking permissions...');
     return (
       <div className="min-h-screen bg-navy flex items-center justify-center">
         <Loader2 className="w-8 h-8 animate-spin text-orange" />
@@ -133,14 +141,15 @@ const AdminLoginPage = () => {
     </div>
   );
 
-  // NUNCA mostrar solicitação para admin root - verificação extra de segurança
-  const isRootAdmin = isApprovedAdmin?.isRoot || (isApprovedAdmin?.isAdmin && isApprovedAdmin?.profile?.admin_level === 'root');
-  
-  if (user && isRootAdmin) {
-    console.log('AdminLoginPage - Root admin detected, should have redirected already');
-    // Força redirecionamento se por algum motivo chegou aqui
-    navigate('/admin/blog');
-    return null;
+  // Verificação extra para admin root - nunca deve mostrar solicitação
+  if (user && isApprovedAdmin && (isApprovedAdmin.isRoot || (isApprovedAdmin.isAdmin && isApprovedAdmin.profile?.admin_level === 'root'))) {
+    console.log('AdminLoginPage - Root admin detected in render, forcing redirect');
+    navigate('/admin/blog', { replace: true });
+    return (
+      <div className="min-h-screen bg-navy flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-orange" />
+      </div>
+    );
   }
 
   // Status da solicitação existente - só mostra se não tem permissões admin

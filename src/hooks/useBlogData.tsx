@@ -195,7 +195,12 @@ export const useIsApprovedAdmin = () => {
     queryKey: ['is-approved-admin'],
     queryFn: async () => {
       const { data: user } = await supabase.auth.getUser();
-      if (!user.user) return { isAdmin: false, isRoot: false, isAuthorAdmin: false, isAuthor: false, profile: null };
+      console.log('useIsApprovedAdmin - Current user:', user.user?.email);
+      
+      if (!user.user) {
+        console.log('useIsApprovedAdmin - No user found');
+        return { isAdmin: false, isRoot: false, isAuthorAdmin: false, isAuthor: false, profile: null };
+      }
 
       const { data, error } = await supabase
         .from('profiles')
@@ -203,12 +208,26 @@ export const useIsApprovedAdmin = () => {
         .eq('id', user.user.id)
         .single();
 
-      if (error) return { isAdmin: false, isRoot: false, isAuthorAdmin: false, isAuthor: false, profile: null };
+      console.log('useIsApprovedAdmin - Profile data:', data);
+      console.log('useIsApprovedAdmin - Profile error:', error);
+
+      if (error) {
+        console.error('useIsApprovedAdmin - Error fetching profile:', error);
+        return { isAdmin: false, isRoot: false, isAuthorAdmin: false, isAuthor: false, profile: null };
+      }
       
       const isAdmin = data?.role === 'admin' && data?.approved === true;
       const isRoot = isAdmin && data?.admin_level === 'root';
       const isAuthorAdmin = data?.role === 'author_admin' && data?.approved === true;
       const isAuthor = data?.role === 'author' && data?.approved === true;
+      
+      console.log('useIsApprovedAdmin - Calculated permissions:', {
+        isAdmin,
+        isRoot,
+        isAuthorAdmin,
+        isAuthor,
+        profile: data
+      });
       
       return { 
         isAdmin, 
@@ -217,7 +236,9 @@ export const useIsApprovedAdmin = () => {
         isAuthor,
         profile: data as UserProfile
       };
-    }
+    },
+    retry: 1,
+    staleTime: 1000 * 60 * 5 // Cache por 5 minutos
   });
 };
 
@@ -314,15 +335,32 @@ export const useMyAdminRequest = () => {
   return useQuery({
     queryKey: ['my-admin-request'],
     queryFn: async () => {
+      const { data: user } = await supabase.auth.getUser();
+      console.log('useMyAdminRequest - Current user:', user.user?.email);
+      
+      if (!user.user) {
+        console.log('useMyAdminRequest - No user found');
+        return null;
+      }
+
       const { data, error } = await supabase
         .from('admin_requests')
         .select('*')
-        .eq('user_id', (await supabase.auth.getUser()).data.user?.id)
+        .eq('user_id', user.user.id)
         .single();
 
-      if (error && error.code !== 'PGRST116') throw error;
+      console.log('useMyAdminRequest - Request data:', data);
+      console.log('useMyAdminRequest - Request error:', error);
+
+      if (error && error.code !== 'PGRST116') {
+        console.error('useMyAdminRequest - Error fetching request:', error);
+        throw error;
+      }
+      
       return data as AdminRequest | null;
-    }
+    },
+    retry: 1,
+    staleTime: 1000 * 60 * 5 // Cache por 5 minutos
   });
 };
 
