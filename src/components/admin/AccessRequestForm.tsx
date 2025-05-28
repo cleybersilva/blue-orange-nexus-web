@@ -32,9 +32,9 @@ const AccessRequestForm: React.FC<AccessRequestFormProps> = ({
   onCancel
 }) => {
   return (
-    <Card>
+    <Card className="border-navy/20">
       <CardHeader>
-        <CardTitle>Solicitar Acesso Administrativo</CardTitle>
+        <CardTitle className="text-navy">Solicitar Acesso Administrativo</CardTitle>
         <CardDescription>
           Preencha as informações para solicitar acesso ao painel
         </CardDescription>
@@ -42,7 +42,7 @@ const AccessRequestForm: React.FC<AccessRequestFormProps> = ({
       <CardContent>
         <form onSubmit={onSubmit} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="fullName">Nome Completo</Label>
+            <Label htmlFor="fullName" className="text-navy">Nome Completo</Label>
             <Input
               id="fullName"
               type="text"
@@ -50,11 +50,12 @@ const AccessRequestForm: React.FC<AccessRequestFormProps> = ({
               onChange={(e) => setFullName(e.target.value)}
               required
               placeholder="Seu nome completo"
+              className="border-navy/20 focus:border-orange"
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="role">Tipo de Acesso Solicitado</Label>
+            <Label htmlFor="role" className="text-navy">Tipo de Acesso Solicitado</Label>
             <RoleSelector
               currentRole={requestedRole}
               onRoleChange={(role) => setRequestedRole(role)}
@@ -65,13 +66,14 @@ const AccessRequestForm: React.FC<AccessRequestFormProps> = ({
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="message">Mensagem (Opcional)</Label>
+            <Label htmlFor="message" className="text-navy">Mensagem (Opcional)</Label>
             <Textarea
               id="message"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Explique brevemente por que precisa de acesso administrativo..."
               rows={3}
+              className="border-navy/20 focus:border-orange"
             />
           </div>
 
@@ -95,7 +97,7 @@ const AccessRequestForm: React.FC<AccessRequestFormProps> = ({
               type="button"
               variant="link"
               onClick={onCancel}
-              className="text-gray-600"
+              className="text-gray-600 hover:text-orange"
             >
               Cancelar
             </Button>

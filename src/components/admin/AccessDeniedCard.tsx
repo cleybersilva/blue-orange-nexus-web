@@ -11,16 +11,16 @@ interface AccessDeniedCardProps {
 
 const AccessDeniedCard: React.FC<AccessDeniedCardProps> = ({ onRequestAccess }) => {
   return (
-    <Card>
+    <Card className="border-navy/20">
       <CardHeader>
-        <CardTitle>Solicitar Acesso Administrativo</CardTitle>
+        <CardTitle className="text-navy">Solicitar Acesso Administrativo</CardTitle>
         <CardDescription>
           Você precisa ser aprovado para acessar o painel administrativo
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <Alert className="mb-4">
-          <AlertDescription>
+        <Alert className="mb-4 border-orange/20 bg-orange/5">
+          <AlertDescription className="text-navy">
             Sua conta foi criada com sucesso, mas você precisa solicitar acesso administrativo.
           </AlertDescription>
         </Alert>

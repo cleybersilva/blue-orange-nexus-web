@@ -54,12 +54,12 @@ const RequestStatusCard: React.FC<RequestStatusCardProps> = ({ request }) => {
   };
 
   return (
-    <Card>
+    <Card className="border-navy/20">
       <CardHeader className="text-center">
         <div className="mx-auto mb-4">
           {getIcon()}
         </div>
-        <CardTitle>Solicitação de Acesso Administrativo</CardTitle>
+        <CardTitle className="text-navy">Solicitação de Acesso Administrativo</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="text-center">
@@ -69,17 +69,17 @@ const RequestStatusCard: React.FC<RequestStatusCardProps> = ({ request }) => {
         </div>
 
         <div className="space-y-2 text-sm text-gray-600">
-          <p><strong>Email:</strong> {request.email}</p>
-          <p><strong>Nome:</strong> {request.full_name}</p>
+          <p><strong className="text-navy">Email:</strong> {request.email}</p>
+          <p><strong className="text-navy">Nome:</strong> {request.full_name}</p>
           {request.message && (
-            <p><strong>Mensagem:</strong> {request.message}</p>
+            <p><strong className="text-navy">Mensagem:</strong> {request.message}</p>
           )}
-          <p><strong>Solicitado em:</strong> {new Date(request.requested_at).toLocaleDateString('pt-BR')}</p>
+          <p><strong className="text-navy">Solicitado em:</strong> {new Date(request.requested_at).toLocaleDateString('pt-BR')}</p>
         </div>
 
         {request.status === 'pending' && (
-          <Alert>
-            <AlertDescription>
+          <Alert className="border-orange/20 bg-orange/5">
+            <AlertDescription className="text-navy">
               Sua solicitação está sendo analisada. Você receberá uma notificação quando for aprovada.
             </AlertDescription>
           </Alert>

@@ -7,7 +7,7 @@ import { Loader2, Eye, Share, Heart, TrendingUp, BarChart3 } from 'lucide-react'
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 
-const COLORS = ['#f97316', '#1e40af', '#16a34a', '#dc2626', '#7c3aed', '#ea580c'];
+const COLORS = ['#FF6F3C', '#1A2A44', '#16a34a', '#dc2626', '#7c3aed', '#ea580c'];
 
 const AnalyticsDashboard = () => {
   const { data: stats, isLoading: statsLoading } = useAnalyticsStats();
@@ -24,11 +24,11 @@ const AnalyticsDashboard = () => {
   const chartConfig = {
     views: {
       label: "Visualizações",
-      color: "#f97316",
+      color: "#FF6F3C",
     },
     shares: {
       label: "Compartilhamentos",
-      color: "#1e40af",
+      color: "#1A2A44",
     },
     likes: {
       label: "Curtidas",
@@ -37,8 +37,8 @@ const AnalyticsDashboard = () => {
   };
 
   const pieData = [
-    { name: 'Visualizações', value: stats?.totals.totalViews || 0, color: '#f97316' },
-    { name: 'Compartilhamentos', value: stats?.totals.totalShares || 0, color: '#1e40af' },
+    { name: 'Visualizações', value: stats?.totals.totalViews || 0, color: '#FF6F3C' },
+    { name: 'Compartilhamentos', value: stats?.totals.totalShares || 0, color: '#1A2A44' },
     { name: 'Curtidas', value: stats?.totals.totalLikes || 0, color: '#16a34a' },
   ];
 
@@ -46,10 +46,10 @@ const AnalyticsDashboard = () => {
     <div className="space-y-6">
       {/* Cards de Estatísticas Gerais */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card>
+        <Card className="border-navy/20">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total de Visualizações</CardTitle>
-            <Eye className="h-4 w-4 text-muted-foreground" />
+            <CardTitle className="text-sm font-medium text-navy">Total de Visualizações</CardTitle>
+            <Eye className="h-4 w-4 text-orange" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-orange">{stats?.totals.totalViews.toLocaleString()}</div>
@@ -59,23 +59,23 @@ const AnalyticsDashboard = () => {
           </CardContent>
         </Card>
         
-        <Card>
+        <Card className="border-navy/20">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total de Compartilhamentos</CardTitle>
-            <Share className="h-4 w-4 text-muted-foreground" />
+            <CardTitle className="text-sm font-medium text-navy">Total de Compartilhamentos</CardTitle>
+            <Share className="h-4 w-4 text-navy" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-blue-600">{stats?.totals.totalShares.toLocaleString()}</div>
+            <div className="text-2xl font-bold text-navy">{stats?.totals.totalShares.toLocaleString()}</div>
             <p className="text-xs text-muted-foreground">
               +15.3% em relação ao mês anterior
             </p>
           </CardContent>
         </Card>
         
-        <Card>
+        <Card className="border-navy/20">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total de Curtidas</CardTitle>
-            <Heart className="h-4 w-4 text-muted-foreground" />
+            <CardTitle className="text-sm font-medium text-navy">Total de Curtidas</CardTitle>
+            <Heart className="h-4 w-4 text-green-600" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-green-600">{stats?.totals.totalLikes.toLocaleString()}</div>
@@ -89,10 +89,10 @@ const AnalyticsDashboard = () => {
       {/* Gráficos */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Gráfico de Barras - Artigos Mais Visitados */}
-        <Card>
+        <Card className="border-navy/20">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <BarChart3 className="h-5 w-5" />
+            <CardTitle className="flex items-center gap-2 text-navy">
+              <BarChart3 className="h-5 w-5 text-orange" />
               Top 10 Artigos Mais Visitados
             </CardTitle>
             <CardDescription>
@@ -112,7 +112,7 @@ const AnalyticsDashboard = () => {
                   />
                   <YAxis />
                   <ChartTooltip content={<ChartTooltipContent />} />
-                  <Bar dataKey="views" fill="#f97316" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="views" fill="#FF6F3C" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </ChartContainer>
@@ -120,10 +120,10 @@ const AnalyticsDashboard = () => {
         </Card>
 
         {/* Gráfico de Pizza - Distribuição de Engajamento */}
-        <Card>
+        <Card className="border-navy/20">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <TrendingUp className="h-5 w-5" />
+            <CardTitle className="flex items-center gap-2 text-navy">
+              <TrendingUp className="h-5 w-5 text-orange" />
               Distribuição de Engajamento
             </CardTitle>
             <CardDescription>
@@ -155,9 +155,9 @@ const AnalyticsDashboard = () => {
       </div>
 
       {/* Lista Detalhada dos Artigos Mais Populares */}
-      <Card>
+      <Card className="border-navy/20">
         <CardHeader>
-          <CardTitle>Ranking Completo de Artigos</CardTitle>
+          <CardTitle className="text-navy">Ranking Completo de Artigos</CardTitle>
           <CardDescription>
             Performance detalhada de todos os artigos publicados
           </CardDescription>
@@ -165,13 +165,13 @@ const AnalyticsDashboard = () => {
         <CardContent>
           <div className="space-y-4">
             {stats?.mostViewed.map((article, index) => (
-              <div key={article.slug} className="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50">
+              <div key={article.slug} className="flex items-center justify-between p-4 border border-navy/10 rounded-lg hover:bg-gray-50">
                 <div className="flex items-center gap-4">
-                  <Badge variant="outline" className="min-w-[2rem] justify-center">
+                  <Badge variant="outline" className="min-w-[2rem] justify-center border-navy/20">
                     #{index + 1}
                   </Badge>
                   <div>
-                    <h4 className="font-medium">{article.title}</h4>
+                    <h4 className="font-medium text-navy">{article.title}</h4>
                     <p className="text-sm text-gray-600">/{article.slug}</p>
                   </div>
                 </div>
@@ -181,7 +181,7 @@ const AnalyticsDashboard = () => {
                     <span className="font-medium">{article.views?.toLocaleString() || 0}</span>
                   </div>
                   <div className="flex items-center gap-1">
-                    <Share className="h-4 w-4 text-blue-600" />
+                    <Share className="h-4 w-4 text-navy" />
                     <span className="font-medium">{article.shares?.toLocaleString() || 0}</span>
                   </div>
                   <div className="flex items-center gap-1">

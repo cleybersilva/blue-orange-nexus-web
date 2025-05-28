@@ -41,9 +41,9 @@ const AdminLoginForm: React.FC<AdminLoginFormProps> = ({
   onSubmit
 }) => {
   return (
-    <Card>
+    <Card className="border-navy/20">
       <CardHeader>
-        <CardTitle>{isSignUp ? 'Criar Conta Admin' : 'Login Administrativo'}</CardTitle>
+        <CardTitle className="text-navy">{isSignUp ? 'Criar Conta Admin' : 'Login Administrativo'}</CardTitle>
         <CardDescription>
           {isSignUp 
             ? 'Crie sua conta para solicitar acesso administrativo'
@@ -55,7 +55,7 @@ const AdminLoginForm: React.FC<AdminLoginFormProps> = ({
         <form onSubmit={onSubmit} className="space-y-4">
           {isSignUp && (
             <div className="space-y-2">
-              <Label htmlFor="fullName">Nome Completo</Label>
+              <Label htmlFor="fullName" className="text-navy">Nome Completo</Label>
               <Input
                 id="fullName"
                 type="text"
@@ -63,12 +63,13 @@ const AdminLoginForm: React.FC<AdminLoginFormProps> = ({
                 onChange={(e) => setFullName(e.target.value)}
                 required
                 placeholder="Seu nome completo"
+                className="border-navy/20 focus:border-orange"
               />
             </div>
           )}
           
           <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email" className="text-navy">Email</Label>
             <Input
               id="email"
               type="email"
@@ -76,11 +77,12 @@ const AdminLoginForm: React.FC<AdminLoginFormProps> = ({
               onChange={(e) => setEmail(e.target.value)}
               required
               placeholder="admin@agenciadigital.com"
+              className="border-navy/20 focus:border-orange"
             />
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="password">Senha</Label>
+            <Label htmlFor="password" className="text-navy">Senha</Label>
             <div className="relative">
               <Input
                 id="password"
@@ -89,12 +91,13 @@ const AdminLoginForm: React.FC<AdminLoginFormProps> = ({
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 placeholder="••••••••"
+                className="border-navy/20 focus:border-orange"
               />
               <Button
                 type="button"
                 variant="ghost"
                 size="sm"
-                className="absolute right-0 top-0 h-full px-3"
+                className="absolute right-0 top-0 h-full px-3 text-navy hover:text-orange"
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
@@ -103,8 +106,8 @@ const AdminLoginForm: React.FC<AdminLoginFormProps> = ({
           </div>
 
           {error && (
-            <Alert variant={error.includes('sucesso') ? 'default' : 'destructive'}>
-              <AlertDescription>{error}</AlertDescription>
+            <Alert variant={error.includes('sucesso') ? 'default' : 'destructive'} className={error.includes('sucesso') ? 'border-orange/20 bg-orange/5' : ''}>
+              <AlertDescription className={error.includes('sucesso') ? 'text-navy' : ''}>{error}</AlertDescription>
             </Alert>
           )}
 
@@ -131,7 +134,7 @@ const AdminLoginForm: React.FC<AdminLoginFormProps> = ({
                 setIsSignUp(!isSignUp);
                 setError('');
               }}
-              className="text-orange"
+              className="text-orange hover:text-orange-dark"
             >
               {isSignUp 
                 ? 'Já tem uma conta? Faça login' 

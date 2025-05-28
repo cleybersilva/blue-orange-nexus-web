@@ -56,43 +56,46 @@ const AuthorManager = () => {
               Novo Autor
             </Button>
           </DialogTrigger>
-          <DialogContent>
+          <DialogContent className="border-navy/20">
             <DialogHeader>
-              <DialogTitle>Criar Novo Autor</DialogTitle>
+              <DialogTitle className="text-navy">Criar Novo Autor</DialogTitle>
               <DialogDescription>
                 Adicione um novo autor ao sistema
               </DialogDescription>
             </DialogHeader>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <Label htmlFor="name">Nome *</Label>
+                <Label htmlFor="name" className="text-navy">Nome *</Label>
                 <Input
                   id="name"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   placeholder="Nome do autor"
                   required
+                  className="border-navy/20 focus:border-orange"
                 />
               </div>
               
               <div>
-                <Label htmlFor="bio">Biografia</Label>
+                <Label htmlFor="bio" className="text-navy">Biografia</Label>
                 <Textarea
                   id="bio"
                   value={formData.bio}
                   onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
                   placeholder="Breve biografia do autor"
                   rows={3}
+                  className="border-navy/20 focus:border-orange"
                 />
               </div>
               
               <div>
-                <Label htmlFor="avatar_url">URL do Avatar</Label>
+                <Label htmlFor="avatar_url" className="text-navy">URL do Avatar</Label>
                 <Input
                   id="avatar_url"
                   value={formData.avatar_url}
                   onChange={(e) => setFormData({ ...formData, avatar_url: e.target.value })}
                   placeholder="https://exemplo.com/avatar.jpg"
+                  className="border-navy/20 focus:border-orange"
                 />
               </div>
               
@@ -117,7 +120,7 @@ const AuthorManager = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {authors?.map((author) => (
-          <Card key={author.id}>
+          <Card key={author.id} className="border-navy/20">
             <CardHeader>
               <div className="flex items-center gap-3">
                 {author.avatar_url ? (
@@ -132,7 +135,7 @@ const AuthorManager = () => {
                   </div>
                 )}
                 <div>
-                  <CardTitle className="text-lg">{author.name}</CardTitle>
+                  <CardTitle className="text-lg text-navy">{author.name}</CardTitle>
                 </div>
               </div>
             </CardHeader>
@@ -146,10 +149,10 @@ const AuthorManager = () => {
       </div>
 
       {authors?.length === 0 && (
-        <Card>
+        <Card className="border-navy/20">
           <CardContent className="text-center py-8">
             <User size={48} className="mx-auto text-gray-400 mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">Nenhum autor encontrado</h3>
+            <h3 className="text-lg font-medium text-navy mb-2">Nenhum autor encontrado</h3>
             <p className="text-gray-600 mb-4">Comece criando seu primeiro autor</p>
             <Button 
               onClick={() => setIsDialogOpen(true)}
