@@ -14,11 +14,13 @@ import { useToast } from '@/hooks/use-toast';
 import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useCalendly } from '@/components/CalendlyProvider';
+import { supabase } from '@/integrations/supabase/client';
 
 const ContactForm: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { toast } = useToast();
   const { openCalendly } = useCalendly();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
   const [formData, setFormData] = useState({
     name: '',
@@ -37,30 +39,68 @@ const ContactForm: React.FC = () => {
     setFormData(prev => ({ ...prev, service: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    setIsSubmitting(true);
     
-    // Here you would typically send the data to your backend
-    
-    toast({
-      title: t('footer.success'),
-      description: t('footer.subscribed'),
-      duration: 5000,
-    });
+    try {
+      // Save to database
+      const { error: dbError } = await supabase
+        .from('contact_submissions')
+        .insert({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          service: formData.service,
+          message: formData.message,
+          language: i18n.language,
+        });
 
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      service: '',
-      message: '',
-    });
+      if (dbError) throw dbError;
+
+      // Send email
+      const { error: emailError } = await supabase.functions.invoke('send-contact-email', {
+        body: {
+          ...formData,
+          language: i18n.language,
+        },
+      });
+
+      if (emailError) {
+        console.error('Email sending error:', emailError);
+        // Don't throw error for email - form submission still succeeded
+      }
+
+      toast({
+        title: t('footer.success'),
+        description: t('footer.subscribed'),
+        duration: 5000,
+      });
+
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        service: '',
+        message: '',
+      });
+
+    } catch (error) {
+      console.error('Form submission error:', error);
+      toast({
+        title: t('footer.error'),
+        description: 'Erro ao enviar mensagem. Tente novamente.',
+        variant: "destructive",
+        duration: 5000,
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactInfo = [
-    { icon: <Phone size={20} className="text-orange" />, label: t('aboutPage.location.phone'), value: '(11) 9999-9999' },
+    { icon: <Phone size={20} className="text-orange" />, label: t('aboutPage.location.phone'), value: '(83) 98832-9018' },
     { icon: <Mail size={20} className="text-orange" />, label: t('aboutPage.location.email'), value: 'contato@agenciadigital.com' },
     { icon: <MapPin size={20} className="text-orange" />, label: t('aboutPage.location.office'), value: t('footer.address') },
     { icon: <Clock size={20} className="text-orange" />, label: t('timeline.title'), value: 'Seg-Sex: 9h às 18h' },
@@ -172,8 +212,12 @@ const ContactForm: React.FC = () => {
                   className="w-full"
                 />
               </div>
-              <Button type="submit" className="btn-primary w-full md:w-auto">
-                {t('hero.scheduleButton')}
+              <Button 
+                type="submit" 
+                className="btn-primary w-full md:w-auto"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Enviando...' : t('hero.scheduleButton')}
               </Button>
             </form>
           </div>
