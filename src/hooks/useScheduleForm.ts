@@ -1,40 +1,20 @@
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
 import { useTranslation } from 'react-i18next';
 import { toast } from "@/hooks/use-toast";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { FormStage } from "@/components/agendar/FormProgress";
 import { useCalendly } from "@/components/CalendlyProvider";
-
-export type ScheduleFormValues = z.infer<ReturnType<typeof createFormSchema>>;
-
-const createFormSchema = (t: (key: string) => string) => z.object({
-  // Personal data
-  name: z.string().min(3, { message: t('form.errors.nameMin') }),
-  email: z.string().email({ message: t('form.errors.emailInvalid') }),
-  phone: z.string().min(10, { message: t('form.errors.phoneInvalid') }),
-  role: z.string().min(2, { message: t('form.errors.roleRequired') }),
-  
-  // Company data
-  companyName: z.string().min(2, { message: t('form.errors.companyNameRequired') }),
-  segment: z.string().min(2, { message: t('form.errors.segmentRequired') }),
-  companySize: z.string().min(1, { message: t('form.errors.companySizeRequired') }),
-  website: z.string().optional(),
-  
-  // Project data
-  serviceType: z.string().min(2, { message: t('form.errors.serviceTypeRequired') }),
-  projectDescription: z.string().min(20, { message: t('form.errors.descriptionMin') }),
-  deadline: z.string().min(1, { message: t('form.errors.deadlineRequired') }),
-  budget: z.string().optional(),
-
-  // Contact preferences
-  preferWhatsApp: z.boolean().default(true),
-  preferEmail: z.boolean().default(false),
-  preferPhone: z.boolean().default(false),
-  preferCalendly: z.boolean().default(false),
-});
+import { createFormSchema, ScheduleFormValues } from "@/types/scheduleForm";
+import { useFormStorage } from "@/hooks/useFormStorage";
+import { validateCurrentStage } from "@/utils/formValidation";
+import { 
+  getContactEmail, 
+  formatSubmissionMessage, 
+  sendToWhatsApp, 
+  sendToEmail 
+} from "@/utils/formSubmission";
 
 export const useScheduleForm = () => {
   const { t, i18n } = useTranslation();
@@ -65,43 +45,7 @@ export const useScheduleForm = () => {
     },
   });
 
-  // Load stored data on component mount
-  useEffect(() => {
-    const storedData = localStorage.getItem('scheduleFormData');
-    const storedStage = localStorage.getItem('scheduleFormStage');
-    
-    if (storedData) {
-      try {
-        const parsedData = JSON.parse(storedData);
-        console.log('Loading stored form data:', parsedData);
-        
-        // Reset form with stored data
-        form.reset(parsedData);
-      } catch (error) {
-        console.error('Error parsing stored form data:', error);
-      }
-    }
-    
-    if (storedStage) {
-      const parsedStage = parseInt(storedStage);
-      if (parsedStage >= FormStage.PERSONAL && parsedStage <= FormStage.CONFIRMATION) {
-        console.log('Loading stored stage:', parsedStage);
-        setStage(parsedStage);
-      }
-    }
-  }, [form]);
-
-  // Save data to localStorage whenever form values change
-  const saveFormData = (data: ScheduleFormValues) => {
-    localStorage.setItem('scheduleFormData', JSON.stringify(data));
-    console.log('Form data saved to localStorage');
-  };
-
-  // Save current stage to localStorage
-  const saveCurrentStage = (currentStage: FormStage) => {
-    localStorage.setItem('scheduleFormStage', currentStage.toString());
-    console.log('Current stage saved to localStorage:', currentStage);
-  };
+  const { saveFormData, saveCurrentStage, clearStoredData } = useFormStorage(form, setStage);
 
   // Handle stage navigation
   const goToNextStage = () => {
@@ -124,83 +68,11 @@ export const useScheduleForm = () => {
     }
   };
 
-  // Determine email based on language
-  const getContactEmail = () => {
-    const currentLanguage = i18n.language;
-    console.log('Current language:', currentLanguage);
-    
-    // For English, use contact@agenciadigitalhub.com
-    if (currentLanguage === 'en') {
-      return 'contact@agenciadigitalhub.com';
-    }
-    
-    // For Portuguese (BR and PT) and Spanish, use contato@agenciadigitalhub.com
-    return 'contato@agenciadigitalhub.com';
-  };
-
-  // Get fields to validate for each stage
-  const getFieldsForStage = (currentStage: FormStage): (keyof ScheduleFormValues)[] => {
-    switch (currentStage) {
-      case FormStage.PERSONAL:
-        return ['name', 'email', 'phone', 'role'];
-      case FormStage.COMPANY:
-        return ['companyName', 'segment', 'companySize'];
-      case FormStage.PROJECT:
-        return ['serviceType', 'projectDescription', 'deadline'];
-      case FormStage.CONFIRMATION:
-        return [];
-      default:
-        return [];
-    }
-  };
-
-  // Validate current stage before proceeding
-  const validateCurrentStage = async (): Promise<boolean> => {
-    const fieldsToValidate = getFieldsForStage(stage);
-    console.log('Validating fields for stage:', stage, 'Fields:', fieldsToValidate);
-    
-    if (fieldsToValidate.length === 0) {
-      console.log('No fields to validate for this stage');
-      return true;
-    }
-    
-    const result = await form.trigger(fieldsToValidate);
-    console.log('Validation result:', result);
-    
-    if (!result) {
-      console.log('Validation failed for stage:', stage);
-      const errors = form.formState.errors;
-      console.log('Form errors:', errors);
-      
-      // Show first error message
-      const firstErrorField = fieldsToValidate.find(field => errors[field]);
-      if (firstErrorField && errors[firstErrorField]?.message) {
-        toast({
-          title: t('form.validationError'),
-          description: errors[firstErrorField]?.message as string,
-          variant: "destructive",
-          duration: 4000,
-        });
-      } else {
-        toast({
-          title: t('form.validationError'),
-          description: t('form.pleaseCheckRequiredFields'),
-          variant: "destructive",
-          duration: 4000,
-        });
-      }
-      return false;
-    }
-    
-    console.log('Validation passed for stage:', stage);
-    return true;
-  };
-
   // Handle next button click with validation
   const handleNext = async () => {
     console.log('handleNext called for stage:', stage);
     
-    const isValid = await validateCurrentStage();
+    const isValid = await validateCurrentStage(form, stage, t, toast);
     if (!isValid) {
       console.log('Validation failed, staying on current stage');
       return;
@@ -248,72 +120,21 @@ export const useScheduleForm = () => {
     // Store form data in localStorage for persistence
     saveFormData(values);
 
-    // Formatting data for submission
-    const contactEmail = getContactEmail();
-    console.log('Contact email determined:', contactEmail);
-
-    const formattedMessage = `
-*${t('form.newBriefing')}*
--------------------
-*${t('form.personalData')}*
-${t('form.name')}: ${values.name}
-${t('form.email')}: ${values.email}
-${t('form.phone')}: ${values.phone}
-${t('form.role')}: ${values.role}
-
-*${t('form.companyData')}*
-${t('form.company')}: ${values.companyName}
-${t('form.segment')}: ${values.segment}
-${t('form.size')}: ${values.companySize}
-${t('form.website')}: ${values.website || t('form.notProvided')}
-
-*${t('form.projectData')}*
-${t('form.service')}: ${values.serviceType}
-${t('form.description')}: ${values.projectDescription}
-${t('form.deadline')}: ${values.deadline}
-${t('form.budget')}: ${values.budget || t('form.notProvided')}
-
-*${t('form.contactPreference')}*
-${values.preferWhatsApp ? "• WhatsApp" : ""}
-${values.preferEmail ? `• ${t('form.email')}` : ""}
-${values.preferPhone ? `• ${t('form.phone')}` : ""}
-${values.preferCalendly ? `• ${t('form.onlineScheduling')}` : ""}
-
-*${t('form.systemInfo')}*
-${t('form.submissionTime')}: ${new Date().toLocaleString()}
-${t('form.language')}: ${i18n.language}
-    `;
+    // Get contact email and format message
+    const contactEmail = getContactEmail(i18n);
+    const formattedMessage = formatSubmissionMessage(values, t, i18n);
 
     let submissionSuccess = false;
 
-    // Sending to WhatsApp
+    // Handle different submission methods
     if (values.preferWhatsApp) {
-      try {
-        const whatsappNumber = "5583988329018";
-        const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(formattedMessage)}`;
-        console.log('Opening WhatsApp with message');
-        window.open(whatsappUrl, "_blank");
-        submissionSuccess = true;
-      } catch (error) {
-        console.error('Error opening WhatsApp:', error);
-      }
+      submissionSuccess = sendToWhatsApp(formattedMessage) || submissionSuccess;
     }
     
-    // Sending to email
     if (values.preferEmail) {
-      try {
-        const emailSubject = t('form.newBriefingSubject');
-        const emailBody = formattedMessage;
-        const mailtoUrl = `mailto:${contactEmail}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
-        console.log('Opening email client with message to:', contactEmail);
-        window.location.href = mailtoUrl;
-        submissionSuccess = true;
-      } catch (error) {
-        console.error('Error opening email client:', error);
-      }
+      submissionSuccess = sendToEmail(formattedMessage, contactEmail, t) || submissionSuccess;
     }
     
-    // Showing Calendly if preferred
     if (values.preferCalendly) {
       console.log('Opening Calendly for scheduling');
       setShowCalendly(true);
@@ -344,8 +165,7 @@ ${t('form.language')}: ${i18n.language}
       setTimeout(() => {
         form.reset();
         setStage(FormStage.PERSONAL);
-        localStorage.removeItem('scheduleFormData');
-        localStorage.removeItem('scheduleFormStage');
+        clearStoredData();
         console.log('Form reset completed');
       }, 3000);
     }
@@ -356,8 +176,7 @@ ${t('form.language')}: ${i18n.language}
     setShowCalendly(false);
     form.reset();
     setStage(FormStage.PERSONAL);
-    localStorage.removeItem('scheduleFormData');
-    localStorage.removeItem('scheduleFormStage');
+    clearStoredData();
   };
 
   return {
@@ -370,3 +189,5 @@ ${t('form.language')}: ${i18n.language}
     closeCalendly
   };
 };
+
+export type { ScheduleFormValues };
