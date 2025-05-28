@@ -148,7 +148,7 @@
     "subtitle": "Real testimonials from companies that transformed their businesses with us"
   },
   "timeline": {
-    "title": "Timeline - History of DigitalHub Agency",
+    "title": "History of DigitalHub Agency",
     "2018": {
       "title": "Journey Begins",
       "description": "First steps in the digital world with responsive website projects."
@@ -172,6 +172,10 @@
     "2024": {
       "title": "Market Leadership",
       "description": "Consolidation as a reference in digital solutions in Northeast Brazil."
+    },
+    "2025": {
+      "title": "Artificial Intelligence Era",
+      "description": "Implementation of high-level AI across all products and services, offering even smarter and more personalized solutions for our clients."
     }
   },
   "footer": {

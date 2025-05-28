@@ -57,6 +57,11 @@ const TimelineSection = () => {
       year: "2024",
       title: t('timeline.2024.title'),
       description: t('timeline.2024.description')
+    },
+    {
+      year: "2025",
+      title: t('timeline.2025.title'),
+      description: t('timeline.2025.description')
     }
   ];
 
@@ -64,7 +69,7 @@ const TimelineSection = () => {
     <section className="py-16 md:py-24 bg-gray-50">
       <div className="container-custom">
         <h2 className="heading-lg text-center mb-12">
-          <span className="text-orange">Timeline - História da</span>
+          <span className="text-orange">História da</span>
           <span className="text-navy">Agência</span>
           <span className="text-orange">Digital</span>
           <HubHighlight className="text-3xl font-bold ml-2" />

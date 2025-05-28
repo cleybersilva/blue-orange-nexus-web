@@ -148,7 +148,7 @@
     "subtitle": "Depoimentos reais de empresas que transformaram seus negócios conosco"
   },
   "timeline": {
-    "title": "Timeline - História da AgênciaDigital Hub",
+    "title": "História da AgênciaDigital Hub",
     "2018": {
       "title": "Início da Jornada",
       "description": "Primeiros passos no mundo digital com projetos de websites responsivos."
@@ -172,6 +172,10 @@
     "2024": {
       "title": "Liderança no Mercado",
       "description": "Consolidação como referência em soluções digitais no Nordeste brasileiro."
+    },
+    "2025": {
+      "title": "Era da Inteligência Artificial",
+      "description": "Implementação de IA de alto nível em todos os produtos e serviços, oferecendo soluções ainda mais inteligentes e personalizadas para nossos clientes."
     }
   },
   "footer": {
