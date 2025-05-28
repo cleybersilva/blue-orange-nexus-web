@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { FormStage } from './FormProgress';
@@ -6,6 +5,7 @@ import { FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessa
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { UseFormReturn } from 'react-hook-form';
 import { ScheduleFormValues } from '@/hooks/useScheduleForm';
@@ -164,9 +164,23 @@ const FormStages: React.FC<FormStagesProps> = ({ stage, form }) => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>{t('form.serviceType')}</FormLabel>
-                  <FormControl>
-                    <Input placeholder={t('form.serviceTypePlaceholder')} {...field} />
-                  </FormControl>
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <FormControl>
+                      <SelectTrigger className="bg-white">
+                        <SelectValue placeholder={t('form.serviceTypePlaceholder')} />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent className="bg-white border border-gray-200 shadow-lg z-50">
+                      <SelectItem value="websites">{t('services.websites.title')}</SelectItem>
+                      <SelectItem value="ecommerce">{t('services.ecommerce.title')}</SelectItem>
+                      <SelectItem value="apps">{t('services.apps.title')}</SelectItem>
+                      <SelectItem value="lms">{t('services.lms.title')}</SelectItem>
+                      <SelectItem value="marketing">{t('services.marketing.title')}</SelectItem>
+                      <SelectItem value="social">{t('services.social.title')}</SelectItem>
+                      <SelectItem value="design">{t('services.design.title')}</SelectItem>
+                      <SelectItem value="political">{t('services.political.title')}</SelectItem>
+                    </SelectContent>
+                  </Select>
                   <FormMessage />
                 </FormItem>
               )}
