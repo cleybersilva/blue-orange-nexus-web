@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Label } from '@/components/ui/label';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Loader2, Eye, EyeOff } from 'lucide-react';
+import HubHighlight from '@/components/ui/hub-highlight';
 
 interface AdminLoginFormProps {
   email: string;
@@ -54,6 +55,16 @@ const AdminLoginForm: React.FC<AdminLoginFormProps> = ({
   return (
     <div className="min-h-screen bg-navy flex items-center justify-center p-4">
       <div className="w-full max-w-md">
+        {/* Header com AgênciaDigitalHub */}
+        <div className="text-center mb-8">
+          <span className="text-3xl font-bold">
+            <span className="text-orange">Agência</span>
+            <span className="text-white">Digital</span>
+            <HubHighlight className="text-white" />
+          </span>
+          <p className="text-white/80 mt-2 font-medium">Painel Administrativo</p>
+        </div>
+
         <Card className="border-navy/20 bg-white shadow-xl">
           <CardHeader className="text-center pb-6">
             <CardTitle className="text-2xl font-bold text-navy mb-2">
