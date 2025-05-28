@@ -9,6 +9,7 @@ import { useCalendly } from "@/components/CalendlyProvider";
 import { createFormSchema, ScheduleFormValues } from "@/types/scheduleForm";
 import { useFormStorage } from "@/hooks/useFormStorage";
 import { validateCurrentStage } from "@/utils/formValidation";
+import { useScheduleSubmission } from "@/hooks/useScheduleSubmission";
 import { 
   getContactEmail, 
   formatSubmissionMessage, 
@@ -21,6 +22,7 @@ export const useScheduleForm = () => {
   const [stage, setStage] = useState<FormStage>(FormStage.PERSONAL);
   const [showCalendly, setShowCalendly] = useState(false);
   const { openCalendly } = useCalendly();
+  const { submitScheduleForm } = useScheduleSubmission();
   
   // Create form with the translation function
   const form = useForm<ScheduleFormValues>({
@@ -120,21 +122,9 @@ export const useScheduleForm = () => {
     // Store form data in localStorage for persistence
     saveFormData(values);
 
-    // Get contact email and format message
-    const contactEmail = getContactEmail(i18n);
-    const formattedMessage = formatSubmissionMessage(values, t, i18n);
-
     let submissionSuccess = false;
 
-    // Handle different submission methods
-    if (values.preferWhatsApp) {
-      submissionSuccess = sendToWhatsApp(formattedMessage) || submissionSuccess;
-    }
-    
-    if (values.preferEmail) {
-      submissionSuccess = sendToEmail(formattedMessage, contactEmail, t) || submissionSuccess;
-    }
-    
+    // Handle Calendly first if selected
     if (values.preferCalendly) {
       console.log('Opening Calendly for scheduling');
       setShowCalendly(true);
@@ -142,26 +132,26 @@ export const useScheduleForm = () => {
       submissionSuccess = true;
     }
 
-    // Show success message
-    if (submissionSuccess) {
-      toast({
-        title: t('form.briefingSentSuccess'),
-        description: t('form.willContactSoon'),
-        duration: 5000,
-      });
+    // Submit to database and send emails
+    const dbSubmissionSuccess = await submitScheduleForm(values);
+    submissionSuccess = submissionSuccess || dbSubmissionSuccess;
+
+    // Handle WhatsApp and Email methods
+    if (values.preferWhatsApp || values.preferEmail) {
+      const contactEmail = getContactEmail(i18n);
+      const formattedMessage = formatSubmissionMessage(values, t, i18n);
+
+      if (values.preferWhatsApp) {
+        sendToWhatsApp(formattedMessage);
+      }
       
-      console.log('Form submission completed successfully');
-    } else {
-      toast({
-        title: t('form.submissionError'),
-        description: t('form.pleaseSelectContactMethod'),
-        variant: "destructive",
-        duration: 4000,
-      });
+      if (values.preferEmail) {
+        sendToEmail(formattedMessage, contactEmail, t);
+      }
     }
     
     // Reset form if not using Calendly
-    if (!values.preferCalendly) {
+    if (!values.preferCalendly && submissionSuccess) {
       setTimeout(() => {
         form.reset();
         setStage(FormStage.PERSONAL);

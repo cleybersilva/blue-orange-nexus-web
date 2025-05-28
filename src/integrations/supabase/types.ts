@@ -286,6 +286,78 @@ export type Database = {
         }
         Relationships: []
       }
+      schedule_submissions: {
+        Row: {
+          budget: string | null
+          company_name: string
+          company_size: string
+          created_at: string
+          deadline: string
+          email: string
+          id: string
+          language: string
+          name: string
+          phone: string
+          prefer_calendly: boolean | null
+          prefer_email: boolean | null
+          prefer_phone: boolean | null
+          prefer_whatsapp: boolean | null
+          project_description: string
+          role: string
+          segment: string
+          service_type: string
+          status: string | null
+          updated_at: string
+          website: string | null
+        }
+        Insert: {
+          budget?: string | null
+          company_name: string
+          company_size: string
+          created_at?: string
+          deadline: string
+          email: string
+          id?: string
+          language?: string
+          name: string
+          phone: string
+          prefer_calendly?: boolean | null
+          prefer_email?: boolean | null
+          prefer_phone?: boolean | null
+          prefer_whatsapp?: boolean | null
+          project_description: string
+          role: string
+          segment: string
+          service_type: string
+          status?: string | null
+          updated_at?: string
+          website?: string | null
+        }
+        Update: {
+          budget?: string | null
+          company_name?: string
+          company_size?: string
+          created_at?: string
+          deadline?: string
+          email?: string
+          id?: string
+          language?: string
+          name?: string
+          phone?: string
+          prefer_calendly?: boolean | null
+          prefer_email?: boolean | null
+          prefer_phone?: boolean | null
+          prefer_whatsapp?: boolean | null
+          project_description?: string
+          role?: string
+          segment?: string
+          service_type?: string
+          status?: string | null
+          updated_at?: string
+          website?: string | null
+        }
+        Relationships: []
+      }
       user_articles: {
         Row: {
           article_id: string
