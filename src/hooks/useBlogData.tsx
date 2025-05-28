@@ -189,7 +189,7 @@ export const useAuthors = () => {
   });
 };
 
-// Hook atualizado para verificar permissões do usuário
+// Hook atualizado para verificar permissões do usuário com correção para admin root
 export const useIsApprovedAdmin = () => {
   return useQuery({
     queryKey: ['is-approved-admin'],
@@ -203,7 +203,64 @@ export const useIsApprovedAdmin = () => {
         return { isAdmin: false, isRoot: false, isAuthorAdmin: false, isAuthor: false, profile: null };
       }
 
-      // Buscar perfil do usuário com logs detalhados
+      // CORREÇÃO ESPECÍFICA: Verificação direta para admin root Cleyber
+      if (user.user.email === 'cleyber.silva@live.com') {
+        console.log('useIsApprovedAdmin - ROOT ADMIN DETECTED: cleyber.silva@live.com');
+        
+        // Garantir que o perfil existe no banco com as permissões corretas
+        const { data: existingProfile, error: profileError } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('email', 'cleyber.silva@live.com')
+          .single();
+
+        console.log('useIsApprovedAdmin - Root admin profile check:', existingProfile);
+        
+        if (!existingProfile || profileError) {
+          console.log('useIsApprovedAdmin - Creating/updating root admin profile');
+          
+          // Criar ou atualizar perfil do admin root
+          const { data: updatedProfile, error: updateError } = await supabase
+            .from('profiles')
+            .upsert({
+              id: user.user.id,
+              email: 'cleyber.silva@live.com',
+              full_name: 'Cleyber Gomes da Silva',
+              role: 'admin',
+              admin_level: 'root',
+              approved: true,
+              updated_at: new Date().toISOString()
+            })
+            .select()
+            .single();
+
+          if (updateError) {
+            console.error('useIsApprovedAdmin - Error updating root admin profile:', updateError);
+          } else {
+            console.log('useIsApprovedAdmin - Root admin profile updated:', updatedProfile);
+          }
+        }
+
+        // Retornar permissões completas para o admin root
+        return {
+          isAdmin: true,
+          isRoot: true,
+          isAuthorAdmin: true,
+          isAuthor: true,
+          profile: {
+            id: user.user.id,
+            email: 'cleyber.silva@live.com',
+            full_name: 'Cleyber Gomes da Silva',
+            role: 'admin' as const,
+            admin_level: 'root' as const,
+            approved: true,
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString()
+          } as UserProfile
+        };
+      }
+
+      // Buscar perfil do usuário para outros usuários
       const { data, error } = await supabase
         .from('profiles')
         .select('*')
@@ -278,8 +335,9 @@ export const useIsApprovedAdmin = () => {
       };
     },
     retry: 1,
-    staleTime: 0, // Remover cache temporariamente para debug
-    refetchOnWindowFocus: true
+    staleTime: 0, // Sem cache para garantir dados atualizados
+    refetchOnWindowFocus: true,
+    refetchOnMount: true
   });
 };
 

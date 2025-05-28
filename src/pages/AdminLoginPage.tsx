@@ -35,12 +35,19 @@ const AdminLoginPage = () => {
     console.log('AdminLoginPage - Checking Admin:', checkingAdmin);
     console.log('AdminLoginPage - Checking Request:', checkingRequest);
     
+    // PRIORIDADE MÁXIMA: Admin Root Cleyber
+    if (user?.email === 'cleyber.silva@live.com') {
+      console.log('AdminLoginPage - ROOT ADMIN CLEYBER DETECTED - IMMEDIATE REDIRECT');
+      navigate('/admin/blog', { replace: true });
+      return;
+    }
+    
     // Se o usuário está logado e as verificações terminaram
     if (user && !checkingAdmin && !checkingRequest) {
       console.log('AdminLoginPage - All checks completed, processing permissions...');
       console.log('AdminLoginPage - Full permission object:', isApprovedAdmin);
       
-      // Verificação especial para admin root
+      // Verificação para qualquer admin root
       if (isApprovedAdmin && (isApprovedAdmin.isRoot || 
           (isApprovedAdmin.isAdmin && isApprovedAdmin.profile?.admin_level === 'root'))) {
         console.log('AdminLoginPage - ROOT ADMIN detected, redirecting immediately');
@@ -81,6 +88,14 @@ const AdminLoginPage = () => {
           setError(error.message);
         } else {
           console.log('AdminLoginPage - Sign up successful');
+          
+          // Verificação especial para admin root após signup
+          if (email === 'cleyber.silva@live.com') {
+            console.log('AdminLoginPage - Root admin signed up, redirecting immediately');
+            navigate('/admin/blog', { replace: true });
+            return;
+          }
+          
           setError('Conta criada com sucesso! Agora você pode solicitar acesso administrativo.');
           setIsSignUp(false);
           setShowAccessRequest(true);
@@ -93,6 +108,13 @@ const AdminLoginPage = () => {
           setError('Credenciais inválidas. Verifique seu email e senha.');
         } else {
           console.log('AdminLoginPage - Sign in successful');
+          
+          // Verificação especial para admin root após login
+          if (email === 'cleyber.silva@live.com') {
+            console.log('AdminLoginPage - Root admin logged in, redirecting immediately');
+            navigate('/admin/blog', { replace: true });
+            return;
+          }
         }
       }
     } catch (err) {
@@ -120,8 +142,15 @@ const AdminLoginPage = () => {
     }
   };
 
-  // Mostrar loader durante verificações
+  // Mostrar loader durante verificações (exceto para admin root)
   if (checkingAdmin || checkingRequest) {
+    // Bypass loader para admin root
+    if (user?.email === 'cleyber.silva@live.com') {
+      console.log('AdminLoginPage - Root admin bypassing loader, redirecting...');
+      navigate('/admin/blog', { replace: true });
+      return null;
+    }
+    
     console.log('AdminLoginPage - Still checking permissions...');
     return (
       <div className="min-h-screen bg-navy flex items-center justify-center">
@@ -156,6 +185,17 @@ const AdminLoginPage = () => {
       myRequestValue: myRequest,
       showAccessRequest
     });
+  }
+
+  // PROTEÇÃO EXTRA: Admin root nunca deve ver outras telas
+  if (user?.email === 'cleyber.silva@live.com') {
+    console.log('AdminLoginPage - Root admin in render, forcing redirect');
+    navigate('/admin/blog', { replace: true });
+    return (
+      <div className="min-h-screen bg-navy flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-orange" />
+      </div>
+    );
   }
 
   // Verificação extra para admin root - nunca deve mostrar solicitação
