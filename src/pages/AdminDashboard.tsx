@@ -102,8 +102,13 @@ const AdminDashboard = () => {
   };
 
   // Determinar quais artigos mostrar baseado no role do usuário
-  const articles = adminInfo?.isAuthor ? myArticles : allArticles;
-  const articlesLoading = adminInfo?.isAuthor ? myArticlesLoading : allArticlesLoading;
+  // Para admins e author_admins: mostrar TODOS os artigos
+  // Para authors: mostrar apenas os seus artigos
+  const articles = (adminInfo?.isAdmin || adminInfo?.isAuthorAdmin) ? allArticles : myArticles;
+  const articlesLoading = (adminInfo?.isAdmin || adminInfo?.isAuthorAdmin) ? allArticlesLoading : myArticlesLoading;
+  
+  console.log('AdminDashboard - Selected articles for display:', articles);
+  console.log('AdminDashboard - Articles loading:', articlesLoading);
   
   const publishedArticles = articles?.filter(article => article.status === 'published') || [];
   const draftArticles = articles?.filter(article => article.status === 'draft') || [];
@@ -233,7 +238,7 @@ const AdminDashboard = () => {
               <Card className="border-navy/20">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium text-navy">
-                    {adminInfo?.isAuthor ? 'Meus Artigos' : 'Total de Artigos'}
+                    {(adminInfo?.isAdmin || adminInfo?.isAuthorAdmin) ? 'Total de Artigos' : 'Meus Artigos'}
                   </CardTitle>
                   <FileText className="h-4 w-4 text-orange" />
                 </CardHeader>
@@ -291,6 +296,7 @@ const AdminDashboard = () => {
                     Criar Novo Artigo
                   </Button>
                   
+                  {/* ... keep existing code (action buttons) */}
                   {(adminInfo?.isAdmin || adminInfo?.isAuthorAdmin) && (
                     <>
                       <Button 
@@ -342,10 +348,10 @@ const AdminDashboard = () => {
               <Card className="border-navy/20">
                 <CardHeader>
                   <CardTitle className="text-navy">
-                    {adminInfo?.isAuthor ? 'Meus Artigos Recentes' : 'Artigos Recentes'}
+                    {(adminInfo?.isAdmin || adminInfo?.isAuthorAdmin) ? 'Artigos Recentes' : 'Meus Artigos Recentes'}
                   </CardTitle>
                   <CardDescription>
-                    {adminInfo?.isAuthor ? 'Seus últimos artigos' : 'Últimos artigos criados ou editados'}
+                    {(adminInfo?.isAdmin || adminInfo?.isAuthorAdmin) ? 'Últimos artigos criados ou editados' : 'Seus últimos artigos'}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -393,12 +399,12 @@ const AdminDashboard = () => {
                 <div className="flex justify-between items-center">
                   <div>
                     <CardTitle className="text-navy">
-                      {adminInfo?.isAuthor ? 'Meus Artigos' : 'Todos os Artigos'}
+                      {(adminInfo?.isAdmin || adminInfo?.isAuthorAdmin) ? 'Todos os Artigos' : 'Meus Artigos'}
                     </CardTitle>
                     <CardDescription>
-                      {adminInfo?.isAuthor 
-                        ? 'Gerencie seus artigos do blog' 
-                        : 'Gerencie todos os artigos do blog'}
+                      {(adminInfo?.isAdmin || adminInfo?.isAuthorAdmin) 
+                        ? 'Gerencie todos os artigos do blog' 
+                        : 'Gerencie seus artigos do blog'}
                     </CardDescription>
                   </div>
                   <Button 
@@ -473,9 +479,9 @@ const AdminDashboard = () => {
                         <FileText size={48} className="mx-auto text-gray-400 mb-4" />
                         <h3 className="text-lg font-medium text-gray-900 mb-2">Nenhum artigo encontrado</h3>
                         <p className="text-gray-600 mb-4">
-                          {adminInfo?.isAuthor 
-                            ? 'Comece criando seu primeiro artigo' 
-                            : 'Comece criando o primeiro artigo'}
+                          {(adminInfo?.isAdmin || adminInfo?.isAuthorAdmin) 
+                            ? 'Comece criando o primeiro artigo' 
+                            : 'Comece criando seu primeiro artigo'}
                         </p>
                         <Button 
                           onClick={() => navigate('/admin/articles/new')}
