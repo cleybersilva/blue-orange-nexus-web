@@ -2,11 +2,15 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from "@/components/ui/use-toast";
+import { supabase } from '@/integrations/supabase/client';
 
 export interface NewsletterSubscription {
+  id: string;
   email: string;
   language: string;
-  subscribedAt: string;
+  subscribed_at: string;
+  status: string;
+  created_at: string;
 }
 
 export const useNewsletter = () => {
@@ -26,15 +30,16 @@ export const useNewsletter = () => {
     setIsLoading(true);
 
     try {
-      // Get existing subscriptions
-      const existingSubscriptions = JSON.parse(
-        localStorage.getItem('newsletterSubscriptions') || '[]'
-      ) as NewsletterSubscription[];
-
       // Check if email already exists
-      const existingSubscription = existingSubscriptions.find(
-        sub => sub.email.toLowerCase() === email.toLowerCase()
-      );
+      const { data: existingSubscription, error: checkError } = await supabase
+        .from('newsletter_subscriptions')
+        .select('email')
+        .eq('email', email.toLowerCase())
+        .single();
+
+      if (checkError && checkError.code !== 'PGRST116') {
+        throw checkError;
+      }
 
       if (existingSubscription) {
         toast({
@@ -45,25 +50,36 @@ export const useNewsletter = () => {
         return false;
       }
 
-      // Add new subscription
-      const newSubscription: NewsletterSubscription = {
-        email: email.toLowerCase(),
-        language: i18n.language,
-        subscribedAt: new Date().toISOString()
-      };
+      // Insert new subscription
+      const { error: insertError } = await supabase
+        .from('newsletter_subscriptions')
+        .insert({
+          email: email.toLowerCase(),
+          language: i18n.language,
+          status: 'active'
+        });
 
-      existingSubscriptions.push(newSubscription);
-      localStorage.setItem('newsletterSubscriptions', JSON.stringify(existingSubscriptions));
+      if (insertError) throw insertError;
 
-      // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Send welcome email
+      const { error: emailError } = await supabase.functions.invoke('send-newsletter-welcome', {
+        body: {
+          email: email.toLowerCase(),
+          language: i18n.language,
+        },
+      });
+
+      if (emailError) {
+        console.error('Welcome email sending error:', emailError);
+        // Don't throw error for email - subscription still succeeded
+      }
 
       toast({
         title: t('footer.success'),
         description: t('footer.subscribed'),
       });
 
-      console.log("Newsletter subscription successful:", newSubscription);
+      console.log("Newsletter subscription successful for:", email);
       return true;
 
     } catch (error) {
@@ -79,37 +95,53 @@ export const useNewsletter = () => {
     }
   };
 
-  const getSubscriptions = (): NewsletterSubscription[] => {
+  const getSubscriptions = async (): Promise<NewsletterSubscription[]> => {
     try {
-      return JSON.parse(localStorage.getItem('newsletterSubscriptions') || '[]');
-    } catch {
+      const { data, error } = await supabase
+        .from('newsletter_subscriptions')
+        .select('*')
+        .eq('status', 'active')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      return data || [];
+    } catch (error) {
+      console.error('Error fetching subscriptions:', error);
       return [];
     }
   };
 
-  const sendNewsletterToSubscribers = async (articleTitle: string, articleUrl: string) => {
-    const subscriptions = getSubscriptions();
-    
-    // In a real implementation, this would send emails via an API
-    // For now, we'll just log the action
-    console.log(`Sending newsletter to ${subscriptions.length} subscribers about: ${articleTitle}`);
-    
-    // Group subscribers by language
-    const subscribersByLanguage = subscriptions.reduce((acc, sub) => {
-      if (!acc[sub.language]) {
-        acc[sub.language] = [];
+  const sendNewsletterToSubscribers = async (articleTitle: string, articleUrl: string, articleSummary?: string) => {
+    try {
+      const subscriptions = await getSubscriptions();
+      
+      if (subscriptions.length === 0) {
+        console.log('No active subscribers found');
+        return 0;
       }
-      acc[sub.language].push(sub);
-      return acc;
-    }, {} as Record<string, NewsletterSubscription[]>);
 
-    // Log what would be sent to each language group
-    Object.entries(subscribersByLanguage).forEach(([language, subs]) => {
-      console.log(`Newsletter for ${language}: ${subs.length} subscribers`);
-      console.log(`Article: ${articleTitle} - ${articleUrl}`);
-    });
+      // Send newsletter via edge function
+      const { error } = await supabase.functions.invoke('send-newsletter-article', {
+        body: {
+          articleTitle,
+          articleUrl,
+          articleSummary,
+          subscriptions
+        },
+      });
 
-    return subscriptions.length;
+      if (error) {
+        console.error('Newsletter sending error:', error);
+        throw error;
+      }
+
+      console.log(`Newsletter sent to ${subscriptions.length} subscribers`);
+      return subscriptions.length;
+
+    } catch (error) {
+      console.error('Error sending newsletter:', error);
+      throw error;
+    }
   };
 
   return {
