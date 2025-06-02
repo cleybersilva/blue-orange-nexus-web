@@ -5,8 +5,11 @@ import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Calendar, User, ArrowLeft, Share2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const ChatbotsAutomacao = () => {
+  const { t } = useTranslation();
+  
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
@@ -15,40 +18,40 @@ const ChatbotsAutomacao = () => {
         <div className="container-custom max-w-4xl">
           {/* Breadcrumb */}
           <div className="flex items-center gap-2 mb-8 text-sm">
-            <Link to="/blog" className="text-orange hover:underline">Blog</Link>
+            <Link to="/blog" className="text-orange hover:underline">{t('nav.blog')}</Link>
             <span className="text-gray-400">/</span>
-            <span className="text-gray-600">Automação com Chatbots</span>
+            <span className="text-gray-600">{t('blog.articles.chatbots.title')}</span>
           </div>
 
           {/* Article Header */}
           <div className="bg-white rounded-2xl shadow-lg overflow-hidden mb-8">
             <img 
               src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
-              alt="Chatbots Automation"
+              alt={t('blog.articles.chatbots.title')}
               className="w-full h-64 md:h-80 object-cover"
             />
             <div className="p-8">
               <h1 className="text-3xl md:text-4xl font-bold text-navy mb-4">
-                Automação com Chatbots: Como Otimizar o Atendimento ao Cliente
+                {t('blog.articles.chatbots.title')}
               </h1>
               <p className="text-xl text-gray-600 mb-6">
-                Aprenda a implementar assistentes virtuais inteligentes para melhorar a experiência do cliente e reduzir custos operacionais.
+                {t('blog.articles.chatbots.subtitle')}
               </p>
               
               <div className="flex items-center justify-between text-sm text-gray-500 mb-6">
                 <div className="flex items-center gap-4">
                   <div className="flex items-center gap-2">
                     <User size={16} />
-                    <span>Autor: Cleyber Silva</span>
+                    <span>{t('blog.by')}: {t('blog.articles.chatbots.author')}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Calendar size={16} />
-                    <span>05 Nov 2024</span>
+                    <span>{t('blog.articles.chatbots.date')}</span>
                   </div>
                 </div>
                 <Button variant="outline" size="sm">
                   <Share2 size={16} className="mr-2" />
-                  Compartilhar
+                  {t('blog.share')}
                 </Button>
               </div>
             </div>
@@ -57,28 +60,28 @@ const ChatbotsAutomacao = () => {
           {/* Article Content */}
           <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
             <div className="prose prose-lg max-w-none">
-              <h2 className="text-2xl font-bold text-navy mb-4">A Revolução dos Chatbots</h2>
+              <h2 className="text-2xl font-bold text-navy mb-4">{t('blog.articles.chatbots.section1.title')}</h2>
               <p className="text-gray-700 leading-relaxed mb-6">
-                Os chatbots evoluíram de simples respondedores automáticos para assistentes virtuais sofisticados capazes de compreender contexto, sentimentos e intenções dos usuários.
+                {t('blog.articles.chatbots.section1.content')}
               </p>
 
-              <h2 className="text-2xl font-bold text-navy mb-4">Benefícios da Automação</h2>
+              <h2 className="text-2xl font-bold text-navy mb-4">{t('blog.articles.chatbots.section2.title')}</h2>
               <ul className="list-disc pl-6 mb-6 text-gray-700">
-                <li className="mb-2"><strong>Disponibilidade 24/7:</strong> Atendimento ininterrupto sem custos adicionais</li>
-                <li className="mb-2"><strong>Redução de Custos:</strong> Até 70% de economia em atendimento</li>
-                <li className="mb-2"><strong>Escalabilidade:</strong> Atende milhares de clientes simultaneamente</li>
-                <li className="mb-2"><strong>Consistência:</strong> Respostas padronizadas e precisas</li>
+                <li className="mb-2"><strong>{t('blog.articles.chatbots.benefits.availability.title')}:</strong> {t('blog.articles.chatbots.benefits.availability.description')}</li>
+                <li className="mb-2"><strong>{t('blog.articles.chatbots.benefits.cost.title')}:</strong> {t('blog.articles.chatbots.benefits.cost.description')}</li>
+                <li className="mb-2"><strong>{t('blog.articles.chatbots.benefits.scalability.title')}:</strong> {t('blog.articles.chatbots.benefits.scalability.description')}</li>
+                <li className="mb-2"><strong>{t('blog.articles.chatbots.benefits.consistency.title')}:</strong> {t('blog.articles.chatbots.benefits.consistency.description')}</li>
               </ul>
 
               <div className="bg-blue-50 border-l-4 border-blue-500 p-6 my-8">
                 <p className="text-blue-800 italic">
-                  "Um chatbot bem implementado pode resolver 80% das dúvidas dos clientes, liberando a equipe humana para casos mais complexos."
+                  "{t('blog.articles.chatbots.quote')}"
                 </p>
               </div>
 
-              <h2 className="text-2xl font-bold text-navy mb-4">Implementação Estratégica</h2>
+              <h2 className="text-2xl font-bold text-navy mb-4">{t('blog.articles.chatbots.section3.title')}</h2>
               <p className="text-gray-700 leading-relaxed mb-6">
-                A chave para o sucesso está em mapear as principais dúvidas dos clientes, criar fluxos conversacionais naturais e integrar o chatbot aos sistemas existentes da empresa.
+                {t('blog.articles.chatbots.section3.content')}
               </p>
             </div>
           </div>
@@ -88,12 +91,12 @@ const ChatbotsAutomacao = () => {
             <Link to="/blog">
               <Button variant="outline">
                 <ArrowLeft size={16} className="mr-2" />
-                Voltar ao Blog
+                {t('blog.backToBlog')}
               </Button>
             </Link>
             <Link to="/agendar">
               <Button className="bg-orange hover:bg-orange-dark text-white">
-                Implementar Chatbot Inteligente
+                {t('blog.articles.chatbots.cta')}
               </Button>
             </Link>
           </div>

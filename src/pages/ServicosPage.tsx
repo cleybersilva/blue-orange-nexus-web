@@ -5,62 +5,65 @@ import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Globe, ShoppingBag, Smartphone, GraduationCap, BarChartBig, Users, Palette, Vote } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const ServicosPage = () => {
+  const { t } = useTranslation();
+  
   const services = [
     {
       icon: <Globe size={40} />,
-      title: "Desenvolvimento de Websites",
-      description: "Sites institucionais responsivos e otimizados para SEO com integração de IA para geração automática de textos e tradução em tempo real.",
+      title: t("services.websites.title"),
+      description: t("services.websites.description"),
       link: "/servicos/websites",
       color: "from-blue-500 to-blue-600"
     },
     {
       icon: <ShoppingBag size={40} />,
-      title: "Soluções de E-commerce",
-      description: "Plataformas integradas com IA de recomendação de produtos, otimização mobile-first e checkouts inteligentes.",
+      title: t("services.ecommerce.title"),
+      description: t("services.ecommerce.description"),
       link: "/servicos/ecommerce",
       color: "from-green-500 to-green-600"
     },
     {
       icon: <Smartphone size={40} />,
-      title: "Aplicativos Móveis",
-      description: "Apps nativos e híbridos para Android e iOS com funcionalidades de comandos por voz e chatbots integrados.",
+      title: t("services.apps.title"),
+      description: t("services.apps.description"),
       link: "/servicos/aplicativos",
       color: "from-purple-500 to-purple-600"
     },
     {
       icon: <GraduationCap size={40} />,
-      title: "Sistemas LMS",
-      description: "Plataformas EAD com gamificação, dashboards de performance e suporte a tutores IA para acompanhamento de alunos.",
+      title: t("services.lms.title"),
+      description: t("services.lms.description"),
       link: "/servicos/lms",
       color: "from-indigo-500 to-indigo-600"
     },
     {
       icon: <BarChartBig size={40} />,
-      title: "Marketing Digital",
-      description: "Estratégias baseadas em dados e automações com IA, criação de campanhas com análise preditiva de ROI.",
+      title: t("services.marketing.title"),
+      description: t("services.marketing.description"),
       link: "/servicos/marketing",
       color: "from-orange-500 to-orange-600"
     },
     {
       icon: <Users size={40} />,
-      title: "Gestão de Mídias Sociais",
-      description: "Agendamento inteligente com IA de copywriting, relatórios automáticos e criativos personalizados.",
+      title: t("services.social.title"),
+      description: t("services.social.description"),
       link: "/servicos/midias-sociais",
       color: "from-pink-500 to-pink-600"
     },
     {
       icon: <Palette size={40} />,
-      title: "Design UI/UX",
-      description: "Prototipagem rápida com IA, estudos de usabilidade e layouts com animações leves e microinterações.",
+      title: t("services.design.title"),
+      description: t("services.design.description"),
       link: "/servicos/design",
       color: "from-teal-500 to-teal-600"
     },
     {
       icon: <Vote size={40} />,
-      title: "Campanhas Políticas",
-      description: "Plataformas para captação de leads com IA, análise de sentimento e assistentes virtuais multicanal.",
+      title: t("services.political.title"),
+      description: t("services.political.description"),
       link: "/servicos/politicas",
       color: "from-red-500 to-red-600"
     }
@@ -74,10 +77,9 @@ const ServicosPage = () => {
         <div className="container-custom">
           {/* Hero Section */}
           <div className="text-center mb-16">
-            <h1 className="heading-lg mb-6">Nossos Serviços</h1>
+            <h1 className="heading-lg mb-6">{t('services.title')}</h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Oferecemos soluções digitais completas integradas com Inteligência Artificial para transformar 
-              sua presença online e impulsionar o crescimento do seu negócio.
+              {t('services.subtitle')}
             </p>
           </div>
           
@@ -99,7 +101,7 @@ const ServicosPage = () => {
                   {service.description}
                 </p>
                 <div className="flex items-center text-orange font-medium text-sm group-hover:gap-2 transition-all duration-300">
-                  Saiba mais
+                  {t('services.learnMore')}
                   <ArrowRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform duration-300" />
                 </div>
               </Link>
@@ -109,15 +111,14 @@ const ServicosPage = () => {
           {/* CTA Section */}
           <div className="text-center mt-16 bg-navy rounded-2xl p-12">
             <h2 className="text-3xl font-bold text-white mb-4">
-              Pronto para Transformar seu Negócio?
+              {t('aboutPage.cta.title')}
             </h2>
             <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
-              Nossa equipe especializada está preparada para desenvolver a solução perfeita 
-              para suas necessidades, utilizando as mais avançadas tecnologias de IA.
+              {t('aboutPage.cta.subtitle')}
             </p>
             <Link to="/agendar">
               <Button className="bg-orange hover:bg-orange-dark text-white px-8 py-3 text-lg">
-                Agendar Consultoria Gratuita
+                {t('aboutPage.cta.schedule')}
               </Button>
             </Link>
           </div>

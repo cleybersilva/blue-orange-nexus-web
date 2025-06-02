@@ -143,6 +143,56 @@
       "email": "E-mail"
     }
   },
+  "projects": {
+    "title": "Nosso Portfólio",
+    "backToHome": "Voltar para o Início",
+    "viewDetails": "Ver Detalhes",
+    "viewProject": "Ver Projeto",
+    "detailsTitle": "Detalhes do projeto",
+    "detailsDescription": "Funcionalidade em desenvolvimento",
+    "categories": {
+      "ecommerce": "Loja Virtual",
+      "mobile": "Aplicativo Móvel",
+      "website": "Website",
+      "software": "Software",
+      "platform": "Plataforma Web",
+      "marketplace": "Marketplace",
+      "fintech": "Fintech",
+      "edtech": "EdTech"
+    },
+    "ecommerce": {
+      "title": "E-commerce de Moda",
+      "description": "Loja virtual completa com integração de pagamentos e gestão de estoque."
+    },
+    "delivery": {
+      "title": "App de Delivery",
+      "description": "Aplicativo móvel para pedidos e entregas com rastreamento em tempo real."
+    },
+    "institutional": {
+      "title": "Site Institucional",
+      "description": "Website responsivo com otimização SEO e integração com CRM."
+    },
+    "dashboard": {
+      "title": "Dashboard Analítico",
+      "description": "Painel de controle com métricas de negócio e relatórios personalizados."
+    },
+    "social": {
+      "title": "Rede Social Corporativa",
+      "description": "Plataforma privada para comunicação e colaboração entre funcionários."
+    },
+    "marketplace": {
+      "title": "Marketplace B2B",
+      "description": "Portal para conectar fornecedores e compradores do setor industrial."
+    },
+    "finance": {
+      "title": "App de Gestão Financeira",
+      "description": "Aplicativo para controle de finanças pessoais com análise de gastos."
+    },
+    "education": {
+      "title": "Portal Educacional",
+      "description": "Plataforma de cursos online com área do aluno e certificação digital."
+    }
+  },
   "portfolio": {
     "title": "Nosso Portfólio",
     "subtitle": "Projetos que transformaram negócios e geraram resultados excepcionais"
@@ -150,6 +200,92 @@
   "testimonials": {
     "title": "O que nossos clientes dizem",
     "subtitle": "Depoimentos reais de empresas que transformaram seus negócios conosco"
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Insights sobre tecnologia, marketing digital, IA e tendências que moldam o futuro dos negócios digitais.",
+    "loading": "Carregando artigos...",
+    "error": "Erro ao carregar artigos. Tente novamente mais tarde.",
+    "readTime": "min de leitura",
+    "by": "Por",
+    "readFull": "Ler Artigo Completo",
+    "noArticles": "Nenhum artigo encontrado nesta categoria.",
+    "backToBlog": "Voltar ao Blog",
+    "share": "Compartilhar",
+    "categories": {
+      "all": "Todos",
+      "ai": "Inteligência Artificial",
+      "marketing": "Marketing Digital",
+      "design": "UX/UI Design",
+      "technology": "Tecnologia",
+      "cases": "Cases de Sucesso",
+      "automation": "Automação"
+    },
+    "newsletter": {
+      "title": "Fique por Dentro das Novidades",
+      "subtitle": "Receba insights exclusivos sobre tecnologia, IA e marketing digital diretamente em seu e-mail.",
+      "placeholder": "Seu melhor e-mail",
+      "subscribe": "Assinar"
+    },
+    "articles": {
+      "chatbots": {
+        "title": "Automação com Chatbots: Como Otimizar o Atendimento ao Cliente",
+        "subtitle": "Aprenda a implementar assistentes virtuais inteligentes para melhorar a experiência do cliente e reduzir custos operacionais.",
+        "author": "Cleyber Silva",
+        "date": "05 Nov 2024",
+        "section1": {
+          "title": "A Revolução dos Chatbots",
+          "content": "Os chatbots evoluíram de simples respondedores automáticos para assistentes virtuais sofisticados capazes de compreender contexto, sentimentos e intenções dos usuários."
+        },
+        "section2": {
+          "title": "Benefícios da Automação"
+        },
+        "benefits": {
+          "availability": {
+            "title": "Disponibilidade 24/7",
+            "description": "Atendimento ininterrupto sem custos adicionais"
+          },
+          "cost": {
+            "title": "Redução de Custos",
+            "description": "Até 70% de economia em atendimento"
+          },
+          "scalability": {
+            "title": "Escalabilidade",
+            "description": "Atende milhares de clientes simultaneamente"
+          },
+          "consistency": {
+            "title": "Consistência",
+            "description": "Respostas padronizadas e precisas"
+          }
+        },
+        "quote": "Um chatbot bem implementado pode resolver 80% das dúvidas dos clientes, liberando a equipe humana para casos mais complexos.",
+        "section3": {
+          "title": "Implementação Estratégica",
+          "content": "A chave para o sucesso está em mapear as principais dúvidas dos clientes, criar fluxos conversacionais naturais e integrar o chatbot aos sistemas existentes da empresa."
+        },
+        "cta": "Implementar Chatbot Inteligente"
+      },
+      "pwa": {
+        "title": "O Futuro dos PWAs em 2025",
+        "subtitle": "Descubra como os Progressive Web Apps estão revolucionando a experiência mobile e desktop.",
+        "author": "Cleyber Silva",
+        "date": "12 Nov 2024",
+        "section1": {
+          "title": "O que são PWAs?",
+          "content": "Progressive Web Apps são aplicações web que oferecem uma experiência similar aos aplicativos nativos, mas com a flexibilidade e alcance da web."
+        },
+        "section2": {
+          "title": "Vantagens dos PWAs",
+          "content": "Os PWAs oferecem instalação sem lojas de aplicativos, atualizações automáticas, funcionamento offline e performance superior."
+        },
+        "quote": "PWAs representam o futuro das aplicações digitais, combinando o melhor dos dois mundos: web e mobile.",
+        "section3": {
+          "title": "Implementação em 2025",
+          "content": "Com o avanço das APIs web e melhor suporte dos navegadores, 2025 será o ano da consolidação dos PWAs no mercado."
+        },
+        "cta": "Desenvolver PWA Personalizado"
+      }
+    }
   },
   "timeline": {
     "title": "Linha do Tempo Hub",

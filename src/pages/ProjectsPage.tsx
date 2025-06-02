@@ -11,63 +11,63 @@ import { useTranslation } from 'react-i18next';
 const ProjectsPage: React.FC = () => {
   const { t } = useTranslation();
   
-  // Sample projects data
+  // Sample projects data with translations
   const projects = [
     {
       id: 1,
-      title: "E-commerce de Moda",
-      description: "Loja virtual completa com integração de pagamentos e gestão de estoque.",
+      title: t("projects.ecommerce.title"),
+      description: t("projects.ecommerce.description"),
       image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-      category: "Loja Virtual"
+      category: t("projects.categories.ecommerce")
     },
     {
       id: 2,
-      title: "App de Delivery",
-      description: "Aplicativo móvel para pedidos e entregas com rastreamento em tempo real.",
+      title: t("projects.delivery.title"),
+      description: t("projects.delivery.description"),
       image: "https://images.unsplash.com/photo-1555421689-3f034debb7a6?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-      category: "Aplicativo Móvel"
+      category: t("projects.categories.mobile")
     },
     {
       id: 3,
-      title: "Site Institucional",
-      description: "Website responsivo com otimização SEO e integração com CRM.",
+      title: t("projects.institutional.title"),
+      description: t("projects.institutional.description"),
       image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-      category: "Website"
+      category: t("projects.categories.website")
     },
     {
       id: 4,
-      title: "Dashboard Analítico",
-      description: "Painel de controle com métricas de negócio e relatórios personalizados.",
+      title: t("projects.dashboard.title"),
+      description: t("projects.dashboard.description"),
       image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-      category: "Software"
+      category: t("projects.categories.software")
     },
     {
       id: 5,
-      title: "Rede Social Corporativa",
-      description: "Plataforma privada para comunicação e colaboração entre funcionários.",
+      title: t("projects.social.title"),
+      description: t("projects.social.description"),
       image: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-      category: "Plataforma Web"
+      category: t("projects.categories.platform")
     },
     {
       id: 6,
-      title: "Marketplace B2B",
-      description: "Portal para conectar fornecedores e compradores do setor industrial.",
+      title: t("projects.marketplace.title"),
+      description: t("projects.marketplace.description"),
       image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-      category: "Marketplace"
+      category: t("projects.categories.marketplace")
     },
     {
       id: 7,
-      title: "App de Gestão Financeira",
-      description: "Aplicativo para controle de finanças pessoais com análise de gastos.",
+      title: t("projects.finance.title"),
+      description: t("projects.finance.description"),
       image: "https://images.unsplash.com/photo-1553729459-efe14ef6055d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-      category: "Fintech"
+      category: t("projects.categories.fintech")
     },
     {
       id: 8,
-      title: "Portal Educacional",
-      description: "Plataforma de cursos online com área do aluno e certificação digital.",
+      title: t("projects.education.title"),
+      description: t("projects.education.description"),
       image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-      category: "EdTech"
+      category: t("projects.categories.edtech")
     }
   ];
 
@@ -78,10 +78,10 @@ const ProjectsPage: React.FC = () => {
       <main className="pt-32 pb-20">
         <div className="container-custom">
           <div className="flex items-center justify-between mb-12">
-            <h1 className="heading-lg">Nosso Portfólio</h1>
+            <h1 className="heading-lg">{t('projects.title')}</h1>
             <Link to="/">
               <Button variant="ghost" className="flex items-center gap-2">
-                <ArrowLeft size={16} /> Voltar para Home
+                <ArrowLeft size={16} /> {t('projects.backToHome')}
               </Button>
             </Link>
           </div>
@@ -113,13 +113,13 @@ const ProjectsPage: React.FC = () => {
                     className="w-full"
                     onClick={() => {
                       toast({
-                        title: "Detalhes do projeto",
-                        description: "Funcionalidade em desenvolvimento",
+                        title: t("projects.detailsTitle"),
+                        description: t("projects.detailsDescription"),
                         duration: 3000,
                       });
                     }}
                   >
-                    Ver Detalhes
+                    {t('projects.viewDetails')}
                   </Button>
                 </div>
               </div>
