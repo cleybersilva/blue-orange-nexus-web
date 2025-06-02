@@ -1,9 +1,8 @@
-
 {
   "siteTitle": {
-    "agency": "Agência Digital",
+    "agency": "Agência",
     "hub": "Hub",
-    "digital": ""
+    "digital": "Digital"
   },
   "nav": {
     "home": "Página Inicial",
@@ -23,7 +22,7 @@
     "imageAlt": "Desenvolvimento de website responsivo"
   },
   "footer": {
-    "about": "Sobre a Agência Digital",
+    "about": "Sobre a Agência",
     "aboutText": "Somos uma agência digital completa, especializada em transformar ideias em resultados através de soluções digitais inovadoras.",
     "links": "Links rápidos",
     "contact": "Entre em contacto",
