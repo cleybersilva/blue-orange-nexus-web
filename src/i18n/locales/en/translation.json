@@ -1,3 +1,4 @@
+
 {
   "nav": {
     "home": "Home",
@@ -148,7 +149,7 @@
     "subtitle": "Real testimonials from companies that transformed their businesses with us"
   },
   "timeline": {
-    "title": "History of DigitalHub Agency",
+    "title": "Hub Timeline",
     "2018": {
       "title": "Journey Begins",
       "description": "First steps in the digital world with responsive website projects."
@@ -179,7 +180,7 @@
     }
   },
   "footer": {
-    "company": "Digital Hub Agency",
+    "company": "AgênciaDigital Hub",
     "description": "We transform ideas into digital solutions that generate real results for your business.",
     "aboutText": "We are a complete digital agency, specialized in transforming ideas into results through innovative digital solutions.",
     "quickLinks": "Quick Links",
