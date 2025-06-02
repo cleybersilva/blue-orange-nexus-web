@@ -70,8 +70,7 @@ const TimelineSection = () => {
       <div className="container-custom">
         <h2 className="heading-lg text-center mb-12">
           <span className="text-orange">História da </span>
-          <span className="text-navy">Agência </span>
-          <span className="text-orange">Digital </span>
+          <span className="text-navy">AgênciaDigital </span>
           <HubHighlight className="text-3xl font-bold ml-2" />
         </h2>
         
