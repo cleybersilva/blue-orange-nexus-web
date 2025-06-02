@@ -85,7 +85,7 @@ const Header = () => {
         <Link to="/" className="flex items-center gap-2">
           <span className="text-2xl font-bold">
             <span className="text-orange">Agência</span>
-            <span className="text-white">Digital</span>
+            <span style={{ color: '#FFFFFF' }}>Digital</span>
           </span>
           <HubHighlight className="text-2xl font-bold" />
         </Link>

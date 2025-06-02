@@ -13,7 +13,7 @@ const AdminHeader: React.FC<AdminHeaderProps> = ({ subtitle }) => {
       <Link to="/" className="inline-block">
         <span className="text-3xl font-bold">
           <span className="text-orange">Agência</span>
-          <span className="text-white">Digital</span>
+          <span style={{ color: '#FFFFFF' }}>Digital</span>
           <HubHighlight className="text-white" />
         </span>
       </Link>
