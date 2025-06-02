@@ -51,8 +51,7 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           <div>
             <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-              <span className="text-orange">Agência</span>
-              <span className="text-white">Digital</span>
+              <span className="text-orange">AgênciaDigital</span>
               <HubHighlight />
             </h2>
             <p className="text-gray-300 mb-6">
