@@ -25,6 +25,7 @@
     "title": "Nossos Serviços",
     "subtitle": "Soluções completas para transformar seu negócio digital",
     "viewAll": "Conheça todos os serviços",
+    "learnMore": "Saiba Mais",
     "websites": {
       "title": "Desenvolvimento de Sites",
       "description": "Sites profissionais e responsivos que convertem visitantes em clientes."
@@ -56,8 +57,7 @@
     "political": {
       "title": "Marketing Político",
       "description": "Estratégias digitais especializadas para campanhas políticas."
-    },
-    "learnMore": "Saiba Mais"
+    }
   },
   "aboutPage": {
     "ourHistory": "Nossa História",
@@ -146,7 +146,7 @@
   "projects": {
     "title": "Nosso Portfólio",
     "backToHome": "Voltar para o Início",
-    "viewDetails": "Ver Detalhes",
+    "viewDetails": "Ver Mais Projetos",
     "viewProject": "Ver Projeto",
     "detailsTitle": "Detalhes do projeto",
     "detailsDescription": "Funcionalidade em desenvolvimento",
@@ -199,7 +199,17 @@
   },
   "testimonials": {
     "title": "O que nossos clientes dizem",
-    "subtitle": "Depoimentos reais de empresas que transformaram seus negócios conosco"
+    "subtitle": "Depoimentos reais de empresas que transformaram seus negócios conosco",
+    "quotes": {
+      "first": "A equipe superou todas as nossas expectativas. Nosso website foi entregue no prazo e com um design excepcional que reflete perfeitamente nossa marca.",
+      "second": "Nossa loja virtual aumentou as vendas em 150% após o redesign e implementação das estratégias de marketing sugeridas pela equipe.",
+      "third": "O aplicativo desenvolvido revolucionou a forma como nos comunicamos com nossos clientes. Interface intuitiva e sem erros."
+    },
+    "roles": {
+      "ceo": "CEO",
+      "commercial": "Diretor Comercial",
+      "product": "Gerente de Produto"
+    }
   },
   "blog": {
     "title": "Blog",

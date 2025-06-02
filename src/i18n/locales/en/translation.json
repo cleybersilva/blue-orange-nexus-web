@@ -143,13 +143,159 @@
       "email": "Email"
     }
   },
+  "projects": {
+    "title": "Our Portfolio",
+    "backToHome": "Back to Home",
+    "viewDetails": "View More Projects",
+    "viewProject": "View Project",
+    "detailsTitle": "Project details",
+    "detailsDescription": "Feature in development",
+    "categories": {
+      "ecommerce": "E-commerce",
+      "mobile": "Mobile App",
+      "website": "Website",
+      "software": "Software",
+      "platform": "Web Platform",
+      "marketplace": "Marketplace",
+      "fintech": "Fintech",
+      "edtech": "EdTech"
+    },
+    "ecommerce": {
+      "title": "Fashion E-commerce",
+      "description": "Complete online store with payment integration and inventory management."
+    },
+    "delivery": {
+      "title": "Delivery App",
+      "description": "Mobile application for orders and deliveries with real-time tracking."
+    },
+    "institutional": {
+      "title": "Corporate Website",
+      "description": "Responsive website with SEO optimization and CRM integration."
+    },
+    "dashboard": {
+      "title": "Analytics Dashboard",
+      "description": "Control panel with business metrics and custom reports."
+    },
+    "social": {
+      "title": "Corporate Social Network",
+      "description": "Private platform for communication and collaboration between employees."
+    },
+    "marketplace": {
+      "title": "B2B Marketplace",
+      "description": "Portal to connect suppliers and buyers in the industrial sector."
+    },
+    "finance": {
+      "title": "Financial Management App",
+      "description": "Application for personal finance control with expense analysis."
+    },
+    "education": {
+      "title": "Educational Portal",
+      "description": "Online course platform with student area and digital certification."
+    }
+  },
   "portfolio": {
     "title": "Our Portfolio",
     "subtitle": "Projects that transformed businesses and generated exceptional results"
   },
   "testimonials": {
     "title": "What our clients say",
-    "subtitle": "Real testimonials from companies that transformed their businesses with us"
+    "subtitle": "Real testimonials from companies that transformed their businesses with us",
+    "quotes": {
+      "first": "The team exceeded all our expectations. Our website was delivered on time and with exceptional design that perfectly reflects our brand.",
+      "second": "Our online store increased sales by 150% after the redesign and implementation of marketing strategies suggested by the team.",
+      "third": "The developed application revolutionized how we communicate with our customers. Intuitive interface and error-free."
+    },
+    "roles": {
+      "ceo": "CEO",
+      "commercial": "Commercial Director",
+      "product": "Product Manager"
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Insights about technology, digital marketing, AI and trends that shape the future of digital business.",
+    "loading": "Loading articles...",
+    "error": "Error loading articles. Please try again later.",
+    "readTime": "min read",
+    "by": "By",
+    "readFull": "Read Full Article",
+    "noArticles": "No articles found in this category.",
+    "backToBlog": "Back to Blog",
+    "share": "Share",
+    "categories": {
+      "all": "All",
+      "ai": "Artificial Intelligence",
+      "marketing": "Digital Marketing",
+      "design": "UX/UI Design",
+      "technology": "Technology",
+      "cases": "Success Cases",
+      "automation": "Automation"
+    },
+    "newsletter": {
+      "title": "Stay Updated",
+      "subtitle": "Receive exclusive insights about technology, AI and digital marketing directly in your email.",
+      "placeholder": "Your best email",
+      "subscribe": "Subscribe"
+    },
+    "articles": {
+      "chatbots": {
+        "title": "Chatbot Automation: How to Optimize Customer Service",
+        "subtitle": "Learn to implement intelligent virtual assistants to improve customer experience and reduce operational costs.",
+        "author": "Cleyber Silva",
+        "date": "Nov 05, 2024",
+        "section1": {
+          "title": "The Chatbot Revolution",
+          "content": "Chatbots have evolved from simple auto-responders to sophisticated virtual assistants capable of understanding context, emotions and user intentions."
+        },
+        "section2": {
+          "title": "Benefits of Automation"
+        },
+        "benefits": {
+          "availability": {
+            "title": "24/7 Availability",
+            "description": "Uninterrupted service without additional costs"
+          },
+          "cost": {
+            "title": "Cost Reduction",
+            "description": "Up to 70% savings in customer service"
+          },
+          "scalability": {
+            "title": "Scalability",
+            "description": "Serves thousands of customers simultaneously"
+          },
+          "consistency": {
+            "title": "Consistency",
+            "description": "Standardized and accurate responses"
+          }
+        },
+        "quote": "A well-implemented chatbot can solve 80% of customer queries, freeing the human team for more complex cases.",
+        "section3": {
+          "title": "Strategic Implementation",
+          "content": "The key to success lies in mapping main customer queries, creating natural conversational flows and integrating the chatbot with existing company systems."
+        },
+        "cta": "Implement Intelligent Chatbot"
+      },
+      "pwa": {
+        "title": "The Future of PWAs in 2025",
+        "subtitle": "Discover how Progressive Web Apps are revolutionizing mobile and desktop experiences.",
+        "author": "Cleyber Silva",
+        "date": "Nov 12, 2024",
+        "section1": {
+          "title": "What are PWAs?",
+          "content": "Progressive Web Apps are web applications that offer an experience similar to native apps, but with web flexibility and reach."
+        },
+        "section2": {
+          "title": "PWA Advantages",
+          "content": "PWAs offer installation without app stores, automatic updates, offline functionality and superior performance."
+        },
+        "quote": "PWAs represent the future of digital applications, combining the best of both worlds: web and mobile.",
+        "section3": {
+          "title": "Implementation in 2025",
+          "content": "With the advancement of web APIs and better browser support, 2025 will be the year of PWA consolidation in the market."
+        },
+        "cta": "Develop Custom PWA"
+      }
+    }
   },
   "timeline": {
     "title": "Hub Timeline",
