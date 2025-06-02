@@ -201,6 +201,10 @@
     "emailInvalid": "Por favor, insira um e-mail válido",
     "faq": "Perguntas Frequentes"
   },
+  "language": {
+    "changed": "Idioma alterado",
+    "changedTo": "O idioma foi alterado para {{language}}"
+  },
   "form": {
     "scheduleTitle": "Agende sua Consulta Gratuita",
     "briefingInstructions": "Preencha o formulário abaixo com as informações do seu projeto para que possamos oferecer a melhor solução para o seu negócio.",
@@ -301,9 +305,9 @@
     "seoBio": "Especialista em inteligência artificial e engenharia de confiabilidade de sistemas para soluções digitais avançadas.",
     "security": "Senior CyberSecurity",
     "securityBio": "Responsável pela segurança digital e proteção de dados dos clientes, com vasta experiência em prevenção de ameaças.",
-    "traffic": "Traffic Manager",
-    "trafficBio": "Especialista em geração de tráfego qualificado e estratégias de conversão para campanhas digitais.",
-    "design": "Graphic Design Manager",
+    "traffic": "Gestor de Tráfego e SEO",
+    "trafficBio": "Especialista em geração de tráfego qualificado e estratégias de conversão para campanhas digitais e otimização SEO.",
+    "design": "Gerente de Design Gráfico",
     "designBio": "Lidera a equipe de design gráfico, garantindo a excelência visual em todos os projetos e materiais da empresa."
   }
 }

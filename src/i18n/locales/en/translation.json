@@ -1,4 +1,3 @@
-
 {
   "nav": {
     "home": "Home",
@@ -93,8 +92,8 @@
       "seoBio": "Expert in search engine optimization and organic growth strategies.",
       "security": "Security Specialist",
       "securityBio": "Professional focused on digital security and data protection for web applications.",
-      "traffic": "Traffic Manager",
-      "trafficBio": "Expert in paid traffic campaigns and digital advertising performance analysis.",
+      "traffic": "Traffic Manager & SEO",
+      "trafficBio": "Specialist in qualified traffic generation and conversion strategies for digital campaigns and SEO optimization.",
       "design": "Designer",
       "designBio": "Creative designer focused on user experience and impactful visual interfaces."
     },
@@ -296,13 +295,17 @@
       "deadlineRequired": "Deadline is required"
     }
   },
+  "language": {
+    "changed": "Language changed",
+    "changedTo": "Language has been changed to {{language}}"
+  },
   "teamMembers": {
     "seo": "AI Scientist/SRE Engineer",
     "seoBio": "Specialist in artificial intelligence and site reliability engineering for advanced digital solutions.",
     "security": "Senior CyberSecurity",
     "securityBio": "Responsible for digital security and client data protection, with extensive experience in threat prevention.",
-    "traffic": "Traffic Manager",
-    "trafficBio": "Specialist in qualified traffic generation and conversion strategies for digital campaigns.",
+    "traffic": "Traffic Manager & SEO",
+    "trafficBio": "Specialist in qualified traffic generation and conversion strategies for digital campaigns and SEO optimization.",
     "design": "Graphic Design Manager",
     "designBio": "Leads the graphic design team, ensuring visual excellence in all company projects and materials."
   }
