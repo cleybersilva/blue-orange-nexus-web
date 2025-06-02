@@ -1,3 +1,4 @@
+
 {
   "nav": {
     "home": "Início",
@@ -294,5 +295,15 @@
       "descriptionMin": "Descrição deve ter pelo menos 20 caracteres",
       "deadlineRequired": "Prazo é obrigatório"
     }
+  },
+  "teamMembers": {
+    "seo": "Cientista em IA/Engenheiro SRE",
+    "seoBio": "Especialista em inteligência artificial e engenharia de confiabilidade de sistemas para soluções digitais avançadas.",
+    "security": "Senior CyberSecurity",
+    "securityBio": "Responsável pela segurança digital e proteção de dados dos clientes, com vasta experiência em prevenção de ameaças.",
+    "traffic": "Traffic Manager",
+    "trafficBio": "Especialista em geração de tráfego qualificado e estratégias de conversão para campanhas digitais.",
+    "design": "Graphic Design Manager",
+    "designBio": "Lidera a equipe de design gráfico, garantindo a excelência visual em todos os projetos e materiais da empresa."
   }
 }

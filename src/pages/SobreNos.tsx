@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { Calendar, Users, Building, Phone, MapPin, Mail, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -41,26 +40,26 @@ const SobreNos = () => {
   const teamMembers = [
     {
       name: "Cleyber Silva",
-      role: t('aboutPage.teamMembers.seo'),
-      bio: t('aboutPage.teamMembers.seoBio'),
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      role: t('teamMembers.seo'),
+      bio: t('teamMembers.seoBio'),
+      image: "/lovable-uploads/70367edc-7bb0-4595-928a-3b0453e00ee7.png"
     },
     {
       name: "Marcos Túlio",
-      role: t('aboutPage.teamMembers.security'),
-      bio: t('aboutPage.teamMembers.securityBio'),
+      role: t('teamMembers.security'),
+      bio: t('teamMembers.securityBio'),
       image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     {
       name: "Euthelys Arthur",
-      role: t('aboutPage.teamMembers.traffic'),
-      bio: t('aboutPage.teamMembers.trafficBio'),
+      role: t('teamMembers.traffic'),
+      bio: t('teamMembers.trafficBio'),
       image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=2576&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     {
       name: "Vini",
-      role: t('aboutPage.teamMembers.design'),
-      bio: t('aboutPage.teamMembers.designBio'),
+      role: t('teamMembers.design'),
+      bio: t('teamMembers.designBio'),
       image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     }
   ];
@@ -84,6 +83,14 @@ const SobreNos = () => {
       return defaultValuesList;
     }
   })();
+
+  // Function to get the correct email based on language
+  const getContactEmail = () => {
+    if (i18n.language === 'en') {
+      return 'contact@agenciadigitahub.com';
+    }
+    return 'contato@agenciadigitalhub.com';
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -370,8 +377,8 @@ const SobreNos = () => {
                   <div>
                     <h3 className="font-medium text-navy">{t('aboutPage.location.email')}</h3>
                     <p className="text-gray-600">
-                      <a href="mailto:contato@agenciadigital.com" className="hover:text-orange transition-colors">
-                        contato@agenciadigital.com
+                      <a href={`mailto:${getContactEmail()}`} className="hover:text-orange transition-colors">
+                        {getContactEmail()}
                       </a>
                     </p>
                   </div>

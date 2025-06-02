@@ -1,3 +1,4 @@
+
 {
   "siteTitle": {
     "agency": "Agencia Digital",
@@ -240,8 +241,8 @@
     }
   },
   "teamMembers": {
-    "seo": "SEO y AI Scientist",
-    "seoBio": "Especialista en optimización para motores de búsqueda y aplicaciones de inteligencia artificial para negocios digitales.",
+    "seo": "Científico en IA/Ingeniero SRE",
+    "seoBio": "Especialista en inteligencia artificial e ingeniería de confiabilidad de sistemas para soluciones digitales avanzadas.",
     "security": "Senior CyberSecurity",
     "securityBio": "Responsable de la seguridad digital y protección de datos de los clientes, con amplia experiencia en prevención de amenazas.",
     "traffic": "Traffic Manager",

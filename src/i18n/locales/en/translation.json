@@ -1,3 +1,4 @@
+
 {
   "nav": {
     "home": "Home",
@@ -294,5 +295,15 @@
       "descriptionMin": "Description must be at least 20 characters",
       "deadlineRequired": "Deadline is required"
     }
+  },
+  "teamMembers": {
+    "seo": "AI Scientist/SRE Engineer",
+    "seoBio": "Specialist in artificial intelligence and site reliability engineering for advanced digital solutions.",
+    "security": "Senior CyberSecurity",
+    "securityBio": "Responsible for digital security and client data protection, with extensive experience in threat prevention.",
+    "traffic": "Traffic Manager",
+    "trafficBio": "Specialist in qualified traffic generation and conversion strategies for digital campaigns.",
+    "design": "Graphic Design Manager",
+    "designBio": "Leads the graphic design team, ensuring visual excellence in all company projects and materials."
   }
 }
