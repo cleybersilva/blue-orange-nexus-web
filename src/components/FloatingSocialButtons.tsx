@@ -7,7 +7,7 @@ const FloatingSocialButtons: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const socialLinks = [
-    { icon: <Linkedin size={20} />, name: 'LinkedIn', url: '#', color: 'bg-[#0077B5]' },
+    { icon: <Linkedin size={20} />, name: 'LinkedIn', url: 'https://www.linkedin.com/in/cleybersilva/', color: 'bg-[#0077B5]' },
     { icon: <Facebook size={20} />, name: 'Facebook', url: '#', color: 'bg-[#1877F2]' },
     { icon: <Instagram size={20} />, name: 'Instagram', url: '#', color: 'bg-gradient-to-tr from-[#FFDC80] via-[#F56040] to-[#833AB4]' },
   ];
