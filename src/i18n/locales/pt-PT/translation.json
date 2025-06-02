@@ -1,7 +1,9 @@
+
 {
   "siteTitle": {
     "agency": "Agência Digital",
-    "hub": "Hub"
+    "hub": "Hub",
+    "digital": ""
   },
   "nav": {
     "home": "Página Inicial",
@@ -238,10 +240,6 @@
       "commercial": "Diretor Comercial",
       "product": "Gestor de Produto"
     }
-  },
-  "siteTitle": {
-    "agency": "Agência Digital",
-    "digital": "Digital"
   },
   "teamMembers": {
     "seo": "Cientista em IA/Engenheiro SRE",

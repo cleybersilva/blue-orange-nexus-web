@@ -1,7 +1,9 @@
+
 {
   "siteTitle": {
     "agency": "Agencia Digital",
-    "hub": "Hub"
+    "hub": "Hub",
+    "digital": ""
   },
   "nav": {
     "home": "Inicio",
