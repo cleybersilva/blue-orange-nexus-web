@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { useTranslation } from 'react-i18next';
@@ -7,14 +6,14 @@ import HubHighlight from '@/components/ui/hub-highlight';
 const TimelineSection = () => {
   const { t, i18n } = useTranslation();
   // Add a state to force re-render on language change
-  const [, setForceUpdate] = useState(0);
+  const [key, setKey] = useState(0);
 
   // Enhanced language change handling
   useEffect(() => {
     const handleLanguageChange = () => {
       console.log('Timeline language updated:', i18n.language);
       // Force re-render when language changes
-      setForceUpdate(prev => prev + 1);
+      setKey(prev => prev + 1);
     };
 
     i18n.on('languageChanged', handleLanguageChange);
@@ -66,7 +65,7 @@ const TimelineSection = () => {
   ];
 
   return (
-    <section className="py-16 md:py-24 bg-gray-50">
+    <section key={key} className="py-16 md:py-24 bg-gray-50">
       <div className="container-custom">
         <h2 className="heading-lg text-center mb-12">
           <span className="mr-2">{t('timeline.title')}</span>
