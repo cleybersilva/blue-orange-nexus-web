@@ -10,7 +10,7 @@ const FooterBrand: React.FC = () => {
   return (
     <div>
       <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-        <span><span className="text-orange">Agência</span><span style={{ color: '#FFFFFF' }}>Digital</span></span>
+        <span><span className="text-orange">{t('siteTitle.agency')}</span><span style={{ color: '#FFFFFF' }}>{t('siteTitle.digital')}</span></span>
         <HubHighlight />
       </h2>
       <p className="text-gray-300 mb-6">

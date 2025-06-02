@@ -1,5 +1,8 @@
-
 {
+  "siteTitle": {
+    "agency": "Agência",
+    "digital": "Digital"
+  },
   "nav": {
     "home": "Início",
     "about": "Sobre Nós",

@@ -84,8 +84,8 @@ const Header = () => {
       <div className="container-custom flex justify-between items-center">
         <Link to="/" className="flex items-center gap-2">
           <span className="text-2xl font-bold">
-            <span className="text-orange">Agência</span>
-            <span style={{ color: '#FFFFFF' }}>Digital</span>
+            <span className="text-orange">{t('siteTitle.agency')}</span>
+            <span style={{ color: '#FFFFFF' }}>{t('siteTitle.digital')}</span>
           </span>
           <HubHighlight className="text-2xl font-bold" />
         </Link>

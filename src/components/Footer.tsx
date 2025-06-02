@@ -25,7 +25,7 @@ const Footer: React.FC = () => {
 
         <div className="flex flex-col md:flex-row justify-between">
           <p className="text-gray-400 text-sm">
-            © {new Date().getFullYear()} <span><span className="text-orange">Agência</span><span style={{ color: '#FFFFFF' }}>Digital</span></span><HubHighlight className="text-sm" />. {t('footer.rights')}
+            © {new Date().getFullYear()} <span><span className="text-orange">{t('siteTitle.agency')}</span><span style={{ color: '#FFFFFF' }}>{t('siteTitle.digital')}</span></span><HubHighlight className="text-sm" />. {t('footer.rights')}
           </p>
           <div className="flex gap-4 mt-2 md:mt-0">
             <Link to="/politica-privacidade" className="text-gray-400 hover:text-orange text-sm">{t('footer.privacy')}</Link>
