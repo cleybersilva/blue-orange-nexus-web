@@ -69,7 +69,8 @@ const TimelineSection = () => {
     <section className="py-16 md:py-24 bg-gray-50">
       <div className="container-custom">
         <h2 className="heading-lg text-center mb-12">
-          {t('timeline.title')}
+          <span className="mr-2">Linha do Tempo</span>
+          <HubHighlight className="text-3xl font-bold" />
         </h2>
         
         <div className="relative max-w-4xl mx-auto">
