@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { useTranslation } from 'react-i18next';
-import HubHighlight from '@/components/ui/hub-highlight';
 
 const TimelineSection = () => {
   const { t, i18n } = useTranslation();
@@ -69,8 +68,7 @@ const TimelineSection = () => {
     <section key={key} className="py-16 md:py-24 bg-gray-50">
       <div className="container-custom">
         <h2 className="heading-lg text-center mb-12">
-          <span>{t('timeline.title')}</span>
-          <HubHighlight className="text-3xl font-bold" />
+          {t('timeline.title')}
         </h2>
         
         <div className="relative max-w-4xl mx-auto">
