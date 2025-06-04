@@ -48,31 +48,35 @@ const LanguageSelector = () => {
         <Button 
           variant="ghost" 
           size="sm" 
-          className="h-10 flex items-center gap-3 px-3 hover:bg-white/10 text-white transition-colors duration-300 border border-orange/30 hover:border-orange"
+          className="h-10 flex items-center gap-2 lg:gap-3 px-2 lg:px-3 hover:bg-white/10 text-white transition-all duration-300 border border-orange/30 hover:border-orange hover:scale-105 active:scale-95"
           aria-label="Select language"
         >
-          <span className="text-xl">
+          <span className="text-lg lg:text-xl">
             {getCurrentLanguage()?.flag}
           </span>
-          <span className="text-sm font-medium">
+          <span className="text-xs lg:text-sm font-medium hidden sm:block">
             {getCurrentLanguage()?.name}
+          </span>
+          <span className="text-xs font-medium sm:hidden">
+            {getCurrentLanguage()?.code.toUpperCase()}
           </span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent 
         align="end" 
-        className="bg-navy border-orange/20 animate-in fade-in-80 data-[side=bottom]:slide-in-from-top-2 min-w-[220px]"
+        className="bg-navy border-orange/20 animate-in fade-in-80 slide-in-from-top-2 duration-300 min-w-[180px] lg:min-w-[220px] z-50"
+        sideOffset={5}
       >
         {languages.map((language) => (
           <DropdownMenuItem
             key={language.code}
             onClick={() => handleLanguageChange(language.code)}
-            className={`flex items-center gap-3 cursor-pointer text-white hover:bg-orange/20 hover:text-white transition-colors duration-200 py-3 px-4 ${
+            className={`flex items-center gap-2 lg:gap-3 cursor-pointer text-white hover:bg-orange/20 hover:text-white transition-all duration-200 py-2 lg:py-3 px-3 lg:px-4 ${
               currentLanguage === language.code ? 'bg-orange/20 border-l-4 border-orange' : ''
             }`}
           >
-            <span className="text-lg">{language.flag}</span>
-            <span className="text-sm">{language.name}</span>
+            <span className="text-base lg:text-lg">{language.flag}</span>
+            <span className="text-xs lg:text-sm">{language.name}</span>
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>

@@ -78,16 +78,16 @@ const Header = () => {
   return (
     <header 
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-navy shadow-md py-2' : 'bg-navy py-4'
+        isScrolled ? 'bg-navy shadow-md py-2' : 'bg-navy py-3 lg:py-4'
       }`}
     >
       <div className="container-custom flex justify-between items-center">
-        <Link to="/" className="flex items-center gap-2">
-          <span className="text-2xl font-bold">
+        <Link to="/" className="flex items-center gap-1 lg:gap-2">
+          <span className="text-lg lg:text-2xl font-bold">
             <span className="text-orange">{t('siteTitle.agency')}</span>
             <span style={{ color: '#FFFFFF' }}>{t('siteTitle.digital')}</span>
           </span>
-          <HubHighlight className="text-2xl font-bold" />
+          <HubHighlight className="text-lg lg:text-2xl font-bold" />
         </Link>
 
         {/* Desktop Nav */}
@@ -105,7 +105,7 @@ const Header = () => {
           <div className="ml-4 flex items-center space-x-2">
             <LanguageSelector />
             <Button 
-              className="bg-orange hover:bg-orange-dark text-white"
+              className="bg-orange hover:bg-orange-dark text-white transition-all duration-300 hover:scale-105 active:scale-95"
               onClick={handleScheduleClick}
             >
               {t('nav.schedule')}
@@ -113,12 +113,12 @@ const Header = () => {
           </div>
         </nav>
 
-        {/* Mobile Nav */}
-        <div className="flex items-center lg:hidden">
+        {/* Mobile Nav Controls */}
+        <div className="flex items-center lg:hidden gap-2">
           <LanguageSelector />
           <button 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="p-2 ml-2 text-white"
+            className="p-2 text-white transition-all duration-300 hover:bg-white/10 rounded-md active:scale-95"
             aria-label="Toggle menu"
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -128,21 +128,21 @@ const Header = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && isMobile && (
-        <div className="lg:hidden bg-navy shadow-lg">
+        <div className="lg:hidden bg-navy shadow-lg animate-in slide-in-from-top-2 duration-300">
           <div className="container-custom py-4">
-            <nav className="flex flex-col space-y-3">
+            <nav className="flex flex-col space-y-3 text-center">
               {navItems.map((item, i) => (
                 <Link 
                   key={i}
                   to={item.path}
-                  className="px-3 py-2 text-white/90 hover:text-white transition-colors duration-300"
+                  className="px-3 py-3 text-white/90 hover:text-white transition-all duration-300 hover:bg-white/10 rounded-md"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.label}
                 </Link>
               ))}
               <Button 
-                className="bg-orange hover:bg-orange-dark text-white mt-2"
+                className="bg-orange hover:bg-orange-dark text-white mt-4 mx-auto w-full max-w-xs transition-all duration-300 hover:scale-105 active:scale-95"
                 onClick={() => {
                   setIsMenuOpen(false);
                   navigate('/agendar');
