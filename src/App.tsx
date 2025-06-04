@@ -1,133 +1,60 @@
-
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
-import SobreNos from "./pages/SobreNos";
-import Agendar from "./pages/Agendar";
-import ProjectsPage from "./pages/ProjectsPage";
-import ServicosPage from "./pages/ServicosPage";
-import BlogPage from "./pages/BlogPage";
-import BlogArticlePage from "./pages/BlogArticlePage";
-import AdminLoginPage from "./pages/AdminLoginPage";
-import AdminDashboard from "./pages/AdminDashboard";
-import AdminAuthorsPage from "./pages/AdminAuthorsPage";
-import AdminRequestsPage from "./pages/AdminRequestsPage";
-import AdminUsersPage from "./pages/AdminUsersPage";
-import ArticleEditor from "./components/admin/ArticleEditor";
-import WebsitesPage from "./pages/services/WebsitesPage";
-import EcommercePage from "./pages/services/EcommercePage";
-import AppsPage from "./pages/services/AppsPage";
-import LMSPage from "./pages/services/LMSPage";
-import MarketingPage from "./pages/services/MarketingPage";
-import SocialMediaPage from "./pages/services/SocialMediaPage";
-import DesignPage from "./pages/services/DesignPage";
-import PoliticalPage from "./pages/services/PoliticalPage";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import TermsOfUse from "./pages/TermsOfUse";
-import IAMarketingDigital2025 from "./pages/blog/IAMarketingDigital2025";
-import TendenciasUXUI2025 from "./pages/blog/TendenciasUXUI2025";
-import CaseEcommerceIA from "./pages/blog/CaseEcommerceIA";
-import ChatbotsAutomacao from "./pages/blog/ChatbotsAutomacao";
-import MarketingDataDriven from "./pages/blog/MarketingDataDriven";
-import PWAFuturo2025 from "./pages/blog/PWAFuturo2025";
-import { CalendlyProvider } from "./components/CalendlyProvider";
-import { LanguageProvider } from "./components/LanguageProvider";
-import { AuthProvider } from "./hooks/useAuth";
-import { useEffect } from "react";
-import { useTranslation } from "react-i18next";
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
+import ServicesPage from './pages/ServicesPage';
+import ContactPage from './pages/ContactPage';
+import ProjectsPage from './pages/ProjectsPage';
+import WebsitesPage from './pages/services/WebsitesPage';
+import ECommercePage from './pages/services/ECommercePage';
+import AppsPage from './pages/services/AppsPage';
+import LMSSolutionsPage from './pages/services/LMSSolutionsPage';
+import MarketingDigitalPage from './pages/services/MarketingDigitalPage';
+import SocialMediaPage from './pages/services/SocialMediaPage';
+import DesignGraficoPage from './pages/services/DesignGraficoPage';
+import MarketingPoliticoPage from './pages/services/MarketingPoliticoPage';
+import { LanguageProvider } from './components/LanguageProvider';
+import { CalendlyProvider } from './components/CalendlyProvider';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { Toaster } from '@/components/ui/toaster';
+import FloatingSocialButtons from './components/FloatingSocialButtons';
+import NotFoundPage from './pages/NotFoundPage';
+import WebsitePortfolioPage from './pages/services/WebsitePortfolioPage';
 
 const queryClient = new QueryClient();
 
-// Component to force re-render when language changes
-const LanguageHandler = () => {
-  const { i18n } = useTranslation();
-  
-  useEffect(() => {
-    const handleLanguageChange = () => {
-      console.log('Language change detected in App');
-    };
-
-    window.addEventListener('languageChanged', handleLanguageChange);
-    i18n.on('languageChanged', (lng) => {
-      console.log('i18n language changed to:', lng);
-    });
-    
-    return () => {
-      window.removeEventListener('languageChanged', handleLanguageChange);
-      i18n.off('languageChanged');
-    };
-  }, [i18n]);
-
-  return null;
-};
-
-// Ensure language updates apply to the entire app
-const AppWithLanguage = () => {
+function App() {
   return (
-    <LanguageProvider>
-      <AuthProvider>
-        <BrowserRouter>
-          <CalendlyProvider>
-            <LanguageHandler />
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/sobre-nos" element={<SobreNos />} />
-              <Route path="/agendar" element={<Agendar />} />
-              <Route path="/projetos" element={<ProjectsPage />} />
-              <Route path="/servicos" element={<ServicosPage />} />
-              <Route path="/servicos/websites" element={<WebsitesPage />} />
-              <Route path="/servicos/ecommerce" element={<EcommercePage />} />
-              <Route path="/servicos/aplicativos" element={<AppsPage />} />
-              <Route path="/servicos/lms" element={<LMSPage />} />
-              <Route path="/servicos/marketing" element={<MarketingPage />} />
-              <Route path="/servicos/midias-sociais" element={<SocialMediaPage />} />
-              <Route path="/servicos/design" element={<DesignPage />} />
-              <Route path="/servicos/politicas" element={<PoliticalPage />} />
-              <Route path="/blog" element={<BlogPage />} />
-              <Route path="/blog/:slug" element={<BlogArticlePage />} />
-              
-              {/* Admin Routes */}
-              <Route path="/admin/login" element={<AdminLoginPage />} />
-              <Route path="/admin/blog" element={<AdminDashboard />} />
-              <Route path="/admin/authors" element={<AdminAuthorsPage />} />
-              <Route path="/admin/requests" element={<AdminRequestsPage />} />
-              <Route path="/admin/users" element={<AdminUsersPage />} />
-              <Route path="/admin/articles/new" element={<ArticleEditor />} />
-              <Route path="/admin/articles/edit/:id" element={<ArticleEditor />} />
-              
-              <Route path="/politica-privacidade" element={<PrivacyPolicy />} />
-              <Route path="/termos-uso" element={<TermsOfUse />} />
-              
-              {/* Legacy routes for backward compatibility */}
-              <Route path="/blog/ia-no-marketing-digital-2025" element={<IAMarketingDigital2025 />} />
-              <Route path="/blog/tendencias-ux-ui-2025" element={<TendenciasUXUI2025 />} />
-              <Route path="/blog/case-ecommerce-ia-vendas" element={<CaseEcommerceIA />} />
-              <Route path="/blog/chatbots-automacao-atendimento" element={<ChatbotsAutomacao />} />
-              <Route path="/blog/marketing-digital-data-driven" element={<MarketingDataDriven />} />
-              <Route path="/blog/pwa-futuro-2025" element={<PWAFuturo2025 />} />
-              
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-            <Toaster />
-            <Sonner />
-          </CalendlyProvider>
-        </BrowserRouter>
-      </AuthProvider>
-    </LanguageProvider>
+    <Router>
+      <LanguageProvider>
+        <CalendlyProvider>
+          <QueryClientProvider client={queryClient}>
+            <div className="App">
+              <Toaster />
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/sobre" element={<AboutPage />} />
+                <Route path="/servicos" element={<ServicesPage />} />
+                <Route path="/contato" element={<ContactPage />} />
+                <Route path="/projetos" element={<ProjectsPage />} />
+                <Route path="/servicos/websites" element={<WebsitesPage />} />
+                <Route path="/servicos/ecommerce" element={<ECommercePage />} />
+                <Route path="/servicos/apps" element={<AppsPage />} />
+                <Route path="/servicos/lms" element={<LMSSolutionsPage />} />
+                <Route path="/servicos/marketing-digital" element={<MarketingDigitalPage />} />
+                <Route path="/servicos/social-media" element={<SocialMediaPage />} />
+                <Route path="/servicos/design-grafico" element={<DesignGraficoPage />} />
+                <Route path="/servicos/marketing-politico" element={<MarketingPoliticoPage />} />
+                <Route path="*" element={<NotFoundPage />} />
+                <Route path="/servicos/websites/portfolio" element={<WebsitePortfolioPage />} />
+              </Routes>
+              <FloatingSocialButtons />
+            </div>
+          </QueryClientProvider>
+        </CalendlyProvider>
+      </LanguageProvider>
+    </Router>
   );
-};
-
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <AppWithLanguage />
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+}
 
 export default App;

@@ -112,9 +112,11 @@ const WebsitesPage = () => {
                     Solicitar Orçamento
                   </Button>
                 </Link>
-                <Button variant="outline" className="px-8 py-3">
-                  Ver Portfolio
-                </Button>
+                <Link to="/servicos/websites/portfolio">
+                  <Button variant="outline" className="px-8 py-3">
+                    Ver Portfolio
+                  </Button>
+                </Link>
               </div>
             </div>
             <div className="relative">
