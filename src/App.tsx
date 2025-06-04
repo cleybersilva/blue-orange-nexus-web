@@ -15,6 +15,10 @@ import SocialMediaPage from './pages/services/SocialMediaPage';
 import DesignPage from './pages/services/DesignPage';
 import PoliticalPage from './pages/services/PoliticalPage';
 import BlogPage from './pages/BlogPage';
+import AdminLoginPage from './pages/AdminLoginPage';
+import AdminDashboard from './pages/AdminDashboard';
+import AdminAuthorsPage from './pages/AdminAuthorsPage';
+import AdminUsersPage from './pages/AdminUsersPage';
 import { LanguageProvider } from './components/LanguageProvider';
 import { CalendlyProvider } from './components/CalendlyProvider';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -51,6 +55,14 @@ function App() {
                 <Route path="/servicos/design-grafico" element={<DesignPage />} />
                 <Route path="/servicos/marketing-politico" element={<PoliticalPage />} />
                 <Route path="/servicos/websites/portfolio" element={<WebsitePortfolioPage />} />
+                
+                {/* Admin Routes */}
+                <Route path="/admin/login" element={<AdminLoginPage />} />
+                <Route path="/admin/blog" element={<AdminDashboard />} />
+                <Route path="/admin/dashboard" element={<AdminDashboard />} />
+                <Route path="/admin/authors" element={<AdminAuthorsPage />} />
+                <Route path="/admin/users" element={<AdminUsersPage />} />
+                
                 <Route path="*" element={<NotFound />} />
               </Routes>
               <FloatingSocialButtons />
