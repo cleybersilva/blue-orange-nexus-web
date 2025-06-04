@@ -14,6 +14,7 @@ import MarketingPage from './pages/services/MarketingPage';
 import SocialMediaPage from './pages/services/SocialMediaPage';
 import DesignPage from './pages/services/DesignPage';
 import PoliticalPage from './pages/services/PoliticalPage';
+import BlogPage from './pages/BlogPage';
 import { LanguageProvider } from './components/LanguageProvider';
 import { CalendlyProvider } from './components/CalendlyProvider';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -34,10 +35,13 @@ function App() {
               <Toaster />
               <Routes>
                 <Route path="/" element={<Index />} />
+                <Route path="/sobre-nos" element={<SobreNos />} />
                 <Route path="/sobre" element={<SobreNos />} />
                 <Route path="/servicos" element={<ServicosPage />} />
                 <Route path="/contato" element={<Agendar />} />
+                <Route path="/agendar" element={<Agendar />} />
                 <Route path="/projetos" element={<ProjectsPage />} />
+                <Route path="/blog" element={<BlogPage />} />
                 <Route path="/servicos/websites" element={<WebsitesPage />} />
                 <Route path="/servicos/ecommerce" element={<EcommercePage />} />
                 <Route path="/servicos/apps" element={<AppsPage />} />
