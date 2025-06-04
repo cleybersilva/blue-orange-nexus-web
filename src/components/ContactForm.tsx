@@ -100,7 +100,7 @@ const ContactForm: React.FC = () => {
 
   const contactInfo = [
     { icon: <Phone size={20} className="text-orange" />, label: t('aboutPage.location.phone'), value: '(83) 98832-9018' },
-    { icon: <Mail size={20} className="text-orange" />, label: t('aboutPage.location.email'), value: 'contato@agenciadigital.com' },
+    { icon: <Mail size={20} className="text-orange" />, label: t('aboutPage.location.email'), value: 'contato@agenciadigitalhub.com' },
     { icon: <MapPin size={20} className="text-orange" />, label: t('aboutPage.location.office'), value: t('footer.address') },
     { icon: <Clock size={20} className="text-orange" />, label: t('timeline.title'), value: 'Seg-Sex: 9h às 18h' },
   ];

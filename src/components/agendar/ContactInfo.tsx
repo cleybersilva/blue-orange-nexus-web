@@ -27,7 +27,7 @@ const ContactInfo: React.FC = () => {
           <Mail className="mr-3 text-orange" />
           <div>
             <p className="font-medium">{t('form.email')}</p>
-            <p className="text-sm text-gray-200">contact@agenciadigital.com</p>
+            <p className="text-sm text-gray-200">contato@agenciadigitalhub.com</p>
           </div>
         </div>
         <div className="flex items-center md:col-span-2">
