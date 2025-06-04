@@ -15,10 +15,17 @@ import SocialMediaPage from './pages/services/SocialMediaPage';
 import DesignPage from './pages/services/DesignPage';
 import PoliticalPage from './pages/services/PoliticalPage';
 import BlogPage from './pages/BlogPage';
+import BlogArticlePage from './pages/BlogArticlePage';
 import AdminLoginPage from './pages/AdminLoginPage';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminAuthorsPage from './pages/AdminAuthorsPage';
 import AdminUsersPage from './pages/AdminUsersPage';
+import PWAFuturo2025 from './pages/blog/PWAFuturo2025';
+import CaseEcommerceIA from './pages/blog/CaseEcommerceIA';
+import MarketingDataDriven from './pages/blog/MarketingDataDriven';
+import ChatbotsAutomacao from './pages/blog/ChatbotsAutomacao';
+import TendenciasUXUI2025 from './pages/blog/TendenciasUXUI2025';
+import IAMarketingDigital2025 from './pages/blog/IAMarketingDigital2025';
 import { LanguageProvider } from './components/LanguageProvider';
 import { CalendlyProvider } from './components/CalendlyProvider';
 import { AuthProvider } from './hooks/useAuth';
@@ -48,6 +55,18 @@ function App() {
                   <Route path="/agendar" element={<Agendar />} />
                   <Route path="/projetos" element={<ProjectsPage />} />
                   <Route path="/blog" element={<BlogPage />} />
+                  
+                  {/* Blog Article Routes - Static pages */}
+                  <Route path="/blog/pwa-futuro-2025" element={<PWAFuturo2025 />} />
+                  <Route path="/blog/case-ecommerce-ia" element={<CaseEcommerceIA />} />
+                  <Route path="/blog/marketing-digital-data-driven" element={<MarketingDataDriven />} />
+                  <Route path="/blog/chatbots-automacao" element={<ChatbotsAutomacao />} />
+                  <Route path="/blog/tendencias-ux-ui-2025" element={<TendenciasUXUI2025 />} />
+                  <Route path="/blog/ia-marketing-digital-2025" element={<IAMarketingDigital2025 />} />
+                  
+                  {/* Dynamic blog article route */}
+                  <Route path="/blog/:slug" element={<BlogArticlePage />} />
+                  
                   <Route path="/servicos/websites" element={<WebsitesPage />} />
                   <Route path="/servicos/ecommerce" element={<EcommercePage />} />
                   <Route path="/servicos/apps" element={<AppsPage />} />
