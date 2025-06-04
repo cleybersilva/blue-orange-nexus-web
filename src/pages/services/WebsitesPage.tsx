@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -240,7 +239,7 @@ const WebsitesPage = () => {
                 </Button>
               </Link>
               <Link to="/servicos">
-                <Button variant="outline" className="border-white text-white hover:bg-white hover:text-orange px-8 py-3">
+                <Button variant="outline" className="border-white text-white hover:bg-white hover:text-orange px-8 py-3 bg-transparent">
                   <ArrowLeft size={16} className="mr-2" />
                   Voltar aos Serviços
                 </Button>
