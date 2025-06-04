@@ -20,6 +20,7 @@ import AdminLoginPage from './pages/AdminLoginPage';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminAuthorsPage from './pages/AdminAuthorsPage';
 import AdminUsersPage from './pages/AdminUsersPage';
+import ArticleEditor from './components/admin/ArticleEditor';
 import PWAFuturo2025 from './pages/blog/PWAFuturo2025';
 import CaseEcommerceIA from './pages/blog/CaseEcommerceIA';
 import MarketingDataDriven from './pages/blog/MarketingDataDriven';
@@ -83,6 +84,10 @@ function App() {
                   <Route path="/admin/dashboard" element={<AdminDashboard />} />
                   <Route path="/admin/authors" element={<AdminAuthorsPage />} />
                   <Route path="/admin/users" element={<AdminUsersPage />} />
+                  
+                  {/* Article Editor Routes */}
+                  <Route path="/admin/articles/new" element={<ArticleEditor />} />
+                  <Route path="/admin/articles/edit/:id" element={<ArticleEditor />} />
                   
                   <Route path="*" element={<NotFound />} />
                 </Routes>
