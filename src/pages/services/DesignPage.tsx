@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -16,8 +15,11 @@ import {
   Sparkles
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const DesignPage = () => {
+  const { t } = useTranslation();
+
   const features = [
     {
       icon: <Zap size={24} />,
@@ -93,9 +95,9 @@ const DesignPage = () => {
         <div className="container-custom">
           {/* Breadcrumb */}
           <div className="flex items-center gap-2 mb-8 text-sm">
-            <Link to="/servicos" className="text-orange hover:underline">Serviços</Link>
+            <Link to="/servicos" className="text-orange hover:underline">{t('nav.services')}</Link>
             <span className="text-gray-400">/</span>
-            <span className="text-gray-600">Design UI/UX</span>
+            <span className="text-gray-600">{t('services.design.title')}</span>
           </div>
 
           {/* Hero Section */}
@@ -243,7 +245,7 @@ const DesignPage = () => {
               <Link to="/servicos">
                 <Button variant="outline" className="border-white text-white hover:bg-white hover:text-orange px-8 py-3">
                   <ArrowLeft size={16} className="mr-2" />
-                  Voltar aos Serviços
+                  ← Voltar aos Serviços
                 </Button>
               </Link>
             </div>
