@@ -312,5 +312,130 @@
     "trafficBio": "Specialist in qualified traffic generation and conversion strategies for digital campaigns and SEO optimization.",
     "design": "Graphic Design Manager",
     "designBio": "Leads the graphic design team, ensuring visual excellence in all company projects and materials."
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated",
+    "introduction": {
+      "title": "1. Who We Are",
+      "p1": "AgênciaDigital Hub (Tax ID: xx.xxx.xxx/xxxx-xx), based in João Pessoa, PB - Brazil, is a company specialized in innovative digital solutions.",
+      "p2": "This Privacy Policy describes how we collect, use, store and protect your personal information in accordance with applicable data protection regulations."
+    },
+    "dataCollection": {
+      "title": "2. Data We Collect",
+      "p1": "We collect different types of information to provide and improve our services:",
+      "items": {
+        "personal": "Personal data: name, email, phone, position and company",
+        "usage": "Usage data: pages visited, browsing time, traffic source",
+        "technical": "Technical data: IP address, browser type, device used"
+      }
+    },
+    "dataUse": {
+      "title": "3. How We Use Your Data",
+      "p1": "We use your information to:",
+      "items": {
+        "provide": "Provide our services and respond to your requests",
+        "improve": "Improve our products and user experience",
+        "communicate": "Communicate with you about our services and news",
+        "security": "Ensure security and prevent fraud"
+      }
+    },
+    "cookies": {
+      "title": "4. Cookies and Similar Technologies",
+      "p1": "We use cookies to improve your experience on our website, analyze traffic and personalize content.",
+      "p2": "You can manage your cookie preferences through your browser settings."
+    },
+    "thirdParty": {
+      "title": "5. Third Party Sharing",
+      "p1": "We do not sell, rent or share your personal information with third parties, except when necessary for service provision or legal compliance."
+    },
+    "dataRetention": {
+      "title": "6. Data Retention",
+      "p1": "We retain your personal data only for the time necessary to fulfill the purposes described in this policy or as required by law."
+    },
+    "rights": {
+      "title": "7. Your Rights",
+      "p1": "You have the right to:",
+      "items": {
+        "access": "Request access to your personal data",
+        "rectification": "Request correction of incorrect or incomplete data",
+        "erasure": "Request deletion of your personal data",
+        "restrict": "Request restriction of data processing",
+        "portability": "Request portability of your data"
+      }
+    },
+    "changes": {
+      "title": "8. Changes to This Policy",
+      "p1": "We may update this Privacy Policy periodically. We will notify about significant changes through our communication channels."
+    },
+    "contact": {
+      "title": "9. Contact",
+      "p1": "To exercise your rights or clarify doubts about this policy, contact us:"
+    }
+  },
+  "terms": {
+    "title": "Terms of Use",
+    "lastUpdated": "Last updated",
+    "introduction": {
+      "title": "1. Acceptance of Terms",
+      "p1": "By accessing and using the AgênciaDigital Hub website, you agree to comply with and be bound by these Terms of Use.",
+      "p2": "If you do not agree with any part of these terms, you should not use our services."
+    },
+    "use": {
+      "title": "2. Permitted Use",
+      "p1": "You may use our website to:",
+      "items": {
+        "license": "View information about our services and company",
+        "restrictions": "Contact us for commercial requests",
+        "modifications": "Access educational content and informational materials"
+      }
+    },
+    "content": {
+      "title": "3. Website Content",
+      "p1": "All content on our website, including text, images, logos and design, is owned by AgênciaDigital Hub or its licensors.",
+      "p2": "Reproduction, distribution or modification of content without prior written authorization is prohibited."
+    },
+    "accounts": {
+      "title": "4. User Accounts",
+      "p1": "Some features may require account creation. You are responsible for maintaining the confidentiality of your credentials.",
+      "p2": "You must provide accurate information and keep your data updated."
+    },
+    "intellectual": {
+      "title": "5. Intellectual Property",
+      "p1": "We respect intellectual property rights and expect our users to do the same:",
+      "items": {
+        "copyright": "All copyrights are protected by law",
+        "trademarks": "Registered trademarks cannot be used without authorization",
+        "use": "Unauthorized use may result in legal action"
+      }
+    },
+    "userContent": {
+      "title": "6. User Content",
+      "p1": "By submitting content through forms or other means, you grant us a license to use this information according to our Privacy Policy.",
+      "p2": "You are responsible for the content you share and guarantee that you have the necessary rights."
+    },
+    "privacy": {
+      "title": "7. Privacy",
+      "p1": "The processing of your personal data is governed by our",
+      "link": "Privacy Policy"
+    },
+    "termination": {
+      "title": "8. Suspension and Termination",
+      "p1": "We may suspend or terminate your access to our services at any time, for any reason, without prior notice.",
+      "p2": "You may stop using our services at any time."
+    },
+    "liability": {
+      "title": "9. Limitation of Liability",
+      "p1": "Our services are provided 'as is'. We do not guarantee that the website will always be available or error-free.",
+      "p2": "Our liability is limited to the maximum extent permitted by applicable law."
+    },
+    "changes": {
+      "title": "10. Changes to Terms",
+      "p1": "We may modify these terms at any time. Changes take effect immediately upon publication on the website."
+    },
+    "contact": {
+      "title": "11. Contact",
+      "p1": "For questions about these Terms of Use, contact us:"
+    }
   }
 }

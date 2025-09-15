@@ -448,5 +448,130 @@
     "trafficBio": "Especialista em geração de tráfego qualificado e estratégias de conversão para campanhas digitais e otimização SEO.",
     "design": "Gerente de Design Gráfico",
     "designBio": "Lidera a equipe de design gráfico, garantindo a excelência visual em todos os projetos e materiais da empresa."
+  },
+  "privacy": {
+    "title": "Política de Privacidade",
+    "lastUpdated": "Última atualização",
+    "introduction": {
+      "title": "1. Quem Somos",
+      "p1": "A AgênciaDigital Hub (CNPJ: xx.xxx.xxx/xxxx-xx), com sede em João Pessoa, PB - Brasil, é uma empresa especializada em soluções digitais inovadoras.",
+      "p2": "Esta Política de Privacidade descreve como coletamos, usamos, armazenamos e protegemos suas informações pessoais de acordo com a Lei Geral de Proteção de Dados (LGPD) e demais regulamentações aplicáveis."
+    },
+    "dataCollection": {
+      "title": "2. Dados que Coletamos",
+      "p1": "Coletamos diferentes tipos de informações para fornecer e melhorar nossos serviços:",
+      "items": {
+        "personal": "Dados pessoais: nome, e-mail, telefone, cargo e empresa",
+        "usage": "Dados de uso: páginas visitadas, tempo de navegação, origem do tráfego",
+        "technical": "Dados técnicos: endereço IP, tipo de navegador, dispositivo utilizado"
+      }
+    },
+    "dataUse": {
+      "title": "3. Como Utilizamos seus Dados",
+      "p1": "Utilizamos suas informações para:",
+      "items": {
+        "provide": "Fornecer nossos serviços e responder às suas solicitações",
+        "improve": "Melhorar nossos produtos e experiência do usuário",
+        "communicate": "Comunicar-nos com você sobre nossos serviços e novidades",
+        "security": "Garantir a segurança e prevenir fraudes"
+      }
+    },
+    "cookies": {
+      "title": "4. Cookies e Tecnologias Similares",
+      "p1": "Utilizamos cookies para melhorar sua experiência em nosso site, analisar o tráfego e personalizar conteúdo.",
+      "p2": "Você pode gerenciar suas preferências de cookies através das configurações do seu navegador."
+    },
+    "thirdParty": {
+      "title": "5. Compartilhamento com Terceiros",
+      "p1": "Não vendemos, alugamos ou compartilhamos suas informações pessoais com terceiros, exceto quando necessário para prestação de serviços ou cumprimento de obrigações legais."
+    },
+    "dataRetention": {
+      "title": "6. Retenção de Dados",
+      "p1": "Mantemos seus dados pessoais apenas pelo tempo necessário para cumprir as finalidades descritas nesta política ou conforme exigido por lei."
+    },
+    "rights": {
+      "title": "7. Seus Direitos",
+      "p1": "Você tem o direito de:",
+      "items": {
+        "access": "Solicitar acesso aos seus dados pessoais",
+        "rectification": "Solicitar correção de dados incorretos ou incompletos",
+        "erasure": "Solicitar eliminação de seus dados pessoais",
+        "restrict": "Solicitar limitação do tratamento de seus dados",
+        "portability": "Solicitar portabilidade de seus dados"
+      }
+    },
+    "changes": {
+      "title": "8. Alterações nesta Política",
+      "p1": "Podemos atualizar esta Política de Privacidade periodicamente. Notificaremos sobre mudanças significativas através de nossos canais de comunicação."
+    },
+    "contact": {
+      "title": "9. Contato",
+      "p1": "Para exercer seus direitos ou esclarecer dúvidas sobre esta política, entre em contato conosco:"
+    }
+  },
+  "terms": {
+    "title": "Termos de Uso",
+    "lastUpdated": "Última atualização",
+    "introduction": {
+      "title": "1. Aceite dos Termos",
+      "p1": "Ao acessar e utilizar o website da AgênciaDigital Hub, você concorda em cumprir e estar vinculado a estes Termos de Uso.",
+      "p2": "Se você não concordar com qualquer parte destes termos, não deve usar nossos serviços."
+    },
+    "use": {
+      "title": "2. Uso Permitido",
+      "p1": "Você pode usar nosso website para:",
+      "items": {
+        "license": "Visualizar informações sobre nossos serviços e empresa",
+        "restrictions": "Entrar em contato conosco para solicitações comerciais",
+        "modifications": "Acessar conteúdos educacionais e materiais informativos"
+      }
+    },
+    "content": {
+      "title": "3. Conteúdo do Website",
+      "p1": "Todo o conteúdo presente em nosso website, incluindo textos, imagens, logotipos e design, é de propriedade da AgênciaDigital Hub ou de seus licenciadores.",
+      "p2": "É proibida a reprodução, distribuição ou modificação do conteúdo sem autorização prévia por escrito."
+    },
+    "accounts": {
+      "title": "4. Contas de Usuário",
+      "p1": "Algumas funcionalidades podem exigir criação de conta. Você é responsável por manter a confidencialidade de suas credenciais.",
+      "p2": "Você deve fornecer informações precisas e manter seus dados atualizados."
+    },
+    "intellectual": {
+      "title": "5. Propriedade Intelectual",
+      "p1": "Respeitamos os direitos de propriedade intelectual e esperamos que nossos usuários façam o mesmo:",
+      "items": {
+        "copyright": "Todos os direitos autorais são protegidos por lei",
+        "trademarks": "Marcas registradas não podem ser utilizadas sem autorização",
+        "use": "O uso não autorizado pode resultar em ações legais"
+      }
+    },
+    "userContent": {
+      "title": "6. Conteúdo do Usuário",
+      "p1": "Ao enviar conteúdo através de formulários ou outros meios, você nos concede licença para usar essas informações conforme nossa Política de Privacidade.",
+      "p2": "Você é responsável pelo conteúdo que compartilha e garante que possui os direitos necessários."
+    },
+    "privacy": {
+      "title": "7. Privacidade",
+      "p1": "O tratamento de seus dados pessoais é regido por nossa",
+      "link": "Política de Privacidade"
+    },
+    "termination": {
+      "title": "8. Suspensão e Rescisão",
+      "p1": "Podemos suspender ou encerrar seu acesso aos nossos serviços a qualquer tempo, por qualquer motivo, sem aviso prévio.",
+      "p2": "Você pode interromper o uso de nossos serviços a qualquer momento."
+    },
+    "liability": {
+      "title": "9. Limitação de Responsabilidade",
+      "p1": "Nossos serviços são fornecidos 'como estão'. Não garantimos que o website estará sempre disponível ou livre de erros.",
+      "p2": "Nossa responsabilidade é limitada na extensão máxima permitida pela lei aplicável."
+    },
+    "changes": {
+      "title": "10. Alterações nos Termos",
+      "p1": "Podemos modificar estes termos a qualquer momento. As alterações entram em vigor imediatamente após a publicação no website."
+    },
+    "contact": {
+      "title": "11. Contato",
+      "p1": "Para dúvidas sobre estes Termos de Uso, entre em contato conosco:"
+    }
   }
 }
