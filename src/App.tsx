@@ -48,6 +48,7 @@ import { FormsPage } from './pages/saas/FormsPage';
 import { MessagesPage } from './pages/saas/MessagesPage';
 import { SettingsPage } from './pages/saas/SettingsPage';
 import TimelinePage from './pages/saas/TimelinePage';
+import ProfilePage from './pages/saas/ProfilePage';
 import TasksPage from './pages/saas/TasksPage';
 import ApprovalsPage from './pages/saas/ApprovalsPage';
 import FilesPage from './pages/saas/FilesPage';
@@ -139,6 +140,7 @@ function App() {
           <Route path="automation" element={<AutomationPage />} />
           <Route path="reports" element={<ReportsPage />} />
           <Route path="settings" element={<SettingsPage />} />
+          <Route path="profile" element={<ProfilePage />} />
           <Route path="conteudo/autor" element={<SaasAutorPage />} />
         </Route>
                   
