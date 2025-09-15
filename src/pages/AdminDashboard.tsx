@@ -335,6 +335,14 @@ const AdminDashboard = () => {
                   )}
                   
                   <Button 
+                    className="w-full bg-gradient-to-r from-orange to-orange-dark text-white hover:shadow-lg transform hover:scale-105 transition-all duration-200" 
+                    onClick={() => navigate('/saas')}
+                  >
+                    <Shield size={16} className="mr-2" />
+                    🚀 ACESSAR NOVO SaaS
+                  </Button>
+                  
+                  <Button 
                     variant="outline" 
                     className="w-full border-navy/20 text-navy hover:bg-navy hover:text-white" 
                     onClick={() => navigate('/blog')}
