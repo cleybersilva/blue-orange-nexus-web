@@ -23,7 +23,7 @@ export default function SiteSectionsPage() {
     content: '',
     order_index: 0,
     is_active: true,
-    page_id: ''
+    page_id: null
   });
 
   const { data: sections, isLoading } = useSiteSections(selectedPageId === 'all' ? undefined : selectedPageId);
@@ -56,7 +56,7 @@ export default function SiteSectionsPage() {
         content: '',
         order_index: 0,
         is_active: true,
-        page_id: ''
+        page_id: null
       });
       setIsDialogOpen(false);
       
@@ -164,7 +164,7 @@ export default function SiteSectionsPage() {
                         <SelectItem key={page.id} value={page.id}>
                           {page.title}
                         </SelectItem>
-                      ))}
+                      )) || []}
                     </SelectContent>
                   </Select>
                 </div>
@@ -253,7 +253,7 @@ export default function SiteSectionsPage() {
               <SelectItem key={page.id} value={page.id}>
                 {page.title}
               </SelectItem>
-            ))}
+            )) || []}
           </SelectContent>
         </Select>
       </div>

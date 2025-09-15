@@ -27,7 +27,7 @@ export default function MenusPage() {
     url: '',
     order_index: 0,
     is_active: true,
-    parent_id: ''
+    parent_id: null
   });
 
   const { data: menus, isLoading } = useMenus();
@@ -87,7 +87,7 @@ export default function MenusPage() {
         url: '',
         order_index: 0,
         is_active: true,
-        parent_id: ''
+        parent_id: null
       });
       setIsItemDialogOpen(false);
       
