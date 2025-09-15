@@ -21,13 +21,14 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Bell, Search, Plus, User, Settings, LogOut } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { useNavigate } from 'react-router-dom';
 
 export const SaasHeader = () => {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
   const [showNotifications, setShowNotifications] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
   
   const notifications = [
     {
@@ -77,6 +78,14 @@ export const SaasHeader = () => {
           <Input
             placeholder="Buscar... (⌘K)"
             className="pl-8"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && searchTerm.trim()) {
+                console.log('Buscando por:', searchTerm);
+                // Aqui seria implementada a busca real
+              }
+            }}
           />
         </div>
 
@@ -106,20 +115,21 @@ export const SaasHeader = () => {
 
         {/* Notifications */}
         <Dialog open={showNotifications} onOpenChange={setShowNotifications}>
-          <Button 
-            variant="outline" 
-            size="sm" 
-            className="relative"
-            onClick={() => setShowNotifications(true)}
-          >
-            <Bell className="h-4 w-4" />
-            <Badge
-              variant="destructive"
-              className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center text-xs"
+          <DialogTrigger asChild>
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="relative"
             >
-              {notifications.filter(n => !n.read).length}
-            </Badge>
-          </Button>
+              <Bell className="h-4 w-4" />
+              <Badge
+                variant="destructive"
+                className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center text-xs"
+              >
+                {notifications.filter(n => !n.read).length}
+              </Badge>
+            </Button>
+          </DialogTrigger>
           <DialogContent>
             <DialogHeader>
               <DialogTitle>Notificações</DialogTitle>
