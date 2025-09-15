@@ -47,6 +47,14 @@ import { SitePagesPage } from './pages/saas/SitePagesPage';
 import { FormsPage } from './pages/saas/FormsPage';
 import { MessagesPage } from './pages/saas/MessagesPage';
 import { SettingsPage } from './pages/saas/SettingsPage';
+import TimelinePage from './pages/saas/TimelinePage';
+import TasksPage from './pages/saas/TasksPage';
+import ApprovalsPage from './pages/saas/ApprovalsPage';
+import FilesPage from './pages/saas/FilesPage';
+import ContactsPage from './pages/saas/ContactsPage';
+import CategoriesPage from './pages/saas/CategoriesPage';
+import TagsPage from './pages/saas/TagsPage';
+import ArticlesPage from './pages/saas/ArticlesPage';
 
 const queryClient = new QueryClient();
 
@@ -97,13 +105,21 @@ function App() {
         {/* SaaS Routes */}
         <Route path="/saas" element={<SaasLayout />}>
           <Route index element={<SaasDashboard />} />
-          <Route path="conteudo/autor" element={<SaasAutorPage />} />
+          <Route path="timeline" element={<TimelinePage />} />
+          <Route path="tasks" element={<TasksPage />} />
+          <Route path="approvals" element={<ApprovalsPage />} />
+          <Route path="files" element={<FilesPage />} />
           <Route path="projects" element={<SaasProjectsPage />} />
           <Route path="clients" element={<ClientsPage />} />
-          <Route path="site/pages" element={<SitePagesPage />} />
-          <Route path="forms" element={<FormsPage />} />
+          <Route path="contacts" element={<ContactsPage />} />
           <Route path="messages" element={<MessagesPage />} />
+          <Route path="forms" element={<FormsPage />} />
+          <Route path="articles" element={<ArticlesPage />} />
+          <Route path="categories" element={<CategoriesPage />} />
+          <Route path="tags" element={<TagsPage />} />
+          <Route path="site/pages" element={<SitePagesPage />} />
           <Route path="settings" element={<SettingsPage />} />
+          <Route path="conteudo/autor" element={<SaasAutorPage />} />
         </Route>
                   
                   {/* Admin Routes */}

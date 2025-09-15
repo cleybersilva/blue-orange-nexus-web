@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { useArticles } from "@/hooks/useArticleQueries";
+import { useAllArticles } from "@/hooks/useArticleQueries";
 import { Plus, FileText, Eye, Edit, Trash2, Calendar, User, Search, Filter, BarChart } from "lucide-react";
 import { toast } from "sonner";
 
@@ -14,7 +14,7 @@ export default function ArticlesPage() {
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [categoryFilter, setCategoryFilter] = useState<string>('all');
   
-  const { data: articles } = useArticles();
+  const { data: articles } = useAllArticles();
 
   const handleEdit = (articleId: string) => {
     // Navigate to editor
@@ -60,7 +60,7 @@ export default function ArticlesPage() {
   }) || [];
 
   // Get unique categories for filter
-  const categories = [...new Set(articles?.map(a => a.category).filter(Boolean))];
+  const categories = [...new Set(articles?.map(a => a.category).filter((cat): cat is string => Boolean(cat)))];
 
   const stats = {
     total: articles?.length || 0,
@@ -178,8 +178,8 @@ export default function ArticlesPage() {
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="all">Todas as Categorias</SelectItem>
-            {categories.map((category) => (
-              <SelectItem key={category} value={category || ''}>
+            {categories.map((category, index) => (
+              <SelectItem key={`category-${index}-${category}`} value={category}>
                 {category}
               </SelectItem>
             ))}

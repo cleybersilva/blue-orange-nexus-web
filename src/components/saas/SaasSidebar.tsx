@@ -27,7 +27,10 @@ import {
   Calendar,
   CheckSquare,
   MessageSquare,
-  Star
+  Star,
+  Clock,
+  CheckCircle,
+  UserCircle
 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 
@@ -42,23 +45,22 @@ const menuItems = [
     ]
   },
   {
-    id: 'projects',
-    label: 'Projetos',
+    id: 'overview',
+    label: 'Visão Geral',
     items: [
-      { icon: FolderKanban, label: 'Visão Geral', href: '/saas/projects' },
-      { icon: Calendar, label: 'Timeline', href: '/saas/projects/timeline' },
-      { icon: CheckSquare, label: 'Tarefas', href: '/saas/projects/tasks' },
-      { icon: MessageSquare, label: 'Aprovações', href: '/saas/projects/approvals', badge: 3 },
-      { icon: Folder, label: 'Arquivos', href: '/saas/projects/files' }
+      { icon: Clock, label: 'Timeline', href: '/saas/timeline' },
+      { icon: CheckSquare, label: 'Tarefas', href: '/saas/tasks' },
+      { icon: CheckCircle, label: 'Aprovações', href: '/saas/approvals', badge: 3 },
+      { icon: Folder, label: 'Arquivos', href: '/saas/files' }
     ]
   },
   {
     id: 'clients',
     label: 'Clientes',
     items: [
-      { icon: Users, label: 'Contas', href: '/saas/clients' },
-      { icon: Users, label: 'Contatos', href: '/saas/clients/contacts' },
-      { icon: Globe, label: 'Portal do Cliente', href: '/saas/clients/portal' }
+      { icon: UserCircle, label: 'Contas', href: '/saas/accounts' },
+      { icon: Users, label: 'Contatos', href: '/saas/contacts' },
+      { icon: Globe, label: 'Portal do Cliente', href: '/saas/client-portal' }
     ]
   },
   {
@@ -66,10 +68,10 @@ const menuItems = [
     label: 'Conteúdo',
     items: [
       { icon: BookOpen, label: 'Dashboard do Autor', href: '/saas/conteudo/autor' },
-      { icon: BookOpen, label: 'Artigos', href: '/saas/content/articles' },
-      { icon: BookOpen, label: 'Categorias', href: '/saas/content/categories' },
-      { icon: BookOpen, label: 'Tags', href: '/saas/content/tags' },
-      { icon: Folder, label: 'Mídia', href: '/saas/content/media' }
+      { icon: BookOpen, label: 'Artigos', href: '/saas/articles' },
+      { icon: BookOpen, label: 'Categorias', href: '/saas/categories' },
+      { icon: BookOpen, label: 'Tags', href: '/saas/tags' },
+      { icon: Folder, label: 'Mídia', href: '/saas/media' }
     ]
   },
   {
