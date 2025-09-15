@@ -40,6 +40,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfUse from './pages/TermsOfUse';
 import { SaasLayout } from './components/saas/SaasLayout';
 import SaasDashboard from './pages/saas/SaasDashboard';
+import SaasAutorPage from './pages/saas/SaasAutorPage';
 
 const queryClient = new QueryClient();
 
@@ -87,10 +88,11 @@ function App() {
                   <Route path="/politica-privacidade" element={<PrivacyPolicy />} />
                   <Route path="/termos-uso" element={<TermsOfUse />} />
                   
-                  {/* SaaS Routes */}
-                  <Route path="/saas" element={<SaasLayout />}>
-                    <Route index element={<SaasDashboard />} />
-                  </Route>
+              {/* SaaS Routes */}
+              <Route path="/saas" element={<SaasLayout />}>
+                <Route index element={<SaasDashboard />} />
+                <Route path="conteudo/autor" element={<SaasAutorPage />} />
+              </Route>
                   
                   {/* Admin Routes */}
                   <Route path="/admin/login" element={<AdminLoginPage />} />

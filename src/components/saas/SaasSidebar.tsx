@@ -65,6 +65,7 @@ const menuItems = [
     id: 'content',
     label: 'Conteúdo',
     items: [
+      { icon: BookOpen, label: 'Dashboard do Autor', href: '/saas/conteudo/autor' },
       { icon: BookOpen, label: 'Artigos', href: '/saas/content/articles' },
       { icon: BookOpen, label: 'Categorias', href: '/saas/content/categories' },
       { icon: BookOpen, label: 'Tags', href: '/saas/content/tags' },

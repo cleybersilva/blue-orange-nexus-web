@@ -26,9 +26,9 @@ export const useAdminLogin = () => {
   // Função centralizada para redirecionamento
   const redirectToDashboard = () => {
     if (!hasRedirected) {
-      console.log('AdminLoginPage - Redirecting to dashboard...');
+      console.log('AdminLoginPage - Redirecting to saas...');
       setHasRedirected(true);
-      navigate('/admin/blog', { replace: true });
+      navigate('/saas', { replace: true });
     }
   };
 
