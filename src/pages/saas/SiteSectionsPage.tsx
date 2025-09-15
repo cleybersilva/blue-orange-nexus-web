@@ -15,7 +15,7 @@ import { useToast } from '@/hooks/use-toast';
 
 export default function SiteSectionsPage() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedPageId, setSelectedPageId] = useState('');
+  const [selectedPageId, setSelectedPageId] = useState('all');
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [newSection, setNewSection] = useState({
     name: '',
@@ -26,7 +26,7 @@ export default function SiteSectionsPage() {
     page_id: ''
   });
 
-  const { data: sections, isLoading } = useSiteSections(selectedPageId);
+  const { data: sections, isLoading } = useSiteSections(selectedPageId === 'all' ? undefined : selectedPageId);
   const { data: pages } = useSitePages();
   const createSectionMutation = useCreateSiteSection();
   const updateSectionMutation = useUpdateSiteSection();
@@ -248,7 +248,7 @@ export default function SiteSectionsPage() {
             <SelectValue placeholder="Filtrar por página" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">Todas as páginas</SelectItem>
+            <SelectItem value="all">Todas as páginas</SelectItem>
             {pages?.map((page) => (
               <SelectItem key={page.id} value={page.id}>
                 {page.title}
