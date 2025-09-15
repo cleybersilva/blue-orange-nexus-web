@@ -38,6 +38,8 @@ import NotFound from './pages/NotFound';
 import WebsitePortfolioPage from './pages/services/WebsitePortfolioPage';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfUse from './pages/TermsOfUse';
+import { SaasLayout } from './components/saas/SaasLayout';
+import SaasDashboard from './pages/saas/SaasDashboard';
 
 const queryClient = new QueryClient();
 
@@ -84,6 +86,11 @@ function App() {
                   {/* Legal Pages */}
                   <Route path="/politica-privacidade" element={<PrivacyPolicy />} />
                   <Route path="/termos-uso" element={<TermsOfUse />} />
+                  
+                  {/* SaaS Routes */}
+                  <Route path="/saas" element={<SaasLayout />}>
+                    <Route index element={<SaasDashboard />} />
+                  </Route>
                   
                   {/* Admin Routes */}
                   <Route path="/admin/login" element={<AdminLoginPage />} />
