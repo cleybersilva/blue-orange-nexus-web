@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { useProjects } from '@/hooks/useSaasQueries';
+import { useProjects, useClients } from '@/hooks/useSaasQueries';
 import { useCreateProject } from '@/hooks/useSaasMutations';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
@@ -13,6 +13,7 @@ import { Textarea } from '@/components/ui/textarea';
 
 export const ProjectsPage = () => {
   const { data: projects = [], isLoading } = useProjects();
+  const { data: clients } = useClients();
   const createProject = useCreateProject();
   const [searchTerm, setSearchTerm] = useState('');
   const [isNewProjectOpen, setIsNewProjectOpen] = useState(false);
@@ -21,20 +22,30 @@ export const ProjectsPage = () => {
     description: '',
     type: 'website',
     status: 'planning',
-    priority: 'medium'
+    priority: 'medium',
+    client_id: ''
   });
 
   const handleCreateProject = async (e: React.FormEvent) => {
     e.preventDefault();
-    await createProject.mutateAsync(newProject);
-    setIsNewProjectOpen(false);
-    setNewProject({
-      name: '',
-      description: '',
-      type: 'website',
-      status: 'planning',
-      priority: 'medium'
-    });
+    if (!newProject.client_id) {
+      alert('Cliente é obrigatório');
+      return;
+    }
+    try {
+      await createProject.mutateAsync(newProject);
+      setIsNewProjectOpen(false);
+      setNewProject({
+        name: '',
+        description: '',
+        type: 'website',
+        status: 'planning',
+        priority: 'medium',
+        client_id: ''
+      });
+    } catch (error) {
+      console.error('Erro ao criar projeto:', error);
+    }
   };
 
   const getStatusColor = (status: string) => {
@@ -88,13 +99,28 @@ export const ProjectsPage = () => {
             </DialogHeader>
             <form onSubmit={handleCreateProject} className="space-y-4">
               <div>
-                <Label htmlFor="name">Nome do Projeto</Label>
+                <Label htmlFor="name">Nome do Projeto *</Label>
                 <Input
                   id="name"
                   value={newProject.name}
                   onChange={(e) => setNewProject({...newProject, name: e.target.value})}
                   required
                 />
+              </div>
+              <div>
+                <Label htmlFor="client">Cliente *</Label>
+                <Select value={newProject.client_id} onValueChange={(value) => setNewProject({...newProject, client_id: value})}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Selecione o cliente" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {clients?.map((client) => (
+                      <SelectItem key={client.id} value={client.id}>
+                        {client.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
               <div>
                 <Label htmlFor="description">Descrição</Label>
