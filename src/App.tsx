@@ -36,6 +36,8 @@ import { Toaster } from '@/components/ui/toaster';
 import FloatingSocialButtons from './components/FloatingSocialButtons';
 import NotFound from './pages/NotFound';
 import WebsitePortfolioPage from './pages/services/WebsitePortfolioPage';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfUse from './pages/TermsOfUse';
 
 const queryClient = new QueryClient();
 
@@ -78,6 +80,10 @@ function App() {
                   <Route path="/servicos/design-grafico" element={<DesignPage />} />
                   <Route path="/servicos/marketing-politico" element={<PoliticalPage />} />
                   <Route path="/servicos/websites/portfolio" element={<WebsitePortfolioPage />} />
+                  
+                  {/* Legal Pages */}
+                  <Route path="/politica-privacidade" element={<PrivacyPolicy />} />
+                  <Route path="/termos-uso" element={<TermsOfUse />} />
                   
                   {/* Admin Routes */}
                   <Route path="/admin/login" element={<AdminLoginPage />} />
