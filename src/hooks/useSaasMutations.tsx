@@ -457,3 +457,168 @@ export const useDeleteContact = () => {
     },
   });
 };
+
+// Site Sections mutations
+export const useCreateSiteSection = () => {
+  const queryClient = useQueryClient();
+  const { toast } = useToast();
+
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const { data: result, error } = await supabase
+        .from('site_sections')
+        .insert([data])
+        .select()
+        .single();
+      
+      if (error) throw error;
+      return result;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['site_sections'] });
+      toast({
+        title: 'Seção criada',
+        description: 'Seção criada com sucesso!',
+      });
+    },
+    onError: (error: any) => {
+      toast({
+        title: 'Erro',
+        description: error.message,
+        variant: 'destructive',
+      });
+    },
+  });
+};
+
+export const useUpdateSiteSection = () => {
+  const queryClient = useQueryClient();
+  const { toast } = useToast();
+
+  return useMutation({
+    mutationFn: async ({ id, data }: { id: string; data: any }) => {
+      const { data: result, error } = await supabase
+        .from('site_sections')
+        .update(data)
+        .eq('id', id)
+        .select()
+        .single();
+      
+      if (error) throw error;
+      return result;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['site_sections'] });
+      toast({
+        title: 'Seção atualizada',
+        description: 'Seção atualizada com sucesso!',
+      });
+    },
+    onError: (error: any) => {
+      toast({
+        title: 'Erro',
+        description: error.message,
+        variant: 'destructive',
+      });
+    },
+  });
+};
+
+// Menus mutations
+export const useCreateMenu = () => {
+  const queryClient = useQueryClient();
+  const { toast } = useToast();
+
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const { data: result, error } = await supabase
+        .from('menus')
+        .insert([data])
+        .select()
+        .single();
+      
+      if (error) throw error;
+      return result;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['menus'] });
+      toast({
+        title: 'Menu criado',
+        description: 'Menu criado com sucesso!',
+      });
+    },
+    onError: (error: any) => {
+      toast({
+        title: 'Erro',
+        description: error.message,
+        variant: 'destructive',
+      });
+    },
+  });
+};
+
+export const useCreateMenuItem = () => {
+  const queryClient = useQueryClient();
+  const { toast } = useToast();
+
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const { data: result, error } = await supabase
+        .from('menu_items')
+        .insert([data])
+        .select()
+        .single();
+      
+      if (error) throw error;
+      return result;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['menu_items'] });
+      queryClient.invalidateQueries({ queryKey: ['menus'] });
+      toast({
+        title: 'Item de menu criado',
+        description: 'Item de menu criado com sucesso!',
+      });
+    },
+    onError: (error: any) => {
+      toast({
+        title: 'Erro',
+        description: error.message,
+        variant: 'destructive',
+      });
+    },
+  });
+};
+
+// Automation Workflows mutations
+export const useCreateAutomationWorkflow = () => {
+  const queryClient = useQueryClient();
+  const { toast } = useToast();
+
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const { data: result, error } = await supabase
+        .from('automation_workflows')
+        .insert([data])
+        .select()
+        .single();
+      
+      if (error) throw error;
+      return result;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['automation_workflows'] });
+      toast({
+        title: 'Workflow criado',
+        description: 'Workflow de automação criado com sucesso!',
+      });
+    },
+    onError: (error: any) => {
+      toast({
+        title: 'Erro',
+        description: error.message,
+        variant: 'destructive',
+      });
+    },
+  });
+};

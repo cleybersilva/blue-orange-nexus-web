@@ -55,6 +55,13 @@ import ContactsPage from './pages/saas/ContactsPage';
 import CategoriesPage from './pages/saas/CategoriesPage';
 import TagsPage from './pages/saas/TagsPage';
 import ArticlesPage from './pages/saas/ArticlesPage';
+import SiteSectionsPage from './pages/saas/SiteSectionsPage';
+import MenusPage from './pages/saas/MenusPage';
+import HeaderPage from './pages/saas/HeaderPage';
+import FooterPage from './pages/saas/FooterPage';
+import SeoPage from './pages/saas/SeoPage';
+import AutomationPage from './pages/saas/AutomationPage';
+import ReportsPage from './pages/saas/ReportsPage';
 
 const queryClient = new QueryClient();
 
@@ -118,6 +125,13 @@ function App() {
           <Route path="categories" element={<CategoriesPage />} />
           <Route path="tags" element={<TagsPage />} />
           <Route path="site/pages" element={<SitePagesPage />} />
+          <Route path="site/sections" element={<SiteSectionsPage />} />
+          <Route path="site/menus" element={<MenusPage />} />
+          <Route path="site/header" element={<HeaderPage />} />
+          <Route path="site/footer" element={<FooterPage />} />
+          <Route path="site/seo" element={<SeoPage />} />
+          <Route path="automation" element={<AutomationPage />} />
+          <Route path="reports" element={<ReportsPage />} />
           <Route path="settings" element={<SettingsPage />} />
           <Route path="conteudo/autor" element={<SaasAutorPage />} />
         </Route>
