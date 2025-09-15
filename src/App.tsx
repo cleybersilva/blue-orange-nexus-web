@@ -41,6 +41,12 @@ import TermsOfUse from './pages/TermsOfUse';
 import { SaasLayout } from './components/saas/SaasLayout';
 import SaasDashboard from './pages/saas/SaasDashboard';
 import SaasAutorPage from './pages/saas/SaasAutorPage';
+import { ProjectsPage as SaasProjectsPage } from './pages/saas/ProjectsPage';
+import { ClientsPage } from './pages/saas/ClientsPage';
+import { SitePagesPage } from './pages/saas/SitePagesPage';
+import { FormsPage } from './pages/saas/FormsPage';
+import { MessagesPage } from './pages/saas/MessagesPage';
+import { SettingsPage } from './pages/saas/SettingsPage';
 
 const queryClient = new QueryClient();
 
@@ -88,11 +94,17 @@ function App() {
                   <Route path="/politica-privacidade" element={<PrivacyPolicy />} />
                   <Route path="/termos-uso" element={<TermsOfUse />} />
                   
-              {/* SaaS Routes */}
-              <Route path="/saas" element={<SaasLayout />}>
-                <Route index element={<SaasDashboard />} />
-                <Route path="conteudo/autor" element={<SaasAutorPage />} />
-              </Route>
+        {/* SaaS Routes */}
+        <Route path="/saas" element={<SaasLayout />}>
+          <Route index element={<SaasDashboard />} />
+          <Route path="conteudo/autor" element={<SaasAutorPage />} />
+          <Route path="projects" element={<SaasProjectsPage />} />
+          <Route path="clients" element={<ClientsPage />} />
+          <Route path="site/pages" element={<SitePagesPage />} />
+          <Route path="forms" element={<FormsPage />} />
+          <Route path="messages" element={<MessagesPage />} />
+          <Route path="settings" element={<SettingsPage />} />
+        </Route>
                   
                   {/* Admin Routes */}
                   <Route path="/admin/login" element={<AdminLoginPage />} />
