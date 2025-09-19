@@ -30,7 +30,7 @@ const FloatingSocialButtons: React.FC = () => {
             </a>
           ))}
           <a
-            href="https://w.app/agenciadigitalhub"
+            href="https://wa.me/5583988329018"
             className="flex items-center bg-green-500 text-white rounded-full p-3 shadow-lg transform transition-transform hover:scale-105"
             target="_blank"
             rel="noopener noreferrer"
