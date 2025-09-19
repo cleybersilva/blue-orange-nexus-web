@@ -30,28 +30,7 @@ export const useNewsletter = () => {
     setIsLoading(true);
 
     try {
-      // Check if email already exists
-      const { data: existingSubscription, error: checkError } = await supabase
-        .from('newsletter_subscriptions')
-        .select('email')
-        .eq('email', email.toLowerCase())
-        .maybeSingle();
-
-      if (checkError) {
-        console.error('Error checking existing subscription:', checkError);
-        throw checkError;
-      }
-
-      if (existingSubscription) {
-        toast({
-          variant: "destructive",
-          title: t('footer.error'),
-          description: "Este e-mail já está inscrito na newsletter.",
-        });
-        return false;
-      }
-
-      // Insert new subscription
+      // Insert new subscription directly - let the database handle duplicates
       const { error: insertError } = await supabase
         .from('newsletter_subscriptions')
         .insert({
@@ -60,7 +39,18 @@ export const useNewsletter = () => {
           status: 'active'
         });
 
-      if (insertError) throw insertError;
+      // Handle duplicate email error
+      if (insertError) {
+        if (insertError.code === '23505') {
+          toast({
+            variant: "destructive",
+            title: t('footer.error'),
+            description: "Este e-mail já está inscrito na newsletter.",
+          });
+          return false;
+        }
+        throw insertError;
+      }
 
       // Send welcome email
       const { error: emailError } = await supabase.functions.invoke('send-newsletter-welcome', {
