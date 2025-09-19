@@ -303,6 +303,11 @@
     "changed": "Language changed",
     "changedTo": "Language has been changed to {{language}}"
   },
+  "calendly": {
+    "openingSchedule": "Opening schedule",
+    "chooseTime": "Choose the best time for your meeting",
+    "scheduleTitle": "Schedule Meeting"
+  },
   "teamMembers": {
     "seo": "AI Scientist/SRE Engineer",
     "seoBio": "Specialist in artificial intelligence and site reliability engineering for advanced digital solutions.",

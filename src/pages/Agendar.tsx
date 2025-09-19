@@ -13,7 +13,7 @@ import ContactInfo from "@/components/agendar/ContactInfo";
 import { useScheduleForm } from "@/hooks/useScheduleForm";
 
 const Agendar = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const {
     form,
     stage,
@@ -23,6 +23,21 @@ const Agendar = () => {
     onSubmit,
     closeCalendly
   } = useScheduleForm();
+
+  // Get the current language code for Calendly
+  const getCalendlyLanguage = () => {
+    // Calendly supported languages
+    const supportedLanguages = ['en', 'es', 'pt', 'fr', 'de', 'nl'];
+    
+    // Convert i18next language code to Calendly language code
+    let langCode = i18n.language.split('-')[0]; // Get base language code
+    
+    if (!supportedLanguages.includes(langCode)) {
+      langCode = 'en'; // Default to English if not supported
+    }
+    
+    return langCode;
+  };
 
   if (showCalendly) {
     return (
@@ -34,13 +49,14 @@ const Agendar = () => {
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h2 className="text-xl font-bold mb-4">{t('form.scheduleYourMeeting')}</h2>
               <div className="calendly-embed mb-6" style={{ minHeight: '650px' }}>
-                <iframe
-                  src={`https://calendly.com/agenciadigital/30min?lang=${t('form.lang')}`}
-                  width="100%"
-                  height="650"
-                  frameBorder="0"
-                  title={t('form.scheduleTitle')}
-                ></iframe>
+              <iframe
+                src={`https://calendly.com/agenciadigital/30min?lang=${getCalendlyLanguage()}`}
+                width="100%" 
+                height="600"
+                frameBorder="0" 
+                title={t('calendly.scheduleTitle')}
+                className="rounded-md"
+              ></iframe>
               </div>
               <Button 
                 onClick={closeCalendly} 

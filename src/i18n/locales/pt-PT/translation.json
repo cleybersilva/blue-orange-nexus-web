@@ -43,6 +43,11 @@
     "changed": "Idioma alterado",
     "changedTo": "O idioma foi alterado para {{language}}"
   },
+  "calendly": {
+    "openingSchedule": "Abrindo agendamento",
+    "chooseTime": "Escolha o melhor horário para a sua reunião",
+    "scheduleTitle": "Agendar Reunião"
+  },
   "notFound": {
     "message": "Ops! Página não encontrada",
     "returnHome": "Voltar para a Página Inicial"

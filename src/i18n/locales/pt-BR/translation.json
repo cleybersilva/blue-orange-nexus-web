@@ -344,6 +344,11 @@
     "changed": "Idioma alterado",
     "changedTo": "O idioma foi alterado para {{language}}"
   },
+  "calendly": {
+    "openingSchedule": "Abrindo agendamento",
+    "chooseTime": "Escolha o melhor horário para sua reunião",
+    "scheduleTitle": "Agendar Reunião"
+  },
   "form": {
     "scheduleTitle": "Agende sua Consulta Gratuita",
     "briefingInstructions": "Preencha o formulário abaixo com as informações do seu projeto para que possamos oferecer a melhor solução para o seu negócio.",

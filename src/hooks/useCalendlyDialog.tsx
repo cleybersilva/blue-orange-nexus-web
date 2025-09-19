@@ -1,7 +1,6 @@
-
 import React, { useState } from 'react';
 import { Dialog, DialogContent, DialogTitle, DialogOverlay } from '@/components/ui/dialog';
-import { toast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 import { useTranslation } from 'react-i18next';
 
 export const useCalendlyDialog = () => {

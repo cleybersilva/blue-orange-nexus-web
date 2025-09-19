@@ -33,6 +33,7 @@ import { CalendlyProvider } from './components/CalendlyProvider';
 import { AuthProvider } from './hooks/useAuth';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from '@/components/ui/toaster';
+import { Toaster as Sonner } from "sonner";
 import FloatingSocialButtons from './components/FloatingSocialButtons';
 import NotFound from './pages/NotFound';
 import WebsitePortfolioPage from './pages/services/WebsitePortfolioPage';
@@ -78,6 +79,7 @@ function App() {
             <AuthProvider>
               <div className="App">
                 <Toaster />
+                <Sonner />
                 <Routes>
                   <Route path="/" element={<Index />} />
                   <Route path="/sobre-nos" element={<SobreNos />} />
