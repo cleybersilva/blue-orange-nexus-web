@@ -35,9 +35,10 @@ export const useNewsletter = () => {
         .from('newsletter_subscriptions')
         .select('email')
         .eq('email', email.toLowerCase())
-        .single();
+        .maybeSingle();
 
-      if (checkError && checkError.code !== 'PGRST116') {
+      if (checkError) {
+        console.error('Error checking existing subscription:', checkError);
         throw checkError;
       }
 
