@@ -37,6 +37,14 @@ import { Toaster as Sonner } from "sonner";
 import FloatingSocialButtons from './components/FloatingSocialButtons';
 import NotFound from './pages/NotFound';
 import WebsitePortfolioPage from './pages/services/WebsitePortfolioPage';
+import EcommerceModaPage from './pages/portfolio/EcommerceModaPage';
+import AppDeliveryPage from './pages/portfolio/AppDeliveryPage';
+import SiteInstitucionalPage from './pages/portfolio/SiteInstitucionalPage';
+import DashboardAnaliticoPage from './pages/portfolio/DashboardAnaliticoPage';
+import RedeSocialCorporativaPage from './pages/portfolio/RedeSocialCorporativaPage';
+import MarketplaceB2BPage from './pages/portfolio/MarketplaceB2BPage';
+import AppGestaoFinanceiraPage from './pages/portfolio/AppGestaoFinanceiraPage';
+import PortalEducacionalPage from './pages/portfolio/PortalEducacionalPage';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfUse from './pages/TermsOfUse';
 import { SaasLayout } from './components/saas/SaasLayout';
@@ -110,6 +118,16 @@ function App() {
                   <Route path="/servicos/design-grafico" element={<DesignPage />} />
                   <Route path="/servicos/marketing-politico" element={<PoliticalPage />} />
                   <Route path="/servicos/websites/portfolio" element={<WebsitePortfolioPage />} />
+                  
+                  {/* Portfolio Project Pages */}
+                  <Route path="/portfolio/ecommerce-moda" element={<EcommerceModaPage />} />
+                  <Route path="/portfolio/app-delivery" element={<AppDeliveryPage />} />
+                  <Route path="/portfolio/site-institucional" element={<SiteInstitucionalPage />} />
+                  <Route path="/portfolio/dashboard-analitico" element={<DashboardAnaliticoPage />} />
+                  <Route path="/portfolio/rede-social-corporativa" element={<RedeSocialCorporativaPage />} />
+                  <Route path="/portfolio/marketplace-b2b" element={<MarketplaceB2BPage />} />
+                  <Route path="/portfolio/app-gestao-financeira" element={<AppGestaoFinanceiraPage />} />
+                  <Route path="/portfolio/portal-educacional" element={<PortalEducacionalPage />} />
                   
                   {/* Legal Pages */}
                   <Route path="/politica-privacidade" element={<PrivacyPolicy />} />

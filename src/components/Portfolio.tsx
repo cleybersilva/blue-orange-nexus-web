@@ -33,14 +33,12 @@ const ProjectCard: React.FC<ProjectProps> = ({ title, category, image, link }) =
           <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
             <p className="text-orange font-medium text-sm">{category}</p>
             <h3 className="text-white font-bold text-xl mb-2">{title}</h3>
-            <a 
-              href={link} 
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link 
+              to={link} 
               className="inline-flex items-center gap-2 text-white hover:text-orange transition-colors"
             >
-              <span>{t('projects.viewProject')}</span> <ExternalLink size={16} />
-            </a>
+              <span>Ver Detalhes</span> <ExternalLink size={16} />
+            </Link>
           </div>
         </div>
       </div>
@@ -53,40 +51,52 @@ const Portfolio: React.FC = () => {
   
   const projects = [
     {
-      title: t("projects.ecommerce.title"),
-      category: t("projects.categories.ecommerce"),
-      image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-      link: '#',
+      title: "E-commerce de Moda Premium",
+      category: "E-commerce",
+      image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+      link: '/portfolio/ecommerce-moda',
     },
     {
-      title: t("projects.delivery.title"),
-      category: t("projects.categories.mobile"),
-      image: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-      link: '#',
+      title: "App de Delivery Inteligente",
+      category: "Mobile App",
+      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+      link: '/portfolio/app-delivery',
     },
     {
-      title: t("projects.institutional.title"),
-      category: t("projects.categories.website"),
-      image: 'https://images.unsplash.com/photo-1487014679447-9f8336841d58?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-      link: '#',
-    },
-    {
-      title: t("projects.dashboard.title"),
-      category: t("projects.categories.software"),
-      image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-      link: '#',
-    },
-    {
-      title: t("projects.social.title"),
-      category: t("projects.categories.platform"),
+      title: "Site Institucional Premium",
+      category: "Website",
       image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-      link: '#',
+      link: '/portfolio/site-institucional',
     },
     {
-      title: t("projects.marketplace.title"),
-      category: t("projects.categories.marketplace"),
-      image: 'https://images.unsplash.com/photo-1600866920583-1ccd4ba2525e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-      link: '#',
+      title: "Dashboard Analítico com IA",
+      category: "Software",
+      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+      link: '/portfolio/dashboard-analitico',
+    },
+    {
+      title: "Rede Social Corporativa",
+      category: "Plataforma",
+      image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+      link: '/portfolio/rede-social-corporativa',
+    },
+    {
+      title: "Marketplace B2B Enterprise",
+      category: "Marketplace",
+      image: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+      link: '/portfolio/marketplace-b2b',
+    },
+    {
+      title: "App de Gestão Financeira",
+      category: "Fintech",
+      image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+      link: '/portfolio/app-gestao-financeira',
+    },
+    {
+      title: "Portal Educacional Inteligente",
+      category: "EdTech",
+      image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+      link: '/portfolio/portal-educacional',
     },
   ];
 
