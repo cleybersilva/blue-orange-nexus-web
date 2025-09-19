@@ -34,18 +34,22 @@ export const useCalendlyDialog = () => {
 
   const CalendlyDialog = () => (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogOverlay className="bg-black/50" />
-      <DialogContent className="sm:max-w-[800px] max-h-[80vh] overflow-y-auto">
-        <DialogTitle className="text-xl font-bold mb-4">{t('calendly.scheduleTitle')}</DialogTitle>
-        <div className="min-h-[600px]">
-          <iframe
-            src={`https://calendly.com/agenciadigital/30min?lang=${getCalendlyLanguage()}`}
-            width="100%" 
-            height="600"
-            frameBorder="0" 
-            title={t('calendly.scheduleTitle')}
-            className="rounded-md"
-          ></iframe>
+      <DialogContent className="sm:max-w-[900px] max-w-[95vw] max-h-[90vh] overflow-hidden p-0">
+        <div className="p-6 pb-0">
+          <DialogTitle className="text-xl font-bold">{t('calendly.scheduleTitle')}</DialogTitle>
+        </div>
+        <div className="px-6 pb-6">
+          <div className="w-full h-[600px] bg-white rounded-md overflow-hidden">
+            <iframe
+              src={`https://calendly.com/agenciadigital/30min?lang=${getCalendlyLanguage()}`}
+              width="100%" 
+              height="100%"
+              frameBorder="0" 
+              title={t('calendly.scheduleTitle')}
+              className="w-full h-full"
+              loading="lazy"
+            />
+          </div>
         </div>
       </DialogContent>
     </Dialog>
