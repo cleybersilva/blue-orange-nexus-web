@@ -33,7 +33,7 @@ const SobreNos = () => {
   }, [i18n]);
 
   const handleWhatsAppClick = () => {
-    window.open('https://wa.me/5583988329018', '_blank');
+    window.open('https://w.app/agenciadigitalhub', '_blank');
   };
 
   // Updated team members with translated roles and bios

@@ -53,8 +53,7 @@ ${t('form.language')}: ${i18n.language}
 // Handle WhatsApp submission
 export const sendToWhatsApp = (message: string) => {
   try {
-    const whatsappNumber = "5583988329018";
-    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://w.app/agenciadigitalhub?text=${encodeURIComponent(message)}`;
     console.log('Opening WhatsApp with message');
     window.open(whatsappUrl, "_blank");
     return true;
