@@ -4,8 +4,10 @@ import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { Calendar, User, Tag, ArrowRight, Loader2 } from 'lucide-react';
 import { useBlogArticles } from '@/hooks/useBlogData';
+import { useNewsletter } from '@/hooks/useNewsletter';
 import { format } from 'date-fns';
 import HubHighlight from '@/components/ui/hub-highlight';
 import { useTranslation } from 'react-i18next';
@@ -13,7 +15,9 @@ import { useTranslation } from 'react-i18next';
 const BlogPage = () => {
   const { t, i18n } = useTranslation();
   const [selectedCategory, setSelectedCategory] = useState('');
+  const [newsletterEmail, setNewsletterEmail] = useState('');
   const { data: articles, isLoading, error } = useBlogArticles();
+  const { subscribe, isLoading: newsletterLoading } = useNewsletter();
   
   // Force re-render on language change
   const [, setForceUpdate] = useState(0);
@@ -49,6 +53,16 @@ const BlogPage = () => {
   const filteredArticles = selectedCategory === t('blog.categories.all') 
     ? articles || []
     : articles?.filter(article => article.category === selectedCategory) || [];
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (newsletterEmail.trim()) {
+      const success = await subscribe(newsletterEmail.trim());
+      if (success) {
+        setNewsletterEmail('');
+      }
+    }
+  };
 
   if (isLoading) {
     return (
@@ -192,16 +206,23 @@ const BlogPage = () => {
             <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
               {t('blog.newsletter.subtitle')}
             </p>
-            <div className="max-w-md mx-auto flex gap-3">
-              <input
+            <form onSubmit={handleNewsletterSubmit} className="max-w-md mx-auto flex gap-3">
+              <Input
                 type="email"
+                value={newsletterEmail}
+                onChange={(e) => setNewsletterEmail(e.target.value)}
                 placeholder={t('blog.newsletter.placeholder')}
                 className="flex-1 px-4 py-3 rounded-lg border-0 focus:ring-2 focus:ring-orange"
+                required
               />
-              <Button className="bg-orange hover:bg-orange-dark text-white px-6">
-                {t('blog.newsletter.subscribe')}
+              <Button 
+                type="submit"
+                disabled={newsletterLoading}
+                className="bg-orange hover:bg-orange-dark text-white px-6"
+              >
+                {newsletterLoading ? '...' : t('blog.newsletter.subscribe')}
               </Button>
-            </div>
+            </form>
           </div>
         </div>
       </main>
