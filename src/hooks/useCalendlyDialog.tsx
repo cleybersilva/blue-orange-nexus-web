@@ -41,7 +41,7 @@ export const useCalendlyDialog = () => {
         <div className="px-6 pb-6">
           <div className="w-full h-[600px] bg-white rounded-md overflow-hidden">
             <iframe
-              src={`https://calendly.com/agenciadigital/30min?lang=${getCalendlyLanguage()}`}
+              src={`https://calendly.com/sre-engineer/30min?lang=${getCalendlyLanguage()}`}
               width="100%" 
               height="100%"
               frameBorder="0" 
