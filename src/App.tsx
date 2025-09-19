@@ -45,6 +45,7 @@ import RedeSocialCorporativaPage from './pages/portfolio/RedeSocialCorporativaPa
 import MarketplaceB2BPage from './pages/portfolio/MarketplaceB2BPage';
 import AppGestaoFinanceiraPage from './pages/portfolio/AppGestaoFinanceiraPage';
 import PortalEducacionalPage from './pages/portfolio/PortalEducacionalPage';
+import TestPage from './pages/TestPage';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfUse from './pages/TermsOfUse';
 import { SaasLayout } from './components/saas/SaasLayout';
@@ -128,6 +129,7 @@ function App() {
                   <Route path="/portfolio/marketplace-b2b" element={<MarketplaceB2BPage />} />
                   <Route path="/portfolio/app-gestao-financeira" element={<AppGestaoFinanceiraPage />} />
                   <Route path="/portfolio/portal-educacional" element={<PortalEducacionalPage />} />
+                  <Route path="/test" element={<TestPage />} />
                   
                   {/* Legal Pages */}
                   <Route path="/politica-privacidade" element={<PrivacyPolicy />} />
