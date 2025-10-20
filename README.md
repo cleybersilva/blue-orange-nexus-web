@@ -1,73 +1,238 @@
-# Welcome to your Lovable project
+# Como usar o GitHub
 
-## Project info
-
-**URL**: https://lovable.dev/projects/8c4a9b49-aac8-4b4d-8b1e-9495505d6e71
-
-## How can I edit this code?
-
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/8c4a9b49-aac8-4b4d-8b1e-9495505d6e71) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+Baixar os arquivos do repositório do GitHub. O ponto no final do comando "." indica que o projeto será clonado no mesmo diretório.
+```
+git clone --branch <nome_da_branch> <ur_do_repositorio_no_github> .
+```
+```
+git clone --branch dev-master https://github.com/celkecursos/como-usar-github.git .
 ```
 
-**Edit a file directly in GitHub**
+Definir as configurações do usuário.
+Definir o nome do usuário.
+```
+git config --local user.name <nome_do_usuario>
+```
+```
+git config --local user.name Cesar
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Definir o e-mail do usuário.
+```
+git config --local user.email <email_do_usuario>
+```
+```
+git config --local user.email cleyber.silva@live.com
+```
 
-**Use GitHub Codespaces**
+Verificar a branch atual.
+```
+git branch 
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Baixar as atualizações do repositório remoto.
+```
+git pull
+```
 
-## What technologies are used for this project?
+Adicionar todos os arquivos modificados à staging area (área de preparação).
+```
+git add .
+```
 
-This project is built with:
+O commit representa um conjunto de alterações em um ponto específico do projeto, registrando apenas as alterações adicionadas à área de preparação. O comando -m permite inserir a mensagem do commit diretamente na linha de comando.
+```
+git commit -m "Descrição do commit"
+```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Enviar os commits locais para um repositório remoto.
+```
+git push <nome_padrao_do_repositorio_remoto> <nome_da_branch>
+```
+```
+git push origin dev-master
+```
 
-## How can I deploy this project?
+Criar nova branch no PC.
+```
+git checkout -b <nome_da_branch>
+```
+```
+git checkout -b main
+```
 
-Simply open [Lovable](https://lovable.dev/projects/8c4a9b49-aac8-4b4d-8b1e-9495505d6e71) and click on Share -> Publish.
+Trocar de branch.
+```
+git switch <nome_da_branch>
+```
+```
+git switch main
+```
 
-## Can I connect a custom domain to my Lovable project?
+Mesclar o histórico de commits de uma branch em outra branch.
+```
+git merge <nome_da_branch>
+```
+```
+git merge dev-master
+```
 
-Yes, you can!
+Fazer o push das alterações de uma branch para outra.
+```
+git push <nome_padrao_do_repositorio_remoto> <nome_da_branch>
+```
+```
+git push origin main
+```
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## Conectar o PC ao servidor com SSH
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Criar chave SSH (chave pública e privada).
+```
+ssh-keygen -t rsa -b 4096 -C "seu-email@exemplo.com"
+```
+```
+ssh-keygen -t rsa -b 4096 -C "cleyber.silva@live.com"
+```
+
+Senha usada na aula, não utilizar a mesma: $Cleyber2025EUA<br>
+
+Local que é criado a chave pública.
+```
+C:\Users\SeuUsuario\.ssh\
+```
+```
+C:\Users\cleyb/.ssh/
+```
+
+Exibir o conteúdo da chave pública.
+```
+cat ~/.ssh/id_rsa.pub
+```
+
+Acessar o servidor com SSH.
+```
+ssh <usuario>@<ip_do_servidor>
+```
+```
+ssh root@69.62.67.170
+```
+
+Usar o terminal conectado ao servidor para listar os arquivo.
+```
+cd /var/www/html
+```
+
+Listar os arquivo.
+```
+ls
+```
+
+Remover os arquivos do servidor.
+```
+rm -rf /var/www/html/{*,.*}
+```
+
+Compactar os arquivos com ZIP. Usar terminal sem conexão com o servidor.
+```
+Compress-Archive -Path .\* -DestinationPath cleyber_hostinger.zip
+```
+
+Enviar o projeto local para o servidor. Usar terminal sem conexão com o servidor.
+```
+scp /caminho/do/seu/projeto.zip <usuario_ssh>@<ip_do_servidor>:/var/www/html/
+```
+```
+scp D:\DEV\VS Code\vps\cleyber_hostinger.zip root@69.62.67.170:/var/www/html/
+```
+
+Usar o terminal conectado ao servidor. Primeiro acessar o diretório do projeto no servidor. Em seguida descompactar o arquivo.
+```
+cd /var/www/html/
+```
+```
+unzip cleyber_hostinger.zip
+```
+
+Se não tiver "unzip" instalado no servidor, atualize a lista de pacotes. Usar o terminal conectado ao servidor.
+```
+sudo apt update
+```
+
+Instalar unzip. Usar o terminal conectado ao servidor.
+```
+sudo apt install unzip
+```
+
+Reiniciar o Apache. Usar o terminal conectado ao servidor.
+```
+sudo systemctl restart apache2
+```
+
+Remover o arquivo compactado do servidor.
+```
+rm -rf /var/www/html/<nome_do_arquivo>
+```
+```
+rm -rf /var/www/html/celke_hostinger.zip
+```
+
+## Conectar Servidor ao GitHub
+
+Gerar a chave SSH no servidor.
+```
+ssh-keygen -t rsa -b 4096 -C "cleyber.silva@live.com"
+```
+
+Imprimir a chave pública gerada.
+```
+cat ~/.ssh/id_rsa.pub
+```
+
+No GitHub, vá para Settings (Configurações) do seu repositório ou da sua conta, em seguida, vá para SSH and GPG keys e clique em New SSH key.<br>
+Cole a chave pública no campo fornecido e salve.<br>
+
+Verificar a conexão com o GitHub.
+```
+ssh -T git@github.com
+```
+
+Se gerar o erro "The authenticity of host 'github.com (xx.xxx.xx.xxx)' can't be established.".<br>
+Isso é uma medida de segurança para evitar ataques de "man-in-the-middle".<br>
+Necessário adicionar a chave do host do GitHub ao arquivo de known_hosts do seu servidor.<br>
+
+Digite yes quando for solicitado.
+```
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+```
+
+Mensagem de conexão realizada com sucesso.<br>
+Hi nome-usuario! You've successfully authenticated, but GitHub does not provide shell access.<br>
+
+Usar o terminal conectado ao servidor para listar os arquivo.
+```
+cd /var/www/html
+```
+
+Listar os arquivo.
+```
+ls
+```
+
+Remover os arquivos do servidor.
+```
+rm -rf /var/www/html/{*,.*}
+```
+
+Baixar os arquivos para o servidor do GitHub via SSH.
+```
+git clone -b <branch_name> <repository_url_ssh> .
+```
+```
+git clone -b main git@github.com:celkecursos/como-usar-github.git .
+```
+
+Verificar e baixar as atualizações do projeto no GitHub via SSH.
+```
+git pull
+```
