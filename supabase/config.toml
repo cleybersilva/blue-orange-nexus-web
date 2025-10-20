@@ -1,1 +1,13 @@
 project_id = "gullluryfretqztoobxj"
+
+[functions.send-contact-email]
+verify_jwt = false
+
+[functions.send-schedule-briefing]
+verify_jwt = false
+
+[functions.send-newsletter-article]
+verify_jwt = false
+
+[functions.send-newsletter-welcome]
+verify_jwt = false
