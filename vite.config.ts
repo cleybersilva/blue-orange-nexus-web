@@ -11,7 +11,11 @@ export default defineConfig(({ mode }) => ({
     mode === 'development' && componentTagger(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.ico', 'robots.txt', '*.jpg', '*.png'],
+      injectRegister: 'auto',
+      devOptions: {
+        enabled: true
+      },
+      includeAssets: ['*.ico', 'robots.txt', '*.jpg', '*.png'],
       manifest: {
         name: 'Blue Orange Nexus - Agência Digital',
         short_name: 'Blue Orange',
