@@ -149,7 +149,17 @@
   },
   "testimonials": {
     "title": "What our clients say",
-    "subtitle": "Real testimonials from companies that transformed their businesses with us"
+    "subtitle": "Real testimonials from companies that transformed their businesses with us",
+    "quotes": {
+      "first": "The Digital Hub team completely transformed our online presence. The new website increased our conversions by 150% in the first three months.",
+      "second": "Extremely competent and committed professionals. Our e-commerce exceeded all sales expectations in the very first month.",
+      "third": "The app they developed revolutionized our operation. Intuitive interface and excellent performance. Highly recommend!"
+    },
+    "roles": {
+      "ceo": "CEO",
+      "commercial": "Commercial Director",
+      "product": "Product Manager"
+    }
   },
   "timeline": {
     "title": "Hub Timeline",
