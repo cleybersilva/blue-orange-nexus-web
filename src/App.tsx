@@ -48,6 +48,7 @@ import PortalEducacionalPage from './pages/portfolio/PortalEducacionalPage';
 import TestPage from './pages/TestPage';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfUse from './pages/TermsOfUse';
+import InstallPWA from './pages/InstallPWA';
 import { SaasLayout } from './components/saas/SaasLayout';
 import SaasDashboard from './pages/saas/SaasDashboard';
 import SaasAutorPage from './pages/saas/SaasAutorPage';
@@ -130,6 +131,9 @@ function App() {
                   <Route path="/portfolio/app-gestao-financeira" element={<AppGestaoFinanceiraPage />} />
                   <Route path="/portfolio/portal-educacional" element={<PortalEducacionalPage />} />
                   <Route path="/test" element={<TestPage />} />
+                  
+                  {/* PWA Install */}
+                  <Route path="/instalar" element={<InstallPWA />} />
                   
                   {/* Legal Pages */}
                   <Route path="/politica-privacidade" element={<PrivacyPolicy />} />

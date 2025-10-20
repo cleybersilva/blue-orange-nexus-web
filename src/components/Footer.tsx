@@ -28,6 +28,7 @@ const Footer: React.FC = () => {
             © {new Date().getFullYear()} <span><span className="text-orange">{t('siteTitle.agency')}</span><span style={{ color: '#FFFFFF' }}>{t('siteTitle.digital')}</span></span><HubHighlight className="text-xs lg:text-sm" />. {t('footer.rights')}
           </p>
           <div className="flex gap-3 lg:gap-4">
+            <Link to="/instalar" className="text-gray-400 hover:text-orange text-xs lg:text-sm transition-colors duration-300">{t('footer.installApp')}</Link>
             <Link to="/politica-privacidade" className="text-gray-400 hover:text-orange text-xs lg:text-sm transition-colors duration-300">{t('footer.privacy')}</Link>
             <Link to="/termos-uso" className="text-gray-400 hover:text-orange text-xs lg:text-sm transition-colors duration-300">{t('footer.terms')}</Link>
           </div>
