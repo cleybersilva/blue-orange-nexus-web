@@ -113,12 +113,12 @@ function App() {
                   
                   <Route path="/servicos/websites" element={<WebsitesPage />} />
                   <Route path="/servicos/ecommerce" element={<EcommercePage />} />
-                  <Route path="/servicos/apps" element={<AppsPage />} />
+                  <Route path="/servicos/aplicativos" element={<AppsPage />} />
                   <Route path="/servicos/lms" element={<LMSPage />} />
-                  <Route path="/servicos/marketing-digital" element={<MarketingPage />} />
-                  <Route path="/servicos/social-media" element={<SocialMediaPage />} />
-                  <Route path="/servicos/design-grafico" element={<DesignPage />} />
-                  <Route path="/servicos/marketing-politico" element={<PoliticalPage />} />
+                  <Route path="/servicos/marketing" element={<MarketingPage />} />
+                  <Route path="/servicos/midias-sociais" element={<SocialMediaPage />} />
+                  <Route path="/servicos/design" element={<DesignPage />} />
+                  <Route path="/servicos/politicas" element={<PoliticalPage />} />
                   <Route path="/servicos/websites/portfolio" element={<WebsitePortfolioPage />} />
                   
                   {/* Portfolio Project Pages */}
